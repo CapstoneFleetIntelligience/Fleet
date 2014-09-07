@@ -94,7 +94,9 @@
     </div>
 
     <p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
-    <?php echo row('interesting', 'test', 'row'); ?>
+    <?php echo row_open('test', 'row'); ?>
+    <?php echo button_bar('button', 'button'); ?>
+    
 </div>
 
 </body>
