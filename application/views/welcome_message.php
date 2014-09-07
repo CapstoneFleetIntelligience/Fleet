@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <?php echo link_tag(base_url('/assets/css/foundation.css')); ?>
-    <?php echo link_tag(base_url('/assets/css/normalize.css')); ?>
+    <?php echo link_tag('/assets/css/foundation.css'); ?>
+    <?php //echo link_tag(base_url('/assets/css/normalize.css')); ?>
     <title>Welcome to CodeIgniter</title>
 
     <style type="text/css">
