@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-    <?php AssetLoad::queue($cache_bust = false, $manifest_file_name = 'assets.ini', $manifest_path = 'assets/'); ?>
-    <?php //$this->assetload->queue(); ?>
     <meta charset="utf-8">
+    <?php Assets::css('foundation.css', 'normalize.css'); ?>
     <title>Welcome to CodeIgniter</title>
 
     <style type="text/css">
