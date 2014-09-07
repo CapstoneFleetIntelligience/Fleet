@@ -794,10 +794,10 @@ class CI_Upload
             fclose($file);
 
             // These are known to throw IE into mime-type detection chaos
-            // <a, <body, <head, <html, <img, <plaintext, <pre, <script, <table, <title
+            // <a, <body, <head, <html, <images, <plaintext, <pre, <script, <table, <title
             // title is basically just in SVG, but we filter it anyhow
 
-            if (!preg_match('/<(a|body|head|html|img|plaintext|pre|script|table|title)[\s>]/i', $opening_bytes)) {
+            if (!preg_match('/<(a|body|head|html|images|plaintext|pre|script|table|title)[\s>]/i', $opening_bytes)) {
                 return TRUE; // its an image, no "triggers" detected in the first 256 bytes, we're good
             } else {
                 return FALSE;

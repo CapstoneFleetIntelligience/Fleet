@@ -175,7 +175,7 @@ if (!function_exists('br')) {
 /**
  * Image
  *
- * Generates an <img /> element
+ * Generates an <images /> element
  *
  * @access    public
  * @param    mixed
@@ -193,7 +193,7 @@ if (!function_exists('img')) {
             $src['alt'] = '';
         }
 
-        $img = '<img';
+        $img = '<images';
 
         foreach ($src as $k => $v) {
 

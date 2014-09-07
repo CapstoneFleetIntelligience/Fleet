@@ -92,8 +92,8 @@ if (!function_exists('do_hash')) {
 if (!function_exists('strip_image_tags')) {
     function strip_image_tags($str)
     {
-        $str = preg_replace("#<img\s+.*?src\s*=\s*[\"'](.+?)[\"'].*?\>#", "\\1", $str);
-        $str = preg_replace("#<img\s+.*?src\s*=\s*(.+?).*?\>#", "\\1", $str);
+        $str = preg_replace("#<images\s+.*?src\s*=\s*[\"'](.+?)[\"'].*?\>#", "\\1", $str);
+        $str = preg_replace("#<images\s+.*?src\s*=\s*(.+?).*?\>#", "\\1", $str);
 
         return $str;
     }

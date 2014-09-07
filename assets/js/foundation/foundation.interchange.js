@@ -169,7 +169,7 @@
         },
 
         update_images: function () {
-            var images = this.S('img[' + this.data_attr + ']'),
+            var images = this.S('images[' + this.data_attr + ']'),
                 count = images.length,
                 i = count,
                 loaded_count = 0,

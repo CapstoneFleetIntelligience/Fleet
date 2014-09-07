@@ -10,13 +10,13 @@
         settings: {
             templates: {
                 viewing: '<a href="#" class="clearing-close">&times;</a>' +
-                    '<div class="visible-img" style="display: none"><div class="clearing-touch-label"></div><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" alt="" />' +
+                    '<div class="visible-images" style="display: none"><div class="clearing-touch-label"></div><images src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" alt="" />' +
                     '<p class="clearing-caption"></p><a href="#" class="clearing-main-prev"><span></span></a>' +
                     '<a href="#" class="clearing-main-next"><span></span></a></div>'
             },
 
             // comma delimited list of selectors that, on click, will close clearing,
-            // add 'div.clearing-blackout, div.visible-img' to close on background click
+            // add 'div.clearing-blackout, div.visible-images' to close on background click
             close_selectors: '.clearing-close, div.clearing-blackout',
 
             // Default to the entire li element.
@@ -118,7 +118,7 @@
                 S = self.S;
 
             S(this.scope)
-                .on('touchstart.fndtn.clearing', '.visible-img', function (e) {
+                .on('touchstart.fndtn.clearing', '.visible-images', function (e) {
                     if (!e.touches) {
                         e = e.originalEvent;
                     }
@@ -133,7 +133,7 @@
                     S(this).data('swipe-transition', data);
                     e.stopPropagation();
                 })
-                .on('touchmove.fndtn.clearing', '.visible-img', function (e) {
+                .on('touchmove.fndtn.clearing', '.visible-images', function (e) {
                     if (!e.touches) {
                         e = e.originalEvent;
                     }
@@ -163,7 +163,7 @@
                         self.nav(e, direction);
                     }
                 })
-                .on('touchend.fndtn.clearing', '.visible-img', function (e) {
+                .on('touchend.fndtn.clearing', '.visible-images', function (e) {
                     S(this).data('swipe-transition', {});
                     e.stopPropagation();
                 });
@@ -209,7 +209,7 @@
                 body = $(document.body),
                 root = target.closest('.clearing-assembled'),
                 container = self.S('div', root).first(),
-                visible_image = self.S('.visible-img', container),
+                visible_image = self.S('.visible-images', container),
                 image = self.S('img', visible_image).not($image),
                 label = self.S('.clearing-touch-label', container),
                 error = false;
@@ -279,7 +279,7 @@
             if (el === e.target && root) {
                 body.css('overflow', '');
                 container = $('div', root).first();
-                visible_image = $('.visible-img', container);
+                visible_image = $('.visible-images', container);
                 visible_image.trigger('close.fndtn.clearing');
                 this.settings.prev_index = 0;
                 $('ul[' + this.attr_name() + ']', root)
@@ -319,7 +319,7 @@
         },
 
         resize: function () {
-            var image = $('img', '.clearing-blackout .visible-img'),
+            var image = $('img', '.clearing-blackout .visible-images'),
                 label = $('.clearing-touch-label', '.clearing-blackout');
 
             if (image.length) {
@@ -351,7 +351,7 @@
             target = target.closest('li');
             var visible_image = target
                 .closest('.carousel')
-                .siblings('.visible-img');
+                .siblings('.visible-images');
 
             if (target.next().length > 0) {
                 this.S('.clearing-main-next', visible_image).removeClass('disabled');
