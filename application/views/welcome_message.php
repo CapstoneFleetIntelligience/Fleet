@@ -3,7 +3,7 @@
 <head>
 
     <?php AssetLoad::queue($cache_bust = false, $manifest_file_name = 'assets.ini', $manifest_path = 'assets/'); ?>
-    <?php $this->assetload->queue(); ?>
+    <?php //$this->assetload->queue(); ?>
     <meta charset="utf-8">
     <title>Welcome to CodeIgniter</title>
 
