@@ -15,7 +15,6 @@
 |
 */
 $config['base_url'] = '';
-$config['assets']['base_url'] = 'http://babbage.cs.missouri.edu/~cs4970s14grp5/';
 
 /*
 |--------------------------------------------------------------------------
