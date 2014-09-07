@@ -74,11 +74,9 @@
             -webkit-box-shadow: 0 0 8px #D0D0D0;
         }
     </style>
-    <?php Assets::css(array('foundation.css', 'normalize.css')); ?>
-
 </head>
 <body>
-
+<?php Assets::css(array('foundation.css', 'normalize.css')); ?>
 <div id="container">
     <h1>Welcome to CodeIgniter! Woo</h1>
 
