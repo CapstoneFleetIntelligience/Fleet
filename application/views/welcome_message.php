@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <?php Assets::css('foundation.css', 'normalize.css'); ?>
+    <?php Assets::css(array('foundation.css', 'normalize.css')); ?>
     <title>Welcome to CodeIgniter</title>
 
     <style type="text/css">
