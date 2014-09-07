@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <?php $this->assetload->queue(); ?>
     <meta charset="utf-8">
     <title>Welcome to CodeIgniter</title>
 

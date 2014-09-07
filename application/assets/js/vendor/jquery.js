@@ -1942,8 +1942,8 @@
         return h >= 0 && (d = _.trim(a.slice(h)), a = a.slice(0, h)), _.isFunction(b) ? (c = b, b = void 0) : b && "object" == typeof b && (e = "POST"), g.length > 0 && _.ajax({url: a, type: e, dataType: "html", data: b}).done(function (a) {
             f = arguments, g.html(d ? _("<div>").append(_.parseHTML(a)).find(d) : a)
         }).complete(c && function (a, b) {
-            g.each(c, f || [a.responseText, b, a])
-        }), this
+                g.each(c, f || [a.responseText, b, a])
+            }), this
     }, _.expr.filters.animated = function (a) {
         return _.grep(_.timers,function (b) {
             return a === b.elem
