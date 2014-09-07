@@ -79,6 +79,9 @@
 
 <div id="container">
     <h1>Welcome to CodeIgniter! Woo</h1>
+    <?php row_open('test', 'row'); ?>
+    <?php button_bar('button', 'button'); ?>
+    <a href="#" class="button">Default Button</a>
 
     <div id="body">
         <p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
@@ -94,9 +97,8 @@
     </div>
 
     <p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
-    <?php echo row_open('test', 'row'); ?>
-    <?php echo button_bar('button', 'button'); ?>
-    
+
+
 </div>
 
 </body>
