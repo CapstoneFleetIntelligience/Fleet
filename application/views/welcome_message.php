@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <?php Assets::css(array('foundation.css', 'normalize.css')); ?>
     <title>Welcome to CodeIgniter</title>
 
     <style type="text/css">
@@ -75,6 +74,8 @@
             -webkit-box-shadow: 0 0 8px #D0D0D0;
         }
     </style>
+    <?php Assets::css(array('foundation.css', 'normalize.css')); ?>
+
 </head>
 <body>
 
