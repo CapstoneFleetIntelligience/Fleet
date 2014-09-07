@@ -154,7 +154,7 @@ class AssetLoad
      * @param string $route
      * @return string
      */
-    public static function script_route($path)
+    public function script_route($path)
     {
         return self::script($path . '/' . $this->ci->router->fetch_class() . '.js');
     }
@@ -196,7 +196,7 @@ class AssetLoad
      * @param string $path
      * @return string
      */
-    public static function css_route($path)
+    public function css_route($path)
     {
         return self::css($path . '/' . $this->ci->router->fetch_class() . '.css');
     }
