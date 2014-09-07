@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php echo $library_src; ?>
-    <?php echo $script_head; ?>
     <meta charset="utf-8">
     <title>Welcome to CodeIgniter</title>
 
