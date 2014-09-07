@@ -2,8 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <?php echo link_tag('/assets/css/foundation.css'); ?>
-    <?php //echo link_tag(base_url('/assets/css/normalize.css')); ?>
+    <?php
+    echo link_tag('/assets/css/foundation.css');
+    echo link_tag('/assets/css/normalize.css');
+    echo script_tag('/assets/js/foundation/foundation.js');
+    echo script_tag('/assets/js/vendor/jquery.js');
+    echo script_tag('/assets/js/vendor/fastclick.js');
+    echo script_tag('/assets/js/vendor/modernizr.js');
+    echo script_tag('/assets/js/vendor/placeholder.js');
+    ?>
     <title>Welcome to CodeIgniter</title>
 
     <style type="text/css">
