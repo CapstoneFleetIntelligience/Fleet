@@ -79,12 +79,14 @@
 
 <div id="container">
     <h1>Welcome to CodeIgniter! Woo</h1>
-    <?php echo row_open('test', 'row'); ?>
-    <?php echo button_bar('button', 'button'); ?>
-    <a href="#" class="button">Default Button</a>
+
 
     <div id="body">
         <p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
+
+        <?php echo row_open('test', 'row'); ?>
+        <?php echo button_bar('button', 'button'); ?>
+        <a href="#" class="button">Default Button</a>
 
         <p>If you would like to edit this page you'll find it located at:</p>
         <code>application/views/welcome_message.php</code>
