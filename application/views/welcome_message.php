@@ -79,8 +79,8 @@
 
 <div id="container">
     <h1>Welcome to CodeIgniter! Woo</h1>
-    <?php row_open('test', 'row'); ?>
-    <?php button_bar('button', 'button'); ?>
+    <?php echo row_open('test', 'row'); ?>
+    <?php echo button_bar('button', 'button'); ?>
     <a href="#" class="button">Default Button</a>
 
     <div id="body">
