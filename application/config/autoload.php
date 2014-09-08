@@ -53,7 +53,7 @@ $autoload['packages'] = array();
 */
 
 $autoload['libraries'] = array('email', 'encrypt', 'form_validation', 'table', 'image_lib', 'javascript', 'security', 'session', 'typography', 'user_agent');
-$autoload['sparks'] = array('assets/1.5.1');
+$autoload['sparks'] = array('assets/1.5.1', 'ion_auth/2.5.0', 'foundation/0.6.3');
 
 
 /*
