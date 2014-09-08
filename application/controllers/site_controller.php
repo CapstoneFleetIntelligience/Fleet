@@ -11,7 +11,6 @@ class Site_controller extends CI_Controller
 
     public function index()
     {
-        $this->load->spark();
         $this->load->view('welcome_message');
     }
 
