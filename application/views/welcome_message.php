@@ -91,7 +91,7 @@
 
 
 <div id="container">
-    <h1>Welcome to CodeIgniter! Woo</h1>
+    <h1>Welcome to CodeIgniter!</h1>
     <a href="#" class="button">Fire</a>
 
     <div id="body">
