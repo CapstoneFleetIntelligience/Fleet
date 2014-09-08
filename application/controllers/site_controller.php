@@ -11,7 +11,12 @@ class Site_controller extends CI_Controller
 
     public function index()
     {
-        $this->load->view('home');
+        $data = array(
+            'title' => 'home',
+            'subhead' => 'subtitle'
+        );
+        $this->smartyview->render('template.php', $data);
+
     }
 
 } 

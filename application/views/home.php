@@ -4,17 +4,8 @@
     <meta charset="utf-8">
     <?php Assets::css(array('foundation.css', 'normalize.css')); ?>
     <?php Assets::js(array('vendor/jquery.js', 'foundation/foundation.js', 'vendor/fastclick.js', 'vendor/modernizr.js', 'vendor/placeholder.js')) ?>
-    <?php
-    /*  echo link_tag('/assets/css/foundation.css');
-      echo link_tag('/assets/css/normalize.css');
-      echo script_tag('/assets/js/foundation/foundation.js');
-          echo script_tag('/assets/js/vendor/jquery.js');
-          echo script_tag('/assets/js/vendor/fastclick.js');
-          echo script_tag('/assets/js/vendor/modernizr.js');
-          echo script_tag('/assets/js/vendor/placeholder.js');*/
 
-    ?>
-    <title>Welcome to CodeIgniter</title>
+    <title></title>
 </head>
 <body>
 
