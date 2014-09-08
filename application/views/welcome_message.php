@@ -90,7 +90,7 @@
 <div id="container">
     <h1>Welcome to CodeIgniter! Woo</h1>
 
-    <?php echo button_anchor('', 'button'); ?>
+
     <div id="body">
         <p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
 
