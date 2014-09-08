@@ -1376,21 +1376,23 @@ class CssParser
      */
     public function __construct($source = null, array $plugins = null)
     {
-        $plugins = array_merge(array
-        (
-            "Comment" => true,
-            "String" => true,
-            "Url" => true,
-            "Expression" => true,
-            "Ruleset" => true,
-            "AtCharset" => true,
-            "AtFontFace" => true,
-            "AtImport" => true,
-            "AtKeyframes" => true,
-            "AtMedia" => true,
-            "AtPage" => true,
-            "AtVariables" => true
-        ), is_array($plugins) ? $plugins : array());
+        $plugins = array_merge(
+            array
+            (
+                "Comment" => true,
+                "String" => true,
+                "Url" => true,
+                "Expression" => true,
+                "Ruleset" => true,
+                "AtCharset" => true,
+                "AtFontFace" => true,
+                "AtImport" => true,
+                "AtKeyframes" => true,
+                "AtMedia" => true,
+                "AtPage" => true,
+                "AtVariables" => true
+            ), is_array($plugins) ? $plugins : array()
+        );
         // Create plugin instances
         foreach ($plugins as $name => $config) {
             if ($config !== false) {
@@ -1865,28 +1867,32 @@ class CssMinifier
      */
     public function __construct($source = null, array $filters = null, array $plugins = null)
     {
-        $filters = array_merge(array
-        (
-            "ImportImports" => false,
-            "RemoveComments" => true,
-            "RemoveEmptyRulesets" => true,
-            "RemoveEmptyAtBlocks" => true,
-            "ConvertLevel3Properties" => false,
-            "ConvertLevel3AtKeyframes" => false,
-            "Variables" => true,
-            "RemoveLastDelarationSemiColon" => true
-        ), is_array($filters) ? $filters : array());
-        $plugins = array_merge(array
-        (
-            "Variables" => true,
-            "ConvertFontWeight" => false,
-            "ConvertHslColors" => false,
-            "ConvertRgbColors" => false,
-            "ConvertNamedColors" => false,
-            "CompressColorValues" => false,
-            "CompressUnitValues" => false,
-            "CompressExpressionValues" => false
-        ), is_array($plugins) ? $plugins : array());
+        $filters = array_merge(
+            array
+            (
+                "ImportImports" => false,
+                "RemoveComments" => true,
+                "RemoveEmptyRulesets" => true,
+                "RemoveEmptyAtBlocks" => true,
+                "ConvertLevel3Properties" => false,
+                "ConvertLevel3AtKeyframes" => false,
+                "Variables" => true,
+                "RemoveLastDelarationSemiColon" => true
+            ), is_array($filters) ? $filters : array()
+        );
+        $plugins = array_merge(
+            array
+            (
+                "Variables" => true,
+                "ConvertFontWeight" => false,
+                "ConvertHslColors" => false,
+                "ConvertRgbColors" => false,
+                "ConvertNamedColors" => false,
+                "CompressColorValues" => false,
+                "CompressUnitValues" => false,
+                "CompressExpressionValues" => false
+            ), is_array($plugins) ? $plugins : array()
+        );
         // Filters
         foreach ($filters as $name => $config) {
             if ($config !== false) {

@@ -125,7 +125,8 @@ class lessc
                     if (isset($parentBlock->children[$childName])) {
                         $parentBlock->children[$childName] = array_merge(
                             $parentBlock->children[$childName],
-                            $child);
+                            $child
+                        );
                     } else {
                         $parentBlock->children[$childName] = $child;
                     }
@@ -562,8 +563,10 @@ class lessc
             } else {
                 $matches = array();
                 foreach ($blocks as $subBlock) {
-                    $subMatches = $this->findBlocks($subBlock,
-                        array_slice($path, 1), $args, $seen);
+                    $subMatches = $this->findBlocks(
+                        $subBlock,
+                        array_slice($path, 1), $args, $seen
+                    );
 
                     if (!is_null($subMatches)) {
                         foreach ($subMatches as $sm) {
@@ -634,8 +637,10 @@ class lessc
                 if ($name[0] == $this->vPrefix) {
                     $this->set($name, $value);
                 } else {
-                    $out->lines[] = $this->formatter->property($name,
-                        $this->compileValue($this->reduce($value)));
+                    $out->lines[] = $this->formatter->property(
+                        $name,
+                        $this->compileValue($this->reduce($value))
+                    );
                 }
                 break;
             case 'block':
@@ -822,9 +827,11 @@ class lessc
         if (is_null($color))
             $this->throwError("color expected for rgbahex");
 
-        return sprintf("#%02x%02x%02x%02x",
+        return sprintf(
+            "#%02x%02x%02x%02x",
             isset($color[4]) ? $color[4] * 255 : 0,
-            $color[1], $color[2], $color[3]);
+            $color[1], $color[2], $color[3]
+        );
     }
 
     protected function lib_argb($color)
@@ -872,8 +879,10 @@ class lessc
 
                 $i++;
                 $rep = $this->compileValue($this->lib_e($val));
-                $template = preg_replace('/' . self::preg_quote($match) . '/',
-                    $rep, $template, 1);
+                $template = preg_replace(
+                    '/' . self::preg_quote($match) . '/',
+                    $rep, $template, 1
+                );
             }
         }
 
@@ -1040,7 +1049,8 @@ class lessc
         $w1 = (($w * $a == -1 ? $w : ($w + $a) / (1 + $w * $a)) + 1) / 2.0;
         $w2 = 1.0 - $w1;
 
-        $new = array('color',
+        $new = array(
+            'color',
             $w1 * $first[1] + $w2 * $second[1],
             $w1 * $first[2] + $w2 * $second[2],
             $w1 * $first[3] + $w2 * $second[3],
@@ -1092,7 +1102,8 @@ class lessc
 
         }
 
-        $out = array('hsl',
+        $out = array(
+            'hsl',
             ($H < 0 ? $H + 6 : $H) * 60,
             $S * 100,
             $L * 100,
@@ -1263,9 +1274,11 @@ class lessc
                     $ret = call_user_func($f, $this->reduce($args), $this);
 
                     if (is_null($ret)) {
-                        return array("string", "", array(
-                            $name, "(", $args, ")"
-                        ));
+                        return array(
+                            "string", "", array(
+                                $name, "(", $args, ")"
+                            )
+                        );
                     }
 
                     // convert to a typed value if the result is a php primitive
@@ -1432,8 +1445,10 @@ class lessc
     {
         if ($rgt[0] == '%') $rgt[1] /= 100;
 
-        return $this->op_color_color($op, $lft,
-            array_fill(1, count($lft) - 1, $rgt[1]));
+        return $this->op_color_color(
+            $op, $lft,
+            array_fill(1, count($lft) - 1, $rgt[1])
+        );
     }
 
     protected function op_color_color($op, $left, $right)
@@ -2056,8 +2071,12 @@ class lessc_parser
 
         if (!self::$operatorString) {
             self::$operatorString =
-                '(' . implode('|', array_map(array('lessc', 'preg_quote'),
-                    array_keys(self::$precedence))) . ')';
+                '(' . implode(
+                    '|', array_map(
+                        array('lessc', 'preg_quote'),
+                        array_keys(self::$precedence)
+                    )
+                ) . ')';
 
             $commentSingle = lessc::preg_quote(self::$commentSingle);
             $commentMultiLeft = lessc::preg_quote(self::$commentMultiLeft);
@@ -2218,8 +2237,12 @@ class lessc_parser
                 }
             }
 
-            $this->append(array('raw', '@import url("' . $url . '")' .
-            ($media ? ' ' . $media : '') . ';'), $s);
+            $this->append(
+                array(
+                    'raw', '@import url("' . $url . '")' .
+                ($media ? ' ' . $media : '') . ';'
+                ), $s
+            );
             return true;
         }
 
@@ -2301,8 +2324,10 @@ class lessc_parser
     protected function isDirective($dirname, $directives)
     {
         // TODO: cache pattern in parser
-        $pattern = implode("|",
-            array_map(array("lessc", "preg_quote"), $directives));
+        $pattern = implode(
+            "|",
+            array_map(array("lessc", "preg_quote"), $directives)
+        );
         $pattern = '/^(-[a-z-]+-)?(' . $pattern . ')$/i';
 
         return preg_match($pattern, $dirname);
@@ -2347,8 +2372,10 @@ class lessc_parser
                 unset($this->env->supressedDivision);
                 $s = $this->seek();
                 if ($this->literal("/") && $this->value($rhs)) {
-                    $out = array("list", "",
-                        array($out, array("keyword", "/"), $rhs));
+                    $out = array(
+                        "list", "",
+                        array($out, array("keyword", "/"), $rhs)
+                    );
                 } else {
                     $this->seek($s);
                 }
