@@ -86,7 +86,7 @@
     </style>
 </head>
 <body>
-<?php //Assets::css(array('foundation.css', 'normalize.css')); ?>
+<?php Assets::css(array('foundation.css', 'normalize.css')); ?>
 <div id="container">
     <h1>Welcome to CodeIgniter! Woo</h1>
 
