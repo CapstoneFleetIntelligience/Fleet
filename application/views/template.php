@@ -12,7 +12,8 @@
     <title>{$title}</title>
 </head>
 <body>
-
+{$content}
+Testing the template I think it works
 </body>
 </html>
 
