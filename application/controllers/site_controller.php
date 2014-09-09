@@ -16,7 +16,7 @@ class Site_controller extends CI_Controller
             'content' => $this->load->view('home')
         );
         $this->smartyview->render('template.php', $data);
-        //$this->load->view('home');
+
     }
 
 } 
