@@ -16,7 +16,7 @@
 </head>
 <body>
 <div class="medium-5 medium-centered columns">
-    <?php $this->load->view($content); ?>
+    <?php $CI->load->view($content); ?>
 </div>
 
 Testing the template I think it works
