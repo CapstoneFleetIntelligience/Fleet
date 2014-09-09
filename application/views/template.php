@@ -9,15 +9,10 @@
 
 <html>
 <head>
-    {<?php Assets::css(array('foundation.css', 'normalize.css')); ?>}
-    { <?php Assets::js(
-        array(
-            'vendor/jquery.js', 'foundation/foundation.js', 'vendor/fastclick.js',
-            'vendor/modernizr.js', 'vendor/placeholder.js'
-        )
-    ) ?>}
 
-    <title>{$title}</title>
+
+<title>{$title}</title>
+
 </head>
 <body>
 <div class="medium-5 medium-centered columns">

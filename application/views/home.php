@@ -1,3 +1,10 @@
+<?php Assets::css(array('foundation.css', 'normalize.css')); ?>
+<?php Assets::js(
+    array(
+        'vendor/jquery.js', 'foundation/foundation.js', 'vendor/fastclick.js',
+        'vendor/modernizr.js', 'vendor/placeholder.js'
+    )
+) ?>
 <div id="container">
     <h1>Welcome to CodeIgniter!</h1>
     <a href="#" class="button">Fire</a>
@@ -19,6 +26,3 @@
 
 
 </div>
-
-</body>
-</html>
