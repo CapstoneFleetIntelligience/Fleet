@@ -13,7 +13,7 @@ class Site_controller extends CI_Controller
     {
         $data = array(
             'title' => 'home',
-            'content' => $this->load->view('home')
+            'content' => 'home'
         );
         $this->smartyview->render('template.php', $data);
 
