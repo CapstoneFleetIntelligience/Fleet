@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <?php Assets::css(array('foundation.css', 'normalize.css')); ?>
-    <?php Assets::js(array('vendor/jquery.js', 'foundation/foundation.js', 'vendor/fastclick.js', 'vendor/modernizr.js', 'vendor/placeholder.js')) ?>
-    <title>Welcome to CodeIgniter</title>
-</head>
-<body>
+<?php Assets::css(array('foundation.css', 'normalize.css')); ?>
+<?php Assets::js(array('vendor/jquery.js', 'foundation/foundation.js', 'vendor/fastclick.js', 'vendor/modernizr.js', 'vendor/placeholder.js')) ?>
+
 
 
 <div id="container">
