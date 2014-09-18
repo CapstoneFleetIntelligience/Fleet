@@ -11,7 +11,9 @@ class Site_controller extends CI_Controller
 
     public function index()
     {
-        $this->load->view('home');
+        $data = array(
+          'title' => 'home',
+        );
+        $this->load->template('home', $data);
     }
-
 } 
