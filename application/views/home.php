@@ -1,11 +1,4 @@
-<div id="container">
-    <div class = "row header">
-         <div class="small-12 columns">
-                <h1 class="center">
-                    Welcome to Fleet Intelligience
-                </h1>
-         </div>
-    </div>
+<div class="container">
     <div class="row">
         <div class="contain-to-grid sticky">
             <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
@@ -24,6 +17,7 @@
     </div>
     <div class="row">
         <div class="block">
+
         </div>
     </div>
-</div>
+</div

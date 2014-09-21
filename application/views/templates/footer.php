@@ -7,11 +7,13 @@
  */
 ?>
 
-<div class="footer">
+
     <div class="row">
+    	<div id="footer">
         <div class = "small-12 center">
             Copyrighted
         </div>
+        
     </div>
 </div>
 </body>

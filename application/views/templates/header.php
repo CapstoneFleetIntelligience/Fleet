@@ -18,3 +18,10 @@
     <title><?php echo $title ?></title>
 </head>
 <body>
+    <div class = "row header">
+         <div class="small-12 columns">
+                <h1 class="center">
+                    Welcome to Fleet Intelligience <a href="#" class="button small radius right">Log in</a>
+                </h1>
+         </div>      
+    </div>
