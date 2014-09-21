@@ -16,4 +16,4 @@ class Site_controller extends CI_Controller
         );
         $this->load->template('home', $data);
     }
-} 
+}
