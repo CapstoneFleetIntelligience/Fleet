@@ -1,9 +1,14 @@
-    RewriteEngine On
-    RewriteBase /
+Options -Indexes
+Options +FollowSymLinks
 
- RewriteRule ^(site_controller(/index)?|index(\.php)?)/?$ / [L,R=301]
- RewriteRule ^(.*)/index/?$ $1 [L,R=301]
+RewriteEngine On
+RewriteBase /
 
- # Removes trailing slashes (prevents SEO duplicate content issues)
- RewriteCond %{REQUEST_FILENAME} !-d
- RewriteRule ^(.+)/$ $1 [L,R=301]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteCond $1 !^(index\.php|web|robots\.txt)
+RewriteRule ^(site_controller(/index)?|index(\.php)?)/?$ / [L,R=301]
+
+RewriteRule ^(.*)/index/?$ $1 [L,R=301]
+RewriteRule ^(.+)/$ $1 [L,R=301]
+# Removes trailing slashes (prevents SEO duplicate content issues)

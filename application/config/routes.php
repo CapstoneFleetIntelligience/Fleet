@@ -40,6 +40,7 @@
 
 $route['default_controller'] = "site_controller";
 $route['404_override'] = '';
+$route['registration'] = "site_controller/registration";
 
 
 /* End of file routes.php */
