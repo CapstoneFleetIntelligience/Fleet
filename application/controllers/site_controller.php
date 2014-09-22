@@ -24,4 +24,10 @@ class Site_controller extends CI_Controller
         );
         $this->load->template('registration',$data);
     }
+
+    public  function register()
+    {
+        
+    }
+
 }
