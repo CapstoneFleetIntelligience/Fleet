@@ -27,7 +27,7 @@ class Site_controller extends CI_Controller
 
     public  function register()
     {
-        
+
     }
 
 }

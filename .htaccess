@@ -1,14 +1,10 @@
 Options -Indexes
 Options +FollowSymLinks
 
-RewriteEngine On
-RewriteBase /
+#RewriteEngine On
+RewriteBase /~cg236/Capstone/
 
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME} !-l
-RewriteCond $1 !^(index\.php|web|robots\.txt)
-RewriteRule ^(site_controller(/index)?|index(\.php)?)/?$ / [L,R=301]
-
-RewriteRule ^(.*)/index/?$ $1 [L,R=301]
-RewriteRule ^(.+)/$ $1 [L,R=301]
+RewriteEngine on
+RewriteCond $1 !^(index\.php|images|assets|robots\.txt)
+RewriteRule ^(.*)$ index.php/$1 [L]
 # Removes trailing slashes (prevents SEO duplicate content issues)
