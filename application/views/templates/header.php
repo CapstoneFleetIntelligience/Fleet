@@ -15,7 +15,7 @@
     <?php Assets::css(array('foundation.css', 'normalize.css')); ?>
     <?php Assets::js(
         array(
-            'vendor/jquery.js', 'foundation/foundation.js', 'foundation/topbar.js',
+            'vendor/jquery.js', 'foundation/foundation.js', 'foundation/foundation.tab.js', 'foundation/topbar.js',
             'vendor/fastclick.js',
             'vendor/modernizr.js', 'vendor/placeholder.js'
         )
