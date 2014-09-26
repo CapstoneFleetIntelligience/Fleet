@@ -20,7 +20,7 @@ class registration_model extends CI_Model
 
     public function createUser($data)
     {
-        foreach($user as $key => $value)
+        foreach($data as $key => $value)
         {
             $this->$key = $value;
         }
