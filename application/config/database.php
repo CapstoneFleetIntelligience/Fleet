@@ -50,11 +50,11 @@ $active_record = TRUE;
 
 $db['default']['hostname'] = 'dbhost-pgsql.cs.missouri.edu';
 $db['default']['username'] = 'cs4970s14grp5';
-$db['default']['password'] = '+sRexdy5V6,xV';
+$db['default']['password'] = 'DgiqIPzs';
 $db['default']['database'] = 'cs4970s14grp5';
 $db['default']['dbdriver'] = 'postgre';
 $db['default']['dbprefix'] = '';
-$db['default']['pconnect'] = FALSE;
+$db['default']['pconnect'] = TRUE;
 $db['default']['db_debug'] = TRUE;
 $db['default']['cache_on'] = FALSE;
 $db['default']['cachedir'] = '';
