@@ -2,3 +2,4 @@
 *.DS_Store
 !.gitignore
 application/config/database.php
+.htaccess
