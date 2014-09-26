@@ -27,8 +27,10 @@ class Site_controller extends CI_Controller
 
     public  function register()
     {
-        $user = $_POST;
-        $this->registration_model->getUserData($user);
+        $user = new registration_model;
+        $data = $_POST;
+        $user->getUserData($data);
+
 
     }
 

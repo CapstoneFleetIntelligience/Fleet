@@ -10,7 +10,7 @@ $email = array(
     'class' => 'small-8 columns right'
 );
 $bName = array(
-    'name' => 'businessEmail',
+    'name' => 'businessName',
     'class' => 'small-8 columns right'
 );
 $address = array(
@@ -22,7 +22,7 @@ $range = array(
    'class' => 'small-8 columns right'
 );
 $name = array(
-    'name' => 'name',
+    'name' => 'managerName',
     'class' => 'small-8 columns right'
 )
 ?>
