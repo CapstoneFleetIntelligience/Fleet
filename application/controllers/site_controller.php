@@ -38,4 +38,12 @@ class Site_controller extends CI_Controller
 
         $this->db->insert('capsql.user', $user);
     }
+
+    public function adminH()
+    {
+        $data = array(
+            'title' => 'Managers Home'
+        );
+        $this->load->template('adminH',$data);
+    }
 }

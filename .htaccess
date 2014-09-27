@@ -2,7 +2,7 @@ Options -Indexes
 Options +FollowSymLinks
 
 #RewriteEngine On
-RewriteBase /~cg236/Capstone/
+RewriteBase /~bpcx97/Fleet/
 
 RewriteEngine on
 RewriteCond $1 !^(index\.php|images|assets|robots\.txt)
