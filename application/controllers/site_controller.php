@@ -8,6 +8,10 @@
  */
 class Site_controller extends CI_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     public function index()
     {
@@ -16,4 +20,22 @@ class Site_controller extends CI_Controller
         );
         $this->load->template('home', $data);
     }
-} 
+
+    public function registration()
+    {
+        $data = array(
+            'title' => 'register'
+        );
+        $this->load->template('registration',$data);
+    }
+
+    public function register()
+    {
+
+        $user = new registration_model;
+        $data = $_POST;
+        $user->createUser($data);
+
+        $this->db->insert('capsql.user', $user);
+    }
+}
