@@ -3,3 +3,4 @@
 !.gitignore
 application/config/database.php
 .htaccess
+.idea/vcs.xml
