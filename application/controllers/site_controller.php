@@ -46,4 +46,17 @@ class Site_controller extends CI_Controller
         );
         $this->load->template('adminH',$data);
     }
+
+    public function itemN(){
+        $data = array(
+            'title' => 'Add New Item'
+        );
+        $this->load->template('itemN',$data);
+    }
+
+    public function addItem(){
+        $data = $_POST;
+
+        createItem($data);
+    }
 }

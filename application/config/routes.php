@@ -43,6 +43,8 @@ $route['404_override'] = '';
 $route['registration'] = "site_controller/registration";
 $route['register'] = "site_controller/register";
 $route['adminH'] = "site_controller/adminH";
+$route['itemN'] = "site_controller/itemN";
+$route['custN'] = "site_controller/custN";
 
 
 /* End of file routes.php */
