@@ -5,30 +5,26 @@
  * Date: 9/21/14
  * Time: 7:17 PM
  */
-$email = array(
-    'name' => 'email',
+
+$phone = array(
+    'name' => 'phone',
     'class' => 'small-8 columns right'
-);
-$bName = array(
-    'name' => 'businessName',
-    'class' => 'small-8 columns right'
-);
-$address = array(
-    'name' => 'address',
-    'class' => 'small-8 columns right'
-);
-$range = array(
-    'name' => 'range',
-   'class' => 'small-8 columns right'
 );
 $name = array(
-    'name' => 'managerName',
+    'name' => 'name',
+    'class' => 'small-8 columns right'
+);
+$pass = array(
+    'name' => 'pass',
+    'class' => 'small-8 columns right'
+);
+$email = array(
+    'name' => 'email',
     'class' => 'small-8 columns right'
 )
 ?>
 
 <div class="container">
-
     <div class="row">
         <?php echo form_open('register');
         echo form_fieldset('Simple yet effective');
@@ -41,29 +37,23 @@ $name = array(
         </div>
         <div class="small-8 small-centered columns">
                 <span class="prefix">
-                    Email
+                     Email
                 </span>
             <?php echo form_input($email); ?>
         </div>
         <div class="small-8 small-centered columns">
             <span class="prefix">
-                    Business Name
+                    Password
                 </span>
-            <?php echo form_input($bName); ?>
+            <?php echo form_password($pass); ?>
         </div>
         <div class="small-8 small-centered columns">
             <span class="prefix">
-                    Address
+                    Phone
                 </span>
-            <?php echo form_input($address); ?>
+            <?php echo form_input($phone); ?>
         </div>
-        <div class="small-8 small-centered columns">
-            <span class="prefix">
-                    Max Delivery range
-                </span>
-            <?php echo form_input($range); ?>
-        </div>
-        <?php echo form_submit('submit', 'Continue', array('class' => 'button small'));
+        <?php echo form_submit('','Continue', array('class' => 'button small'));
                 echo form_close();
             ?>
     </div>

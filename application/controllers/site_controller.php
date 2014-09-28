@@ -31,11 +31,37 @@ class Site_controller extends CI_Controller
 
     public function register()
     {
-
-        $user = new registration_model;
+        $user = new user_registration();
         $data = $_POST;
-        $user->createUser($data);
+        $user->createAdmin($data);
+        $this->session->set_userdata('user', serialize($user));
+        $this->businessRegistration();
+    }
 
-        $this->db->insert('capsql.user', $user);
+    public  function registerBusiness()
+    {
+
+        $business = new business_registration();
+
+        $user = unserialize($this->session->userdata('user'));
+        $data = $_POST;
+        $business->createBusiness($data);
+        $business->bid = $user->bid;
+
+        if(isset($business->bid))
+        {
+            $this->db->insert('capsql.business', $business);
+            $this->db->insert('capsql.user', $user);
+            $this->index();
+        }
+
+    }
+
+    public function businessRegistration()
+    {
+        $data = array(
+            'title' => 'Almost Done',
+        );
+        $this->load->template('bRegistration', $data);
     }
 }

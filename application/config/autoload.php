@@ -111,7 +111,7 @@ $autoload['language'] = array();
 |
 */
 
-$autoload['model'] = array('registration_model');
+$autoload['model'] = array('user_registration', 'business_registration');
 
 
 /* End of file autoload.php */
