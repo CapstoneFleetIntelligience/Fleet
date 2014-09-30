@@ -1,4 +1,13 @@
+<<<<<<< HEAD
 .idea/
 *.DS_Store
 !.gitignore
 application/config/database.php
+=======
+.idea/
+*.DS_Store
+!.gitignore
+application/config/database.php
+.htaccess
+.idea/vcs.xml
+>>>>>>> origin/Admin-home
