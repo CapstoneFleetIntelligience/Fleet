@@ -26,6 +26,7 @@ class Site_controller extends CI_Controller
         $data = array(
             'title' => 'register'
         );
+
         $this->load->template('registration',$data);
     }
 
