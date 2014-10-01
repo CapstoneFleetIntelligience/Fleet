@@ -6,22 +6,34 @@
  * Time: 4:19 PM
  */
 
-class user_registration extends CI_Model
+/**
+ * Class user
+ * @property string $name
+ * @property string $role
+ * @property string $pass
+ * @property string $email
+ * @property string $bname
+ */
+
+class user extends CI_Model
 {
-    public $name;
+    public $uname;
     public $role;
     public $pass;
-    public $phone;
+    public $uphone;
     public $email;
     public $salt;
-    public $bid;
-    public $uid;
+    public $bname;
+
 
     public function __construct()
     {
         parent::__construct();
     }
 
+    /**
+     * @param array $data post data
+     */
     public function createAdmin($data)
     {
         foreach($data as $key => $value)
@@ -30,7 +42,6 @@ class user_registration extends CI_Model
         }
 
         $this->encryptPass();
-        $this->generateID();
         $this->role = 'A';
     }
 
@@ -40,11 +51,12 @@ class user_registration extends CI_Model
         $this->pass = $this->salt.sha1($this->pass);
     }
 
-    public function generateID()
+    public function authenticate($credentials)
     {
-        $this->bid = mt_rand(1, 1500);
-        $this->uid = mt_rand(1, 1500);
+        
     }
+
+
 }
 
 ?>

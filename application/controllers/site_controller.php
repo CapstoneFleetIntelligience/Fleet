@@ -8,11 +8,15 @@
  */
 class Site_controller extends CI_Controller
 {
+
     public function __construct()
     {
         parent::__construct();
     }
 
+    /**
+     * Home Page
+     */
     public function index()
     {
         $data = array(
@@ -21,48 +25,51 @@ class Site_controller extends CI_Controller
         $this->load->template('home', $data);
     }
 
+    /**
+     * Registration Page
+     */
     public function registration()
     {
         $data = array(
-            'title' => 'register'
+            'title' => 'Almost Done'
         );
         $this->load->template('registration',$data);
     }
 
+    /**
+     * Registers new admin User and Business
+     */
     public function register()
     {
-        $user = new user_registration();
-        $data = $_POST;
-        $user->createAdmin($data);
-        $this->session->set_userdata('user', serialize($user));
-        $this->businessRegistration();
-    }
+        $user = new user();
+        $business = new business();
 
-    public  function registerBusiness()
-    {
+        $data = $this->input->post(NULL, TRUE);
+        $userData = array_chunk($data, 6, TRUE);
 
-        $business = new business_registration();
+        $business->createBusiness($userData[0]);
+        $user->createAdmin($userData[1]);
+        $user->bname = $business->name;
 
-        $user = unserialize($this->session->userdata('user'));
-        $data = $_POST;
-        $business->createBusiness($data);
-        $business->bid = $user->bid;
-
-        if(isset($business->bid))
+        if($this->db->insert('capsql.business', $business))
         {
-            $this->db->insert('capsql.business', $business);
             $this->db->insert('capsql.user', $user);
-            $this->index();
+            $this->adminH();
         }
-
+        else throw new Exception();
     }
 
-    public function businessRegistration()
+    public function login()
     {
         $data = array(
-            'title' => 'Almost Done',
+            'title' => 'Login'
         );
-        $this->load->template('bRegistration', $data);
+        $this->load->template('login', $data);
+    }
+
+    public function authenticate()
+    {
+        $this->user->authenticate($this->input->post(NULL, TRUE));
     }
 
     public function adminH()

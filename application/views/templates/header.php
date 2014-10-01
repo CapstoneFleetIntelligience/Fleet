@@ -33,7 +33,7 @@
     <div class="small-6 columns">
         <?php echo anchor('registration', 'please register', array('class' => 'right')) ?>
         <?php echo anchor(
-            '', 'Log in',
+            'login', 'Log in',
             array('class' => 'button small radius right')
         ) ?>
     </div>

@@ -6,12 +6,11 @@
  * Time: 7:41 PM
  */
 
-class business_registration extends CI_Model
+class business extends CI_Model
 {
-    public $bid;
     public $name;
     public $radius;
-    public $phone;
+    public $bphone;
     public $capacity;
     public $dpass;
     public $dsalt;
@@ -28,6 +27,7 @@ class business_registration extends CI_Model
             $this->$key = $value;
         }
         $this->encryptPass();
+
     }
 
     public function encryptPass()
