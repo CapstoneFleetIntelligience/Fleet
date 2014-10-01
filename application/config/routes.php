@@ -39,7 +39,7 @@
 */
 
 $route['default_controller'] = "site_controller";
-$route[''] = "admin_controller/index";
+$route[''] = "site_controller/index";
 $route['404_override'] = '';
 $route['registration'] = "site_controller/registration";
 $route['register'] = "site_controller/register";
@@ -48,6 +48,7 @@ $route['registerBusiness'] = "site_controller/registerBusiness";
 $route['adminH'] = "site_controller/adminH";
 $route['itemN'] = "site_controller/itemN";
 $route['custN'] = "site_controller/custN";
+$route['addCust'] = "admin_controller/addCust";
 
 
 /* End of file routes.php */

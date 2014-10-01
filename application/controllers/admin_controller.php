@@ -13,9 +13,17 @@ class admin_controller extends CI_Controller
         parent::__construct();
     }
 
-    public function index()
-    {
-        echo 'hey';
+    public function addItem(){
+        $data = $_POST;
+
+        createItem($data);
+    }
+
+    public function addCust(){
+        $data = $_POST;
+        print_r($_POST) ;
+
+        //createCust($data);
     }
 
 }

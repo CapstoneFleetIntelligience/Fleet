@@ -15,7 +15,7 @@
     <div class="row">
         <div class="large-3 medium-3 small-12 columns">
             <div class="row">
-                <?php echo anchor('custN', 'New Customer(s)',array('class' => 'button small radius left')) ?>
+                <?php echo anchor('custN', 'New Delivery',array('class' => 'button small radius left')) ?>
             </div>
             <div class="row">
                 <?php echo anchor('itemN', 'New Item(s)',array('class' => 'button small radius left')) ?>

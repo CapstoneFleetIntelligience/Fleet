@@ -81,9 +81,11 @@ class Site_controller extends CI_Controller
         $this->load->template('itemN',$data);
     }
 
-    public function addItem(){
-        $data = $_POST;
-
-        createItem($data);
+    public function custN(){
+        $data = array(
+            'title' => 'Add New Delivery'
+        );
+        $this->load->template('custN',$data);
     }
+
 }
