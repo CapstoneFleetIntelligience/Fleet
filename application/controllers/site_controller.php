@@ -8,10 +8,19 @@
  */
 class Site_controller extends CI_Controller
 {
-
+    /**
+     * @method void index()
+     * @method void registration()
+     * @method void register()
+     * @method void login()
+     * @method void|bool authenticate()
+     * @method void adminH()
+     * @method void itemN()
+     * @method void addItem()
+     */
     public function __construct()
     {
-        parent::__construct();
+        return parent::__construct();
     }
 
     /**
@@ -59,6 +68,9 @@ class Site_controller extends CI_Controller
         else throw new Exception();
     }
 
+    /**
+     * Loads the login page
+     */
     public function login()
     {
         $data = array(
@@ -67,11 +79,23 @@ class Site_controller extends CI_Controller
         $this->load->template('login', $data);
     }
 
+    /**
+     * Authenticates and redirects user
+     */
     public function authenticate()
     {
-        $this->user->authenticate($this->input->post(NULL, TRUE));
+       $user = $this->user->authenticate($this->input->post(NULL, TRUE));
+        if($user)
+        {
+            $index = $this->user->checkAccess($user);
+            $this->$index();
+        }
+        else return $user;
     }
 
+    /**
+     * Loads admin/managers home
+     */
     public function adminH()
     {
         $data = array(
@@ -80,6 +104,9 @@ class Site_controller extends CI_Controller
         $this->load->template('adminH',$data);
     }
 
+    /**
+     * Loads the item add page
+     */
     public function itemN(){
         $data = array(
             'title' => 'Add New Item'
@@ -87,6 +114,9 @@ class Site_controller extends CI_Controller
         $this->load->template('itemN',$data);
     }
 
+    /**
+     * adds item to db
+     */
     public function addItem(){
         $data = $_POST;
 
