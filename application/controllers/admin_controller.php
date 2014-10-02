@@ -50,7 +50,7 @@ class admin_controller extends CI_Controller
 
         $this->db->insert('capsql.delivery', $delivery);
 
-        if ($list == yes)
+        if ($list == 'yes')
         {
             $this->bChkList($cdata);
         }
