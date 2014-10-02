@@ -50,6 +50,27 @@ class admin_controller extends CI_Controller
 
         $this->db->insert('capsql.delivery', $delivery);
 
+        if ($list == yes)
+        {
+            $this->bChkList($cdata);
+        }
+        else
+        {
+            $data = array(
+                'title' => 'Add New Delivery'
+            );
+            $this->load->template('custN',$data);
+        }
+
+
+    }
+
+    public function bChkList($cdata)
+    {
+        $data = array(
+            'title' => 'Build Checklist'
+        );
+        $this->load->template('bChkList', $data);
     }
 
 }
