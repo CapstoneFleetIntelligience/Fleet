@@ -49,6 +49,7 @@ $route['adminH'] = "site_controller/adminH";
 $route['itemN'] = "site_controller/itemN";
 $route['custN'] = "site_controller/custN";
 $route['addCust'] = "admin_controller/addCust";
+$route['addItem'] = "admin_controller/addItem";
 
 
 /* End of file routes.php */

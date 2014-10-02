@@ -14,13 +14,22 @@ class admin_controller extends CI_Controller
     }
 
     public function addItem(){
-        $data = $_POST;
+        $item = new item_model();
 
-        createItem($data);
+        $data = $this->input->post(NULL, TRUE);
+        $userData = array_chunk($data, 3, TRUE);
+        $item->createItem($userData[0]);
+        $item->bname = $this->session->userdata('bname');
+
+        $this->db->insert('capsql.chkitem', $item);
+
+        $data = array(
+            'title' => 'Managers Home'
+        );
+        $this->load->template('adminH',$data);
     }
 
     public function addCust(){
-        $data = $_POST;
         print_r($_POST) ;
 
         //createCust($data);

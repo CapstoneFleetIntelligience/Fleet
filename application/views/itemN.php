@@ -6,7 +6,7 @@
  * Time: 7:33 PM
  */
 $name = array(
-    'name' => 'name',
+    'name' => 'iname',
     'class' => 'small-8 columns right'
 );
 $description = array(
@@ -14,9 +14,17 @@ $description = array(
     'rows' => '4',
     'class' => 'small-8 columns right'
 );
-$default = array(
-    'name' => 'default',
-    'class' => 'small-8 columns right'
+$isdefault = array(
+    'name'      => 'default',
+    'id'        => 'y',
+    'value'     => '1',
+    'checked'   => FALSE
+);
+$notdefault = array(
+    'name'      => 'default',
+    'id'        => 'n',
+    'value'     => '0',
+    'checked'   => TRUE
 );
 ?>
 <div class="container">
@@ -38,7 +46,19 @@ $default = array(
             <span class="prefix">
                     This item is found<br> in every checklist
                 </span>
-                <?php echo form_checkbox($default,"t",FALSE); ?>
+                <div class="small-2 columns right">
+                    <?php
+                    echo form_label("No",'n');
+                    echo form_radio($notdefault);
+                    ?>
+                </div>
+
+                <div class="small-2 columns right">
+                    <?php
+                    echo form_label("Yes",'y');
+                    echo form_radio($isdefault);
+                    ?>
+                </div>
             </div>
         </div>
         <div class="row">
