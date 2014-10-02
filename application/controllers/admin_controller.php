@@ -13,7 +13,8 @@ class admin_controller extends CI_Controller
         parent::__construct();
     }
 
-    public function addItem(){
+    public function addItem()
+    {
         $item = new item_model();
 
         $data = $this->input->post(NULL, TRUE);
@@ -29,10 +30,26 @@ class admin_controller extends CI_Controller
         $this->load->template('adminH',$data);
     }
 
-    public function addCust(){
-        print_r($_POST) ;
+    public function addCust()
+    {
+        $delivery = new delivery();
+        $customer = new customer();
 
-        //createCust($data);
+        $data = $this->input->post(NULL, TRUE);
+        $cdata = array_slice($data, 0, 3);
+        $ddata = array_slice($data, 3, 1);
+        $list = $data['list'];
+        $x = array_slice($data, 5, 1);
+
+        $customer->custCheck($cdata);
+
+        $xdata = array_merge($ddata,$x);
+
+        $delivery->setDelv($xdata);
+        $delivery->cid = $customer->cid;
+
+        $this->db->insert('capsql.delivery', $delivery);
+
     }
 
 }
