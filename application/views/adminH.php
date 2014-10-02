@@ -9,7 +9,8 @@
 <div class="container">
     <div class="row">
         <div class="large-12 medium-12 small-12 columns">
-            <h3 style="text-align: center;">Managers Name</h3>
+            <h2 style="text-align: center;"><?php echo $this->session->userdata('bname') ?></h2>
+            <h3 style="text-align: center;"><?php echo $this->session->userdata('uname') ?></h3>
         </div>
     </div>
     <div class="row">

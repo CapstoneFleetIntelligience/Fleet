@@ -82,6 +82,7 @@ class Site_controller extends CI_Controller
 
     /**
      * Authenticates and redirects user
+     * Sets user session data
      */
     public function authenticate()
     {
@@ -89,6 +90,16 @@ class Site_controller extends CI_Controller
         if($user)
         {
             $index = $this->user->checkAccess($user);
+
+            $sessionD = array(
+                'uid' => $user->uid,
+                'bname' => $user->bname,
+                'role' => $user->role,
+                'uname' => $user->uname
+            );
+
+            $this->session->set_userdata($sessionD);
+
             $this->$index();
         }
         else return $user;
