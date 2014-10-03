@@ -10,7 +10,6 @@ class item_model extends CI_Model
     public $bname;
     public $iname;
     public $description;
-    public $default;
 
     public function __construct()
     {

@@ -52,7 +52,7 @@ class admin_controller extends CI_Controller
 
         if ($list == 'Yes')
         {
-            $this->bChkList($cdata);
+            $this->bChkList($delivery);
         }
         else
         {
@@ -65,12 +65,41 @@ class admin_controller extends CI_Controller
 
     }
 
-    public function bChkList($cdata)
+    public function bChkList($delivery)
     {
         $data = array(
-            'title' => 'Build Checklist'
+            'title' => 'Build Checklist',
+            'mycid' => $delivery->cid,
+            'myschd' => $delivery->schd
         );
+
         $this->load->template('bChkList', $data);
+    }
+
+    public function addList()
+    {
+
+        $data = $this->input->post(NULL, TRUE);
+        $ddata = array_slice($data, 0, 2);
+        $x = array_slice($data, 2);
+        $list = array_slice($x, 0, -1);
+
+        foreach ($list as $key => $val) {
+            $key = substr($key,1);
+            $del_item = array(
+                'cid' => $ddata['cid'],
+                'ischd' => $ddata['ischd'],
+                'iid' => $key,
+                'qty' => $val
+            );
+            $this->db->insert('capsql.del_item', $del_item);
+        }
+
+        $data = array(
+            'title' => 'Add New Delivery'
+        );
+        $this->load->template('custN',$data);
+
     }
 
 }

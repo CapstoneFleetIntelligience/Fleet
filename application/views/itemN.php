@@ -14,18 +14,6 @@ $description = array(
     'rows' => '4',
     'class' => 'small-8 columns right'
 );
-$isdefault = array(
-    'name'      => 'default',
-    'id'        => 'y',
-    'value'     => '1',
-    'checked'   => FALSE
-);
-$notdefault = array(
-    'name'      => 'default',
-    'id'        => 'n',
-    'value'     => '0',
-    'checked'   => TRUE
-);
 ?>
 <div class="container">
 
@@ -39,26 +27,6 @@ $notdefault = array(
                     Item Name
                 </span>
                 <?php echo form_input($name); ?>
-            </div>
-        </div>
-        <div class="row">
-            <div class="small-8 small-centered columns">
-            <span class="prefix">
-                    This item is found<br> in every checklist
-                </span>
-                <div class="small-2 columns right">
-                    <?php
-                    echo form_label("No",'n');
-                    echo form_radio($notdefault);
-                    ?>
-                </div>
-
-                <div class="small-2 columns right">
-                    <?php
-                    echo form_label("Yes",'y');
-                    echo form_radio($isdefault);
-                    ?>
-                </div>
             </div>
         </div>
         <div class="row">
