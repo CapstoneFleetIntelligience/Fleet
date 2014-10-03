@@ -1,3 +1,4 @@
+
 <?php
 
 /**
@@ -99,9 +100,8 @@ class Site_controller extends CI_Controller
             );
 
             $this->session->set_userdata($sessionD);
+            redirect($index);        }
 
-            $this->$index();
-        }
         else return $user;
     }
 
@@ -133,4 +133,3 @@ class Site_controller extends CI_Controller
         $this->load->template('custN',$data);
     }
 
-}
