@@ -30,7 +30,7 @@ class Site_controller extends CI_Controller
     public function index()
     {
         $data = array(
-          'title' => 'home',
+            'title' => 'home',
         );
         $this->load->template('home', $data);
     }
@@ -44,7 +44,7 @@ class Site_controller extends CI_Controller
             'title' => 'Almost Done'
         );
 
-        $this->load->template('registration',$data);
+        $this->load->template('registration', $data);
     }
 
     /**
@@ -62,12 +62,10 @@ class Site_controller extends CI_Controller
         $user->createAdmin($userData[1]);
         $user->bname = $business->name;
 
-        if($this->db->insert('capsql.business', $business))
-        {
+        if ($this->db->insert('capsql.business', $business)) {
             $this->db->insert('capsql.user', $user);
             $this->adminH();
-        }
-        else throw new Exception();
+        } else throw new Exception();
     }
 
     /**
@@ -87,9 +85,8 @@ class Site_controller extends CI_Controller
      */
     public function authenticate()
     {
-       $user = $this->user->authenticate($this->input->post(NULL, TRUE));
-        if($user)
-        {
+        $user = $this->user->authenticate($this->input->post(NULL, TRUE));
+        if ($user) {
             $index = $this->user->checkAccess($user);
 
             $sessionD = array(
@@ -100,9 +97,8 @@ class Site_controller extends CI_Controller
             );
 
             $this->session->set_userdata($sessionD);
-            redirect($index);        }
-
-        else return $user;
+            redirect($index);
+        } else return $user;
     }
 
     /**
@@ -113,23 +109,26 @@ class Site_controller extends CI_Controller
         $data = array(
             'title' => 'Managers Home'
         );
-        $this->load->template('adminH',$data);
+        $this->load->template('adminH', $data);
     }
 
     /**
      * Loads the item add page
      */
-    public function itemN(){
+    public function itemN()
+    {
         $data = array(
             'title' => 'Add New Item'
         );
-        $this->load->template('itemN',$data);
+        $this->load->template('itemN', $data);
     }
 
-    public function custN(){
+    public function custN()
+    {
         $data = array(
             'title' => 'Add New Delivery'
         );
-        $this->load->template('custN',$data);
+        $this->load->template('custN', $data);
     }
+}
 
