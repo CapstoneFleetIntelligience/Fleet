@@ -15,9 +15,11 @@
     <?php Assets::css(array('foundation.css', 'normalize.css')); ?>
     <?php Assets::js(
         array(
-            'vendor/jquery.js', 'foundation/foundation.js', 'foundation/foundation.tab.js', 'foundation/topbar.js',
-            'vendor/fastclick.js',
-            'vendor/modernizr.js', 'vendor/placeholder.js'
+            'vendor/jquery.js', 'jquery.cookie.js','vendor/modernizr.js','vendor/fastclick.js','foundation/foundation.js','vendor/placeholder.js',
+            'foundation/foundation.tab.js',
+            'foundation/foundation.topbar.js', 'foundation/foundation.reveal.js',
+             'foundation/foundation.alert.js', 'foundation/foundation.slider.js',
+            'foundation/foundation.offcanvas.js'
         )
     ) ?>
     <title><?php echo $title ?></title>
@@ -27,7 +29,6 @@
     <div class="small-6 columns">
         <h1 class="center">
             Welcome to Fleet Intelligience
-
         </h1>
         </div>
     <div class="small-6 columns">

@@ -54,6 +54,48 @@ class user extends CI_Model
     }
 
     /**
+     * Creats an employee of the business
+     * @param array $data User email and role
+     * @throw exception if insertion fails.
+     */
+    public function createEmployee($data)
+    {
+
+        $bname =  $this->session->userdata('bname');
+        $query = $this->db->get_where('business', array('name' => $bname));
+        $business = new business();
+        foreach($query->row() as $key => $value)
+        {
+            $business->$key = $value;
+        }
+
+        foreach($data as $key => $value)
+        {
+            $this->$key = $value;
+        }
+
+        $this->bname = $bname;
+        $this->uname = $this->createUsername($bname);
+        $this->pass = $business->dpass;
+        $this->salt = $business->dsalt;
+        if($this->db->insert('user', $this)) echo $this->load->view('templates/success', array('user' => $this));
+        else throw new Exception();
+
+    }
+
+    /**
+     * Sets each new username
+     * @param string $bname name of the business
+     * @return string $name username
+     */
+    public function createUsername($bname)
+    {
+
+        $name = $bname.mt_rand(100, 9999);
+        return $name;
+    }
+
+    /**
      * Encrypt the user pass
      */
     public function encryptPass()
@@ -92,11 +134,11 @@ class user extends CI_Model
 
         switch ($user->role) {
             case 'A':
-                return 'adminH';
+                return '/adminH';
             case 'M':
-                return 'managerOverview';
+                return '/managerOverview';
             case 'E':
-                return 'overview';
+                return '/overview';
             default:
                 break;
         }

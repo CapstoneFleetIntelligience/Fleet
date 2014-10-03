@@ -76,6 +76,7 @@ class Site_controller extends CI_Controller
         $data = array(
             'title' => 'Login'
         );
+
         $this->load->template('login', $data);
     }
 
@@ -85,15 +86,21 @@ class Site_controller extends CI_Controller
     public function authenticate()
     {
        $user = $this->user->authenticate($this->input->post(NULL, TRUE));
+        $data = array(
+          'user' => $user->uname,
+          'bname' => $user->bname
+        );
         if($user)
         {
             $index = $this->user->checkAccess($user);
-            $this->$index();
+            $this->session->set_userdata($data);
+            redirect($index);
         }
         else return $user;
     }
 
     /**
+     *
      * Loads admin/managers home
      */
     public function adminH()
@@ -101,6 +108,7 @@ class Site_controller extends CI_Controller
         $data = array(
             'title' => 'Managers Home'
         );
+
         $this->load->template('adminH',$data);
     }
 

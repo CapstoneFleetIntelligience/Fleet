@@ -19,6 +19,9 @@
             </div>
             <div class="row">
                 <?php echo anchor('itemN', 'New Item(s)',array('class' => 'button small radius left')) ?>
+                <?php echo anchor('employee_controller/addNew', 'Add Employee(s)',
+                    array('class' => 'button small radius
+                left')) ?>
             </div>
         </div>
         <div class="large-9 medium-9 small-12 columns">
@@ -34,5 +37,4 @@
             </div>
         </div>
     </div>
-
-</div
+</div>
