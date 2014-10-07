@@ -7,9 +7,9 @@
  */
 ?>
 
-<div class="container">
     <?php
-    $query = $this->db->get_where('capsql.chkitem',array('bname' => $this->session->userdata('bname')));
+    $business = $this->session->userdata('bname');
+    $query = $this->db->get_where('capsql.chkitem', array('bname' => $business));
     $x = $query->num_rows();
     if($x > 0)
     {
@@ -17,10 +17,10 @@
     ?>
 
     <div class="row">
-        <?php echo form_open('addList');
+        <?php echo form_open('addList', "id='add_list'");
         echo form_fieldset('Select items for list by giving item a quantity greater than 0.');
-        echo form_hidden('cid',$mycid);
-        echo form_hidden('ischd',$myschd);
+        echo form_hidden('cid',$delivery->cid);
+        echo form_hidden('ischd',$delivery->schd);
         ?>
         <table>
             <thead>
@@ -40,27 +40,25 @@
                 <td><?php echo $row->description; ?></td>
                 <td><?php
 
-                    $y = array(
+                    $quantity = array(
                         'type' => 'number',
-                        'name'  => 'x'.$row->iid,
+                        'name'  => $row->iid,
                         'value' => '0',
                         'min' => '0',
                         'max' => '1000',
                         'step' => '1'
                     );
-                    echo form_input($y) ?></td>
+                    echo form_input($quantity) ?></td>
             </tr>
         <?php
         }
 
-
         ?>
         </tbody>
         </table>
-        <?php echo form_submit('submit','Submit List', array('class' => 'button small'));
+        <?php echo form_submit('','Finish', "id = 'submit_chklst' class = 'button small'");
         echo form_close();
         ?>
-
     </div>
 
     <?php
@@ -73,4 +71,19 @@
     }
     ?>
 
-</div>
+<script type="text/javascript">
+    $("#submit_chklst").click(function()
+    {
+        var form_data = $("#add_list").serializeArray();
+       $.ajax({
+            url:"<?php echo site_url('addList'); ?>",
+            type: "POST",
+            data: form_data,
+            success: function (data) {
+                console.log(data);
+            }
+        });
+        return false
+
+    });
+</script>

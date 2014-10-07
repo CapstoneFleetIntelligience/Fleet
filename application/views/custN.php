@@ -7,34 +7,37 @@
  */
 $cname = array(
     'name' => 'cname',
+    'id' => 'cname',
     'class' => 'small-8 columns right'
 );
 $caddress = array(
     'name' => 'caddress',
+    'id' => 'caddress',
     'class' => 'small-8 columns right'
 );
 $cphone = array(
     'name' => 'cphone',
+    'id' => 'cphone',
     'class' => 'small-8 columns right'
 );
 $schd = array(
     'name' => 'schd',
+    'id' => 'schd',
     'class' => 'small-8 columns right'
 );
 $haslist = array(
     'name' => 'list',
-    'id' => 'y',
-    'value'       => 'Yes',
-    'checked'     => TRUE
+    'id' => 'list',
+    'value' => 'Yes'
 );
 $nolist = array(
     'name' => 'list',
-    'id' => 'n',
-    'value'       => 'No',
-    'checked'     => FALSE
+    'id' => 'list',
+    'value' => 'No'
 );
 $note = array(
     'name' => 'note',
+    'id' => 'note',
     'rows' => '5',
     'style' => 'resize: vertical',
     'class' => 'small-8 columns right'
@@ -44,7 +47,7 @@ $note = array(
 <div class="container">
 
     <div class="row">
-        <?php echo form_open('addCust');
+        <?php echo form_open('addCust', "id = 'add_cust'");
         echo form_fieldset('Enter details for new delivery');
         ?>
 
@@ -103,10 +106,9 @@ $note = array(
                     echo form_radio($haslist);
                     ?>
                 </div>
-
             </div>
-        </div>
 
+        </div>
         <div class="row">
             <div class="small-8 small-centered columns">
                 <span class="prefix">
@@ -117,8 +119,46 @@ $note = array(
         </div>
 
         <?php
-        echo form_submit('submit', 'Submit Delivery', array('class' => 'button small'));
+        echo form_submit('', 'Continue', "id= 'submit_cust' class = 'small button'");
         echo form_close();
         ?>
     </div>
+    <div class="row">
+        <div class="small-12 small-centered columns add_items">
+
+        </div>
+    </div>
 </div>
+
+
+<script type="text/javascript">
+    $('#submit_cust').click(function(){
+        var form_data = {
+            cname: $('#cname').val(),
+            caddress: $('#caddress').val(),
+            cphone: $('#cphone').val(),
+            schd: $('#schd').val(),
+            list: $('input:radio[name=list]:checked').val(),
+            note: $('#note').val()
+        };
+
+       $.ajax({
+            url: "<?php echo site_url('addCust'); ?>",
+            type: 'POST',
+            data: form_data,
+            success: function(data){
+                if(data == 'reset')
+                {
+                    $("#add_cust").trigger('reset');
+                    alert('Delivery Set');
+                }
+                else
+                {
+                    $(".add_items").html(data);
+                    $("#submit_cust").prop('disabled', true);
+                }
+            }
+        });
+        return false;
+    });
+</script>
