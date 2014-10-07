@@ -62,17 +62,14 @@ class admin_controller extends CI_Controller
 
     public function addList()
     {
-
         $data = $this->input->post(NULL, TRUE);
 
+        $this->delivery_item->create($this->input->post(NULL, TRUE));
 
-        $ddata = array_slice($data, 0, 2);
-        $x = array_slice($data, 2);
-        var_dump($ddata);
-        echo '<br/>';
-        var_dump($x);
-        /*$list = array_slice($x, 0, -1);
-
+        ///$delivery->create($data);
+/*        $ddata = array_slice($data, 0, 2);
+        $values = array_slice($data, 2);*/
+/*
         foreach ($list as $key => $val) {
             $key = substr($key,1);
             $del_item = array(

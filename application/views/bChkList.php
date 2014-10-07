@@ -43,6 +43,7 @@
                     $quantity = array(
                         'type' => 'number',
                         'name'  => $row->iid,
+                        'id' => $row->iid,
                         'value' => '0',
                         'min' => '0',
                         'max' => '1000',
@@ -60,6 +61,9 @@
         echo form_close();
         ?>
     </div>
+        <div class="delivered">
+
+        </div>
 
     <?php
     }
@@ -75,15 +79,21 @@
     $("#submit_chklst").click(function()
     {
         var form_data = $("#add_list").serializeArray();
+
        $.ajax({
             url:"<?php echo site_url('addList'); ?>",
             type: "POST",
             data: form_data,
             success: function (data) {
-                console.log(data);
+                $(".delivered").html(data).fadeIn(2000, 'swing', function(){
+                    $('.delivered').fadeOut(5000,'swing', function (){
+                        $("#add_cust").trigger('reset');
+                        $(".add_items").empty();
+                    });
+                    $("#submit_cust").prop('disabled', false);
+                });
             }
         });
         return false
-
     });
 </script>
