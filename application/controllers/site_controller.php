@@ -62,8 +62,15 @@ class Site_controller extends CI_Controller
         $user->createAdmin($userData[1]);
         $user->bname = $business->name;
 
+
         if ($this->db->insert('capsql.business', $business)) {
             $this->db->insert('capsql.user', $user);
+            $sessionD = array(
+                'bname' => $user->bname,
+                'role' => $user->role,
+                'uname' => $user->uname
+            );
+            $this->session->set_userdata($sessionD);
             $this->adminH();
         } else throw new Exception();
     }
@@ -90,7 +97,6 @@ class Site_controller extends CI_Controller
             $index = $this->user->checkAccess($user);
 
             $sessionD = array(
-                'uid' => $user->uid,
                 'bname' => $user->bname,
                 'role' => $user->role,
                 'uname' => $user->uname
@@ -110,6 +116,14 @@ class Site_controller extends CI_Controller
             'title' => 'Managers Home'
         );
         $this->load->template('adminH', $data);
+    }
+
+    public function adminE()
+    {
+        $data = array(
+            'title' => 'Edit'
+        );
+        $this->load->template('settings', $data);
     }
 
     /**

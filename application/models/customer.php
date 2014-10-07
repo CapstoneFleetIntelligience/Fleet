@@ -50,5 +50,4 @@ class customer extends CI_Model
         }
 
     }
-
 }

@@ -26,5 +26,4 @@ class delivery extends CI_Model
         }
 
     }
-
 }

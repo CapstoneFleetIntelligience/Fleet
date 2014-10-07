@@ -13,33 +13,36 @@ class admin_controller extends CI_Controller
         parent::__construct();
     }
 
+    /**
+     * Adds item to the business table.
+     */
     public function addItem()
     {
-        $item = new item_model();
 
-        $data = $this->input->post(NULL, TRUE);
-        $userData = array_chunk($data, 3, TRUE);
-        $item->createItem($userData[0]);
-        $item->bname = $this->session->userdata('bname');
-
-        $this->db->insert('capsql.chkitem', $item);
-
-        $data = array(
-            'title' => 'Managers Home'
-        );
-        $this->load->template('adminH',$data);
+        $item = new item();
+        $item->createItem($this->input->post(NULL, TRUE));
+        $bname = $this->session->userdata('bname');
+        $item->bname = $bname;
+        if($this->db->insert('chkitem', $item))
+        {
+            echo $this->load->view('templates/item_table', array('bname' => $item->bname));
+        }
     }
 
+    /**
+     * adds customer to delivery table
+     */
     public function addCust()
     {
         $delivery = new delivery();
         $customer = new customer();
 
         $data = $this->input->post(NULL, TRUE);
+
         $cdata = array_slice($data, 0, 5);
         $ddata = array_slice($data, 5, 1);
         $list = $data['list'];
-        $x = array_slice($data, 7, 1);
+        $note = array_slice($data, 7, 1);
 
         $cdata['caddress'] = str_replace (" ", "+", urlencode($cdata['caddress']));
         $details_url = "http://maps.googleapis.com/maps/api/geocode/json?address=".$cdata['caddress']."&sensor=false";
@@ -58,65 +61,20 @@ class admin_controller extends CI_Controller
         $cdata['clong'] = $geometry['location']['lng'];
 
         $customer->custCheck($cdata);
-
-        $xdata = array_merge($ddata,$x);
-
-        $delivery->setDelv($xdata);
+        $deliveryData = array_merge($ddata,$note);
+        $delivery->setDelv($deliveryData);
         $delivery->cid = $customer->cid;
-
         $this->db->insert('capsql.delivery', $delivery);
-
-        if ($list == 'Yes')
-        {
-            $this->bChkList($delivery);
-        }
-        else
-        {
-            $data = array(
-                'title' => 'Add New Delivery'
-            );
-            $this->load->template('custN',$data);
-        }
-
-
+        if ($list == 'Yes') $this->load->view('bChkList', array('delivery' => $delivery));
+        else echo 'reset';
     }
 
-    public function bChkList($delivery)
-    {
-        $data = array(
-            'title' => 'Build Checklist',
-            'mycid' => $delivery->cid,
-            'myschd' => $delivery->schd
-        );
-
-        $this->load->template('bChkList', $data);
-    }
-
+    /**
+     * Adds the customer list to delivery items
+     */
     public function addList()
     {
-
-        $data = $this->input->post(NULL, TRUE);
-        $ddata = array_slice($data, 0, 2);
-        $x = array_slice($data, 2);
-        $list = array_slice($x, 0, -1);
-
-        foreach ($list as $key => $val) {
-            if ($val == '0') continue;
-            $key = substr($key,1);
-            $del_item = array(
-                'cid' => $ddata['cid'],
-                'ischd' => $ddata['ischd'],
-                'iid' => $key,
-                'qty' => $val
-            );
-            $this->db->insert('capsql.del_item', $del_item);
-        }
-
-        $data = array(
-            'title' => 'Add New Delivery'
-        );
-        $this->load->template('custN',$data);
-
+        $this->delivery_item->insert($this->input->post(NULL, TRUE));
     }
 
 }

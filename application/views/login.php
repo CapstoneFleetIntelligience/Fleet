@@ -5,8 +5,8 @@
  * Date: 9/30/14
  * Time: 9:46 PM
  */
-$email = array(
-    'name' => 'email',
+$uname = array(
+    'name' => 'uname',
     'class' => 'small-3 columns'
 );
 $pass = array(
@@ -21,13 +21,12 @@ $pass = array(
         echo form_fieldset('Login');?>
         <div class="small-8">
              <span class="prefix">
-                    Email
+                    userid
                 </span>
             <?php
-            echo form_input($email);
+            echo form_input($uname);
             ?>
         </div>
-
         <div class="small-8">
              <span class="prefix">
                     password

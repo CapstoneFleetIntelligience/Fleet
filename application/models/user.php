@@ -112,7 +112,7 @@ class user extends CI_Model
     public function authenticate($credentials)
     {
 
-        $query = $this->db->get_where('user', array('email' => $credentials['email']));
+        $query = $this->db->get_where('user', array('uname' => $credentials['uname']));
 
         foreach ($query->row() as $key => $value) {
 
