@@ -39,15 +39,22 @@
 */
 
 $route['default_controller'] = "site_controller";
+$route[''] = "site_controller/index";
 $route['404_override'] = '';
 $route['registration'] = "site_controller/registration";
 $route['register'] = "site_controller/register";
-$route['bRegistration'] = "site_controller/businessRegistration";
-$route['registerBusiness'] = "site_controller/registerBusiness";
+$route['login'] = "site_controller/login";
+$route['adminE'] = "site_controller/adminE";
+$route['authenticate'] = "site_controller/authenticate";
+$route['employN'] = "employee_controller/addNew";
 $route['adminH'] = "site_controller/adminH";
 $route['itemN'] = "site_controller/itemN";
 $route['custN'] = "site_controller/custN";
+$route['addCust'] = "admin_controller/addCust";
+$route['addItem'] = "admin_controller/addItem";
+$route['bChkList'] = "admin_controller/bChkList";
+$route['addList'] = "admin_controller/addList";
+$route['addNew'] = "business_controller/addNew";
 
 
 /* End of file routes.php */
-/* Location: ./application/config/routes.php */

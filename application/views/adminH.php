@@ -9,16 +9,20 @@
 <div class="container">
     <div class="row">
         <div class="large-12 medium-12 small-12 columns">
-            <h3 style="text-align: center;">Managers Name</h3>
+            <h2 style="text-align: center;"><?php echo $this->session->userdata('bname') ?></h2>
+            <h3 style="text-align: center;"><?php echo $this->session->userdata('uname') ?></h3>
         </div>
     </div>
     <div class="row">
         <div class="large-3 medium-3 small-12 columns">
             <div class="row">
-                <?php echo anchor('custN', 'New Customer(s)',array('class' => 'button small radius left')) ?>
+                <?php echo anchor('custN', 'New Delivery',array('class' => 'button small radius left')) ?>
             </div>
             <div class="row">
                 <?php echo anchor('itemN', 'New Item(s)',array('class' => 'button small radius left')) ?>
+                <?php echo anchor('employee_controller/addNew', 'Add Employee(s)',
+                    array('class' => 'button small radius
+                left')) ?>
             </div>
         </div>
         <div class="large-9 medium-9 small-12 columns">
@@ -34,5 +38,4 @@
             </div>
         </div>
     </div>
-
-</div
+</div>

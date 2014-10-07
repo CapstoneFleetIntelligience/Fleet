@@ -6,16 +6,14 @@
  * Time: 7:33 PM
  */
 $name = array(
-    'name' => 'name',
+    'name' => 'iname',
+    'id' => 'itemN',
     'class' => 'small-8 columns right'
 );
 $description = array(
     'name' => 'description',
+    'id' => 'description',
     'rows' => '4',
-    'class' => 'small-8 columns right'
-);
-$default = array(
-    'name' => 'default',
     'class' => 'small-8 columns right'
 );
 ?>
@@ -34,14 +32,6 @@ $default = array(
             </div>
         </div>
         <div class="row">
-            <div class="small-8 small-centered columns">
-            <span class="prefix">
-                    This item is found<br> in every checklist
-                </span>
-                <?php echo form_checkbox($default,"t",FALSE); ?>
-            </div>
-        </div>
-        <div class="row">
 
             <div class="small-8 small-centered columns">
                 <span class="prefix">
@@ -50,10 +40,30 @@ $default = array(
                 <?php echo form_textarea($description); ?>
             </div>
         </div>
-
-
-        <?php echo form_submit('submit', 'Continue', array('class' => 'button small'));
+        <?php echo form_submit('submit', 'Continue', "class= 'button' id='submit'");
         echo form_close();
         ?>
     </div>
+    <div class="item_list">
+        <?php $this->load->view('templates/item_table') ?>
+    </div>
 </div>
+
+<script type="text/javascript">
+    $('#submit').click(function(){
+        var form_data = {
+            iname: $('#itemN').val(),
+            description: $('#description').val()
+        };
+
+        $.ajax({
+            url: "<?php echo site_url('admin_controller/addItem'); ?>",
+            type: 'POST',
+            data: form_data,
+            success: function(msg){$(".item_list").html(msg);}
+        });
+
+        return false
+    })
+
+</script>
