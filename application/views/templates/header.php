@@ -22,6 +22,9 @@
             'foundation/foundation.offcanvas.js'
         )
     ) ?>
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsl9m5vNRyfN_82WPuUUDpycK6FjwcPEY">
+    </script>
     <title><?php echo $title ?></title>
 </head>
 <body>

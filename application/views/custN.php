@@ -11,6 +11,7 @@ $cname = array(
 );
 $caddress = array(
     'name' => 'caddress',
+    'ID' => 'address',
     'class' => 'small-8 columns right'
 );
 $cphone = array(
@@ -39,13 +40,21 @@ $note = array(
     'style' => 'resize: vertical',
     'class' => 'small-8 columns right'
 );
+$submit = array(
+    'name' => 'submit',
+    'value' => 'Submit Delivery',
+    'class' => 'button small'
+);
 
 ?>
 <div class="container">
 
     <div class="row">
-        <?php echo form_open('addCust');
+        <?php
+        echo form_open('addCust');
         echo form_fieldset('Enter details for new delivery');
+        echo form_hidden('clat', '0.0');
+        echo form_hidden('clong', '0.0');
         ?>
 
         <div class="row">
@@ -117,7 +126,7 @@ $note = array(
         </div>
 
         <?php
-        echo form_submit('submit', 'Submit Delivery', array('class' => 'button small'));
+        echo form_submit($submit);
         echo form_close();
         ?>
     </div>

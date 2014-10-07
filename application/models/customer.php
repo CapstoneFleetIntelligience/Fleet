@@ -12,6 +12,8 @@ class customer extends CI_Model
     public $cname;
     public $caddress;
     public $cphone;
+    public $clat;
+    public $clong;
 
     public function __construct()
     {
@@ -30,6 +32,9 @@ class customer extends CI_Model
         }
         else
         {
+            ?><script
+            <?php
+
             $x = array('bname' => $this->session->userdata('bname'));
             $xdata = array_merge($data,$x);
 
