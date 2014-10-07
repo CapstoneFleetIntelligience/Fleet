@@ -13,6 +13,9 @@ class admin_controller extends CI_Controller
         parent::__construct();
     }
 
+    /**
+     * Adds item to the business table.
+     */
     public function addItem()
     {
 
@@ -26,6 +29,9 @@ class admin_controller extends CI_Controller
         }
     }
 
+    /**
+     * adds customer to delivery table
+     */
     public function addCust()
     {
         $delivery = new delivery();
@@ -38,53 +44,20 @@ class admin_controller extends CI_Controller
         $list = $data['list'];
         $note = array_slice($data, 5, 1);
         $customer->custCheck($cdata);
-
         $deliveryData = array_merge($ddata,$note);
-
         $delivery->setDelv($deliveryData);
         $delivery->cid = $customer->cid;
-        //$this->db->insert('capsql.delivery', $delivery);
-
+        $this->db->insert('capsql.delivery', $delivery);
         if ($list == 'Yes') $this->load->view('bChkList', array('delivery' => $delivery));
         else echo 'reset';
     }
 
-    public function bChkList($delivery)
-    {
-        $data = array(
-            'title' => 'Build Checklist',
-            'mycid' => $delivery->cid,
-            'myschd' => $delivery->schd
-        );
-
-        $this->load->template('bChkList', $data);
-    }
-
+    /**
+     * Adds the customer list to delivery items
+     */
     public function addList()
     {
-        $data = $this->input->post(NULL, TRUE);
-
-        $this->delivery_item->create($this->input->post(NULL, TRUE));
-
-        ///$delivery->create($data);
-/*        $ddata = array_slice($data, 0, 2);
-        $values = array_slice($data, 2);*/
-/*
-        foreach ($list as $key => $val) {
-            $key = substr($key,1);
-            $del_item = array(
-                'cid' => $ddata['cid'],
-                'ischd' => $ddata['ischd'],
-                'iid' => $key,
-                'qty' => $val
-            );
-            $this->db->insert('capsql.del_item', $del_item);
-        }
-
-        $data = array(
-            'title' => 'Add New Delivery'
-        );
-        $this->load->template('custN',$data);*/
+        $this->delivery_item->insert($this->input->post(NULL, TRUE));
 
     }
 

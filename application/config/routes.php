@@ -44,6 +44,7 @@ $route['404_override'] = '';
 $route['registration'] = "site_controller/registration";
 $route['register'] = "site_controller/register";
 $route['login'] = "site_controller/login";
+$route['adminE'] = "site_controller/adminE";
 $route['authenticate'] = "site_controller/authenticate";
 $route['employN'] = "employee_controller/addNew";
 $route['adminH'] = "site_controller/adminH";

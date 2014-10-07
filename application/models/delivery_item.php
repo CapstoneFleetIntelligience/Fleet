@@ -13,12 +13,19 @@ class delivery_item extends CI_Model
     public $ischd;
     public $qty;
 
+    /**
+     * Standard construct function
+     */
     public function __construct()
     {
         parent::__construct();
     }
 
-    public function create($data)
+    /**
+     * Creates the delivery item and inserts into delitem table.
+     * @param array $data item to be inserted into the db
+     */
+    public function insert($data)
     {
         $this->cid = $data['cid'];
         $this->ischd = $data['ischd'];
@@ -27,9 +34,7 @@ class delivery_item extends CI_Model
         {
             $this->iid = $key;
             $this->qty = $value;
-            //insert here
-            var_dump($this);
+            $this->db->insert('del_item', $this);
         }
-
     }
 }

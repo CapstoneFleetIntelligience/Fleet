@@ -11,8 +11,7 @@
     $business = $this->session->userdata('bname');
     $query = $this->db->get_where('capsql.chkitem', array('bname' => $business));
     $x = $query->num_rows();
-    if($x > 0)
-    {
+    if($x > 0):
 
     ?>
 
@@ -60,20 +59,16 @@
         <?php echo form_submit('','Finish', "id = 'submit_chklst' class = 'button small'");
         echo form_close();
         ?>
-    </div>
+         </div>
         <div class="delivered">
 
         </div>
 
     <?php
-    }
-    else{
+    else:
     ?>
         <div class="row"><h2>There are no items associated with this business. Please add items to your business then you can create checklists.</h2></div>
-
-    <?php
-    }
-    ?>
+    <?php endif; ?>
 
 <script type="text/javascript">
     $("#submit_chklst").click(function()
@@ -87,6 +82,7 @@
             success: function (data) {
                 $(".delivered").html(data).fadeIn(2000, 'swing', function(){
                     $('.delivered').fadeOut(5000,'swing', function (){
+                        $('add_items').fadeOut(2500, 'swing');
                         $("#add_cust").trigger('reset');
                         $(".add_items").empty();
                     });

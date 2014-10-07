@@ -118,6 +118,14 @@ class Site_controller extends CI_Controller
         $this->load->template('adminH', $data);
     }
 
+    public function adminE()
+    {
+        $data = array(
+            'title' => 'Edit'
+        );
+        $this->load->template('settings', $data);
+    }
+
     /**
      * Loads the item add page
      */
