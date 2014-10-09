@@ -42,6 +42,11 @@ $note = array(
     'style' => 'resize: vertical',
     'class' => 'small-8 columns right'
 );
+$submit = array(
+    'name' => 'submit',
+    'value' => 'Submit Delivery',
+    'class' => 'button small'
+);
 
 ?>
 <div class="container">
@@ -49,6 +54,8 @@ $note = array(
     <div class="row">
         <?php echo form_open('addCust', "id = 'add_cust'");
         echo form_fieldset('Enter details for new delivery');
+        echo form_hidden('clat', '0.0');
+        echo form_hidden('clong', '0.0');
         ?>
 
         <div class="row">
