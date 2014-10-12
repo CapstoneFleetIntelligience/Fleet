@@ -5,7 +5,6 @@
  * Date: 10/7/14
  * Time: 4:26 PM
  */
-var_dump($business);
 $bpass = array(
     'name' => 'bpass',
     'id' => 'bpass',
@@ -21,7 +20,7 @@ $bpass = array(
                 'id="editEmployee" class="right small button radius"'
             ) ?>
             <div id="employee_table" class="row hide">
-                <?php //$this->load->view('editEmployee'); ?>
+                <?php $this->load->view('editEmployee', array('employees' => $employees)); ?>
             </div>
         </div>
     </div>

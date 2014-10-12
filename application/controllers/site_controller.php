@@ -123,9 +123,11 @@ class Site_controller extends CI_Controller
     {
 
         $business= $this->business->loadModel();
+        $employees = $this->user->getEmployees($business->name);
         $data = array(
             'title' => 'Edit',
-            'business' => $business
+            'business' => $business,
+            'employees' => $employees
         );
 
         $this->load->template('settings', $data);

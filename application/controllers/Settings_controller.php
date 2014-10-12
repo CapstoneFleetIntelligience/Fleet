@@ -23,11 +23,6 @@ class Settings_controller extends CI_Controller {
 
     }
 
-    public function editChklist()
-    {
-        //$this->render->view('templates/item_table');
-    }
-
     public function editPass()
     {
        $this->business->changePass($this->input->post(NULL, true));
