@@ -70,6 +70,7 @@ class Site_controller extends CI_Controller
                 'role' => $user->role,
                 'uname' => $user->uname
             );
+
             $this->session->set_userdata($sessionD);
             $this->adminH();
         } else throw new Exception();
@@ -120,9 +121,13 @@ class Site_controller extends CI_Controller
 
     public function adminE()
     {
+
+        $business= $this->business->loadModel();
         $data = array(
-            'title' => 'Edit'
+            'title' => 'Edit',
+            'business' => $business
         );
+
         $this->load->template('settings', $data);
     }
 
@@ -134,7 +139,7 @@ class Site_controller extends CI_Controller
         $data = array(
             'title' => 'Add New Item'
         );
-        $this->load->template('itemN', $data);
+        $this->load->template('templates/item_table', $data);
     }
 
     public function custN()
