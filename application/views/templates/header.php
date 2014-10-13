@@ -38,26 +38,50 @@
     <?php echo script_tag('assets/js/foundation/foundation.topbar.js'); ?>
     <title><?php echo $title ?></title>
 </head>
-<body>
-<div class="row header">
-    <div class="small-6 columns">
-        <h1 class="center">
-            Welcome to Fleet Intelligience
-        </h1>
-        </div>
-    <div class="small-6 columns">
-        <?php echo anchor('registration', 'please register', array('class' => 'right')) ?>
-        <?php echo anchor(
-            'login', 'Log in',
-            array('class' => 'button small radius right')
-        ) ?>
-    </div>
-</div>
-<div class="row">
-    <dl class="small-12 tabs text-center" data-options="sticky_on: large" data-tab>
-                <dd class="active"><?php echo anchor('adminH', 'Home'); ?></dd>
-                <dd><?php echo anchor('analytics', 'Analytics') ?></dd>
-                <dd><?php echo anchor('adminE', 'Edit')?></dd>
-            </dl>
-</div>
 
+<body>
+	<div class="sticky">
+		<nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large"> 
+			<ul class="title-area"> 
+				<!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone --> 
+				<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li> 
+			</ul> 
+			<section class="top-bar-section"> 
+				<!-- Left Nav Section --> 
+				<ul class="left"> 
+					<li><?php echo anchor('adminH', 'Home'); ?></li>
+					<li><?php echo anchor('analytics', 'Analytics') ?></li>
+					<li><?php echo anchor('adminE', 'Edit')?></li> 
+					
+				</ul>
+			</section>
+		</nav>
+	</div>
+
+	<br />
+
+	<div class="row header">
+		<div class="small-4 medium-6 large-6 columns">
+			<h1>Fleet Intelligence</h1>
+		</div>
+		<div class="small-5 columns">
+			<ul class="button-group right">
+				<li><?php echo anchor('login', 'Log In', array('class' => 'button')) ?></li>
+				<li><?php echo anchor('registration', 'Register', array('class' => 'button')) ?></li>
+			</ul>
+		</div>
+	</div>
+	
+	<!--
+	<div class="row">
+		<dl class="small-12 tabs text-center" data-options="sticky_on: large" data-tab>
+					<dd class="active"><?php echo anchor('adminH', 'Home'); ?></dd>
+					<dd><?php echo anchor('analytics', 'Analytics') ?></dd>
+					<dd><?php echo anchor('adminE', 'Edit')?></dd>
+		</dl>
+	</div>
+	//-->
+	
+</body>
+</html>
+	
