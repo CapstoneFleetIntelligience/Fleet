@@ -37,12 +37,14 @@ class admin_controller extends CI_Controller
         $delivery = new delivery();
         $customer = new customer();
 
-        $data = $this->input->post(NULL, TRUE);
+        $cdata = $this->input->post('customer');
+        $ddata = $this->input->post('delivery');
+        $list = $this->input->post('list');
 
-        $cdata = array_slice($data, 0, 5);
-        $ddata = array_slice($data, 5, 1);
-        $list = $data['list'];
-        $note = array_slice($data, 7, 1);
+        /**
+         *@todo move this into a model either delivery or customer
+         * encode the address here with a model call $this->delivery->encodeAddress()
+         * All this code can go within it just return what you need or don't return
 
         $cdata['caddress'] = str_replace (" ", "+", urlencode($cdata['caddress']));
         $details_url = "http://maps.googleapis.com/maps/api/geocode/json?address=".$cdata['caddress']."&sensor=false";
@@ -53,16 +55,18 @@ class admin_controller extends CI_Controller
         $response = json_decode(curl_exec($ch), true);
 
         if ($response['status'] != 'OK') {
-            return null;
+        return null;
         };
         $geometry = $response['results'][0]['geometry'];
 
         $cdata['clat'] = $geometry['location']['lat'];
         $cdata['clong'] = $geometry['location']['lng'];
 
+         */
+
+
         $customer->custCheck($cdata);
-        $deliveryData = array_merge($ddata,$note);
-        $delivery->setDelv($deliveryData);
+        $delivery->setDelv($ddata);
         $delivery->cid = $customer->cid;
         $this->db->insert('capsql.delivery', $delivery);
         if ($list == 'Yes') $this->load->view('bChkList', array('delivery' => $delivery));

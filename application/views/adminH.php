@@ -5,8 +5,6 @@
  * Date: 9/26/14
  * Time: 8:50 PM
  */
-    $results=$this->db->get_where('capsql.business',array('bname'=> $this->session->userdata('bname')));
-
 ?>
 <script>
     function initialize()
