@@ -11,20 +11,6 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <?php echo link_tag('assets/css/main.css'); ?>
-    <?php Assets::css(array('foundation.css', 'normalize.css')); ?>
-    <?php Assets::js(
-        array(
-            'vendor/jquery.js', 'jquery.cookie.js','vendor/modernizr.js','vendor/fastclick.js','foundation/foundation.js','vendor/placeholder.js',
-            'foundation/foundation.tab.js',
-            'foundation/foundation.topbar.js', 'foundation/foundation.reveal.js',
-             'foundation/foundation.alert.js', 'foundation/foundation.slider.js',
-            'foundation/foundation.offcanvas.js'
-        )
-    ) ?>
-    <script type="text/javascript"
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsl9m5vNRyfN_82WPuUUDpycK6FjwcPEY">
-    </script>
 
     <?php echo link_tag('assets/css/foundation.css'); ?>
     <?php echo link_tag('assets/css/normalize.css'); ?>
@@ -34,6 +20,7 @@
     <?php echo script_tag('assets/js/vendor/fastclick.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.tab.js'); ?>
+    <?php echo script_tag('assets/js/foundation/foundation.abide.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.reveal.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.topbar.js'); ?>
     <title><?php echo $title ?></title>
