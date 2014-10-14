@@ -8,7 +8,9 @@
 
 class employee_controller extends CI_Controller
 {
-
+    /**
+     * Employees home page
+     */
     public function index()
     {
         $data = array(
