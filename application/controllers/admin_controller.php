@@ -34,6 +34,7 @@ class admin_controller extends CI_Controller
      */
     public function addCust()
     {
+
         $delivery = new delivery();
         $customer = new customer();
 
@@ -65,8 +66,14 @@ class admin_controller extends CI_Controller
         $delivery->setDelv($deliveryData);
         $delivery->cid = $customer->cid;
         $this->db->insert('capsql.delivery', $delivery);
-        if ($list == 'Yes') $this->load->view('bChkList', array('delivery' => $delivery));
-        else echo 'reset';
+        if ($list == 'Yes')
+        {
+            $this->load->view('bChkList', array('delivery' => $delivery));
+        }
+        else
+        {
+            echo 'reset';
+        }
     }
 
     /**

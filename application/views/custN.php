@@ -42,11 +42,6 @@ $note = array(
     'style' => 'resize: vertical',
     'class' => 'small-8 columns right'
 );
-$submit = array(
-    'name' => 'submit',
-    'value' => 'Submit Delivery',
-    'class' => 'button small'
-);
 
 ?>
 <div class="container">
@@ -54,8 +49,8 @@ $submit = array(
     <div class="row">
         <?php echo form_open('addCust', "id = 'add_cust'");
         echo form_fieldset('Enter details for new delivery');
-        echo form_hidden('clat', '0.0');
-        echo form_hidden('clong', '0.0');
+        echo form_input(array('name' => 'clat', 'type'=>'hidden', 'id' =>'clat', 'value' => '0.0'));
+        echo form_input(array('name' => 'clong', 'type'=>'hidden', 'id' =>'clong', 'value' => '0.0'));
         ?>
 
         <div class="row">
@@ -146,8 +141,12 @@ $submit = array(
             cphone: $('#cphone').val(),
             schd: $('#schd').val(),
             list: $('input:radio[name=list]:checked').val(),
-            note: $('#note').val()
+            note: $('#note').val(),
+            clat: $('#clat').val(),
+            clong: $('#clong').val()
         };
+
+
 
        $.ajax({
             url: "<?php echo site_url('addCust'); ?>",
@@ -161,6 +160,7 @@ $submit = array(
                 }
                 else
                 {
+
                     $(".add_items").html(data);
                     $("#submit_cust").prop('disabled', true);
                 }

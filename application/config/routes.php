@@ -56,6 +56,7 @@ $route['bChkList'] = "admin_controller/bChkList";
 $route['addList'] = "admin_controller/addList";
 $route['addNew'] = "business_controller/addNew";
 $route['routeN'] = "route_controller/routeN";
-
+$route['routeN/baddate'] = "route_controller/routeN";
+$route['routePrep'] = "route_controller/routePrep";
 
 /* End of file routes.php */

@@ -10,12 +10,24 @@ $schd = array(
     'id' => 'schd',
     'class' => 'small-8 columns right'
 );
-
 $business = $this->session->userdata('bname');
 $query = $this->db->get_where('capsql.user', array('bname' => $business));
+
 ?>
 
 <div class="container">
+    <?php
+    echo $this->uri->segment(2);
+    if ($this->uri->segment(2) == "baddate"){?>
+        <div class="row">
+            <div class="small-12">
+                <div data-alert class="alert-box alert round">
+                    <h4>There are no deliveries scheduled for that date! Please choose another date.</h4>
+                    <a href="#" class="close">&times;</a>
+                </div>
+            </div>
+        </div>
+    <?php } ?>
     <div class="row">
         <?php
         echo form_open('routePrep', "id='route_prep'");
@@ -58,7 +70,7 @@ $query = $this->db->get_where('capsql.user', array('bname' => $business));
                 <tr>
                     <td><?php echo $row->uname; ?></td>
                     <td><?php echo $role; ?></td>
-                    <td><?php echo form_checkbox('users', $row->uname); ?></td>
+                    <td><?php echo form_checkbox('users[]', $row->uname); ?></td>
                 </tr>
             <?php
             }
