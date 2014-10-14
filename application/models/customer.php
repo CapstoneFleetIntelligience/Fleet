@@ -42,20 +42,16 @@ class customer extends CI_Model
         }
         else
         {
-            ?><script
-            <?php
 
-            $x = array('bname' => $this->session->userdata('bname'));
-            $xdata = array_merge($data,$x);
-
-            $this->db->insert('capsql.customer', $xdata);
+            $busName = array('bname' => $this->session->userdata('bname'));
+            $custData = array_merge($data,$busName);
+            $this->db->insert('capsql.customer', $custData);
 
         }
 
         $query = $this->db->get_where('customer', array('cname' => $data['cname'],'caddress' => $data['caddress']));
 
         foreach ($query->row() as $key => $value) {
-
             $this->$key = $value;
         }
 

@@ -87,6 +87,15 @@ class Site_controller extends CI_Controller
         $this->load->template('login', $data);
     }
 
+    public function logout()
+    {
+        $this->session->sess_destroy();
+        $data= array(
+            'title' => 'Home'
+        );
+        $this->load->template('home', $data);
+    }
+
     /**
      * Authenticates and redirects user
      * Sets user session data
