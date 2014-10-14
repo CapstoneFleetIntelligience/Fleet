@@ -8,6 +8,14 @@
 
 class employee_controller extends CI_Controller
 {
+
+    public function index()
+    {
+        $data = array(
+            'title' => 'home'
+        );
+        $this->load->template('employeeHome', $data);
+    }
     /**
      * Loads the addnew employee view
      */

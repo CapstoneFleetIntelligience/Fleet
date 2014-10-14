@@ -41,34 +41,14 @@ class admin_controller extends CI_Controller
         $ddata = $this->input->post('delivery');
         $list = $this->input->post('list');
 
-        /**
-         *@todo move this into a model either delivery or customer
-         * encode the address here with a model call $this->delivery->encodeAddress()
-         * All this code can go within it just return what you need or don't return
-
-        $cdata['caddress'] = str_replace (" ", "+", urlencode($cdata['caddress']));
-        $details_url = "http://maps.googleapis.com/maps/api/geocode/json?address=".$cdata['caddress']."&sensor=false";
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $details_url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        $response = json_decode(curl_exec($ch), true);
-
-        if ($response['status'] != 'OK') {
-        return null;
-        };
-        $geometry = $response['results'][0]['geometry'];
-
-        $cdata['clat'] = $geometry['location']['lat'];
-        $cdata['clong'] = $geometry['location']['lng'];
-
-         */
-
 
         $customer->custCheck($cdata);
+        $customer->setLatLong($customer->caddress);
         $delivery->setDelv($ddata);
+
         $delivery->cid = $customer->cid;
         $this->db->insert('capsql.delivery', $delivery);
+
         if ($list == 'Yes') $this->load->view('bChkList', array('delivery' => $delivery));
         else echo 'reset';
     }

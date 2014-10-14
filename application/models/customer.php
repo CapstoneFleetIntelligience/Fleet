@@ -54,6 +54,31 @@ class customer extends CI_Model
         foreach ($query->row() as $key => $value) {
             $this->$key = $value;
         }
+    }
+
+    public function setLatLong($address)
+    {
+        /**
+         *@todo move this into a model either delivery or customer
+         * encode the address here with a model call $this->delivery->encodeAddress()
+         * All this code can go within it just return what you need or don't return*/
+
+        $address = str_replace (" ", "+", urlencode($address));
+        $location_url = "http://maps.googleapis.com/maps/api/geocode/json?address=".$address."&sensor=false";
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $location_url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $response = json_decode(curl_exec($ch), true);
+
+        if ($response['status'] != 'OK') {
+        return null;
+        };
+
+        $geometry = $response['results'][0]['geometry'];
+
+        $this->clat = $geometry['location']['lat'];
+        $this->clong = $geometry['location']['lng'];
 
     }
 }
