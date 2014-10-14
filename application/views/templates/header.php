@@ -11,7 +11,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <?php echo link_tag('assets/css/main.css'); ?>
+    <?php //echo link_tag('assets/css/main.css'); ?>
     <?php echo link_tag('assets/css/foundation.css'); ?>
     <?php echo link_tag('assets/css/normalize.css'); ?>
     <?php echo script_tag('assets/js/vendor/jquery.js'); ?>
@@ -20,6 +20,7 @@
     <?php echo script_tag('assets/js/vendor/fastclick.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.tab.js'); ?>
+    <?php echo script_tag('assets/js/foundation/foundation.abide.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.reveal.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.topbar.js'); ?>
     <title><?php echo $title ?></title>
