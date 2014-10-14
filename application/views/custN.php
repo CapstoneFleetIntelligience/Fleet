@@ -97,14 +97,14 @@ $note = array(
 
                 <div class="small-2 columns right">
                     <?php
-                    echo form_label("No",'n');
+                    echo form_label("No", 'n');
                     echo form_radio($nolist);
                     ?>
                 </div>
 
                 <div class="small-2 columns right">
                     <?php
-                    echo form_label("Yes",'y');
+                    echo form_label("Yes", 'y');
                     echo form_radio($haslist);
                     ?>
                 </div>
@@ -134,16 +134,15 @@ $note = array(
 
 
 <script type="text/javascript">
-    $('#submit_cust').click(function(){
+    $('#submit_cust').click(function () {
         var form_data = {
             cname: $('#cname').val(),
             caddress: $('#caddress').val(),
-            cphone: $('#cphone').val(),
+            cphone: $('#cphone').val()
+        };
+        var delivery_data = {
             schd: $('#schd').val(),
-            list: $('input:radio[name=list]:checked').val(),
-            note: $('#note').val(),
-            clat: $('#clat').val(),
-            clong: $('#clong').val()
+            note: $('#note').val()
         };
 
 
@@ -151,16 +150,17 @@ $note = array(
        $.ajax({
             url: "<?php echo site_url('addCust'); ?>",
             type: 'POST',
-            data: form_data,
-            success: function(data){
-                if(data == 'reset')
-                {
+            data: {
+                customer: form_data,
+                delivery: delivery_data,
+                list: $('input:radio[name=list]:checked').val()
+            },
+            success: function (data) {
+                if (data == 'reset') {
                     $("#add_cust").trigger('reset');
                     alert('Delivery Set');
                 }
-                else
-                {
-
+                else {
                     $(".add_items").html(data);
                     $("#submit_cust").prop('disabled', true);
                 }

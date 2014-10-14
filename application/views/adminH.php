@@ -9,8 +9,6 @@ $results=$this->db->get_where('capsql.business',array('name'=> $this->session->u
 
 foreach ($results->result() as $biz)
 
-
-
 ?>
 <script>
     function initialize()

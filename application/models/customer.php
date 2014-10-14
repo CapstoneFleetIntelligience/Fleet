@@ -7,6 +7,12 @@
  */
 class customer extends CI_Model
 {
+    /**
+     * @var int $cid
+     * @var string $bname
+     * @var string $cname
+     *
+     */
     public $cid;
     public $bname;
     public $cname;
@@ -20,6 +26,10 @@ class customer extends CI_Model
         parent::__construct();
     }
 
+    /**
+     * Checks that customer exist
+     * @param $data params to find the customer
+     */
     public function custCheck($data)
     {
         $query = $this->db->get_where('customer', array('cname' => $data['cname'],'caddress' => $data['caddress']));
@@ -32,20 +42,16 @@ class customer extends CI_Model
         }
         else
         {
-            ?><script
-            <?php
 
-            $x = array('bname' => $this->session->userdata('bname'));
-            $xdata = array_merge($data,$x);
-
-            $this->db->insert('capsql.customer', $xdata);
+            $busName = array('bname' => $this->session->userdata('bname'));
+            $custData = array_merge($data,$busName);
+            $this->db->insert('capsql.customer', $custData);
 
         }
 
         $query = $this->db->get_where('customer', array('cname' => $data['cname'],'caddress' => $data['caddress']));
 
         foreach ($query->row() as $key => $value) {
-
             $this->$key = $value;
         }
 

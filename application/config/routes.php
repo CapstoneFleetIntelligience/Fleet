@@ -44,6 +44,7 @@ $route['404_override'] = '';
 $route['registration'] = "site_controller/registration";
 $route['register'] = "site_controller/register";
 $route['login'] = "site_controller/login";
+$route['logout'] = "site_controller/logout";
 $route['adminE'] = "site_controller/adminE";
 $route['authenticate'] = "site_controller/authenticate";
 $route['employN'] = "employee_controller/addNew";
@@ -58,5 +59,11 @@ $route['addNew'] = "business_controller/addNew";
 $route['routeN'] = "route_controller/routeN";
 $route['routeN/baddate'] = "route_controller/routeN";
 $route['routePrep'] = "route_controller/routePrep";
+$route['editEmploy'] = "settings_controller/editEmploy";
+$route['editEmploy'] = "settings_controller/editDelivery";
+$route['editEmploy'] = "settings_controller/editChklist";
+$route['editEmploy'] = "settings_controller/editPass";
+$route['editEmploy'] = "settings_controller/editRange";
+
 
 /* End of file routes.php */

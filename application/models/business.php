@@ -56,5 +56,34 @@ class business extends CI_Model
         $this->dpass = $this->dsalt.sha1($this->dpass);
     }
 
+    public function changePass($newPass)
+    {
+       $this->name = $newPass['name'];
+        $this->dpass = $newPass['bpass'];
+        $this->db->where('name', $this->name);
+        $this->encryptPass();
+        if($this->db->update('business', array('dpass' => $this->dpass, 'dsalt' => $this->dsalt))) echo 'success';
+        else throw new Exception();
+    }
+
+    public function updateRange($range)
+    {
+        $this->name = $range['name'];
+        $this->radius = $range['radius'];
+       $this->db->where('name', $this->name);
+        if($this->db->update('business', array('radius' => $this->radius))) echo 'success';
+        else throw new Exception();
+    }
+
+    public function loadModel()
+    {
+        $this->name = $this->session->userdata('bname');
+        $query = $this->db->get_where('business', array('name' => $this->name));
+
+        foreach ($query->row() as $key => $value){
+            $this->$key = $value;
+        }
+        return $this;
+    }
 
 }
