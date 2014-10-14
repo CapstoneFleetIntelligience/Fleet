@@ -78,6 +78,7 @@ class user extends CI_Model
         $this->uname = $this->createUsername($bname);
         $this->pass = $business->dpass;
         $this->salt = $business->dsalt;
+        //var_dump($this->uname);
         if($this->db->insert('user', $this)) echo $this->load->view('templates/success', array('user' => $this));
         else throw new Exception();
 
@@ -90,8 +91,8 @@ class user extends CI_Model
      */
     public function createUsername($bname)
     {
-
-        $name = $bname.mt_rand(100, 9999);
+        $name = str_replace(' ', '', $bname);
+        $name = $name.mt_rand(100, 9999);
         return $name;
     }
 
@@ -142,7 +143,26 @@ class user extends CI_Model
             default:
                 break;
         }
+    }
 
+    public function getEmployees($id)
+    {
+
+        $query = $this->db->get_where('user', array('bname' => $id, 'role' => 'E'));
+        $employees = array();
+
+        foreach ($query->result() as $index => $employee)
+        {
+           $employ = new user();
+
+            foreach($employee as $key => $value)
+            {
+                $employ->$key = $value;
+            }
+
+            $employees[$index] = $employ;
+        }
+            return $employees;
     }
 
 

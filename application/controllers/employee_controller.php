@@ -8,6 +8,9 @@
 
 class employee_controller extends CI_Controller
 {
+    /**
+     * Loads the addnew employee view
+     */
     public function addNew()
     {
         $data = array(
@@ -16,6 +19,9 @@ class employee_controller extends CI_Controller
         $this->load->template('addEmployee', $data);
     }
 
+    /**
+     * Creates an employee user
+     */
     public function create()
     {
         $this->user->createEmployee($this->input->post(null,true));

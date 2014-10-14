@@ -55,6 +55,11 @@ $route['addItem'] = "admin_controller/addItem";
 $route['bChkList'] = "admin_controller/bChkList";
 $route['addList'] = "admin_controller/addList";
 $route['addNew'] = "business_controller/addNew";
+$route['editEmploy'] = "settings_controller/editEmploy";
+$route['editEmploy'] = "settings_controller/editDelivery";
+$route['editEmploy'] = "settings_controller/editChklist";
+$route['editEmploy'] = "settings_controller/editPass";
+$route['editEmploy'] = "settings_controller/editRange";
 
 
 /* End of file routes.php */
