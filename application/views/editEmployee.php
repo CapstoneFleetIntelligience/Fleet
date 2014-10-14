@@ -5,6 +5,10 @@
  * Date: 10/12/14
  * Time: 3:54 PM
  */
+
+/**
+ * @todo Make sure to change the view here to allow updating and deleting employees properly
+ */
 ?>
 
 <div class="row item_table">
@@ -19,18 +23,19 @@
     </thead>
     <tbody>
 <?php
+
     foreach ($employees as $index => $employee)
     {
-
+        echo form_open('updateEmployee');
         echo '<tr>';
+        echo form_hidden('uname', $employee->uname);
         echo '<td>'.$employee->uname.'</td>';
-        echo '<td>'.$employee->email.'</td>';
+        echo '<td>'.form_input('email', $employee->email).'</td>';
         echo '<td>'.$employee->role.'</td>';
-        echo '<td>'.anchor('', 'remove', ' onclick= "remove()" id = "remove'
-                .$employee->uname.'"
-        class="button tiny"')
-            .'</td>';
+        echo '<td>'.form_submit('update', 'update', "id= 'update_employee_$employee->uname' class = 'tiny button'")
+        .'</td>';
         echo '</tr>';
+        echo form_close();
     }
     ?>
     </tbody>
@@ -38,8 +43,8 @@
     </div>
 
 <script type="text/javascript">
-   function remove(){
-       console.log();
-       return false;
-   }
+$('#update_employee').click(function(){
+    console.log();
+    return false;
+});
 </script>

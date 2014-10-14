@@ -7,6 +7,12 @@
  */
 class customer extends CI_Model
 {
+    /**
+     * @var int $cid
+     * @var string $bname
+     * @var string $cname
+     *
+     */
     public $cid;
     public $bname;
     public $cname;
@@ -18,6 +24,10 @@ class customer extends CI_Model
         parent::__construct();
     }
 
+    /**
+     * Checks that customer exist
+     * @param $data params to find the customer
+     */
     public function custCheck($data)
     {
         $query = $this->db->get_where('customer', array('cname' => $data['cname'],'caddress' => $data['caddress']));
