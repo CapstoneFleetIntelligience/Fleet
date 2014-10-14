@@ -128,7 +128,6 @@ class user extends CI_Model
     /**
      * @param $user User object
      * @return string page to be redirected too
-     * @todo choose between views or controller functions.
      */
     public function checkAccess($user)
     {
@@ -143,8 +142,15 @@ class user extends CI_Model
             default:
                 break;
         }
+
+        return false;
     }
 
+    /**
+     * @param $id int represents the business name
+     * @return array of the employees in the company.
+     *
+     */
     public function getEmployees($id)
     {
 

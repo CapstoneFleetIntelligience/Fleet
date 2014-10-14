@@ -58,9 +58,9 @@
                 switch ($role)
                 {
                     case 'E':
-                        echo '<dd class="active">'.anchor('employH', 'Home').'</dd>';
-                        echo '<dd>'.anchor('employD', 'Data').'</dd>';
-                        echo '<dd>'.anchor('employE', 'Edit').'</dd>';
+                        echo '<dd class="active">'.anchor('overview', 'Home').'</dd>';
+                        echo '<dd>'.anchor('assignments', 'Route Assignment').'</dd>';
+                        echo '<dd>'.anchor('contact', 'contact').'</dd>';
                         break;
                     case 'M':
                         echo '<dd class="active">'. anchor('adminH', 'Home').'</dd>';

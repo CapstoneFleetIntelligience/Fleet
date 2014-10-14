@@ -45,6 +45,7 @@ $route['registration'] = "site_controller/registration";
 $route['register'] = "site_controller/register";
 $route['login'] = "site_controller/login";
 $route['logout'] = "site_controller/logout";
+$route['overview'] = "employee_controller/index";
 $route['adminE'] = "site_controller/adminE";
 $route['authenticate'] = "site_controller/authenticate";
 $route['employN'] = "employee_controller/addNew";
