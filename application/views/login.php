@@ -37,7 +37,7 @@ $pass = array(
 
         <?php
         echo form_fieldset_close();
-        echo form_submit('', 'login', array('class' => 'button small'));
+        echo form_submit('', 'login', 'class = "small button"');
         ?>
     </div>
 </div>

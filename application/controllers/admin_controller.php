@@ -46,14 +46,8 @@ class admin_controller extends CI_Controller
         $delivery->setDelv($ddata);
         $delivery->cid = $customer->cid;
         $this->db->insert('capsql.delivery', $delivery);
-        if ($list == 'Yes')
-        {
-            $this->load->view('bChkList', array('delivery' => $delivery));
-        }
-        else
-        {
-            echo 'reset';
-        }
+        if ($list == 'Yes') $this->load->view('bChkList', array('delivery' => $delivery));
+        else echo 'reset';
     }
 
     /**

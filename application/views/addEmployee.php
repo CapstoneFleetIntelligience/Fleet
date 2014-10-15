@@ -17,7 +17,7 @@ $options = array(
             <?php echo form_open('employee_controller/create'); ?>
             <?php echo form_input($email); ?>
             <?php echo form_dropdown('Role', $options, '', 'class="small-8" id="role"'); ?>
-            <?php echo form_submit('', 'Add', 'id = "submit"'); ?>
+            <?php echo form_submit('', 'Add', 'id = "submit" class="tiny button'); ?>
             <?php echo form_close(); ?>
         </div>
     </div>

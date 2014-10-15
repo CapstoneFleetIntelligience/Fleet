@@ -72,8 +72,16 @@ class Site_controller extends CI_Controller
             );
 
             $this->session->set_userdata($sessionD);
-            $this->adminH();
+            $this->getStarted();
         } else throw new Exception();
+    }
+
+    public function getStarted()
+    {
+        $data = array(
+          'title' => 'Lets get started'
+        );
+        $this->load->template('getStarted', $data);
     }
 
     /**
@@ -151,6 +159,11 @@ class Site_controller extends CI_Controller
             'title' => 'Add New Item'
         );
         $this->load->template('templates/item_table', $data);
+    }
+
+    public function itemTable()
+    {
+        $this->load->view('templates/item_table');
     }
 
     public function custN()

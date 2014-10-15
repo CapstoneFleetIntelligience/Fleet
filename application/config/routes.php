@@ -65,6 +65,6 @@ $route['editEmploy'] = "settings_controller/editDelivery";
 $route['editEmploy'] = "settings_controller/editChklist";
 $route['editEmploy'] = "settings_controller/editPass";
 $route['editEmploy'] = "settings_controller/editRange";
-
+$route['getStarted'] = "site_controller/getStarted";
 
 /* End of file routes.php */
