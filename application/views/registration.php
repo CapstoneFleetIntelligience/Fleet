@@ -8,10 +8,8 @@
  */
 ?>
 
-<<<<<<< HEAD
-
 <div class="row">
-	<form>
+	<?php echo form_open('register', 'data-abide'); ?>
 		<div class="row">
 			<div class="small-10 medium-12 large-12 columns">
 				<fieldset>
@@ -19,40 +17,48 @@
 						
 						<div class="row">
 							<div class="small-5 medium-6 large-6 columns">
-								<label>Business Name
-									<input type="text" name="name">
-								</label>
+								<div class="name-field">
+									<label>Business Name
+										<input type="text" placeholder="Required" required pattern="[a-zA-Z]+" name="name">
+									</label>
+									<small class="error">Name is required and must be a string.</small>
+								</div>
 							</div>
 							<div class="small-5 medium-6 large-6 columns">
 								<label>Business Address
-									<input type="text" name="baddress">
+									<input type="text" placeholder="Required" required pattern="[a-zA-Z0-9]+" name="baddress">
 								</label>
+								<small class="error">An address is required and must be a string.</small>
 							</div>
 						</div>
 						
 						<div class="row">
 							<div class="small-4 medium-5 large-6 columns">
 								<label>Business Phone Number
-									<input type="text" name="bphone">
+									<input type="text" placeholder="Required" required pattern="[0-9]+" name="bphone">
 								</label>
+								<small class="error">A phone number is required.</small>
 							</div>
 							<div class="small-2 medium-3 large-3 columns">
 								<label>Max Delivery Range
-									<input type="text" name="radius">
+									<input type="text" placeholder="Required" required pattern="[1-9]+" name="radius">
 								</label>
+								<small class="error">A deliver range is required.</small>
 							</div>
 							<div class="small-4 medium-4 large-3 columns">
 								<label>Max Items Allowed to Deliver
-									<input type="text" name="capacity">
+									<input type="text" placeholder="Required" required pattern="[1-9]+" name="capacity">
 								</label>
+								<small class="error">The capacity amount is required.</small>
 							</div>
 						</div>
 						
 						<div class="row">
 							<div class="small-8 small-centered columns">
 								<label>Default Business Password
-									<input type="text" name="dpass">
+									<input type="text" placeholder="Required" required pattern="[a-zA-Z0-9]+" name="dpass">
 								</label>
+								<small class="error">A password is required.</small>
 							</div>
 						</div>
 						
@@ -63,26 +69,30 @@
 						<div class="row">
 							<div class="small-5 medium-6 large-6 columns">
 								<label>Manager Name
-									<input type="text" name="uname">
+									<input type="text" placeholder="Required" required pattern="[a-zA-Z]+" name="uname">
 								</label>
+								<small class="error">A Manager Name is required and must be a string.</small>
 							</div>
 							<div class="small-5 medium-6 large-6 columns">
 								<label>Email
-									<input type="text" name="email">
+									<input type="text" placeholder="Required" required name="email">
 								</label>
+								<small class="error">An email address is required.</small>
 							</div>
 						</div>
 						
 						<div class="row">
 							<div class="small-5 medium-6 large-6 columns">
 								<label>Create Password
-									<input type="text" name="pass">
+									<input type="text" placeholder="Required" required pattern="[a-zA-Z0-9]+" name="pass">
 								</label>
+								<small class="error">A password is required.</small>
 							</div>
 							<div class="small-5 medium-6 large-6 columns">
 								<label>Phone
-									<input type="text" name="uphone">
+									<input type="text" placeholder="Required" required pattern="[0-9]+" name="uphone">
 								</label>
+								<small class="error">A phone number is required.</small>
 							</div>
 						</div>
 					
@@ -90,131 +100,14 @@
 				
 				<br />
 				
-				<div class="small-3 columns">
-					<a role="button" aria-label="submit form" tabindex="0" class="button">Finish</a>
+				<div class="row">
+					<div class="small-3 columns">
+						<a role="button" aria-label="submit form" class="button">Finish</a>
+					</div>
 				</div>
 			</div>
 		</div>
-	</form>
-</div>
-=======
-<div class="container">
-    <div class="row">
-        <?php echo form_open('register', 'data-abide'); ?>
-            <div class="row">
-                <div class="small-6 small columns">
-                    <div class="name-field">
-                    <label><small>required</small></label>
-                    <span class="prefix">
-                    Business Name
-                    </span>
-                    <input type="text" required pattern="[a-zA-Z]+" name="name">
-                    <small class="error">Name is required and must be a string.</small>
-                    </div>
-                    <?php //echo form_input('name'); ?>
-                </div>
-                <div class="small-6 small columns">
-                    <label><small>required</small></label>
-                    <span class="prefix">
-                     Business Address
-                    </span>
-                    <input type="text" required pattern="[a-zA-Z0-9]+" name="baddress">
-                    <small class="error">An address is required and must be a string.</small>
-                    <?php //echo form_input('baddress'); ?>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="small-6 small columns">
-                    <label><small>required</small></label>
-                    <span class="prefix">
-                    Phone
-                    </span>
-                    <input type="text" required pattern="[0-9]+" name="bphone">
-                    <small class="error">A phone number is required.</small>
-                    <?php //echo form_input('bphone'); ?>
-                </div>
-                <div class="small-3 small columns">
-                    <label><small>required</small></label>
-                    <span class="prefix">
-                    Max Delivery Range
-                    </span>
-                    <input type="text" required pattern="[1-9]+" name="radius">
-                    <small class="error">A delivery range is required.</small>
-                    <?php //echo form_input('radius'); ?>
-                </div>
-                <div class="small-3 small columns">
-                    <label><small>required</small></label>
-                    <span class="prefix">
-                    Max Items Allowed to Deliver
-                    </span>
-                    <input type="number" required pattern="[1-9]+" name="capacity">
-                    <small class="error">The capacity amount is required.</small>
-                    <?php //echo form_input('capacity'); ?>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="small-8 small-centered columns">
-                    <label><small>required</small></label>
-                    <span class="prefix">
-                    Business Default Password
-                    </span>
-                    <input type="password" required pattern="[a-zA-Z0-9]+" name="dpass">
-                    <small class="error">A password is required.</small>
-                    <?php //echo form_password('dpass'); ?>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="small-6 small columns">
-                    <label><small>required</small></label>
-                    <span class="prefix">
-                    Manager Name
-                    </span>
-                    <input type="text" required pattern="[a-zA-Z]+" name="uname">
-                    <small class="error">A Manager Name is required and must be a string.</small>
-                    <?php //echo form_input('uname'); ?>
-                </div>
-                <div class="small-6 small columns">
-                    <div class="email-field">
-                    <label><small>required</small></label>
-                    <span class="prefix">
-                     Email
-                    </span>
-                    <input type="email" name="email" required>
-                    <small class="error">An email address is required.</small>
-                    <?php //echo form_input('email'); ?>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row ">
-                <div class="small-6 small columns">
-                    <label><small>required</small></label>
-                    <span class="prefix">
-                    Password
-                    </span>
-                    <input type="password" required pattern="[a-zA-Z0-9]+" name="pass">
-                    <small class="error">A password is required.</small>
-                    <?php //echo form_password('pass'); ?>
-                </div>
-                <div class="small-6 small columns">
-                    <label><small>required</small></label>
-                    <span class="prefix">
-                    Phone
-                    </span>
-                    <input type="text" required pattern="[0-9]+" name="uphone">
-                    <small class="error">A phone number is required.</small>
-                    <?php //echo form_input('uphone'); ?>
-                </div>
-            <button type="submit">Finish</button>
-            </form>
-            </div>
-        <?php //echo form_submit('', 'Finish', "class ='button small'");
-        echo form_close();
-        ?>
-    </div>
+	<?php form_close(); ?>
 </div>
 
 <body>
@@ -224,4 +117,4 @@
 </script>
 
 </body>
->>>>>>> c136a5e84a065c9eb75cd08765111268e93d69b4
+

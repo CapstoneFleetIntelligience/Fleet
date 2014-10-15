@@ -31,12 +31,11 @@
 </head>
 
 <body>
-<<<<<<< HEAD
 	<div class="sticky">
 		<nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large"> 
 			<ul class="title-area"> 
 				<!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone --> 
-				<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li> 
+				<li class="toggle-topbar"></li> 
 			</ul> 
 			<section class="top-bar-section"> 
 				<!-- Left Nav Section --> 
@@ -51,28 +50,28 @@
 	</div>
 
 	<br />
-=======
-<div class="row header">
-    <div class="small-6 columns">
-        <h1 class="center">
-            Welcome to Fleet Intelligence
-        </h1>
-        </div>
-    <div class="small-6 columns">
-        <?php $role = $this->session->userdata('role');
-        //var_dump($role);
-                if(!($role))
-                {
-                    echo anchor('registration', 'please register', array('class' => 'right'));
-                    echo anchor('login', 'Log in', array('class' => 'button small radius right'));
-                }
-                else
-                {
-                    echo anchor('logout', 'logout', array('class' => 'button small radius right'));
-                }
 
-        ?>
-    </div>
+<div class="row header">
+    <div class="small-6 medium-6 large-8 columns">
+        <h1>Fleet Intelligence</h1>
+	</div>
+	<div class="row">
+		<div class="small-4 columns">
+			<?php $role = $this->session->userdata('role');
+			//var_dump($role);
+					if(!($role))
+					{
+						echo anchor('registration', 'Register', array('class' => 'button'));
+						echo anchor('login', 'Log in', array('class' => 'button'));
+					}
+					else
+					{
+						echo anchor('logout', 'logout', array('class' => 'button'));
+					}
+
+			?>
+		</div>
+	</div>
 </div>
 <div class="row">
     <dl class="small-12 tabs text-center" data-options="sticky_on: large" data-tab>
@@ -100,29 +99,7 @@
         ?>
             </dl>
 </div>
->>>>>>> c136a5e84a065c9eb75cd08765111268e93d69b4
-
-	<div class="row header">
-		<div class="small-4 medium-6 large-6 columns">
-			<h1>Fleet Intelligence</h1>
-		</div>
-		<div class="small-5 columns">
-			<ul class="button-group right">
-				<li><?php echo anchor('login', 'Log In', array('class' => 'button')) ?></li>
-				<li><?php echo anchor('registration', 'Register', array('class' => 'button')) ?></li>
-			</ul>
-		</div>
-	</div>
 	
-	<!--
-	<div class="row">
-		<dl class="small-12 tabs text-center" data-options="sticky_on: large" data-tab>
-					<dd class="active"><?php echo anchor('adminH', 'Home'); ?></dd>
-					<dd><?php echo anchor('analytics', 'Analytics') ?></dd>
-					<dd><?php echo anchor('adminE', 'Edit')?></dd>
-		</dl>
-	</div>
-	//-->
 	
 </body>
 </html>

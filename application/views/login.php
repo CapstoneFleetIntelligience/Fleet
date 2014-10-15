@@ -15,40 +15,8 @@ $pass = array(
 )
 ?>
 
-
-<div class="container">
-	<div class="row">
-		<?php
-			echo form_open('authenticate');
-			echo form_fieldset('Login');
-		?>
-			<div class="small-8">
-				<span class="prefix">
-					userid
-				</span>
-				<?php
-					echo form_input($uname);
-				?>
-			</div>
-			<div class="small-8">
-				<span class="prefix">
-					password
-				</span>
-				<?php
-					echo form_password($pass);
-				?>
-			</div>
-
-		<?php
-			echo form_fieldset_close();
-			echo form_submit('', 'login', array('class' => 'button small'));
-		?>
-	</div>
-</div>
-
-
 <div class="row">
-	<form>
+	<?php echo form_open('authenticate', 'data-abide'); ?>
 		<div class="row">
 			<div class="small-10 large-12 columns">
 				<fieldset>
@@ -59,7 +27,7 @@ $pass = array(
 							<span class="prefix">User ID</span>
 						</div>
 						<div class="small-10 columns">
-							<input type="text" name="uname">
+							<input type="text" placeholder="Required" required pattern="[a-zA-Z0-9]+" name="uname">
 						</div>
 					</div>
 					
@@ -68,17 +36,19 @@ $pass = array(
 							<span class="prefix">Password</span>
 						</div>
 						<div class="small-10 columns">
-							<input type="text" name="pass">
+							<input type="text" placeholder="Required" required pattern="[a-zA-Z0-9]+" name="pass">
 						</div>
 					</div>
 					
 				</fieldset>
 				
 				<br />
-				<div class="small-3 columns">
-					<a role="button" aria-label="submit form" tabindex="0" class="button">Submit</a>
+				<div class="row">
+					<div class="small-3 columns">
+						<a role="button" aria-label="submit form" class="button">Submit</a>
+					</div>
 				</div>
 			</div>
 		</div>
-	</form>
+	<?php form_close(); ?>
 </div>
