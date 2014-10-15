@@ -49,21 +49,3 @@ $description = array(
     </div>
 </div>
 
-<script type="text/javascript">
-    $('#submit').click(function(){
-        var form_data = {
-            iname: $('#itemN').val(),
-            description: $('#description').val()
-        };
-
-        $.ajax({
-            url: "<?php echo site_url('admin_controller/addItem'); ?>",
-            type: 'POST',
-            data: form_data,
-            success: function(msg){$(".item_list").html(msg);}
-        });
-
-        return false
-    })
-
-</script>

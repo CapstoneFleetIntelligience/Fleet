@@ -5,22 +5,44 @@
  * Date: 9/26/14
  * Time: 8:50 PM
  */
-    $results=$this->db->get_where('capsql.business',array('bname'=> $this->session->userdata('bname')));
+$results=$this->db->get_where('capsql.business',array('name'=> $this->session->userdata('bname')));
+
+foreach ($results->result() as $biz)
 
 ?>
 <script>
     function initialize()
     {
+        var myLatlng = new google.maps.LatLng(<?php echo $biz->blat; ?>,<? echo $biz->blong; ?>);
+
         var mapProp = {
-            center:new google.maps.LatLng(51.508742,-0.120850),
-            zoom:5,
-            mapTypeId:google.maps.MapTypeId.ROADMAP
+            center: myLatlng,
+            zoom:13
+
         };
-        var map=new google.maps.Map(document.getElementById("googleMap")
+        var map1=new google.maps.Map(document.getElementById("googleMap1")
             ,mapProp);
+
+        var map2=new google.maps.Map(document.getElementById("googleMap2")
+            ,mapProp);
+
+        var marker1 = new google.maps.Marker({
+            position: myLatlng,
+            map: map1,
+            title: '<? echo $biz->name; ?>'
+        });
+
+        var marker2 = new google.maps.Marker({
+            position: myLatlng,
+            map: map2,
+            title: '<? echo $biz->name; ?>'
+        });
+
     }
 
+
     google.maps.event.addDomListener(window, 'load', initialize);
+
 </script>
 <div class="container">
     <div class="row">
@@ -30,19 +52,23 @@
         </div>
     </div>
     <div class="row">
-        <div class="large-3 medium-3 small-12 columns">
+        <div class="large-12 medium-3 small-12 columns">
             <div class="row">
                 <?php echo anchor('custN', 'New Delivery',array('class' => 'button small radius left')) ?>
-            </div>
-            <div class="row">
                 <?php echo anchor('itemN', 'New Item(s)',array('class' => 'button small radius left')) ?>
-                <?php echo anchor('employee_controller/addNew', 'Add Employee(s)',
-                    array('class' => 'button small radius
+                <?php echo anchor('employee_controller/addNew', 'Add Employee(s)', array('class' => 'button small radius left')) ?>
+                <?php echo anchor('route_controller/routeN', 'Create Routes', array('class' => 'button small radius
                 left')) ?>
             </div>
         </div>
-        <div class="large-9 medium-9 small-12 columns">
-            <div id="googleMap" style="width:500px;height:380px;">
+        <div class=" medium-9 show-for-medium-only columns">
+            <div class="row">
+                <div id="googleMap1" style="width:500px;height:380px;"></div>
+            </div>
+        </div>
+        <div class="large-12 show-for-large-up columns">
+            <div class="row">
+                <div id="googleMap2" style="width:1000px;height:760px;"></div>
             </div>
         </div>
     </div>

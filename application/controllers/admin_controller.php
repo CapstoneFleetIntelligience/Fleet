@@ -37,36 +37,23 @@ class admin_controller extends CI_Controller
         $delivery = new delivery();
         $customer = new customer();
 
-        $data = $this->input->post(NULL, TRUE);
-
-        $cdata = array_slice($data, 0, 5);
-        $ddata = array_slice($data, 5, 1);
-        $list = $data['list'];
-        $note = array_slice($data, 7, 1);
-
-        $cdata['caddress'] = str_replace (" ", "+", urlencode($cdata['caddress']));
-        $details_url = "http://maps.googleapis.com/maps/api/geocode/json?address=".$cdata['caddress']."&sensor=false";
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $details_url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        $response = json_decode(curl_exec($ch), true);
-
-        if ($response['status'] != 'OK') {
-            return null;
-        };
-        $geometry = $response['results'][0]['geometry'];
-
-        $cdata['clat'] = $geometry['location']['lat'];
-        $cdata['clong'] = $geometry['location']['lng'];
+        $cdata = $this->input->post('customer');
+        $ddata = $this->input->post('delivery');
+        $list = $this->input->post('list');
 
         $customer->custCheck($cdata);
-        $deliveryData = array_merge($ddata,$note);
-        $delivery->setDelv($deliveryData);
+        $customer->setLatLong($customer->caddress);
+        $delivery->setDelv($ddata);
         $delivery->cid = $customer->cid;
         $this->db->insert('capsql.delivery', $delivery);
-        if ($list == 'Yes') $this->load->view('bChkList', array('delivery' => $delivery));
-        else echo 'reset';
+        if ($list == 'Yes')
+        {
+            $this->load->view('bChkList', array('delivery' => $delivery));
+        }
+        else
+        {
+            echo 'reset';
+        }
     }
 
     /**
