@@ -35,8 +35,10 @@ $pass = array(
 						<div class="small-2 columns">
 							<span class="prefix">Password</span>
 						</div>
-						<div class="small-10 columns">
-							<input type="text" placeholder="Required" required pattern="[a-zA-Z0-9]+" name="pass">
+						<div class="password-field">
+							<div class="small-10 columns">
+								<input type="password" placeholder="Required" required pattern="[a-zA-Z0-9]+" name="pass">
+							</div>
 						</div>
 					</div>
 					

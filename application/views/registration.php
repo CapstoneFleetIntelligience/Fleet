@@ -56,7 +56,7 @@
 						<div class="row">
 							<div class="small-8 small-centered columns">
 								<label>Default Business Password
-									<input type="text" placeholder="Required" required pattern="[a-zA-Z0-9]+" name="dpass">
+									<input type="password" placeholder="Required" required pattern="[a-zA-Z0-9]+" name="dpass">
 								</label>
 								<small class="error">A password is required.</small>
 							</div>
@@ -84,7 +84,7 @@
 						<div class="row">
 							<div class="small-5 medium-6 large-6 columns">
 								<label>Create Password
-									<input type="text" placeholder="Required" required pattern="[a-zA-Z0-9]+" name="pass">
+									<input type="password" placeholder="Required" required pattern="[a-zA-Z0-9]+" name="pass">
 								</label>
 								<small class="error">A password is required.</small>
 							</div>
