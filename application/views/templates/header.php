@@ -26,7 +26,6 @@
     <?php echo script_tag('assets/js/foundation/foundation.abide.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.reveal.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.topbar.js'); ?>
-    <?php //echo script_tag('assets/js/maps.google.polygon.containsLatLng.js'); ?>
     <title><?php echo $title ?></title>
 </head>
 <body>
