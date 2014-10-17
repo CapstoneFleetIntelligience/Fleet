@@ -62,11 +62,11 @@
 					if(!($role))
 					{
 						echo anchor('registration', 'Register', array('class' => 'button'));
-						echo anchor('login', 'Log in', array('class' => 'button'));
+						echo anchor('login', 'Log In', array('class' => 'button'));
 					}
 					else
 					{
-						echo anchor('logout', 'logout', array('class' => 'button'));
+						echo anchor('logout', 'Log Out', array('class' => 'button'));
 					}
 
 			?>
