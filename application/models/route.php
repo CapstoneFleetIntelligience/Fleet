@@ -328,4 +328,69 @@ class route extends CI_Model
         //return the area
         return $det;
     }
+
+    //function to optimize the order of deliveries in all routes for a given day
+    public function optimizeR($pdata, $rarray)
+    {
+        //set business name to variable
+        $business = $this->session->userdata('bname');
+
+        //gather business's data as results object
+        $bquery = $this->db->get_where('capsql.business', array('name' => $business) );
+        foreach ($bquery->result() as $row)
+        {
+            $bdata = $row;
+        }
+
+        //set parts of the url
+        $url1 = "https://maps.googleapis.com/maps/api/directions/json?origin=".$bdata->baddress."&destination=".$bdata->baddress."&waypoints=optimize:true|";
+        $url3 = "&key=AIzaSyBsl9m5vNRyfN_82WPuUUDpycK6FjwcPEY";
+        //get size of route array
+        $tR = count($rarray);
+        //loop through all routes deliveries to build url string
+        for ($i=0; $i<$tR; $i++)
+        {
+            //gather delivery data
+            $dquery = $this->db->query("select * from delivery as d, customer as c where d.cid = c.cid and d.schd = '".$pdata['schd']."' and c.bname = '".$business."' and d.rid = ".$i."");
+            //loop through all of route's deliveries to build url string
+            foreach ($dquery->result() as $row)
+            {
+                $x[] = $row->caddress;
+            }
+            //build final piece of url
+            $url2 = implode("|",$x);
+            //destroy $x for reuse
+            unset($x);
+            //build url for optimization query
+            $direction_url = $url1.$url2.$url3;
+
+            //get json object from google directions
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $direction_url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            $response = json_decode(curl_exec($ch), true);
+
+            //error check
+            if ($response['status'] != 'OK') {
+                return null;
+            };
+            //store optimized waypoint order from json
+            $order = $response['routes'][0]['waypoint_order'];
+            //set counter for order position
+            $oS = 0;
+
+            //loop through deliveries setting position based on waypoint order
+            foreach ($dquery->result() as $row)
+            {
+                $data = array(
+                    'position' => $order[$oS]
+                );
+                $this->db->where('schd',$row->schd);
+                $this->db->where('cid',$row->cid);
+                $this->db->update('capsql.delivery',$data);
+                //increase counter for order position
+                $oS++;
+            }
+        }
+    }
 }

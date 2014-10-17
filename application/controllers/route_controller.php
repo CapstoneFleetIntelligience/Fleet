@@ -34,7 +34,10 @@ class route_controller extends CI_Controller
         if ($myarray == FALSE ) redirect("/routeN/baddate");
 
         //call setRoute function
-        $err = $this->route->setRoute($pdata, $myarray);
+        $this->route->setRoute($pdata, $myarray);
+
+        //call optimizeR function
+        $this->route->optimizeR($pdata, $myarray);
 
 
     }
