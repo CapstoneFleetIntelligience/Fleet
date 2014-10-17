@@ -102,12 +102,12 @@
 				
 				<div class="row">
 					<div class="small-3 columns">
-						<a role="button" aria-label="submit form" class="button">Finish</a>
+						<button type="submit">Finish</a>
 					</div>
 				</div>
 			</div>
 		</div>
-	<?php form_close(); ?>
+	<?php echo form_close(); ?>
 </div>
 
 <body>

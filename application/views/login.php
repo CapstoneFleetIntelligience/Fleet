@@ -22,34 +22,33 @@ $pass = array(
 				<fieldset>
 					<legend>Login</legend>
 					
+					
 					<div class="row collapse">
-						<div class="small-2 columns">
-							<span class="prefix">User ID</span>
-						</div>
-						<div class="small-10 columns">
-							<input type="text" placeholder="Required" required pattern="[a-zA-Z0-9]+" name="uname">
+						<div class="small-10 medium-12 large-12 columns">
+							<label>User ID
+								<input type="text" placeholder="Required" required pattern="[a-zA-Z0-9]+" name="uname">
+							</label>
+							<small class="error">Please enter an User ID.</small>
 						</div>
 					</div>
 					
 					<div class="row collapse">
-						<div class="small-2 columns">
-							<span class="prefix">Password</span>
-						</div>
-						<div class="password-field">
-							<div class="small-10 columns">
+						<div class="small-10 medium-12 large-12 columns">
+							<label>Password
 								<input type="password" placeholder="Required" required pattern="[a-zA-Z0-9]+" name="pass">
-							</div>
+							</label>
+							<small class="error">Please enter a password.</small>
 						</div>
 					</div>
 					
 				</fieldset>
 				
 				<br />
-				<div class="row">
-					<div class="small-3 columns">
-						<a role="button" aria-label="submit form" class="button">Submit</a>
-					</div>
-				</div>
+				
+				<button type="submit">Submit</a>
+				
+				<br />
+			
 			</div>
 		</div>
 	<?php form_close(); ?>
