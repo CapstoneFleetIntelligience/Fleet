@@ -355,7 +355,8 @@ class route extends CI_Model
             //loop through all of route's deliveries to build url string
             foreach ($dquery->result() as $row)
             {
-                $x[] = $row->caddress;
+                $address = str_replace('%2C',',',$row->caddress);
+                $x[] = $address;
             }
             //build final piece of url
             $url2 = implode("|",$x);
@@ -391,6 +392,19 @@ class route extends CI_Model
                 //increase counter for order position
                 $oS++;
             }
+        }
+    }
+
+    public function updateRoute($pdata)
+    {
+        $i = 0;
+        foreach (array_slice($pdata,1) as $value)
+        {
+            $this->db->where('schd', $pdata['schd']);
+            $this->db->where('bname', $this->session->userdata('bname'));
+            $this->db->where('rid', $i);
+            $this->db->update('capsql.route',array('uname' => $value));
+            $i++;
         }
     }
 }
