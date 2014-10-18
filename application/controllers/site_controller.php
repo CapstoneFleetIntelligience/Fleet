@@ -59,6 +59,7 @@ class Site_controller extends CI_Controller
         $userData = array_chunk($data, 6, TRUE);
 
         $business->createBusiness($userData[0]);
+        $business->setLatLong($business->baddress);
         $user->createAdmin($userData[1]);
         $user->bname = $business->name;
 

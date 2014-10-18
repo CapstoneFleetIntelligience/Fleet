@@ -22,6 +22,9 @@ class business extends CI_Model
     public $capacity;
     public $dpass;
     public $dsalt;
+    public $baddress;
+    public $blat;
+    public $blong;
 
     /**
      * @method void __construct()
@@ -84,6 +87,27 @@ class business extends CI_Model
             $this->$key = $value;
         }
         return $this;
+    }
+
+    public function setLatLong($address)
+    {
+        $address = str_replace (" ", "+", urlencode($address));
+        $location_url = "http://maps.googleapis.com/maps/api/geocode/json?address=".$address."&sensor=false";
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $location_url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $response = json_decode(curl_exec($ch), true);
+
+        if ($response['status'] != 'OK') {
+            return null;
+        };
+
+        $geometry = $response['results'][0]['geometry'];
+
+        $this->blat = $geometry['location']['lat'];
+        $this->blong = $geometry['location']['lng'];
+
     }
 
 }
