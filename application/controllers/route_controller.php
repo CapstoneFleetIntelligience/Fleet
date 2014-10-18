@@ -40,16 +40,16 @@ class route_controller extends CI_Controller
         $pdata = $this->input->post(NULL, TRUE);
 
         //call the rarray function to create routes in DB and return array of route information
-        //$myarray = $this->route->rarray($pdata);
+        $myarray = $this->route->rarray($pdata);
 
         //exit if there are no deliveries
-        //if ($myarray == FALSE ) redirect("/routeN/baddate");
+        if ($myarray == FALSE ) redirect("/routeN/baddate");
 
         //call setRoute function
-        //$this->route->setRoute($pdata, $myarray);
+        $this->route->setRoute($pdata, $myarray);
 
         //call optimizeR function
-        //$this->route->optimizeR($pdata, $myarray);
+        $this->route->optimizeR($pdata, $myarray);
 
         //navigate to route management
         $this->routeM($pdata['schd'], true);
