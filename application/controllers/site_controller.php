@@ -72,7 +72,7 @@ class Site_controller extends CI_Controller
             );
 
             $this->session->set_userdata($sessionD);
-            $this->getStarted();
+            redirect('/getStarted');
         } else throw new Exception();
     }
 

@@ -36,7 +36,7 @@
         $('.prompt').html('<p>Step 2: Create your checklist items</p>');
 
         $.ajax({
-            url:"<?php echo site_url('site_controller/itemTable'); ?>",
+            url:"<?php echo site_url('site_controller/itemN'); ?>",
             type: "GET",
             success: function(data){
                 $('.add').html(data);

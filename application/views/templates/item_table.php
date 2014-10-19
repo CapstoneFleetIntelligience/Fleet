@@ -52,6 +52,7 @@ $query = $this->db->get_where('capsql.chkitem',array('bname' => $this->session->
 </div>
 
 
+
 <script type="text/javascript">
     $('#add_item').click(function(){
         var form_data = {
