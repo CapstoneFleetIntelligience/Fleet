@@ -47,7 +47,7 @@ class employee_controller extends CI_Controller
        $message = 'This email contains information regarding your recent registration to Fleet Intelligience. To log
          in use your user id '.$user->uname.' finally use the password which your boss should provide you with to log
           in for the first time';
-        $this->email->from('FleetIntellience0@gmail.com', 'Fleet Intelligience');
+        $this->email->from('Fleetintelligience0@gmail.com', 'Fleet Intelligience');
         $this->email->to($user->email);
         $this->email->subject('Welcome to Fleet Intelligience');
         $this->email->message($message);
