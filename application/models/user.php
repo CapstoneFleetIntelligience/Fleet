@@ -78,8 +78,10 @@ class user extends CI_Model
         $this->uname = $this->createUsername($bname);
         $this->pass = $business->dpass;
         $this->salt = $business->dsalt;
-        //var_dump($this->uname);
-        if($this->db->insert('user', $this)) echo $this->load->view('templates/success', array('user' => $this));
+        if($this->db->insert('user', $this))
+        {
+            return $this;
+        }
         else throw new Exception();
 
     }
@@ -170,7 +172,6 @@ class user extends CI_Model
         }
             return $employees;
     }
-
 
 }
 
