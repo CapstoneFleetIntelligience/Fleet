@@ -173,6 +173,19 @@ class user extends CI_Model
             return $employees;
     }
 
+    public function findEmployee($id)
+    {
+        $query = $this->db->get_where('user', array('uname' => $id));
+
+       foreach($query->row() as $key => $value)
+        {
+            $this->$key = $value;
+        }
+
+        return $this;
+
+    }
+
 }
 
 ?>

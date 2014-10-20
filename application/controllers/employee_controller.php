@@ -13,10 +13,32 @@ class employee_controller extends CI_Controller
      */
     public function index()
     {
+        $user = $this->loadModel();
+
         $data = array(
-            'title' => 'home'
+            'title' => 'home',
+            'user' => $user
         );
+
         $this->load->template('employeeHome', $data);
+    }
+
+    public function contact()
+    {
+        $data = array(
+          'title' => 'Contact'
+        );
+
+        $this->load->template('contact', $data);
+    }
+
+    public function assignment()
+    {
+        $data = array(
+            'title' => 'assignments'
+        );
+
+        $this->load->template('assignment', $data);
     }
 
     /**
@@ -30,6 +52,7 @@ class employee_controller extends CI_Controller
         $this->load->template('addEmployee', $data);
     }
 
+
     /**
      * Creates an employee user
      */
@@ -38,6 +61,12 @@ class employee_controller extends CI_Controller
        $user = $this->user->createEmployee($this->input->post(null,true));
         $this->sendEmail($user);
         echo $this->load->view('templates/success', array('user' => $user));
+    }
+
+    public function loadModel()
+    {
+        $id = $this->session->userdata('uname');
+        return $this->user->findEmployee($id);
     }
 
     public function sendEmail($user)
