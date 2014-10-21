@@ -7,6 +7,12 @@
  */
 class customer extends CI_Model
 {
+    /**
+     * @var int $cid
+     * @var string $bname
+     * @var string $cname
+     *
+     */
     public $cid;
     public $bname;
     public $cname;
@@ -20,6 +26,10 @@ class customer extends CI_Model
         parent::__construct();
     }
 
+    /**
+     * Checks that customer exist
+     * @param $data params to find the customer
+     */
     public function custCheck($data)
     {
         $query = $this->db->get_where('customer', array('cname' => $data['cname'],'caddress' => $data['caddress']));
@@ -32,22 +42,43 @@ class customer extends CI_Model
         }
         else
         {
-            ?><script
-            <?php
 
-            $x = array('bname' => $this->session->userdata('bname'));
-            $xdata = array_merge($data,$x);
-
-            $this->db->insert('capsql.customer', $xdata);
+            $busName = array('bname' => $this->session->userdata('bname'));
+            $custData = array_merge($data,$busName);
+            $this->db->insert('capsql.customer', $custData);
 
         }
 
         $query = $this->db->get_where('customer', array('cname' => $data['cname'],'caddress' => $data['caddress']));
 
         foreach ($query->row() as $key => $value) {
-
             $this->$key = $value;
         }
+    }
+
+    public function setLatLong($address)
+    {
+        /**
+         *@todo move this into a model either delivery or customer
+         * encode the address here with a model call $this->delivery->encodeAddress()
+         * All this code can go within it just return what you need or don't return*/
+
+        $address = str_replace (" ", "+", urlencode($address));
+        $location_url = "http://maps.googleapis.com/maps/api/geocode/json?address=".$address."&sensor=false";
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $location_url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $response = json_decode(curl_exec($ch), true);
+
+        if ($response['status'] != 'OK') {
+        return null;
+        };
+
+        $geometry = $response['results'][0]['geometry'];
+
+        $this->clat = $geometry['location']['lat'];
+        $this->clong = $geometry['location']['lng'];
 
     }
 }
