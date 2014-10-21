@@ -12,5 +12,7 @@
             Copyrighted
         </div>
     </div>
+<script type="text/javascript">$(document).foundation();</script>
 </body>
+
 </html>

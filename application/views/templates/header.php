@@ -17,8 +17,8 @@
 
     <?php echo link_tag('assets/css/foundation.css'); ?>
     <?php echo link_tag('assets/css/normalize.css'); ?>
-    <?php echo script_tag('assets/js/vendor/jquery.js'); ?>
     <?php echo script_tag('assets/js/vendor/modernizr.js'); ?>
+    <?php echo script_tag('assets/js/vendor/jquery.js'); ?>
     <?php echo script_tag('assets/js/vendor/jquery.cookie.js'); ?>
     <?php echo script_tag('assets/js/vendor/fastclick.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.js'); ?>
@@ -26,6 +26,7 @@
     <?php echo script_tag('assets/js/foundation/foundation.abide.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.reveal.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.topbar.js'); ?>
+    <?php echo script_tag('assets/js/foundation/foundation.alert.js'); ?>
     <title><?php echo $title ?></title>
 </head>
 <body>
