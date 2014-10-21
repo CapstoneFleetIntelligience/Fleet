@@ -52,7 +52,7 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('database', 'email', 'encrypt', 'form_validation', 'table', 'image_lib', 'javascript',
+$autoload['libraries'] = array('database', 'encrypt', 'form_validation', 'table', 'image_lib', 'javascript',
 'security', 'session', 'typography', 'user_agent');
 $autoload['sparks'] = array('assets/1.5.1', 'foundation/0.6.3');
 

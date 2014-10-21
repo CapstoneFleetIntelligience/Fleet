@@ -36,6 +36,7 @@ $query = $this->db->get_where('capsql.chkitem',array('bname' => $this->session->
             echo '</tr>';
         }
         ?>
+        <?php endif; ?>
         <?php echo form_open('addItem');
         ?>
         <tr>
@@ -44,14 +45,16 @@ $query = $this->db->get_where('capsql.chkitem',array('bname' => $this->session->
         </tr>
         </tbody>
     </table>
-       <?php echo form_submit('submit', 'Continue', "class= 'button' id='submit'");
+
+       <?php echo form_submit('submit', 'add', "class= 'tiny button' id='add_item'");
        echo form_close();
        ?>
 </div>
-<?php endif; ?>
+
+
 
 <script type="text/javascript">
-    $('#submit').click(function(){
+    $('#add_item').click(function(){
         var form_data = {
             iname: $('#itemN').val(),
             description: $('#description').val()

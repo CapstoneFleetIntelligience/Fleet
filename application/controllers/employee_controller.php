@@ -18,6 +18,7 @@ class employee_controller extends CI_Controller
         );
         $this->load->template('employeeHome', $data);
     }
+
     /**
      * Loads the addnew employee view
      */
@@ -34,7 +35,24 @@ class employee_controller extends CI_Controller
      */
     public function create()
     {
-        $this->user->createEmployee($this->input->post(null,true));
+       $user = $this->user->createEmployee($this->input->post(null,true));
+        $this->sendEmail($user);
+        echo $this->load->view('templates/success', array('user' => $user));
+    }
+
+    public function sendEmail($user)
+    {
+        $this->load->library('email');
+
+       $message = 'This email contains information regarding your recent registration to Fleet Intelligience. To log
+         in use your user id '.$user->uname.' finally use the password which your boss should provide you with to log
+          in for the first time';
+        $this->email->from('Fleetintelligience0@gmail.com', 'Fleet Intelligience');
+        $this->email->to($user->email);
+        $this->email->subject('Welcome to Fleet Intelligience');
+        $this->email->message($message);
+        if(!$this->email->send()) echo $this->email->print_debugger();
+
     }
 
 } 
