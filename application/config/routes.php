@@ -49,6 +49,8 @@ $route['overview'] = "employee_controller/index";
 $route['adminE'] = "site_controller/adminE";
 $route['authenticate'] = "site_controller/authenticate";
 $route['employN'] = "employee_controller/addNew";
+$route['contact'] = "employee_controller/contact";
+$route['assignments'] = "employee_controller/assignment";
 $route['adminH'] = "site_controller/adminH";
 $route['itemN'] = "site_controller/itemN";
 $route['custN'] = "site_controller/custN";
@@ -65,6 +67,9 @@ $route['editEmploy'] = "settings_controller/editDelivery";
 $route['editEmploy'] = "settings_controller/editChklist";
 $route['editEmploy'] = "settings_controller/editPass";
 $route['editEmploy'] = "settings_controller/editRange";
+$route['getStarted'] = "site_controller/getStarted";
+$route['routeM'] = "route_controller/routeM";
+$route['edit_rts'] = "route_controller/edit_rts";
 
 
 /* End of file routes.php */

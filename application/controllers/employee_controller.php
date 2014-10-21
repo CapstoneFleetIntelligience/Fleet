@@ -38,11 +38,47 @@ class employee_controller extends CI_Controller
      */
     public function index()
     {
+        $user = $this->user->loadModel();
+        $business = $this->business->loadModel();
+
         $data = array(
-            'title' => 'home'
+            'title' => 'home',
+            'user' => $user,
+            'business' => $business
         );
-        $this->load->template('employeeHome', $data);
+
+         $this->load->template('employeeHome', $data);
     }
+
+    public function changePass()
+    {
+
+    }
+
+    /**
+     * Loads the contact view
+     */
+    public function contact()
+    {
+        $data = array(
+          'title' => 'Contact'
+        );
+
+        $this->load->template('contact', $data);
+    }
+
+    /**
+     * Loads the assignment view
+     */
+    public function assignment()
+    {
+        $data = array(
+            'title' => 'assignments'
+        );
+
+        $this->load->template('assignment', $data);
+    }
+
     /**
      * Loads the addnew employee view
      */
@@ -54,12 +90,34 @@ class employee_controller extends CI_Controller
         $this->load->template('addEmployee', $data);
     }
 
+
     /**
      * Creates an employee user
      */
     public function create()
     {
-        $this->user->createEmployee($this->input->post(null,true));
+       $user = $this->user->createEmployee($this->input->post(null,true));
+        $this->sendEmail($user);
+        echo $this->load->view('templates/success', array('user' => $user));
+    }
+
+    /**
+     * Sends an email to the newly registered user
+     * @param $user the user object being sent
+     */
+    public function sendEmail($user)
+    {
+        $this->load->library('email');
+
+       $message = 'This email contains information regarding your recent registration to Fleet Intelligience. To log
+         in use your user id '.$user->uname.' finally use the password which your boss should provide you with to log
+          in for the first time';
+        $this->email->from('Fleetintelligience0@gmail.com', 'Fleet Intelligience');
+        $this->email->to($user->email);
+        $this->email->subject('Welcome to Fleet Intelligience');
+        $this->email->message($message);
+        if(!$this->email->send()) echo $this->email->print_debugger();
+
     }
 
 >>>>>>> f972b268a1295ea69c45347b0dd667a0d5cd7dfa

@@ -206,7 +206,7 @@ class user extends CI_Model
     }
 
     /**
-     * Creats an employee of the business
+     * Creates an employee of the business
      * @param array $data User email and role
      * @throw exception if insertion fails.
      */
@@ -230,8 +230,10 @@ class user extends CI_Model
         $this->uname = $this->createUsername($bname);
         $this->pass = $business->dpass;
         $this->salt = $business->dsalt;
-        //var_dump($this->uname);
-        if($this->db->insert('user', $this)) echo $this->load->view('templates/success', array('user' => $this));
+        if($this->db->insert('user', $this))
+        {
+            return $this;
+        }
         else throw new Exception();
 
     }
@@ -323,6 +325,24 @@ class user extends CI_Model
             return $employees;
     }
 
+    /**
+     * Finds the employee
+     * @param $id the user name to be searched
+     * @return object $this which is the user
+     */
+    public function loadModel()
+    {
+        $id = $this->session->userdata('uname');
+        $query = $this->db->get_where('user', array('uname' => $id));
+
+       foreach($query->row() as $key => $value)
+        {
+            $this->$key = $value;
+        }
+
+        return $this;
+
+    }
 
 }
 
