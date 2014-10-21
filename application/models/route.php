@@ -24,6 +24,10 @@ class route extends CI_Model
     }
 
     //function to create routes, assign deliverers to those routes and produce an array to facilitate proper distribution of deliveries to routes
+    /**
+     * @param $pdata
+     * @return array
+     */
     public function rarray($pdata)
     {
 
@@ -287,11 +291,8 @@ class route extends CI_Model
         $area3 = $this->calcTriArea($pt, $v1, $v2);
 
         //check if area of all triangles using the given point is greater than the area of the given triangle
-        if (($area1 + $area2 + $area3) > $tarea) {
-            return false;
-        } else {
-            return true;
-        }
+        if (($area1 + $area2 + $area3) > $tarea) return false;
+        else return true;
     }
 
     //function to calculate the area of a triangle

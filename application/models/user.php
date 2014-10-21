@@ -54,7 +54,7 @@ class user extends CI_Model
     }
 
     /**
-     * Creats an employee of the business
+     * Creates an employee of the business
      * @param array $data User email and role
      * @throw exception if insertion fails.
      */
@@ -171,6 +171,25 @@ class user extends CI_Model
             $employees[$index] = $employ;
         }
             return $employees;
+    }
+
+    /**
+     * Finds the employee
+     * @param $id the user name to be searched
+     * @return object $this which is the user
+     */
+    public function loadModel()
+    {
+        $id = $this->session->userdata('uname');
+        $query = $this->db->get_where('user', array('uname' => $id));
+
+       foreach($query->row() as $key => $value)
+        {
+            $this->$key = $value;
+        }
+
+        return $this;
+
     }
 
 }
