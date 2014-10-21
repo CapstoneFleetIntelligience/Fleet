@@ -13,16 +13,26 @@ class employee_controller extends CI_Controller
      */
     public function index()
     {
-        $user = $this->loadModel();
+        $user = $this->user->loadModel();
+        $business = $this->business->loadModel();
 
         $data = array(
             'title' => 'home',
-            'user' => $user
+            'user' => $user,
+            'business' => $business
         );
 
-        $this->load->template('employeeHome', $data);
+         $this->load->template('employeeHome', $data);
     }
 
+    public function changePass()
+    {
+
+    }
+
+    /**
+     * Loads the contact view
+     */
     public function contact()
     {
         $data = array(
@@ -32,6 +42,9 @@ class employee_controller extends CI_Controller
         $this->load->template('contact', $data);
     }
 
+    /**
+     * Loads the assignment view
+     */
     public function assignment()
     {
         $data = array(
@@ -63,12 +76,10 @@ class employee_controller extends CI_Controller
         echo $this->load->view('templates/success', array('user' => $user));
     }
 
-    public function loadModel()
-    {
-        $id = $this->session->userdata('uname');
-        return $this->user->findEmployee($id);
-    }
-
+    /**
+     * Sends an email to the newly registered user
+     * @param $user the user object being sent
+     */
     public function sendEmail($user)
     {
         $this->load->library('email');

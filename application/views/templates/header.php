@@ -17,15 +17,21 @@
 
     <?php echo link_tag('assets/css/foundation.css'); ?>
     <?php echo link_tag('assets/css/normalize.css'); ?>
-    <?php echo script_tag('assets/js/vendor/jquery.js'); ?>
+    <?php echo link_tag('assets/css/jquery-ui.css'); ?>
+    <?php echo link_tag('assets/css/jquery-ui.structure.css'); ?>
+    <?php echo link_tag('assets/css/jquery-ui.theme.css'); ?>
     <?php echo script_tag('assets/js/vendor/modernizr.js'); ?>
-    <?php echo script_tag('assets/js/vendor/jquery.cookie.js'); ?>
+    <?php echo script_tag('assets/js/vendor/jquery.js'); ?>
     <?php echo script_tag('assets/js/vendor/fastclick.js'); ?>
+    <?php echo script_tag('assets/js/vendor/jquery-ui.js'); ?>
+    <?php echo script_tag('assets/js/vendor/jquery.cookie.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.tab.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.abide.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.reveal.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.topbar.js'); ?>
+    <?php echo script_tag('assets/js/foundation/foundation.alert.js'); ?>
+    <?php echo script_tag('assets/js/foundation/foundation.tooltip.js'); ?>
     <title><?php echo $title ?></title>
 </head>
 <body>
@@ -33,11 +39,11 @@
     <div class="small-6 columns">
         <h1 class="center">
             Welcome to Fleet Intelligence
+
         </h1>
         </div>
     <div class="small-6 columns">
         <?php $role = $this->session->userdata('role');
-        //var_dump($role);
                 if(!($role))
                 {
                     echo anchor('registration', 'please register', array('class' => 'right'));

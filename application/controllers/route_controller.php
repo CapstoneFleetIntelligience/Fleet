@@ -23,7 +23,7 @@ class route_controller extends CI_Controller
     }
 
     //open view for route management to delete routes or change the users assigned to those routes
-    public function routeM($schd,$success = false)
+    public function routeM($schd, $success = false)
     {
         $data = array(
             'title' => 'Manage Routes',
@@ -66,6 +66,4 @@ class route_controller extends CI_Controller
         //navigate to route management
         $this->routeM($pdata['schd']);
     }
-
-
 }
