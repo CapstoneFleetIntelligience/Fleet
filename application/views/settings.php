@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-<?php
-/**
- * Created by PhpStorm.
- * User: student
- * Date: 10/7/14
- * Time: 4:26 PM
- */ 
-=======
 <?php
 /**
  * Created by PhpStorm.
@@ -157,4 +148,3 @@ $bpass = array(
         return false;
     });
 </script>
->>>>>>> f972b268a1295ea69c45347b0dd667a0d5cd7dfa
