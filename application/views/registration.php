@@ -102,19 +102,11 @@
 				
 				<div class="row">
 					<div class="small-3 columns">
-						<button type="submit">Finish</a>
+
 					</div>
 				</div>
 			</div>
 		</div>
 	<?php echo form_close(); ?>
 </div>
-
-<body>
-
-<script>
-    $(document).foundation();
-</script>
-
-</body>
 

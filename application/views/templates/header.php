@@ -58,7 +58,6 @@
 	<div class="row">
 		<div class="small-4 columns">
 			<?php $role = $this->session->userdata('role');
-			//var_dump($role);
 					if(!($role))
 					{
 						echo anchor('registration', 'Register', array('class' => 'button'));

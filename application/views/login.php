@@ -43,9 +43,6 @@ $pass = array(
 				</fieldset>
 				
 				<br />
-				
-				<button type="submit">Submit</a>
-				
 				<br />
 			
 			</div>
