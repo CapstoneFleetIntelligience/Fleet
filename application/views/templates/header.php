@@ -17,10 +17,14 @@
 
     <?php echo link_tag('assets/css/foundation.css'); ?>
     <?php echo link_tag('assets/css/normalize.css'); ?>
+    <?php echo link_tag('assets/css/jquery-ui.css'); ?>
+    <?php echo link_tag('assets/css/jquery-ui.structure.css'); ?>
+    <?php echo link_tag('assets/css/jquery-ui.theme.css'); ?>
     <?php echo script_tag('assets/js/vendor/modernizr.js'); ?>
-    <?php echo script_tag('assets/js/vendor/jquery.js'); ?>
-    <?php echo script_tag('assets/js/vendor/jquery.cookie.js'); ?>
     <?php echo script_tag('assets/js/vendor/fastclick.js'); ?>
+    <?php echo script_tag('assets/js/vendor/jquery.js'); ?>
+    <?php echo script_tag('assets/js/vendor/jquery-ui.js'); ?>
+    <?php echo script_tag('assets/js/vendor/jquery.cookie.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.tab.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.abide.js'); ?>
