@@ -39,13 +39,10 @@ $pass = array(
 							<small class="error">Please enter a password.</small>
 						</div>
 					</div>
-					
+					<?php echo form_submit('', 'Submit','class = "button tiny radius" '); ?>
 				</fieldset>
-				
-				<br />
-				<br />
-			
+
 			</div>
 		</div>
-	<?php form_close(); ?>
+	<?php echo form_close(); ?>
 </div>

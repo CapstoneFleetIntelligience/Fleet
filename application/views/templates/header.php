@@ -62,15 +62,12 @@
 	<div class="row">
 		<div class="small-4 columns">
 			<?php $role = $this->session->userdata('role');
-					if(!($role))
-					{
-						echo anchor('registration', 'Register', array('class' => 'button'));
-						echo anchor('login', 'Log In', array('class' => 'button'));
-					}
-					else
-					{
-						echo anchor('logout', 'Log Out', array('class' => 'button'));
-					}
+					if(!($role)) {
+                        echo anchor('', 'Register', array('class' => 'button',
+                                                          'data-reveal-id' => 'registrationModal'));
+                        echo anchor('', 'Log In', array('class' => 'button', 'data-reveal-id' => 'loginModal', ));
+                    }
+					else echo anchor('logout', 'Log Out', array('class' => 'button'));
 
 			?>
 		</div>
@@ -102,7 +99,12 @@
         ?>
             </dl>
 </div>
-	
+    <div id="loginModal" class="reveal-modal" data-reveal>
+        <?php $this->load->view('login'); ?>
+    </div>
+    <div id="registrationModal" class="reveal-modal xlarge" data-reveal>
+        <?php $this->load->view('registration'); ?>
+    </div>
 	
 </body>
 </html>

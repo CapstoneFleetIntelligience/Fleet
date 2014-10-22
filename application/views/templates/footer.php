@@ -38,6 +38,20 @@
 
     $(document).foundation();
 
+    $('#register_user').click(function () {
+        var form_data = $('#registration_form').serialize();
+        console.log(form_data);
+        $.ajax({
+            url:"<?php echo site_url('site_controller/register') ?>",
+            type: 'POST',
+            data: form_data,
+            success: function (data) {
+                console.log(data);
+            }
+        });
+        return false;
+    });
+
     $('#submit_employ').click(function(){
         var form_data = {
             email: $('#email').val(),
@@ -71,7 +85,24 @@
             }
         });
         return false
-    })
+    });
+
+    $('#add_item').click(function(){
+        var form_data = {
+            iname: $('#itemN').val(),
+            description: $('#description').val()
+        };
+
+        $.ajax({
+            url: "<?php echo site_url('admin_controller/addItem'); ?>",
+            type: 'POST',
+            data: form_data,
+            success: function(data){$(".item_table").html(data);}
+        });
+
+        return false
+    });
+
 </script>
 
 </body>

@@ -51,6 +51,7 @@ class Site_controller extends CI_Controller
      */
     public function register()
     {
+
         $user = new user();
         $business = new business();
 
@@ -61,8 +62,6 @@ class Site_controller extends CI_Controller
         $business->setLatLong($business->baddress);
         $user->createAdmin($userData[1]);
         $user->bname = $business->name;
-
-
         if ($this->db->insert('capsql.business', $business)) {
             $this->db->insert('capsql.user', $user);
             $sessionD = array(
@@ -72,7 +71,7 @@ class Site_controller extends CI_Controller
             );
 
             $this->session->set_userdata($sessionD);
-            redirect('/getStarted');
+            
         } else throw new Exception();
     }
 
