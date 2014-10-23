@@ -98,16 +98,8 @@
                     <?php echo form_submit('', 'Continue', 'id="register_user" class="button radius small"'); ?>
                     <?php echo form_close(); ?>
 				</fieldset>
-				
-				<br />
-				
-				<div class="row">
-					<div class="small-3 columns">
-
-					</div>
-				</div>
 			</div>
 		</div>
-
+    <a class="close-reveal-modal">&#215;</a>
 </div>
 

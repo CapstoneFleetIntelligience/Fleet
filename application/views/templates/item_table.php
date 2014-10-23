@@ -45,10 +45,10 @@ $query = $this->db->get_where('capsql.chkitem',array('bname' => $this->session->
         </tr>
         </tbody>
     </table>
-
        <?php echo form_submit('submit', 'add', "class= 'tiny button' id='add_item'");
        echo form_close();
        ?>
 </div>
+<a class="close-reveal-modal">&#215;</a>
 
 

@@ -40,9 +40,11 @@ $pass = array(
 						</div>
 					</div>
 					<?php echo form_submit('', 'Submit','class = "button tiny radius" '); ?>
+
 				</fieldset>
 
 			</div>
 		</div>
 	<?php echo form_close(); ?>
 </div>
+<a class="close-reveal-modal">&#215;</a>

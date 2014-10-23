@@ -71,7 +71,7 @@ class Site_controller extends CI_Controller
             );
 
             $this->session->set_userdata($sessionD);
-            
+            redirect('getStarted');
         } else throw new Exception();
     }
 
@@ -83,24 +83,13 @@ class Site_controller extends CI_Controller
         $this->load->template('getStarted', $data);
     }
 
-    /**
-     * Loads the login page
-     */
-    public function login()
-    {
-        $data = array(
-            'title' => 'Login'
-        );
-        $this->load->template('login', $data);
-    }
-
     public function logout()
     {
         $this->session->sess_destroy();
         $data= array(
             'title' => 'Home'
         );
-        $this->load->template('home', $data);
+        redirect('');
     }
 
     /**

@@ -103,6 +103,42 @@
         return false
     });
 
+
+    $('#updateBusinessPass').click(function() {
+        var pass = {
+            bpass: $('#bpass').val(),
+            name: $('#bname').val()
+        };
+
+        $.ajax({
+            url: "<?php echo site_url('Settings_controller/editPass')?>",
+            type: 'POST',
+            data: pass,
+            success: function (msg) {
+                $('#editPassModal').foundation('reveal', 'close');
+            }
+        });
+        return false;
+    });
+
+
+    $('#updateRange').click(function(){
+        var radius = {
+            radius: $('#radius').val(),
+            name: $('#bname').val()
+        };
+        $.ajax({
+            url: "<?php echo site_url('Settings_controller/editRange')?>",
+            type: 'POST',
+            data: radius,
+            success: function (data) {
+                $('#editRadiusModal').foundation('reveal', 'close');
+            }
+        });
+
+        return false;
+    });
+
 </script>
 
 </body>
