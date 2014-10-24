@@ -17,7 +17,6 @@ $query = $this->db->get_where('capsql.user', array('bname' => $business));
 
 <div class="container">
     <?php
-    echo $this->uri->segment(2);
     if ($this->uri->segment(2) == "baddate"){?>
         <div class="row">
             <div class="small-12">

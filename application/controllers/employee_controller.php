@@ -94,5 +94,4 @@ class employee_controller extends CI_Controller
         if(!$this->email->send()) echo $this->email->print_debugger();
 
     }
-
 } 

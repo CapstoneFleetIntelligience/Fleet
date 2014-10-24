@@ -17,10 +17,14 @@
 
     <?php echo link_tag('assets/css/foundation.css'); ?>
     <?php echo link_tag('assets/css/normalize.css'); ?>
+    <?php echo link_tag('assets/css/jquery-ui.css'); ?>
+    <?php echo link_tag('assets/css/jquery-ui.structure.css'); ?>
+    <?php echo link_tag('assets/css/jquery-ui.theme.css'); ?>
     <?php echo script_tag('assets/js/vendor/modernizr.js'); ?>
-    <?php echo script_tag('assets/js/vendor/jquery.js'); ?>
-    <?php echo script_tag('assets/js/vendor/jquery.cookie.js'); ?>
     <?php echo script_tag('assets/js/vendor/fastclick.js'); ?>
+    <?php echo script_tag('assets/js/vendor/jquery.js'); ?>
+    <?php echo script_tag('assets/js/vendor/jquery-ui.js'); ?>
+    <?php echo script_tag('assets/js/vendor/jquery.cookie.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.tab.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.abide.js'); ?>
@@ -30,25 +34,42 @@
     <title><?php echo $title ?></title>
 </head>
 <body>
-<div class="row header">
-    <div class="small-6 columns">
-        <h1 class="center">
-            Welcome to Fleet Intelligence
-        </h1>
-        </div>
-    <div class="small-6 columns">
-        <?php $role = $this->session->userdata('role');
-        //var_dump($role);
-                if(!($role))
-                {
-                    echo anchor('registration', 'please register', array('class' => 'right'));
-                    echo anchor('login', 'Log in', array('class' => 'button small radius right'));
-                }
-                else
-                {
-                    echo anchor('logout', 'logout', array('class' => 'button small radius right'));
-                }
+	<div class="sticky">
+		<nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large"> 
+			<ul class="title-area"> 
+				<!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone --> 
+				<li class="toggle-topbar"></li> 
+			</ul> 
+			<section class="top-bar-section"> 
+				<!-- Left Nav Section --> 
+				<ul class="left"> 
+					<li><?php echo anchor('adminH', 'Home'); ?></li>
+					<li><?php echo anchor('analytics', 'Analytics') ?></li>
+					<li><?php echo anchor('adminE', 'Edit')?></li> 
+					
+				</ul>
+			</section>
+		</nav>
+	</div>
 
+	<br />
+
+<div class="row header">
+    <div class="small-6 medium-6 large-8 columns">
+        <h1>Fleet Intelligence</h1>
+	</div>
+	<div class="row">
+		<div class="small-4 columns">
+			<?php $role = $this->session->userdata('role');
+					if(!($role))
+					{
+						echo anchor('registration', 'Register', array('class' => 'button'));
+						echo anchor('login', 'Log In', array('class' => 'button'));
+					}
+					else
+					{
+						echo anchor('logout', 'Log Out', array('class' => 'button'));
+					}
         ?>
     </div>
 </div>

@@ -70,6 +70,7 @@ $route['editEmploy'] = "settings_controller/editRange";
 $route['getStarted'] = "site_controller/getStarted";
 $route['routeM'] = "route_controller/routeM";
 $route['edit_rts'] = "route_controller/edit_rts";
+$route['routeE/:any'] = "route_controller/routeE";
 
 
 /* End of file routes.php */

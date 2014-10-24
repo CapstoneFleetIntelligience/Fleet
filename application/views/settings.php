@@ -10,7 +10,34 @@ $bpass = array(
     'id' => 'bpass',
     'class' => 'small-6 small-centered'
 );
+$dquery = $this->db->query("select schd from route where bname = '".$this->session->userdata('bname')."' and schd >= current_date group by schd");
+foreach ($dquery->result() as $row)
+{
+    $ddate[] = "'".$row->schd."'";
+}
+$ddates = implode(",",$ddate);
 ?>
+<script>
+    $(function() {
+        var arrayD = [<? echo $ddates ?>];
+        $( "#datepicker" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd",
+            beforeShowDay: function(date){
+                var f = $.datepicker.formatDate('yy-mm-dd', date)
+                if ($.inArray(f, arrayD) > -1) {
+                    return [true];
+                }else{
+                    return [false];
+                }
+            },
+            onSelect: function(dateText) {
+                window.location = '<?php echo site_url('routeE')?>/' + dateText;
+            }
+        });
+    });
+</script>
 <div class="container">
     <div class="row">
         <div class="small-6 small-centered">
@@ -81,6 +108,18 @@ $bpass = array(
             echo form_submit('update', 'update', 'id = "updateRange"  class="small button radius"');
             echo form_close();
             ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-6 small-center">
+            <span>Route Manager</span>
+            <a href="#" data-reveal-id="routeModal" class="right small button radius">Open</a>
+
+        </div>
+        <div id="routeModal" class="reveal-modal tiny text-center" data-reveal>
+            <h4>Select the date of routes to be edited.</h4>
+            <div id="datepicker" style="font-size: 12px; text-align: center; display: inline-block"></div>
+            <a class="close-reveal-modal">&#215;</a>
         </div>
     </div>
 </div>

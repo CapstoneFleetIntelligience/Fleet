@@ -66,4 +66,10 @@ class route_controller extends CI_Controller
         //navigate to route management
         $this->routeM($pdata['schd']);
     }
+
+    public function routeE()
+    {
+        $schd = $this->uri->segment(2);
+        $this->routeM($schd);
+    }
 }
