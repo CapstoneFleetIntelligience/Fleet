@@ -71,6 +71,7 @@ $route['getStarted'] = "site_controller/getStarted";
 $route['routeM'] = "route_controller/routeM";
 $route['edit_rts'] = "route_controller/edit_rts";
 $route['routeE/:any'] = "route_controller/routeE";
+$route['deleteR'] = "route_controller/deleteR";
 
 
 /* End of file routes.php */

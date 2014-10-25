@@ -41,6 +41,7 @@ if ($success == true)
         $("#topdiv").removeClass("alert-box info radius").addClass("alert-box success radius");
         $( "#topmsg" ).text( "<? echo $smsg ?>" );
     });
+
     </script><?php
 }
 
@@ -51,12 +52,30 @@ if ($success == true)
         center: myLatlng,
         zoom:13
     };
+
 </script>
 <div class="container">
     <div class="row">
         <div class="small-12">
             <div id="topdiv" data-alert class="alert-box info radius">
                 <h4 id="topmsg">The following are the routes for <? echo date('l \t\h\e jS \of F Y', strtotime($schd)) ?>.</h4>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-12" style="text-align: center">
+
+            <a href="#" data-reveal-id="confirmModal" class="button alert large radius">Delete all routes for this Date</a>
+            <div id="confirmModal" class="reveal-modal" style="text-align: center" data-reveal>
+                <h4>Are you sure you want to delete all routes for <? echo date('l \t\h\e jS \of F Y', strtotime($schd)) ?>? Create routes will have to be ran again for this date.</h4>
+                <?
+                echo form_open('deleteR',"id = 'deleteR'");
+                echo form_hidden('schd',$schd);
+                echo form_submit('','Yes, I want to delete these routes',"class='button alert small radius'");
+                echo form_close();
+                ?>
+                <h6>After routes are deleted you will be taken back to the Edit page.</h6>
+                <a class="close-reveal-modal">&#215;</a>
             </div>
         </div>
     </div>

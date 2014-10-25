@@ -67,9 +67,24 @@ class route_controller extends CI_Controller
         $this->routeM($pdata['schd']);
     }
 
+    //open route manger from Edit page
     public function routeE()
     {
+        //get date from url
         $schd = $this->uri->segment(2);
+        //open route manager using function with date
         $this->routeM($schd);
+    }
+
+    public function deleteR()
+    {
+        //get post data
+        $pdata = $this->input->post(NULL, TRUE);
+
+        //run delete function
+        $this->route->destNclnR($pdata['schd']);
+
+        //return to edit page
+        redirect(site_url("adminE"));
     }
 }

@@ -11,11 +11,16 @@ $bpass = array(
     'class' => 'small-6 small-centered'
 );
 $dquery = $this->db->query("select schd from route where bname = '".$this->session->userdata('bname')."' and schd >= current_date group by schd");
-foreach ($dquery->result() as $row)
-{
-    $ddate[] = "'".$row->schd."'";
+if ($dquery->num_rows() > 0){
+    foreach ($dquery->result() as $row)
+    {
+        $ddate[] = "'".$row->schd."'";
+    }
+    $ddates = implode(",",$ddate);
+}else{
+    $ddates = '';
 }
-$ddates = implode(",",$ddate);
+
 ?>
 <script>
     $(function() {

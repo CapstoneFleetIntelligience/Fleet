@@ -313,7 +313,9 @@ class route extends CI_Model
         return $det;
     }
 
-    //function to optimize the order of deliveries in all routes for a given day
+    /**
+     * function to optimize the order of deliveries in all routes for a given day
+     */
     public function optimizeR($pdata, $rarray)
     {
         //set business name to variable
@@ -375,6 +377,9 @@ class route extends CI_Model
         }
     }
 
+    /**
+     * update routes with new users from post
+     */
     public function updateRoute($pdata)
     {
         $i = 0;
@@ -385,5 +390,20 @@ class route extends CI_Model
             $this->db->update('capsql.route', array('uname' => $value));
             $i++;
         }
+    }
+
+    /**
+     * Delete routes and update associated deliveries for the given date
+     */
+    public function destNclnR($schd)
+    {
+        //set business name to variable
+        $business = $this->session->userdata('bname');
+
+        //delete the routes
+        $this->db->delete('capsql.route', array('schd' => $schd , 'bname' => $business));
+
+        //update deliveries
+        $this->db->query("update delivery set rid = NULL, position = 0 where schd = '".$schd."' and cid in (select cid from customer where bname = '".$business."')");
     }
 }
