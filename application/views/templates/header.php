@@ -61,42 +61,23 @@
 	<div class="row">
 		<div class="small-4 columns">
 			<?php $role = $this->session->userdata('role');
-					if(!($role))
-					{
-						echo anchor('registration', 'Register', array('class' => 'button'));
-						echo anchor('login', 'Log In', array('class' => 'button'));
-					}
-					else
-					{
-						echo anchor('logout', 'Log Out', array('class' => 'button'));
-					}
-        ?>
+					if(!($role)) {
+                        echo anchor('', 'Register', array('class' => 'button',
+                                                          'data-reveal-id' => 'registrationModal'));
+                        echo anchor('', 'Log In', array('class' => 'button', 'data-reveal-id' => 'loginModal', ));
+                    }
+					else echo anchor('logout', 'Log Out', array('class' => 'button'));
+
+			?>
+		</div>
+	</div>
+    <div id="loginModal" class="small reveal-modal" data-reveal>
+        <?php $this->load->view('login'); ?>
+    </div>
+    <div id="registrationModal"  class="reveal-modal" data-reveal>
+        <?php $this->load->view('registration') ?>
     </div>
 </div>
-<div class="row">
-    <dl class="small-12 tabs text-center" data-options="sticky_on: large" data-tab>
-        <?php
-                switch ($role)
-                {
-                    case 'E':
-                        echo '<dd class="active">'.anchor('overview', 'Home').'</dd>';
-                        echo '<dd>'.anchor('assignments', 'Route Assignment').'</dd>';
-                        echo '<dd>'.anchor('contact', 'contact').'</dd>';
-                        break;
-                    case 'M':
-                        echo '<dd class="active">'. anchor('adminH', 'Home').'</dd>';
-                        echo '<dd>'.anchor('analytics', 'Analytics').'</dd>';
-                        echo '<dd>'.anchor('manE', 'Edit');
-                        break;
-                    case 'A':
-                        echo '<dd class="active">'. anchor('adminH', 'Home').'</dd>';
-                        echo '<dd>'.anchor('analytics', 'Analytics').'</dd>';
-                        echo '<dd>'.anchor('adminE', 'Edit').'</dd>';
-                        break;
-                    default:
-                        break;
-                }
-        ?>
-            </dl>
-</div>
-
+</body>
+</html>
+	

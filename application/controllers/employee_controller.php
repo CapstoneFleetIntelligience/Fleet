@@ -65,6 +65,19 @@ class employee_controller extends CI_Controller
         $this->load->template('addEmployee', $data);
     }
 
+    public function removeEmployee()
+    {
+        $data = $this->input->post(NULL, TRUE);
+        $this->user->remove($data);
+    }
+
+    public function updateEmployee()
+    {
+        $data = $this->input->post(NULL, TRUE);
+        $this->user->update($data);
+
+    }
+
 
     /**
      * Creates an employee user

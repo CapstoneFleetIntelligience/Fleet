@@ -47,11 +47,9 @@ if ($dquery->num_rows() > 0){
     <div class="row">
         <div class="small-6 small-centered">
             <span>Employee(s)</span>
-            <?php echo anchor(
-                'editEmploy', 'Edit',
-                'id="editEmployee" class="right small button radius"'
-            ) ?>
-            <div id="employee_table" class="row hide">
+            <?php echo anchor('', 'Edit', array('class' => 'button radius small right',
+                                                     'data-reveal-id'=>'employeeModal'));?>
+            <div id="employeeModal" class="reveal-modal medium" data-reveal>
                 <?php $this->load->view('editEmployee', array('employees' => $employees)); ?>
             </div>
         </div>
@@ -72,10 +70,9 @@ if ($dquery->num_rows() > 0){
         <div class="small-6 small-centered">
             <span>Checklist Items</span>
             <?php echo anchor(
-                'editChklist', 'Edit',
-                'id="editChklist" class="right small button radius"'
+                'editChklist', 'Edit', array('class' => 'right button small radius', 'data-reveal-id'=>'editItemModal')
             ) ?>
-            <div id="item_table" class="row hide">
+            <div id="editItemModal" class="reveal-modal medium" data-reveal>
                 <?php $this->load->view('templates/item_table'); ?>
             </div>
         </div>
@@ -83,22 +80,26 @@ if ($dquery->num_rows() > 0){
     <div class="row">
         <div class="small-6 small-centered">
             <span> Business Password</span>
-            <?php echo anchor('editPass', 'Edit', 'id="editPass" class="right small button radius"') ?>
+            <?php echo anchor('', 'Edit', array('class' => 'right small button radius',
+                                                'data-reveal-id' => 'editPassModal')) ?>
         </div>
-        <div class="row hide" id="pass_field">
+        <div class="reveal-modal tiny" id="editPassModal" data-reveal>
             <?php echo form_open('changePass');
+            echo form_hidden('business', $business->name, 'id= "bname"');
             echo form_password($bpass);
-            echo form_submit('submit', 'Submit', "class='tiny button' id='submitPass'");
+            echo form_submit('submit', 'Submit', "class='tiny button' id='updateBusinessPass'");
             echo form_close();
             ?>
+            <a class="close-reveal-modal">&#215;</a>
         </div>
     </div>
     <div class="row">
         <div class="small-6 small-centered">
             <span>Delivery Range</span>
-            <?php echo anchor('editRange', 'Edit', 'id="editRange" class="right small button radius"') ?></span>
+            <?php echo anchor('', 'Edit', array('class' => 'radius button small right',
+                                                         'data-reveal-id' => 'editRadiusModal')); ?>
         </div>
-        <div id="range_field" class="row hide">
+        <div id="editRadiusModal" class="reveal-modal tiny" data-reveal>
             <?php echo form_open('changeRange');
             $radius = array(
                 'type' => 'number',
@@ -109,10 +110,12 @@ if ($dquery->num_rows() > 0){
                 'max' => '1000',
                 'step' => '1'
             );
+            echo form_hidden('business', $business->name, 'id = "bname"');
             echo form_input($radius);
-            echo form_submit('update', 'update', 'id = "updateRange"  class="small button radius"');
+            echo form_submit('update', 'update', 'id = "updateRange"  class="tiny button radius"');
             echo form_close();
             ?>
+            <a class="close-reveal-modal">&#215;</a>
         </div>
     </div>
     <div class="row">
@@ -192,3 +195,4 @@ if ($dquery->num_rows() > 0){
         return false;
     });
 </script>
+

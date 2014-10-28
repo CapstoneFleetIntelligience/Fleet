@@ -61,16 +61,14 @@ class user extends CI_Model
     public function createEmployee($data)
     {
 
-        $bname =  $this->session->userdata('bname');
+        $bname = $this->session->userdata('bname');
         $query = $this->db->get_where('business', array('name' => $bname));
         $business = new business();
-        foreach($query->row() as $key => $value)
-        {
+        foreach ($query->row() as $key => $value) {
             $business->$key = $value;
         }
 
-        foreach($data as $key => $value)
-        {
+        foreach ($data as $key => $value) {
             $this->$key = $value;
         }
 
@@ -78,11 +76,9 @@ class user extends CI_Model
         $this->uname = $this->createUsername($bname);
         $this->pass = $business->dpass;
         $this->salt = $business->dsalt;
-        if($this->db->insert('user', $this))
-        {
+        if ($this->db->insert('user', $this)) {
             return $this;
-        }
-        else throw new Exception();
+        } else throw new Exception();
 
     }
 
@@ -127,6 +123,29 @@ class user extends CI_Model
         else return false;
     }
 
+    public function remove($user)
+    {
+        if ($this->db->delete('user', array('uname' => $user['uname']))) {
+            $employees = $this->getEmployees($user['bname']);
+            echo $this->load->view('editEmployee', array('employees' => $employees));
+
+        }
+    }
+
+    public function update($user)
+    {
+        $update = array(
+            'email' => $user['email'],
+            'role' => $user['role']
+        );
+        $this->db->where('uname', $user['uname']);
+        if ($this->db->update('user', $update)) {
+            $employees = $this->getEmployees($user['bname']);
+            echo $this->load->view('editEmployee', array('employees' => $employees));
+        }
+    }
+
+
     /**
      * @param $user User object
      * @return string page to be redirected too
@@ -156,7 +175,11 @@ class user extends CI_Model
     public function getEmployees($id)
     {
 
-        $query = $this->db->get_where('user', array('bname' => $id, 'role' => 'E'));
+        $where =  "role = 'E' ";
+        $this->db->where('bname', $id);
+        $this->db->where($where);
+        $this->db->select('uname, bname, role, email, uphone');
+        $query = $this->db->get('user');
         $employees = array();
 
         foreach ($query->result() as $index => $employee)
@@ -193,3 +216,5 @@ class user extends CI_Model
     }
 
 }
+
+?>

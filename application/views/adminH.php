@@ -54,9 +54,12 @@ foreach ($results->result() as $biz)
     <div class="row">
         <div class="large-12 medium-3 small-12 columns">
             <div class="row">
-                <?php echo anchor('custN', 'New Delivery',array('class' => 'button small radius left')) ?>
-                <?php echo anchor('itemN', 'New Item(s)',array('class' => 'button small radius left')) ?>
-                <?php echo anchor('employee_controller/addNew', 'Add Employee(s)', array('class' => 'button small radius left')) ?>
+                <?php echo anchor('', 'New Delivery',array('class' => 'button small radius left',
+                                                           'data-reveal-id' => 'deliveryModal')) ?>
+                <?php echo anchor('', 'New Item(s)',array('class' => 'button small radius left',
+                                                            'data-reveal-id' => 'addItemModal')) ?>
+                <?php echo anchor('', 'Add Employee(s)', array('class' => 'button small radius left',
+                                                               'data-reveal-id' => 'addEmployeeModal')) ?>
                 <?php echo anchor('route_controller/routeN', 'Create Routes', array('class' => 'button small radius
                 left')) ?>
             </div>
@@ -79,4 +82,14 @@ foreach ($results->result() as $biz)
             </div>
         </div>
     </div>
+</div>
+
+<div id="addItemModal" class="reveal-modal" data-reveal>
+    <?php $this->load->view('templates/item_table'); ?>
+</div>
+<div id="deliveryModal" class="reveal-modal" data-reveal>
+    <?php $this->load->view('custN'); ?>
+</div>
+<div id="addEmployeeModal" class="reveal-modal small" data-reveal>
+    <?php $this->load->view('addEmployee') ?>
 </div>
