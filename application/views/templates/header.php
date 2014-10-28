@@ -73,32 +73,7 @@
 		</div>
 	</div>
 </div>
-<div class="row">
-    <dl class="small-12 tabs text-center" data-options="sticky_on: large" data-tab>
-        <?php
-                switch ($role)
-                {
-                    case 'E':
-                        echo '<dd class="active">'.anchor('overview', 'Home').'</dd>';
-                        echo '<dd>'.anchor('assignments', 'Route Assignment').'</dd>';
-                        echo '<dd>'.anchor('contact', 'contact').'</dd>';
-                        break;
-                    case 'M':
-                        echo '<dd class="active">'. anchor('adminH', 'Home').'</dd>';
-                        echo '<dd>'.anchor('analytics', 'Analytics').'</dd>';
-                        echo '<dd>'.anchor('manE', 'Edit');
-                        break;
-                    case 'A':
-                        echo '<dd class="active">'. anchor('adminH', 'Home').'</dd>';
-                        echo '<dd>'.anchor('analytics', 'Analytics').'</dd>';
-                        echo '<dd>'.anchor('adminE', 'Edit').'</dd>';
-                        break;
-                    default:
-                        break;
-                }
-        ?>
-            </dl>
-</div>
+
     <div id="loginModal" class="reveal-modal" data-reveal>
         <?php $this->load->view('login'); ?>
     </div>

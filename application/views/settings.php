@@ -17,7 +17,7 @@ $bpass = array(
             <span>Employee(s)</span>
             <?php echo anchor('', 'Edit', array('class' => 'button radius small right',
                                                      'data-reveal-id'=>'employeeModal'));?>
-            <div id="employeeModal" class="reveal-modal small" data-reveal>
+            <div id="employeeModal" class="reveal-modal medium" data-reveal>
                 <?php $this->load->view('editEmployee', array('employees' => $employees)); ?>
             </div>
         </div>
