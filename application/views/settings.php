@@ -133,24 +133,18 @@ if ($dquery->num_rows() > 0){
 </div>
 
 <script type="text/javascript">
-    $("#editChklist").click(function () {
-        $("#item_table").toggleClass("hide");
-        return false;
+    $('.employee_table').on("click", ".update", function(){
+        $(this).unbind('click');
+        var id = $(this).attr('id');
+        var data = $('#updateUser-'+id+' :input').serialize();
+        editEmployee('update', data);
     });
 
-    $('#editEmployee').click(function () {
-        $('#employee_table').toggleClass('hide');
-        return false;
-    });
-
-    $("#editDelivery").click(function () {
-        $("#delivery_table").toggleClass('hide');
-        return false;
-    });
-
-    $('#editPass').click(function () {
-        $('#pass_field').toggleClass('hide');
-        return false;
+    $('.employee_table').on("click", ".delete", function(){
+        $(this).unbind('click');
+        var id = $(this).attr('id');
+        var data = $('#updateUser-'+id+' :input').serialize();
+        editEmployee('delete', data);
     });
 
     $('#submitPass').click(function() {
@@ -185,11 +179,6 @@ if ($dquery->num_rows() > 0){
             }
         });
 
-        return false;
-    });
-
-    $('#editRange').click(function () {
-        $('#range_field').toggleClass('hide');
         return false;
     });
 </script>

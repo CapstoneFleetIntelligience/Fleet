@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: student
+ * User: cg236
  * Date: 10/12/14
  * Time: 3:54 PM
  */
@@ -31,20 +31,14 @@ $options = array(
 
             foreach ($employees as $index => $employee)
             {
-                echo '<tr>';
-                echo form_open('updateEmployee', 'id= "updateUser'.$employee->uname.'"');
-                echo form_hidden('uname', $employee->uname);
-                echo form_hidden('bname', $employee->bname);
+                echo '<tr id="updateUser-'.$employee->uname.'">';
                 echo '<td>'.$employee->uname.'</td>';
                 echo '<td>'.form_input('email', $employee->email).'</td>';
                 echo '<td>'.form_dropdown('role', $options, $employee->role).'</td>';
-                echo '<td>'.form_submit('update', 'update', 'id="update" onclick="editEmployee()" class="button tiny
-                radius edit"')
-                    .'</td>';
-                echo '<td>'.form_submit('delete', 'delete', 'id="delete" onclick="editEmployee()" class="button tiny
-                radius edit"')
-                    .'</td>';
-                echo form_close();
+                echo '<td><button type="button" class="button tiny radius update" id="'.$employee->uname.'">Update</button></td>';
+                echo '<td><button type="button" class="button tiny radius delete" id="'.$employee->uname.'">Delete</button></td>';
+                echo form_hidden('uname', $employee->uname);
+                echo form_hidden('bname', $employee->bname);
                 echo '</tr>';
             }
             ?>

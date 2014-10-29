@@ -20,36 +20,7 @@
 
     $(document).foundation();
 
-    function editEmployee(){
-        $('form').on('submit', function(e){
-            var form_data = $(this).serialize();
-            var val = $(":input[type=submit]:focus")[0].id;
-            if(val == 'update')
-            {
-                $.ajax({
-                    url:"<?php echo site_url('employee_controller/updateEmployee') ?>",
-                    type:'POST',
-                    data: form_data,
-                    success: function(data){
-                        console.log(data);
-                        //$(".employee_table").html(data);
-                    }
-                });
-            }
-            else
-            {
-                $.ajax({
-                    url: "<?php echo site_url('employee_controller/removeEmployee') ?>",
-                    type: 'POST',
-                    data: form_data,
-                    success: function(data){
-                        $(".employee_table").html(data);
-                    }
-                });
-            }
-            return false;
-        });
-    }
+
 
     $('#register_user').click(function () {
         var form_data = $('#registration_form').serialize();

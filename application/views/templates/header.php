@@ -31,6 +31,7 @@
     <?php echo script_tag('assets/js/foundation/foundation.reveal.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.topbar.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.alert.js'); ?>
+    <?php echo script_tag('assets/js/utility.js'); ?>
     <title><?php echo $title ?></title>
     <script type="text/javascript">
         $(function(){
