@@ -10,10 +10,21 @@ $cname = array(
     'id' => 'cname',
     'class' => 'small-8 columns right'
 );
-$caddress = array(
-    'name' => 'caddress',
-    'id' => 'caddress',
-    'class' => 'small-8 columns right'
+$address = array(
+    'name' => 'address',
+    'id' => 'address'
+);
+$city = array(
+    'name' => 'city',
+    'id' => 'city'
+);
+$zip = array(
+    'name' => 'zip',
+    'id' => 'zip'
+);
+$state = array(
+    'name' => 'state',
+    'id' => 'state'
 );
 $cphone = array(
     'name' => 'cphone',
@@ -38,9 +49,8 @@ $nolist = array(
 $note = array(
     'name' => 'note',
     'id' => 'note',
-    'rows' => '5',
+    'rows' => '3',
     'style' => 'resize: vertical',
-    'class' => 'small-8 columns right'
 );
 
 ?>
@@ -49,48 +59,59 @@ $note = array(
     <div class="row">
         <?php echo form_open('addCust', "id = 'add_cust'");
         echo form_fieldset('Enter details for new delivery');
-        echo form_input(array('name' => 'clat', 'type'=>'hidden', 'id' =>'clat', 'value' => '0.0'));
-        echo form_input(array('name' => 'clong', 'type'=>'hidden', 'id' =>'clong', 'value' => '0.0'));
+        echo form_input(array('name' => 'clat', 'type' => 'hidden', 'id' => 'clat', 'value' => '0.0'));
+        echo form_input(array('name' => 'clong', 'type' => 'hidden', 'id' => 'clong', 'value' => '0.0'));
         ?>
 
         <div class="row">
-            <div class="small-8 small-centered columns">
+            <div class="small-4 column">
                 <span class="prefix">
                     Customer Name
                 </span>
                 <?php echo form_input($cname); ?>
             </div>
-        </div>
-
-        <div class="row">
-            <div class="small-8 small-centered columns">
-            <span class="prefix">
-                     Customer Address
-                </span>
-                <?php echo form_input($caddress); ?>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="small-8 small-centered columns">
+            <div class="small-4 column">
                 <span class="prefix">
                     Customer Phone
                 </span>
                 <?php echo form_input($cphone); ?>
             </div>
-        </div>
-
-        <div class="row">
-            <div class="small-8 small-centered columns">
+            <div class="small-4 column">
             <span class="prefix">
                      Delivery Date
                 </span>
-                <?php echo form_input($schd); ?>
+                <input type="date" id="schd">
             </div>
         </div>
 
         <div class="row">
-            <div class="small-8 small-centered columns">
+            <div class="small-4 column">
+            <span class="prefix">
+                     Customer Address
+            </span>
+                <?php echo form_input($address); ?>
+            </div>
+            <div class="small-4 column">
+                <span class="prefix">
+                   City
+                </span>
+                <?php echo form_input($city) ?>
+            </div>
+            <div class="small-2 column">
+                <span class="prefix">
+                    State
+                </span>
+                <?php echo form_input($state) ?>
+            </div>
+            <div class="small-2 column">
+                <span class="prefix">
+                    Zip
+                </span>
+                <?php echo form_input($zip) ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-4 column">
             <span class="prefix">
                     Does delivery need a checklist?
                 </span>
@@ -101,7 +122,6 @@ $note = array(
                     echo form_radio($nolist);
                     ?>
                 </div>
-
                 <div class="small-2 columns right">
                     <?php
                     echo form_label("Yes", 'y');
@@ -109,16 +129,14 @@ $note = array(
                     ?>
                 </div>
             </div>
-
-        </div>
-        <div class="row">
-            <div class="small-8 small-centered columns">
+            <div class="small-8 column">
                 <span class="prefix">
                     Notes (optional):
                 </span>
                 <?php echo form_textarea($note); ?>
             </div>
         </div>
+
 
         <?php
         echo form_submit('', 'Continue', "id= 'submit_cust' class = 'small button'");
@@ -135,9 +153,14 @@ $note = array(
 
 <script type="text/javascript">
     $('#submit_cust').click(function () {
+        var city = $("#city").val();
+        var state = $("#state").val();
+        var zip = $("#zip").val();
+        var address = $("#address").val();
+        var caddress = address + ', ' + city + ', ' + state + ' ' + zip;
         var form_data = {
             cname: $('#cname').val(),
-            caddress: $('#caddress').val(),
+            caddress: caddress,
             cphone: $('#cphone').val()
         };
         var delivery_data = {
@@ -146,9 +169,8 @@ $note = array(
         };
 
 
-
-       $.ajax({
-            url: "<?php echo site_url('addCust'); ?>",
+        $.ajax({
+            url: "<?php echo site_url('admin_controller/addCust'); ?>",
             type: 'POST',
             data: {
                 customer: form_data,
@@ -156,7 +178,7 @@ $note = array(
                 list: $('input:radio[name=list]:checked').val()
             },
             success: function (data) {
-                if (data == 'reset') {
+               if (data == 'reset') {
                     $("#add_cust").trigger('reset');
                     alert('Delivery Set');
                 }
@@ -168,4 +190,5 @@ $note = array(
         });
         return false;
     });
+
 </script>

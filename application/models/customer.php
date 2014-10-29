@@ -28,32 +28,35 @@ class customer extends CI_Model
 
     /**
      * Checks that customer exist
-     * @param $data params to find the customer
+     * @param $customer params to find the customer
      */
-    public function custCheck($data)
+    public function custCheck()
     {
-        $query = $this->db->get_where('customer', array('cname' => $data['cname'],'caddress' => $data['caddress']));
+        $query = $this->db->get_where('customer', array('cname' => $this->cname,'caddress' => $this->caddress));
 
         if ($query->num_rows() > 0)
         {
-
-            $this->db->update('customer', array('cphone' => $data['cphone']),array('cname' => $data['cname'],'caddress' => $data['caddress']));
-
+            $this->db->update('customer', array('cphone' => $this->cphone),array('cname' => $this->cname,
+                                                                     'caddress' => $this->caddress,
+                                                                     'clat' => $this->clat, 'clong' => $this->clong));
         }
         else
         {
-
-            $busName = array('bname' => $this->session->userdata('bname'));
-            $custData = array_merge($data,$busName);
-            $this->db->insert('capsql.customer', $custData);
-
+            $busName = $this->session->userdata('bname');
+            $this->bname = $busName;
+            $this->db->insert('capsql.customer', $this);
         }
+    }
 
-        $query = $this->db->get_where('customer', array('cname' => $data['cname'],'caddress' => $data['caddress']));
-
-        foreach ($query->row() as $key => $value) {
+    public function setData($cdata)
+    {
+        foreach ($cdata as $key => $value) {
             $this->$key = $value;
         }
+        $this->setLatLong($this->caddress);
+        $this->custCheck();
+
+        return $this;
     }
 
     public function setLatLong($address)

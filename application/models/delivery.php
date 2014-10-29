@@ -19,11 +19,9 @@ class delivery extends CI_Model
 
     public function setDelv($data)
     {
-
         foreach($data as $key => $value)
         {
             $this->$key = $value;
         }
-
     }
 }

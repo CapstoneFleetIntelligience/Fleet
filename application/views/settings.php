@@ -188,8 +188,6 @@ if ($dquery->num_rows() > 0){
         return false;
     });
 
-
-
     $('#editRange').click(function () {
         $('#range_field').toggleClass('hide');
         return false;

@@ -32,6 +32,12 @@
     <?php echo script_tag('assets/js/foundation/foundation.topbar.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.alert.js'); ?>
     <title><?php echo $title ?></title>
+    <script type="text/javascript">
+        $(function(){
+            $("#scd").datepicker();
+        });
+
+    </script>
 </head>
 <body>
 	<div class="sticky">
