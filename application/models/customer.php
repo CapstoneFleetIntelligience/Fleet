@@ -13,7 +13,6 @@ class customer extends CI_Model
      * @var string $cname
      *
      */
-    public $cid;
     public $bname;
     public $cname;
     public $caddress;
@@ -44,8 +43,14 @@ class customer extends CI_Model
         {
             $busName = $this->session->userdata('bname');
             $this->bname = $busName;
-            $this->db->insert('capsql.customer', $this);
+            $this->db->insert('customer', $this);
         }
+
+        $this->db->select('cid');
+        $query = $this->db->get_where('customer', array('cname' => $this->cname, 'caddress' => $this->caddress));
+        $data = $query->row();
+        $this->cid = $data->cid;
+
     }
 
     public function setData($cdata)

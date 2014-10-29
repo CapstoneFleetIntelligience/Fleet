@@ -41,7 +41,6 @@ class admin_controller extends CI_Controller
         $ddata = $this->input->post('delivery');
         $list = $this->input->post('list');
         $customer->setData($cdata);
-
         $delivery->setDelv($ddata);
         $delivery->cid = $customer->cid;
         $this->db->insert('capsql.delivery', $delivery);
