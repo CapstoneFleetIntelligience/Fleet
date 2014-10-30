@@ -19,9 +19,9 @@ $options = array(
         <table>
             <thead>
             <tr>
-                <th width="200">username</th>
-                <th width="240">email</th>
-                <th width="150">role</th>
+                <th width="200">Username</th>
+                <th width="240">Email</th>
+                <th width="150">Role</th>
                 <th width="80">Update</th>
                 <th width="80">Delete</th>
             </tr>

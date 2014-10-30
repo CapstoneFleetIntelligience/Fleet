@@ -24,4 +24,9 @@ class delivery extends CI_Model
             $this->$key = $value;
         }
     }
+
+    public function getDeliveries()
+    {
+        $this->db->select();
+    }
 }

@@ -20,7 +20,6 @@ if ($dquery->num_rows() > 0){
 }else{
     $ddates = '';
 }
-
 ?>
 <script>
     $(function() {
@@ -133,6 +132,7 @@ if ($dquery->num_rows() > 0){
 </div>
 
 <script type="text/javascript">
+
     $('.employee_table').on("click", ".update", function(){
         $(this).unbind('click');
         var id = $(this).attr('id');
