@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: student
- * Date: 10/5/14
- * Time: 9:12 PM
- */
-
 $name = array(
     'name' => 'iname',
     'id' => 'itemN',
@@ -45,29 +38,10 @@ $query = $this->db->get_where('capsql.chkitem',array('bname' => $this->session->
         </tr>
         </tbody>
     </table>
-
        <?php echo form_submit('submit', 'add', "class= 'tiny button' id='add_item'");
        echo form_close();
        ?>
 </div>
+<a class="close-reveal-modal">&#215;</a>
 
 
-
-<script type="text/javascript">
-    $('#add_item').click(function(){
-        var form_data = {
-            iname: $('#itemN').val(),
-            description: $('#description').val()
-        };
-
-        $.ajax({
-            url: "<?php echo site_url('admin_controller/addItem'); ?>",
-            type: 'POST',
-            data: form_data,
-            success: function(data){$(".item_table").html(data);}
-        });
-
-        return false
-    })
-
-</script>

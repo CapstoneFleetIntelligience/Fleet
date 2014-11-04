@@ -13,13 +13,6 @@ class Settings_controller extends CI_Controller {
         return parent::__construct();
     }
 
-    /**
-     * @todo function edits the employee information
-     */
-    public function editEmploy()
-    {
-
-    }
 
     /**
      * @todo setup editing the deliveries

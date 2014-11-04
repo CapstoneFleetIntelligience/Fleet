@@ -51,6 +51,7 @@ class Site_controller extends CI_Controller
      */
     public function register()
     {
+
         $user = new user();
         $business = new business();
 
@@ -61,8 +62,6 @@ class Site_controller extends CI_Controller
         $business->setLatLong($business->baddress);
         $user->createAdmin($userData[1]);
         $user->bname = $business->name;
-
-
         if ($this->db->insert('capsql.business', $business)) {
             $this->db->insert('capsql.user', $user);
             $sessionD = array(
@@ -72,7 +71,7 @@ class Site_controller extends CI_Controller
             );
 
             $this->session->set_userdata($sessionD);
-            redirect('/getStarted');
+            redirect('getStarted');
         } else throw new Exception();
     }
 
@@ -84,24 +83,13 @@ class Site_controller extends CI_Controller
         $this->load->template('getStarted', $data);
     }
 
-    /**
-     * Loads the login page
-     */
-    public function login()
-    {
-        $data = array(
-            'title' => 'Login'
-        );
-        $this->load->template('login', $data);
-    }
-
     public function logout()
     {
         $this->session->sess_destroy();
         $data= array(
             'title' => 'Home'
         );
-        $this->load->template('home', $data);
+        redirect('');
     }
 
     /**
@@ -141,10 +129,12 @@ class Site_controller extends CI_Controller
 
         $business= $this->business->loadModel();
         $employees = $this->user->getEmployees($business->name);
+        $deliveries = $this->delivery->getDeliveries($business->name);
         $data = array(
             'title' => 'Edit',
             'business' => $business,
-            'employees' => $employees
+            'employees' => $employees,
+            'deliveries' => $deliveries
         );
 
         $this->load->template('settings', $data);
