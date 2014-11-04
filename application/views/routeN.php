@@ -12,9 +12,7 @@ $schd = array(
 );
 $business = $this->session->userdata('bname');
 $query = $this->db->get_where('capsql.user', array('bname' => $business));
-
 ?>
-
 <div class="container">
     <?php
     if ($this->uri->segment(2) == "baddate"){?>

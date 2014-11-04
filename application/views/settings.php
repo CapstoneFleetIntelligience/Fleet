@@ -96,7 +96,7 @@ if ($dquery->num_rows() > 0){
     <div class="row">
         <div class="small-6 small-centered">
             <span>Delivery Range</span>
-            <?php echo anchor('editRange', 'Edit', 'id="editRange" class="right small button radius"') ?></span>
+            <?php echo anchor('editRange', 'Edit', 'id="editRange" class="right small button radius"') ?>
         </div>
         <div id="range_field" class="row hide">
             <?php echo form_open('changeRange');

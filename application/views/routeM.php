@@ -53,6 +53,8 @@ if ($success == true)
         zoom:13
     };
 
+
+
 </script>
 <div class="container">
     <div class="row">
@@ -84,14 +86,19 @@ if ($success == true)
         echo form_open('edit_rts', "id = 'edit_rts'");
         echo form_fieldset('Change the deliverer for any route');
         echo form_input(array('name' => 'schd', 'type'=>'hidden', 'id' =>'schd', 'value' => $schd));
+        //loop through individual routes and display their maps and info
         foreach ($rquery->result() as $row){
+
             $dquery = $this->db->query("select * from delivery as d, customer as c where d.cid = c.cid and d.schd = '".$schd."' and c.bname = '".$biz->name."' and d.rid = '".$row->rid."' order by d.position");
-            foreach ($dquery->result() as $drow)
-            {
-                $address = str_replace('%2C',',',$drow->caddress);
-                $waypoint[] = "{location:\"".$address."\"}";
+            if ($dquery->num_rows() != 0){
+                foreach ($dquery->result() as $drow)
+                {
+                    $address = str_replace('%2C',',',$drow->caddress);
+                    $waypoint[] = "{location:\"".$address."\"}";
+                }
+                $waypoints = implode(",",$waypoint);
             }
-            $waypoints = implode(",",$waypoint);
+            else $waypoints = "";
         ?>
             <script>
                 function initialize<?echo $row->rid?>(){
@@ -119,15 +126,27 @@ if ($success == true)
             </script>
             <div class="row">
                 <div class="small-8 small-centered columns">
-                    <center>
-                    Route #<? echo $row->rid + 1 .br()?>
-                    <div id="googleMap<?echo $row->rid?>" style="width:500px;height:380px;"></div>
-                    <?php echo form_dropdown('rid'.$row->rid,$options,$row->uname); ?>
-                    </center>
+                    <fieldset>
+                        <legend>Route #<? echo $row->rid + 1?></legend>
+                        <?
+                        if ($row->cmplt)echo "<span class=\"success label\">Route Complete</span>";
+                        elseif($row->start)echo "<span class=\"warning label\">Route In Progress</span>";
+                        ?>
+                        <center>
+                        <div id="googleMap<?echo $row->rid?>" style="width:500px;height:380px;border: 10px solid #ffffff"></div>
+                        <?php if($row->cmplt) echo "Completed by ".$row->uname;
+                            elseif ($row->start){
+                                echo "Current Driver is ".$row->uname.br();
+                                echo "Hand Off Route to: ".form_dropdown('rid'.$row->rid,$options,$row->uname);
+                            }
+                            else echo form_dropdown('rid'.$row->rid,$options,$row->uname); ?>
+                        </center>
+                    </fieldset>
                 </div>
             </div>
         <?php
         unset($waypoint);
+            //end loop for each route
         }
         echo form_submit('', 'Set Changes', "id= 'submit_rts' class = 'small button'");
         echo form_close();

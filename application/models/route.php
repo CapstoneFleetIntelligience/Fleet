@@ -326,9 +326,9 @@ class route extends CI_Model
         foreach ($bquery->result() as $row) {
             $bdata = $row;
         }
-
+        $baddress = str_replace (" ", "+", $bdata->baddress);
         //set parts of the url
-        $url1 = "https://maps.googleapis.com/maps/api/directions/json?origin=" . $bdata->baddress . "&destination=" . $bdata->baddress . "&waypoints=optimize:true|";
+        $url1 = "https://maps.googleapis.com/maps/api/directions/json?origin=" . $baddress . "&destination=" . $baddress . "&waypoints=optimize:true|";
         $url3 = "&key=AIzaSyBsl9m5vNRyfN_82WPuUUDpycK6FjwcPEY";
         //get size of route array
         $tR = count($rarray);
@@ -338,7 +338,7 @@ class route extends CI_Model
             $dquery = $this->db->query("select * from delivery as d, customer as c where d.cid = c.cid and d.schd = '" . $pdata['schd'] . "' and c.bname = '" . $business . "' and d.rid = " . $i . "");
             //loop through all of route's deliveries to build url string
             foreach ($dquery->result() as $row) {
-                $address = str_replace('%2C', ',', $row->caddress);
+                $address = str_replace (" ", "+", $row->caddress);
                 $x[] = $address;
             }
             //build final piece of url
@@ -347,7 +347,6 @@ class route extends CI_Model
             unset($x);
             //build url for optimization query
             $direction_url = $url1 . $url2 . $url3;
-
             //get json object from google directions
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $direction_url);
@@ -382,13 +381,31 @@ class route extends CI_Model
      */
     public function updateRoute($pdata)
     {
-        $i = 0;
-        foreach (array_slice($pdata, 1) as $value) {
-            $this->db->where('schd', $pdata['schd']);
-            $this->db->where('bname', $this->session->userdata('bname'));
-            $this->db->where('rid', $i);
-            $this->db->update('capsql.route', array('uname' => $value));
-            $i++;
+        foreach (array_slice($pdata, 1) as $key =>$value) {
+            //get rid from post key
+            $rid = ltrim($key,"rid");
+            //set array for db query on current route
+            $rary = array(
+                'schd' => $pdata['schd'],
+                'bname' => $this->session->userdata('bname'),
+                'rid' => $rid
+            );
+            //execute query
+            $rquery = $this->db->get_where('capsql.route',$rary);
+            //store query results
+            $route = $rquery->result();
+            //check if the route has been started
+            if ($route[0]->start){
+                //if route has been started perform hand off
+                $this->handoff($route[0],$value);
+            }
+            else{
+                //if route hasn't been started replace assigned user
+                $this->db->where('schd', $pdata['schd']);
+                $this->db->where('bname', $this->session->userdata('bname'));
+                $this->db->where('rid', $rid);
+                $this->db->update('capsql.route', array('uname' => $value));
+            }
         }
     }
 
@@ -405,5 +422,95 @@ class route extends CI_Model
 
         //update deliveries
         $this->db->query("update delivery set rid = NULL, position = 0 where schd = '".$schd."' and cid in (select cid from customer where bname = '".$business."')");
+    }
+
+    /**
+     * perform a hand off operation splitting a route in to two separate routes with a deffest user assigned
+     * to the second route.
+     */
+    public function handoff($route,$uname)
+    {
+        //get number of routes
+        $rary = array(
+            'schd' => $route->schd,
+            'bname' => $route->bname
+        );
+        //execute query
+        $rquery = $this->db->get_where('capsql.route',$rary);
+        $rid = $rquery->num_rows();
+
+        $rupdate = array(
+            'cmplt' => date("c")
+        );
+        $this->db->where('schd', $route->schd);
+        $this->db->where('bname', $route->bname);
+        $this->db->where('rid', $route->rid);
+        $this->db->update('capsql.route',$rupdate);
+
+        //create new route and insert into database
+        $rupdate = array(
+            'schd' => $route->schd,
+            'bname' => $route->bname,
+            'rid' => $rid,
+            'uname' => $uname,
+            'start' => date("c")
+        );
+        $this->db->insert('capsql.route',$rupdate);
+
+        //get all deliveries for existing route that haven't been delivered to and assign them to the new route
+        //set business name to variable
+        $business = $this->session->userdata('bname');
+        $this->db->query("update delivery set rid = ".$rid.", position = 0 where schd = '".$route->schd."' and rid = ".$route->rid." and isdlv = false and cid in (select cid from customer where bname = '".$business."')");
+        //optimize new route
+        //gather business's data as results object
+        $bquery = $this->db->get_where('capsql.business', array('name' => $business));
+        foreach ($bquery->result() as $row) {
+            $bdata = $row;
+        }
+
+        $baddress = str_replace (" ", "+", $bdata->baddress);
+        //set parts of the url
+        $url1 = "https://maps.googleapis.com/maps/api/directions/json?origin=" . $baddress . "&destination=" . $baddress . "&waypoints=optimize:true|";
+        $url3 = "&key=AIzaSyBsl9m5vNRyfN_82WPuUUDpycK6FjwcPEY";
+        $dquery = $this->db->query("select * from delivery as d, customer as c where d.cid = c.cid and d.schd = '" . $route->schd . "' and c.bname = '" . $business . "' and d.rid = " . $rid . "");
+        //loop through all of route's deliveries to build url string
+        foreach ($dquery->result() as $row) {
+            $address = str_replace (" ", "+", $row->caddress);
+            $x[] = $address;
+        }
+        //build final piece of url
+        $url2 = implode("|", $x);
+        //build url for optimization query
+        $direction_url = $url1 . $url2 . $url3;
+
+        //get json object from google directions
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $direction_url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $response = json_decode(curl_exec($ch), true);
+
+        //error check
+        if ($response['status'] != 'OK') {
+            echo "we have a problem!!";
+            return null;
+        };
+        //store optimized waypoint order from json
+        $order = $response['routes'][0]['waypoint_order'];
+        //set counter for order position
+        $oS = 0;
+
+        //loop through deliveries setting position based on waypoint order
+        foreach ($dquery->result() as $row) {
+            $data = array(
+                'position' => $order[$oS]
+            );
+            $this->db->where('schd', $row->schd);
+            $this->db->where('cid', $row->cid);
+            $this->db->update('capsql.delivery', $data);
+            //increase counter for order position
+            $oS++;
+        }
+
+
     }
 }
