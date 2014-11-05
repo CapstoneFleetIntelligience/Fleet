@@ -28,15 +28,13 @@ $options = array(
             </thead>
             <tbody>
             <?php
-
-            foreach ($employees as $index => $employee)
-            {
-                echo '<tr id="updateUser-'.$employee->uname.'">';
-                echo '<td>'.$employee->uname.'</td>';
-                echo '<td>'.form_input('email', $employee->email).'</td>';
-                echo '<td>'.form_dropdown('role', $options, $employee->role).'</td>';
-                echo '<td><button type="button" class="button tiny radius update" id="'.$employee->uname.'">Update</button></td>';
-                echo '<td><button type="button" class="button tiny radius delete" id="'.$employee->uname.'">Delete</button></td>';
+            foreach ($employees as $index => $employee) {
+                echo '<tr id="updateUser-' . $employee->uname . '">';
+                echo '<td>' . $employee->uname . '</td>';
+                echo '<td>' . form_input('email', $employee->email) . '</td>';
+                echo '<td>' . form_dropdown('role', $options, $employee->role) . '</td>';
+                echo '<td><button type="button" class="button tiny radius update" id="' . $employee->uname . '">Update</button></td>';
+                echo '<td><button type="button" class="button tiny radius delete" id="' . $employee->uname . '">Delete</button></td>';
                 echo form_hidden('uname', $employee->uname);
                 echo form_hidden('bname', $employee->bname);
                 echo '</tr>';
