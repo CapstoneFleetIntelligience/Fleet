@@ -134,6 +134,24 @@ if ($dquery->num_rows() > 0){
 
 <script type="text/javascript">
 
+    $('.delivery_table').on("click", ".delete", function () {
+        $(this).unbind('click');
+        var id= $(this).attr('id');
+
+        var data = {
+            cid: id
+        };
+
+        $.ajax({
+            url: "admin_controller/removeDelivery",
+            type: 'POST',
+            data: data,
+            success: function(data){
+                $('.delivery_table').html(data);
+            }
+        })
+    });
+
     $('.employee_table').on("click", ".update", function(){
         $(this).unbind('click');
         var id = $(this).attr('id');

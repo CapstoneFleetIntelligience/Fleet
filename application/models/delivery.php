@@ -57,4 +57,11 @@ class delivery extends CI_Model
         }
             return $customer;
     }
+
+    public function removeDelivery($cid)
+    {
+        $this->db->delete('delivery', array('cid' => $cid));
+        $deliveries = $this->getDeliveries();
+        echo $this->load->view('editDelivery', array('deliveries' => $deliveries));
+    }
 }
