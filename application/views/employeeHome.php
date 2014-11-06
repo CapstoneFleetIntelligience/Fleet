@@ -11,14 +11,13 @@ $pass = array(
     'id' => 'pass'
 )
 ?>
-
 <?php if($user->pass == $business->dpass): ?>
 <div id="password" class="row">
     <div class="small-centered">
         <?php
               echo form_open('changePass', 'id = "changePass"');
               echo form_password($pass);
-              echo form_submit('continue', 'Continue', 'id="submit_pass" class="button tiny"');
+              echo form_submit('', 'Continue', 'id="submit_pass" class="button tiny"');
               echo form_close();
         ?>
     </div>
