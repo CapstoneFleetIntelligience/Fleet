@@ -57,11 +57,11 @@ if ($dquery->num_rows() > 0){
         <div class="small-6 small-centered">
             <span>Deliveries</span>
             <?php echo anchor(
-                'editDelivery', 'Edit',
-                'id="editDelivery" class="right small button radius"'
+                '', 'Edit',array('class' => 'button radius small right',
+                                 'data-reveal-id'=>'deliveryModal')
             ) ?>
-            <div id="delivery_table" class="row hide">
-                <?php //$this->load->view('editDelivery'); ?>
+            <div id="deliveryModal" class="reveal-modal large" data-reveal>
+                <?php $this->load->view('editDelivery', array('deliveries' => $deliveries)); ?>
             </div>
         </div>
     </div>
@@ -133,6 +133,24 @@ if ($dquery->num_rows() > 0){
 </div>
 
 <script type="text/javascript">
+
+    $('.delivery_table').on("click", ".delete", function () {
+        $(this).unbind('click');
+        var id= $(this).attr('id');
+
+        var data = {
+            cid: id
+        };
+
+        $.ajax({
+            url: "admin_controller/removeDelivery",
+            type: 'POST',
+            data: data,
+            success: function(data){
+                $('.delivery_table').html(data);
+            }
+        })
+    });
 
     $('.employee_table').on("click", ".update", function(){
         $(this).unbind('click');

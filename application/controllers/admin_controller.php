@@ -48,6 +48,11 @@ class admin_controller extends CI_Controller
         else echo 'reset';
     }
 
+    function removeDelivery()
+    {
+        $this->delivery->removeDelivery($_POST['cid']);
+    }
+
     /**
      * Adds the customer list to delivery items
      */
