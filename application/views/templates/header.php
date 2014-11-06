@@ -47,7 +47,6 @@
     </div>
 
     <?php $role = $this->session->userdata('role'); ?>
-
             <?php if(!($role)): ?>
                 <div class="row">
                     <div class="small-4 columns">
@@ -76,19 +75,19 @@
 				<!-- Left Nav Section --> 
 				<ul class="left">
                     <?php
-                    if($role = 'A'): ?>
+                    if($role == 'A'): ?>
                         <li><?php echo anchor('adminH', 'Home'); ?></li>
                         <li><?php echo anchor('analytics', 'Analytics') ?></li>
                         <li><?php echo anchor('adminE', 'Edit')?></li>
                         <li><?php echo anchor('logout', 'Log Out')?></li>
-                    <?php elseif($role = 'M'): ?>
+                    <?php elseif($role == 'M'): ?>
                         <li><?php echo anchor('managerOverview', 'Home'); ?></li>
                         <li><?php echo anchor('analytics', 'Analytics') ?></li>
                         <li><?php echo anchor('contact', 'Contact')?></li>
                         <li><?php echo anchor('logout', 'Log Out') ?></li>
                     <?php else: ?>
-                    <li><?php echo anchor('managerOverview', 'Home'); ?></li>
-                    <li><?php echo anchor('analytics', 'Analytics') ?></li>
+                    <li><?php echo anchor('overview', 'Home'); ?></li>
+                    <li><?php echo anchor('employAnalytics', 'Analytics') ?></li>
                     <li><?php echo anchor('contact', 'Contact')?></li>
                     <li><?php echo anchor('logout', 'Log Out') ?></li>
                     <?php endif; ?>
