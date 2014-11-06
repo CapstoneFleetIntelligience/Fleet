@@ -175,9 +175,10 @@ class user extends CI_Model
     public function getEmployees($id)
     {
 
-        $where =  "role = 'E' ";
         $this->db->where('bname', $id);
-        $this->db->where($where);
+        $this->db->where("role", 'E');
+        $this->db->or_where('role', 'M');
+        $this->db->where('bname', $id);
         $this->db->select('uname, bname, role, email, uphone');
         $query = $this->db->get('user');
         $employees = array();

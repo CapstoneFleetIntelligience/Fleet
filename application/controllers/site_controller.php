@@ -86,6 +86,7 @@ class Site_controller extends CI_Controller
     public function logout()
     {
         $this->session->sess_destroy();
+        var_dump($this->session->all_userdata());
         $data= array(
             'title' => 'Home'
         );

@@ -62,6 +62,7 @@ if ($dquery->num_rows() > 0){
             ) ?>
             <div id="deliveryModal" class="reveal-modal large" data-reveal>
                 <?php $this->load->view('editDelivery', array('deliveries' => $deliveries)); ?>
+                <a class="close-reveal-modal">&#215;</a>
             </div>
         </div>
     </div>
