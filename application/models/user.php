@@ -145,6 +145,14 @@ class user extends CI_Model
         }
     }
 
+    public function updatePass($pass)
+    {
+        $user = $this->session->userdata('uname');
+        $this->encryptPass($pass);
+        if($this->db->update('user', array('pass' => $this->pass, 'salt' => $this->salt), array('uname' => $user)));
+        else throw new Exception('failed to update', 404);
+    }
+
 
     /**
      * @param $user User object
