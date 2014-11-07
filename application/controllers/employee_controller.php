@@ -27,7 +27,7 @@ class employee_controller extends CI_Controller
 
     public function changePass()
     {
-        $this->user->updatePass($_POST);
+        $this->user->updatePass($_POST['pass']);
     }
 
     /**

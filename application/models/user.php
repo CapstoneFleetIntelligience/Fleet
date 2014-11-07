@@ -120,7 +120,7 @@ class user extends CI_Model
         $pass = $this->salt . sha1($credentials['pass']);
 
         if ($this->pass == $pass) return $this;
-        else return false;
+        else echo 'failed';
     }
 
     public function remove($user)
@@ -148,7 +148,8 @@ class user extends CI_Model
     public function updatePass($pass)
     {
         $user = $this->session->userdata('uname');
-        $this->encryptPass($pass);
+        $this->pass = $pass;
+        $this->encryptPass();
         if($this->db->update('user', array('pass' => $this->pass, 'salt' => $this->salt), array('uname' => $user)));
         else throw new Exception('failed to update', 404);
     }

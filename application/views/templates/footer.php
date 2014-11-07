@@ -64,6 +64,7 @@
             type: 'POST',
             data: pass,
             success: function (data) {
+                console.log(data);
                 $(".employee").toggleClass('hide');
                 $("#password").toggleClass('hide');
             }

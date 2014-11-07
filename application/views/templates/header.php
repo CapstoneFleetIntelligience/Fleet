@@ -73,7 +73,6 @@
 			</ul> 
 			<section class="top-bar-section"> 
 				<!-- Left Nav Section -->
-
 				<ul class="left">
                     <?php
                     if($role == 'A'): ?>
