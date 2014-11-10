@@ -45,46 +45,44 @@ foreach ($results->result() as $biz)
 
 </script>
 <div class="container">
+
     <div class="row">
+	<br/ >
         <div class="large-12 medium-12 small-12 columns">
             <h2 style="text-align: center;"><?php echo $this->session->userdata('bname') ?></h2>
             <h3 style="text-align: center;"><?php echo $this->session->userdata('uname') ?></h3>
         </div>
     </div>
     <div class="row">
-        <div class="large-12 medium-3 small-12 columns">
-            <div class="row">
-                <?php echo anchor('', 'New Delivery',array('class' => 'button small radius left',
-                                                           'data-reveal-id' => 'deliveryModal')) ?>
-                <?php echo anchor('', 'New Item(s)',array('class' => 'button small radius left',
-                                                            'data-reveal-id' => 'addItemModal')) ?>
-                <?php echo anchor('', 'Add Employee(s)', array('class' => 'button small radius left',
-                                                               'data-reveal-id' => 'addEmployeeModal')) ?>
-                <?php echo anchor('route_controller/routeN', 'Create Routes', array('class' => 'button small radius
-                left')) ?>
-            </div>
-        </div>
-        <div class=" medium-9 show-for-medium-only columns">
-            <div class="row">
-                <div id="googleMap1" style="width:500px;height:380px;"></div>
-            </div>
-        </div>
-        <div class="large-12 show-for-large-up columns">
-            <div class="row">
-                <div id="googleMap2" style="width:1000px;height:760px;"></div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="large-12 medium-12 small-12 columns">
-            <div class="panel">
-                <h2 style="text-align: center;">Active Delivery Drivers</h2>
-            </div>
-        </div>
+ 
+		<br />
+		<br />
+		<br/>
+		
+        
+		<div class="row">
+			<div class="small-10 medium-12 large-12 columns">
+				<div class="large-12 medium-12 small-12 columns">
+					<div class="panel">
+						<h2 style="text-align: center;">Active Delivery Drivers</h2>
+					</div>
+				</div>
+				<div class=" medium-10 show-for-medium-only columns">
+					<div class="row">
+						<div id="googleMap1" style="width:500px;height:380px;"></div>
+					</div>
+				</div>
+				<div class="large-12 show-for-large-up columns">
+					<div class="row">
+						<div id="googleMap2" style="width:945px;height:700px;"></div>
+					</div>
+				</div>
+			</div>
+		</div>
     </div>
 </div>
 
-<div id="addItemModal" class="reveal-modal" data-reveal>
+	<div id="addItemModal" class="reveal-modal" data-reveal>
     <?php $this->load->view('templates/item_table'); ?>
 </div>
 <div id="deliveryModal" class="reveal-modal" data-reveal>
