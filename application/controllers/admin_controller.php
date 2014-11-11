@@ -37,14 +37,16 @@ class admin_controller extends CI_Controller
         $delivery = new delivery();
         $customer = new customer();
 
+
         $cdata = $this->input->post('customer');
         $ddata = $this->input->post('delivery');
         $list = $this->input->post('list');
         $customer->setData($cdata);
         $delivery->setDelv($ddata);
         $delivery->cid = $customer->cid;
+        $items =  $this->item->getItems($customer->bname);
         $this->db->insert('capsql.delivery', $delivery);
-        if ($list == 'Yes') $this->load->view('bChkList', array('delivery' => $delivery));
+        if ($list == 'Yes') $this->load->view('bChkList', array('delivery' => $delivery, 'items' => $items));
         else echo 'reset';
     }
 

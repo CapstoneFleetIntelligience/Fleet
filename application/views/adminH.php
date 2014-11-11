@@ -11,6 +11,7 @@ foreach ($results->result() as $biz)
 
 ?>
 <script>
+    $('#delDate').datepicker();
     function initialize()
     {
         var myLatlng = new google.maps.LatLng(<?php echo $biz->blat; ?>,<? echo $biz->blong; ?>);
@@ -54,8 +55,10 @@ foreach ($results->result() as $biz)
     <div class="row">
         <div class="large-12 medium-3 small-12 columns">
             <div class="row">
-                <?php echo anchor('', 'New Delivery',array('class' => 'button small radius left',
-                                                           'data-reveal-id' => 'deliveryModal')) ?>
+                <?php echo anchor('', 'New Customer(s)',array('class' => 'button small radius left',
+                                                           'data-reveal-id' => 'customerModal')) ?>
+                <?php echo anchor('', 'New Delivery', array('class' => 'button small radius left',
+                                                            'data-reveal-id' => 'deliveryModal')) ?>
                 <?php echo anchor('', 'New Item(s)',array('class' => 'button small radius left',
                                                             'data-reveal-id' => 'addItemModal')) ?>
                 <?php echo anchor('', 'Add Employee(s)', array('class' => 'button small radius left',
@@ -84,10 +87,13 @@ foreach ($results->result() as $biz)
     </div>
 </div>
 
+<div id="deliveryModal" class="reveal-modal" data-reveal>
+    <?php $this->load->view('newDelivery', array('customers' => $customers, 'items' => $items)); ?>
+</div>
 <div id="addItemModal" class="reveal-modal" data-reveal>
     <?php $this->load->view('templates/item_table'); ?>
 </div>
-<div id="deliveryModal" class="reveal-modal" data-reveal>
+<div id="customerModal" class="reveal-modal" data-reveal>
     <?php $this->load->view('custN'); ?>
 </div>
 <div id="addEmployeeModal" class="reveal-modal small" data-reveal>

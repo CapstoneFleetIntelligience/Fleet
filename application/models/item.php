@@ -23,7 +23,26 @@ class item extends CI_Model
         {
             $this->$key = $value;
         }
+    }
 
+    public function getItems($business)
+    {
+        $query = $this->db->get_where('capsql.chkitem', array('bname' => $business));
+        $items = array();
+        if($query->result())
+        {
+            foreach($query->result() as $index => $data)
+            {
+                $item = new item();
+                foreach ($data as $key => $value)
+                {
+                    $item->$key = $value;
+                }
+                $items[$index] = $item;
+            }
+            return $items;
+        }
+        else return null;
     }
 
 }

@@ -84,4 +84,33 @@ class customer extends CI_Model
         $this->clong = $geometry['location']['lng'];
 
     }
+
+    public function getCustomers()
+    {
+        //Query pulling customers without deliveries
+        $business = $this->session->userdata('bname');
+        $this->db->select('cid, cname, bname');
+        $query = $this->db->get_where('customer',array('bname' => $business));
+        $customers = array();
+        foreach($query->result() as $index => $customer)
+        {
+            $cust = new customer();
+            foreach($customer as $key => $value)
+            {
+                $cust->$key = $value;
+            }
+            $delivery = $cust->hasDelivery();
+            if($delivery) $customers[$index] = $cust;
+            else continue;
+        }
+        return $customers;
+    }
+
+    public function hasDelivery()
+    {
+        $this->db->select('isdlv');
+       $query = $this->db->get_where('delivery', array('cid' => $this->cid, 'isdlv' => 'f'));
+        if($query->row()) return true;
+        else return false;
+    }
 }

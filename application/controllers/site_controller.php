@@ -86,7 +86,6 @@ class Site_controller extends CI_Controller
     public function logout()
     {
         $this->session->sess_destroy();
-        var_dump($this->session->all_userdata());
         $data= array(
             'title' => 'Home'
         );
@@ -119,8 +118,14 @@ class Site_controller extends CI_Controller
      */
     public function adminH()
     {
+        $business = $this->business->loadModel();
+        $customers = $this->customer->getCustomers();
+        $items = $this->item->getItems($business->name);
+
         $data = array(
-            'title' => 'Managers Home'
+            'title' => 'Managers Home',
+            'customers' => $customers,
+            'items' => $items
         );
         $this->load->template('adminH', $data);
     }
@@ -135,7 +140,7 @@ class Site_controller extends CI_Controller
             'title' => 'Edit',
             'business' => $business,
             'employees' => $employees,
-            'deliveries' => $deliveries
+            'deliveries' => $deliveries,
         );
 
         $this->load->template('settings', $data);
