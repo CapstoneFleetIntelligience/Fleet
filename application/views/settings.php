@@ -84,8 +84,9 @@ if ($dquery->num_rows() > 0){
                                                 'data-reveal-id' => 'editPassModal')) ?>
         </div>
         <div class="reveal-modal tiny" id="editPassModal" data-reveal>
-            <?php echo form_open('changePass');
-            echo form_hidden('business', $business->name, 'id= "bname"');
+            <?php echo form_open('changePass');?>
+            <span>New Business Password</span>
+            <?php echo form_hidden('business', $business->name, 'id= "bname"');
             echo form_password($bpass);
             echo form_submit('submit', 'Submit', "class='tiny button' id='updateBusinessPass'");
             echo form_close();
@@ -110,8 +111,9 @@ if ($dquery->num_rows() > 0){
                 'min' => '0',
                 'max' => '1000',
                 'step' => '1'
-            );
-            echo form_hidden('business', $business->name, 'id = "bname"');
+            );?>
+            <span>New Delivery Range</span>
+            <?php echo form_hidden('business', $business->name, 'id = "bname"');
             echo form_input($radius);
             echo form_submit('update', 'update', 'id = "updateRange"  class="tiny button radius"');
             echo form_close();

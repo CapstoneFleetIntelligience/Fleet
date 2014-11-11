@@ -14,11 +14,12 @@ $options = array(
         <div class="panel">
             <p class="center">Add Employee(s)</p>
             <?php
-            echo form_open('employee_controller/create', 'id="new_employ"');
-            echo form_input($email);
-             echo form_dropdown('Role', $options, '', 'class="small-8" id="role"');
-             echo form_submit('submit', 'Add', "id = 'submit_employ' class='tiny button'");
-              ?>
+            echo form_open('employee_controller/create', 'id="new_employ"');?>
+            <span>Employee's Email Address</span>
+            <input type="text" placeholder="Required" required name="email">
+            <span>Employee Role</span><br>
+            <?php echo form_dropdown('Role', $options, '', 'class="small-8" id="role"');?>
+            <br><br><button type="submit" id="submit_employ" class="tiny button">Add</button>
         </div>
         <?php echo form_close(); ?>
     </div>
