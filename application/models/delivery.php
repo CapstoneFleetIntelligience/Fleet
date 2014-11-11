@@ -64,4 +64,9 @@ class delivery extends CI_Model
         $deliveries = $this->getDeliveries();
         echo $this->load->view('editDelivery', array('deliveries' => $deliveries));
     }
+
+    public function update()
+    {
+        $this->db->update('delivery', $this, array('cid' => $this->cid));
+    }
 }

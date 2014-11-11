@@ -55,6 +55,23 @@ class admin_controller extends CI_Controller
         $this->delivery->removeDelivery($_POST['cid']);
     }
 
+    function newDelivery()
+    {
+        $data = $this->input->post(NULL, TRUE);
+        $delData = array(
+          'cid' => $data['cid'],
+          'schd' => $data['ischd'],
+          'note' => $data['note'],
+          'isdlv' => 't'
+        );
+        array_pop($data);
+        $delivery = new delivery();
+        $delivery->setDelv($delData);
+        $delivery->update();
+        $this->delivery_item->insert($data);
+
+    }
+
     /**
      * Adds the customer list to delivery items
      */

@@ -145,8 +145,18 @@
 
     $("#submit_delivery").click(function()
     {
-       var form_data = $("#add_delivery").serialize();
+       var form_data = $("#add_delivery").serializeArray();
         console.log(form_data);
+
+        $.ajax({
+           url: "<?php echo site_url('admin_controller/newDelivery') ?>",
+            type: 'POST',
+            data:form_data,
+            success: function(data){
+                console.log(data);
+            }
+
+        });
         return false
     });
 
