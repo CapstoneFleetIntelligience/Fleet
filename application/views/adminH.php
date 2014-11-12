@@ -55,8 +55,6 @@ foreach ($results->result() as $biz)
     </div>
     <div class="row">
  
-		<br />
-		<br />
 		<br/>
 		
         
@@ -69,12 +67,17 @@ foreach ($results->result() as $biz)
 				</div>
 				<div class=" medium-10 show-for-medium-only columns">
 					<div class="row">
-						<div id="googleMap1" style="width:500px;height:380px;"></div>
+						<div id="googleMap1" style="width:800px;height:500px;"></div>
+					</div>
+				</div>
+				<div class=" large-12 columns show-for-small">
+					<div class="row">
+						<div id="googleMap1" style="width:1000px;height:700px;"></div>
 					</div>
 				</div>
 				<div class="large-12 show-for-large-up columns">
 					<div class="row">
-						<div id="googleMap2" style="width:945px;height:700px;"></div>
+						<div id="googleMap2" style="width:1000px;height:500px;"></div>
 					</div>
 				</div>
 			</div>
@@ -91,3 +94,72 @@ foreach ($results->result() as $biz)
 <div id="addEmployeeModal" class="reveal-modal small" data-reveal>
     <?php $this->load->view('addEmployee') ?>
 </div>
+
+
+
+
+<div class="row">
+    <div class="large-12 columns"> 
+ 
+    <br />
+    
+      <div class="row">
+        <div class="large-12 columns">
+          <div class="row">
+            <div class="large-4 small-6 columns">
+ 
+		<h4>System Tools</h4><hr>
+     
+		<div class="row">
+		    <div class="large-12 small-3 columns">
+			<a href="#" class="button expand">Employee(s)</a>
+			<a href="#" class="button expand">Deliveries</a>
+			<a href="#" class="button expand">Checklist Items</a>
+			<a href="#" class="button expand">Business Password</a>
+			<a href="#" class="button expand">Delivery Range</a>
+			<a href="#" class="button expand">Route Manager</a>
+		    </div>
+		</div>
+	    </div>
+             
+            <div class="large-4 small-6 columns">
+		<br />
+		<br />
+		<img src="http://placehold.it/300x430&text=Image">
+            </div>
+ 
+             
+	    <div class="large-4 small-6 columns">
+ 
+		<h4>Admin Tools</h4><hr>
+     
+		<div class="row">
+		    <div class="large-12 small-3 columns">
+			<a href="#" class="button expand" data-reveal-id="deliveryModal">New Delivery</a>
+			<a href="#" class="button expand" data-reveal-id="addItemModal">Add New Item(s)</a>
+			<a href="#" class="button expand" data-reveal-id="addEmployeeModal">Add Employee(s)</a>
+			<a href="route_controller/routeN" class="button expand">Create Routes</a>
+		    </div>
+		</div>
+	    </div>
+ 
+             
+ 
+	
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <script>
+  document.write('<script src=js/vendor/' +
+  ('__proto__' in {} ? 'zepto' : 'jquery') +
+  '.js><\/script>')
+  </script>
+  <script src="js/foundation.min.js"></script>
+  <script>
+    $(document).foundation();
+  </script>
+ 
+    
