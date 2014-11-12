@@ -48,7 +48,7 @@ if ($dquery->num_rows() > 0){
             <span>Employee(s)</span>
             <?php echo anchor('', 'Edit', array('class' => 'button radius small right',
                                                      'data-reveal-id'=>'employeeModal'));?>
-            <div id="employeeModal" class="reveal-modal medium" data-reveal>
+            <div id="editEmployeeModal" class="reveal-modal medium" data-reveal>
                 <?php $this->load->view('editEmployee', array('employees' => $employees)); ?>
             </div>
         </div>
@@ -60,7 +60,7 @@ if ($dquery->num_rows() > 0){
                 '', 'Edit',array('class' => 'button radius small right',
                                  'data-reveal-id'=>'deliveryModal')
             ) ?>
-            <div id="deliveryModal" class="reveal-modal large" data-reveal>
+            <div id="editDeliveryModal" class="reveal-modal large" data-reveal>
                 <?php $this->load->view('editDelivery', array('deliveries' => $deliveries)); ?>
                 <a class="close-reveal-modal">&#215;</a>
             </div>

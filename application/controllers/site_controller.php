@@ -117,7 +117,8 @@ class Site_controller extends CI_Controller
             'customers' => $customers,
             'items' => $items,
             'deliveries' => $deliveries,
-            'employees' => $employees
+            'employees' => $employees,
+            'business' => $business
         );
         $this->load->template('adminH', $data);
     }

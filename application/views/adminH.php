@@ -5,12 +5,47 @@
  * Date: 9/26/14
  * Time: 8:50 PM
  */
+
 $results=$this->db->get_where('capsql.business',array('name'=> $this->session->userdata('bname')));
 
 foreach ($results->result() as $biz)
 
 ?>
+<?php
+$dquery = $this->db->query("select schd from route where bname = '".$this->session->userdata('bname')."' and schd >= current_date group by schd");
+
+if ($dquery->num_rows() > 0){
+    foreach ($dquery->result() as $row)
+    {
+        $ddate[] = "'".$row->schd."'";
+    }
+    $ddates = implode(",",$ddate);
+}else{
+    $ddates = '';
+}
+?>
 <script>
+
+    $(function() {
+        var arrayD = [<? echo $ddates ?>];
+        $( "#datepicker" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd",
+            beforeShowDay: function(date){
+                var f = $.datepicker.formatDate('yy-mm-dd', date)
+                if ($.inArray(f, arrayD) > -1) {
+                    return [true];
+                }else{
+                    return [false];
+                }
+            },
+            onSelect: function(dateText) {
+                window.location = '<?php echo site_url('routeE')?>/' + dateText;
+            }
+        });
+    });
+
     $('#delDate').datepicker();
     function initialize()
     {
@@ -93,3 +128,125 @@ foreach ($results->result() as $biz)
 <div id="addEmployeeModal" class="reveal-modal small" data-reveal>
     <?php $this->load->view('addEmployee') ?>
 </div>
+<div id="editEmployeeModal" class="reveal-modal medium" data-reveal>
+    <?php $this->load->view('editEmployee', array('employees' => $employees)); ?>
+</div>
+<div id="editDeliveryModal" class="reveal-modal large" data-reveal>
+    <?php $this->load->view('editDelivery', array('deliveries' => $deliveries)); ?>
+    <a class="close-reveal-modal">&#215;</a>
+</div>
+<div id="editItemModal" class="reveal-modal medium" data-reveal>
+    <?php $this->load->view('templates/item_table'); ?>
+</div>
+<div class="reveal-modal tiny" id="editPassModal" data-reveal>
+    <?php echo form_open('changePass');?>
+    <span>New Business Password</span>
+    <?php
+    $bpass = array(
+        'name' => 'bpass',
+        'id' => 'bpass',
+        'class' => 'small-6 small-centered'
+    );
+    ?>
+    <?php echo form_hidden('business', $business->name, 'id= "bname"');
+    echo form_password($bpass);
+    echo form_submit('submit', 'Submit', "class='tiny button' id='updateBusinessPass'");
+    echo form_close();
+    ?>
+    <a class="close-reveal-modal">&#215;</a>
+</div>
+<div id="editRadiusModal" class="reveal-modal tiny" data-reveal>
+    <?php echo form_open('changeRange');
+    $radius = array(
+        'type' => 'number',
+        'name'  => 'radius',
+        'id' => 'radius',
+        'value' => $business->radius,
+        'min' => '0',
+        'max' => '1000',
+        'step' => '1'
+    );?>
+    <span>New Delivery Range</span>
+    <?php echo form_hidden('business', $business->name, 'id = "bname"');
+    echo form_input($radius);
+    echo form_submit('update', 'update', 'id = "updateRange"  class="tiny button radius"');
+    echo form_close();
+    ?>
+    <a class="close-reveal-modal">&#215;</a>
+</div>
+<div id="routeModal" class="reveal-modal tiny text-center" data-reveal>
+    <h4>Select the date of routes to be edited.</h4>
+    <div id="datepicker" style="font-size: 12px; text-align: center; display: inline-block"></div>
+    <a class="close-reveal-modal">&#215;</a>
+</div>
+<script type="text/javascript">
+    $('.delivery_table').on("click", ".delete", function () {
+        $(this).unbind('click');
+        var id= $(this).attr('id');
+        var td = $(this).parent();
+        var schd = $(td[0]).find("input").val();
+
+        var data = {
+            cid: id,
+            schd: schd
+        };
+
+        $.ajax({
+            url: "admin_controller/removeDelivery",
+            type: 'POST',
+            data: data,
+            success: function(data){
+                $('.delivery_table').html(data);
+            }
+        })
+    });
+
+    $('.employee_table').on("click", ".update", function(){
+        $(this).unbind('click');
+        var id = $(this).attr('id');
+        var data = $('#updateUser-'+id+' :input').serialize();
+        editEmployee('update', data);
+    });
+
+    $('.employee_table').on("click", ".delete", function(){
+        $(this).unbind('click');
+        var id = $(this).attr('id');
+        var data = $('#updateUser-'+id+' :input').serialize();
+        editEmployee('delete', data);
+    });
+
+    $('#submitPass').click(function() {
+        var pass = {
+            bpass: $('#bpass').val(),
+            name: "<?php echo $business->name ?>"
+        };
+
+        $.ajax({
+            url: "<?php echo site_url('Settings_controller/editPass')?>",
+            type: 'POST',
+            data: pass,
+            success: function (msg) {
+                console.log(msg);
+            }
+        });
+        return false;
+    });
+
+
+    $('#updateRange').click(function(){
+        var radius = {
+            radius: $('#radius').val(),
+            name: "<?php echo $business->name ?>"
+        };
+        $.ajax({
+            url: "<?php echo site_url('Settings_controller/editRange')?>",
+            type: 'POST',
+            data: radius,
+            success: function (data) {
+
+            }
+        });
+
+        return false;
+    });
+</script>
