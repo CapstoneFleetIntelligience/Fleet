@@ -48,7 +48,7 @@ if ($dquery->num_rows() > 0){
             <span>Employee(s)</span>
             <?php echo anchor('', 'Edit', array('class' => 'button radius small right',
                                                      'data-reveal-id'=>'employeeModal'));?>
-            <div id="employeeModal" class="reveal-modal medium" data-reveal>
+            <div id="editEmployeeModal" class="reveal-modal medium" data-reveal>
                 <?php $this->load->view('editEmployee', array('employees' => $employees)); ?>
             </div>
         </div>
@@ -60,7 +60,7 @@ if ($dquery->num_rows() > 0){
                 '', 'Edit',array('class' => 'button radius small right',
                                  'data-reveal-id'=>'deliveryModal')
             ) ?>
-            <div id="deliveryModal" class="reveal-modal large" data-reveal>
+            <div id="editDeliveryModal" class="reveal-modal large" data-reveal>
                 <?php $this->load->view('editDelivery', array('deliveries' => $deliveries)); ?>
                 <a class="close-reveal-modal">&#215;</a>
             </div>
@@ -84,8 +84,9 @@ if ($dquery->num_rows() > 0){
                                                 'data-reveal-id' => 'editPassModal')) ?>
         </div>
         <div class="reveal-modal tiny" id="editPassModal" data-reveal>
-            <?php echo form_open('changePass');
-            echo form_hidden('business', $business->name, 'id= "bname"');
+            <?php echo form_open('changePass');?>
+            <span>New Business Password</span>
+            <?php echo form_hidden('business', $business->name, 'id= "bname"');
             echo form_password($bpass);
             echo form_submit('submit', 'Submit', "class='tiny button' id='updateBusinessPass'");
             echo form_close();
@@ -110,8 +111,9 @@ if ($dquery->num_rows() > 0){
                 'min' => '0',
                 'max' => '1000',
                 'step' => '1'
-            );
-            echo form_hidden('business', $business->name, 'id = "bname"');
+            );?>
+            <span>New Delivery Range</span>
+            <?php echo form_hidden('business', $business->name, 'id = "bname"');
             echo form_input($radius);
             echo form_submit('update', 'update', 'id = "updateRange"  class="tiny button radius"');
             echo form_close();
@@ -138,9 +140,12 @@ if ($dquery->num_rows() > 0){
     $('.delivery_table').on("click", ".delete", function () {
         $(this).unbind('click');
         var id= $(this).attr('id');
+        var td = $(this).parent();
+        var schd = $(td[0]).find("input").val();
 
         var data = {
-            cid: id
+            cid: id,
+            schd: schd
         };
 
         $.ajax({

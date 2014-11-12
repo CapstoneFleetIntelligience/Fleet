@@ -120,9 +120,13 @@ class user extends CI_Model
         $pass = $this->salt . sha1($credentials['pass']);
 
         if ($this->pass == $pass) return $this;
-        else echo 'failed';
+        else return 'failed';
     }
 
+    /**
+     * Removes a user from the db
+     * @param $user array user information
+     */
     public function remove($user)
     {
         if ($this->db->delete('user', array('uname' => $user['uname']))) {
@@ -132,6 +136,10 @@ class user extends CI_Model
         }
     }
 
+    /**
+     * Updates the user in the db
+     * @param $user array user information
+     */
     public function update($user)
     {
         $update = array(
@@ -145,6 +153,11 @@ class user extends CI_Model
         }
     }
 
+    /**
+     * Updates the users password in the database
+     * @param $pass string new password
+     * @throws Exception
+     */
     public function updatePass($pass)
     {
         $user = $this->session->userdata('uname');

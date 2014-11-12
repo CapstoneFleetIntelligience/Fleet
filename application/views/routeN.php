@@ -35,7 +35,7 @@ $query = $this->db->get_where('capsql.user', array('bname' => $business));
                     <span class="prefix">
                         Delivery Date
                     </span>
-                <?php echo form_input($schd); ?>
+                <input type="date" required name="schd">
             </div>
         </div>
         <table>

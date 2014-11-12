@@ -35,8 +35,11 @@ class employee_controller extends CI_Controller
      */
     public function contact()
     {
+        $business = $this->business->loadModel();
+
         $data = array(
-          'title' => 'Contact'
+          'title' => 'Contact',
+          'business'=>$business
         );
 
         $this->load->template('contact', $data);
