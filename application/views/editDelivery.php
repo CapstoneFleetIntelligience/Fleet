@@ -22,14 +22,16 @@
             <tbody>
             <?php
             foreach ($deliveries as $cid => $customer) {
-                echo '<tr id="removeDelivery-' . $cid . '">';
+                echo '<tr id="removeDelivery">';
                 echo '<td>' . $customer->name . '</td>';
                 echo '<td>' . $customer->address . '</td>';
                 echo '<td>' . $customer->schd . '</td>';
                 echo '<td>' . $customer->iname. '</td>';
                 echo '<td>' . $customer->qty . '</td>';
-                echo '<td><button type="button" id="'.$cid.'" class="button tiny radius delete" >Delete</button></td>';
-                echo form_hidden('cid', $cid);
+                echo '<td><button type="button" id="'.$customer->cid.'" class="button tiny radius delete"
+                >Delete</button>'. form_hidden('schd', $customer->schd).'</td>';
+                echo form_hidden('cid', $customer->cid);
+
                 echo '</tr>';
             }
             ?>

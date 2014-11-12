@@ -106,6 +106,7 @@
 						<li class="has-dropdown">
 							<a href="#">Admin Tools</a>
 							<ul class="dropdown">
+                                <li><a href="#" data-reveal-id="customerModal">New Customer</a></li>
 								<li><a href="#" data-reveal-id="deliveryModal">New Delivery</a></li>
 								<li><a href="#" data-reveal-id="addItemModal">Add New Items(s)</a></li>
 								<li><a href="#" data-reveal-id="addEmployeeModal">Add Employee(s)</a></li>

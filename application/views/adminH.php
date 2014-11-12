@@ -11,6 +11,7 @@ foreach ($results->result() as $biz)
 
 ?>
 <script>
+    $('#delDate').datepicker();
     function initialize()
     {
         var myLatlng = new google.maps.LatLng(<?php echo $biz->blat; ?>,<? echo $biz->blong; ?>);
@@ -45,9 +46,7 @@ foreach ($results->result() as $biz)
 
 </script>
 <div class="container">
-
     <div class="row">
-	<br/ >
         <div class="large-12 medium-12 small-12 columns">
             <h2 style="text-align: center;"><?php echo $this->session->userdata('bname') ?></h2>
             <h3 style="text-align: center;"><?php echo $this->session->userdata('uname') ?></h3>
@@ -82,10 +81,13 @@ foreach ($results->result() as $biz)
     </div>
 </div>
 
-	<div id="addItemModal" class="reveal-modal" data-reveal>
+<div id="deliveryModal" class="reveal-modal" data-reveal>
+    <?php $this->load->view('newDelivery', array('customers' => $customers, 'items' => $items)); ?>
+</div>
+<div id="addItemModal" class="reveal-modal" data-reveal>
     <?php $this->load->view('templates/item_table'); ?>
 </div>
-<div id="deliveryModal" class="reveal-modal" data-reveal>
+<div id="customerModal" class="reveal-modal" data-reveal>
     <?php $this->load->view('custN'); ?>
 </div>
 <div id="addEmployeeModal" class="reveal-modal small" data-reveal>
