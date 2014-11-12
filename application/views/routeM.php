@@ -88,8 +88,9 @@ if ($success == true)
         echo form_input(array('name' => 'schd', 'type'=>'hidden', 'id' =>'schd', 'value' => $schd));
         //loop through individual routes and display their maps and info
         foreach ($rquery->result() as $row){
-
-            $dquery = $this->db->query("select * from delivery as d, customer as c where d.cid = c.cid and d.schd = '".$schd."' and c.bname = '".$biz->name."' and d.rid = '".$row->rid."' order by d.position");
+            $sql = "select * from delivery as d, customer as c where d.cid = c.cid and d.schd = ? and c
+            .bname = ? and d.rid = ? order by d.position";
+            $dquery = $this->db->query($sql ,array($schd,$biz->name,$row->rid));
             if ($dquery->num_rows() != 0){
                 foreach ($dquery->result() as $drow)
                 {
