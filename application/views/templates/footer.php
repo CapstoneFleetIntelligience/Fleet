@@ -186,54 +186,7 @@
         })
     });
 
-    $('.employee_table').on("click", ".update", function(){
-        $(this).unbind('click');
-        var id = $(this).attr('id');
-        var data = $('#updateUser-'+id+' :input').serialize();
-        editEmployee('update', data);
-    });
 
-    $('.employee_table').on("click", ".delete", function(){
-        $(this).unbind('click');
-        var id = $(this).attr('id');
-        var data = $('#updateUser-'+id+' :input').serialize();
-        editEmployee('delete', data);
-    });
-
-    $('#submitPass').click(function() {
-        var pass = {
-            bpass: $('#bpass').val(),
-            name: "<?php echo $business->name ?>"
-        };
-
-        $.ajax({
-            url: "<?php echo site_url('Settings_controller/editPass')?>",
-            type: 'POST',
-            data: pass,
-            success: function (msg) {
-                console.log(msg);
-            }
-        });
-        return false;
-    });
-
-
-    $('#updateRange').click(function(){
-        var radius = {
-            radius: $('#radius').val(),
-            name: "<?php echo $business->name ?>"
-        };
-        $.ajax({
-            url: "<?php echo site_url('Settings_controller/editRange')?>",
-            type: 'POST',
-            data: radius,
-            success: function (data) {
-
-            }
-        });
-
-        return false;
-    });
 
 </script>
 
