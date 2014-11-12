@@ -138,9 +138,12 @@ if ($dquery->num_rows() > 0){
     $('.delivery_table').on("click", ".delete", function () {
         $(this).unbind('click');
         var id= $(this).attr('id');
+        var td = $(this).parent();
+        var schd = $(td[0]).find("input").val();
 
         var data = {
-            cid: id
+            cid: id,
+            schd: schd
         };
 
         $.ajax({

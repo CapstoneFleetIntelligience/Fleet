@@ -50,11 +50,18 @@ class admin_controller extends CI_Controller
         else echo 'reset';
     }
 
+    /**
+     * Removes delivery from the database
+     */
     function removeDelivery()
     {
-        $this->delivery->removeDelivery($_POST['cid']);
+        $data = $this->input->post(NULL, TRUE);
+        $this->delivery->removeDelivery($data);
     }
 
+    /**
+     * Creates new delivery for current customer
+     */
     function newDelivery()
     {
         $data = $this->input->post(NULL, TRUE);
@@ -62,12 +69,11 @@ class admin_controller extends CI_Controller
           'cid' => $data['cid'],
           'schd' => $data['ischd'],
           'note' => $data['note'],
-          'isdlv' => 't'
         );
         array_pop($data);
         $delivery = new delivery();
         $delivery->setDelv($delData);
-        $delivery->update();
+        $delivery->insert();
         $this->delivery_item->insert($data);
 
     }

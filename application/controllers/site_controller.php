@@ -34,17 +34,6 @@ class Site_controller extends CI_Controller
         $this->load->template('home', $data);
     }
 
-    /**
-     * Registration Page
-     */
-    public function registration()
-    {
-        $data = array(
-            'title' => 'Almost Done'
-        );
-
-        $this->load->template('registration', $data);
-    }
 
     /**
      * Registers new admin User and Business
@@ -121,11 +110,15 @@ class Site_controller extends CI_Controller
         $business = $this->business->loadModel();
         $customers = $this->customer->getCustomers();
         $items = $this->item->getItems($business->name);
+        $deliveries = $this->delivery->getDeliveries($business->name);
+        $employees = $this->user->getEmployees($business->name);
 
         $data = array(
             'title' => 'Managers Home',
             'customers' => $customers,
-            'items' => $items
+            'items' => $items,
+            'deliveries' => $deliveries,
+            'employees' => $employees
         );
         $this->load->template('adminH', $data);
     }
@@ -147,27 +140,11 @@ class Site_controller extends CI_Controller
     }
 
     /**
-     * Loads the item add page
+     * Render the item table for a business
      */
-    public function itemN()
-    {
-        $data = array(
-            'title' => 'Add New Item'
-        );
-        $this->load->template('templates/item_table', $data);
-    }
-
     public function itemTable()
     {
         $this->load->view('templates/item_table');
-    }
-
-    public function custN()
-    {
-        $data = array(
-            'title' => 'Add New Delivery'
-        );
-        $this->load->template('custN', $data);
     }
 }
 

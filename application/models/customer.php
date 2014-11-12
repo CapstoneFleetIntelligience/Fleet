@@ -53,6 +53,11 @@ class customer extends CI_Model
 
     }
 
+    /**
+     * Sets the customer data to be inserted into the db
+     * @param $cdata the data to be turned into the object
+     * @return $this customer object being returned
+     */
     public function setData($cdata)
     {
         foreach ($cdata as $key => $value) {
@@ -64,6 +69,10 @@ class customer extends CI_Model
         return $this;
     }
 
+    /**
+     * Sets the lat/long for each customer
+     * @param $address the customers address to be converted
+     */
     public function setLatLong($address)
     {
         $address = str_replace (" ", "+", urlencode($address));
@@ -85,6 +94,10 @@ class customer extends CI_Model
 
     }
 
+    /**
+     * Retrieves all customers from the database
+     * @return array of all customers in the database
+     */
     public function getCustomers()
     {
         //Query pulling customers without deliveries
@@ -99,18 +112,8 @@ class customer extends CI_Model
             {
                 $cust->$key = $value;
             }
-            $delivery = $cust->hasDelivery();
-            if($delivery) $customers[$index] = $cust;
-            else continue;
+            $customers[$index] = $cust;
         }
         return $customers;
-    }
-
-    public function hasDelivery()
-    {
-        $this->db->select('isdlv');
-       $query = $this->db->get_where('delivery', array('cid' => $this->cid, 'isdlv' => 'f'));
-        if($query->row()) return true;
-        else return false;
     }
 }
