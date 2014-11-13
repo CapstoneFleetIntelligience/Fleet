@@ -323,5 +323,10 @@ if ($dquery->num_rows() > 0){
 
         return false;
     });
+<<<<<<< HEAD
 </script>
 >>>>>>> 1e6f58e1999dae60dcddaafda4df6f1f6660fcd4
+=======
+    
+</script>
+>>>>>>> 6bb2be4ef312768164ee579852d7bd63435d13a7
