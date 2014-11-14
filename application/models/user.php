@@ -201,7 +201,7 @@ class user extends CI_Model
         $this->db->where("role", 'E');
         $this->db->or_where('role', 'M');
         $this->db->where('bname', $id);
-        $this->db->select('uname, bname, role, email, uphone, tdist, avgtime');
+        $this->db->select('uname, bname, role, email, uphone, tdist, avgtime, titems, tdelivery');
         $query = $this->db->get('user');
         $employees = array();
 
