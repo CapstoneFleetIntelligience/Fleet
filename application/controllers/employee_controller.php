@@ -24,7 +24,7 @@ class employee_controller extends CI_Controller
             'deliverer' => $deliverer
         );
 
-         $this->load->template('employeeHome', $data);
+        $this->load->template('employeeHome', $data);
     }
 
     public function changePass()
@@ -37,8 +37,11 @@ class employee_controller extends CI_Controller
      */
     public function contact()
     {
+        $business = $this->business->loadModel();
+
         $data = array(
-          'title' => 'Contact'
+          'title' => 'Contact',
+          'business'=>$business
         );
 
         $this->load->template('contact', $data);

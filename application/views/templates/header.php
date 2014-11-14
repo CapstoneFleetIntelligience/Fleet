@@ -83,12 +83,12 @@
 						<li class="has-dropdown">
 							<a href="#">System Tools</a>
 							<ul class="dropdown">
-								<li><a href="#" data-reveal-id="deliveryModal">Employee(s)</a></li>
-								<li><a href="#" data-reveal-id="addItemModal">Deliveries</a></li>
-								<li><a href="#" data-reveal-id="addEmployeeModal">Checklist Items</a></li>
-								<li><a href="#" data-reveal-id="addEmployeeModal">Business Password</a></li>
-								<li><a href="#" data-reveal-id="addEmployeeModal">Delivery Range</a></li>
-								<li><a href="#" data-reveal-id="addEmployeeModal">Route Manager</a></li>
+								<li><a href="#" data-reveal-id="editEmployeeModal">Employee(s)</a></li>
+								<li><a href="#" data-reveal-id="editDeliveryModal">Deliveries</a></li>
+								<li><a href="#" data-reveal-id="editItemModal">Checklist Items</a></li>
+								<li><a href="#" data-reveal-id="editPassModal">Business Password</a></li>
+								<li><a href="#" data-reveal-id="editRadiusModal">Delivery Range</a></li>
+								<li><a href="#" data-reveal-id="routeModal">Route Manager</a></li>
 							</ul>
 						</li>
                     <?php elseif($role == 'M'): ?>
@@ -107,6 +107,7 @@
 						<li class="has-dropdown">
 							<a href="#">Admin Tools</a>
 							<ul class="dropdown">
+                                <li><a href="#" data-reveal-id="customerModal">New Customer</a></li>
 								<li><a href="#" data-reveal-id="deliveryModal">New Delivery</a></li>
 								<li><a href="#" data-reveal-id="addItemModal">Add New Items(s)</a></li>
 								<li><a href="#" data-reveal-id="addEmployeeModal">Add Employee(s)</a></li>

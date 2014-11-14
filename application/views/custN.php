@@ -57,7 +57,7 @@ $note = array(
 <div class="container">
 
     <div class="row">
-        <?php echo form_open('addCust', "id = 'add_cust'");
+        <?php echo form_open('addCust', 'data-abide' ,"id = 'add_cust'");
         echo form_fieldset('Enter details for new delivery');
         echo form_input(array('name' => 'clat', 'type' => 'hidden', 'id' => 'clat', 'value' => '0.0'));
         echo form_input(array('name' => 'clong', 'type' => 'hidden', 'id' => 'clong', 'value' => '0.0'));
@@ -68,13 +68,15 @@ $note = array(
                 <span class="prefix">
                     Customer Name
                 </span>
-                <?php echo form_input($cname); ?>
+                <input type="text" placeholder="Required" required pattern="[a-zA-Z]+" name="cname">
+                <small class="error">A customer name is required.</small>
             </div>
             <div class="small-4 column">
                 <span class="prefix">
                     Customer Phone
                 </span>
-                <?php echo form_input($cphone); ?>
+                <input type="text" placeholder="Required" required pattern="[0-9]+" name="cphone">
+                <small class="error">A customer phone number is required.</small>
             </div>
             <div class="small-4 column">
             <span class="prefix">
@@ -89,25 +91,29 @@ $note = array(
             <span class="prefix">
                      Customer Address
             </span>
-                <?php echo form_input($address); ?>
+                <input type="text" placeholder="Required" required pattern="[a-zA-Z0-9]+" name="address">
+                <small class="error">A customer address is required.</small>
             </div>
             <div class="small-4 column">
                 <span class="prefix">
                    City
                 </span>
-                <?php echo form_input($city) ?>
+                <input type="text" placeholder="Required" required pattern="[a-zA-Z]+" name="city">
+                <small class="error">A city is required.</small>
             </div>
             <div class="small-2 column">
                 <span class="prefix">
                     State
                 </span>
-                <?php echo form_input($state) ?>
+                <input type="text" placeholder="Required" required pattern="[a-zA-Z]+" name="state">
+                <small class="error">A state is required.</small>
             </div>
             <div class="small-2 column">
                 <span class="prefix">
                     Zip
                 </span>
-                <?php echo form_input($zip) ?>
+                <input type="text" placeholder="Required" required pattern="[0-9]+" name="zip">
+                <small class="error">A zip code is required.</small>
             </div>
         </div>
         <div class="row">
@@ -128,6 +134,7 @@ $note = array(
                     echo form_radio($haslist);
                     ?>
                 </div>
+                <small class="error">Please select "Yes" or "No".</small>
             </div>
             <div class="small-8 column">
                 <span class="prefix">
@@ -136,10 +143,9 @@ $note = array(
                 <?php echo form_textarea($note); ?>
             </div>
         </div>
-
+        <button type="submit" id="submit_cust" class="small button">Continue</button>
 
         <?php
-        echo form_submit('', 'Continue', "id= 'submit_cust' class = 'small button'");
         echo form_close();
         ?>
     </div>
