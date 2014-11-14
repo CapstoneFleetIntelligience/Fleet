@@ -24,7 +24,14 @@ $pass = array(
     </div>
 </div>
 <div class="employee hide">
-    <?php endif; ?>
+    <?php endif;
+    if (sizeof($deliverer->routes['route']) < 1){
+        ?><div class="small-4 small-centered">
+            <h2>You dont have any routes assigned for today.</h2>
+        </div><?
+    }
+    else{
+    ?>
     <script>
         var myLatlng = new google.maps.LatLng(<?php echo $business->blat; ?>,<? echo $business->blong; ?>);
         var mapProp = {
@@ -93,4 +100,5 @@ $pass = array(
             Total Distance: <?echo round($deliverer->dist,2)?> Miles
         </div>
     </div>
+    <?}?>
 </div>

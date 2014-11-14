@@ -77,6 +77,7 @@
                     <?php
                     if($role == 'A'): ?>
                         <li><?php echo anchor('adminH', 'Home'); ?></li>
+                        <li><?php echo anchor('overview', 'Delivery'); ?></li>
                         <li><?php echo anchor('analytics', 'Analytics') ?></li>
                         <li><?php echo anchor('adminE', 'Edit')?></li>
 						<li class="has-dropdown">
