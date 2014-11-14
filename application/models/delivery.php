@@ -51,7 +51,7 @@ class delivery extends CI_Model
             $cust->qty = null;
             if($delivery->cid)
             {
-                $this->db->select('qty, iname');
+                $this->db->select('qty, iname, ischk');
                 $this->db->from('del_item');
                 $this->db->where(array('cid' => $delivery->cid));
                 $this->db->join('chkitem', 'del_item.iid = chkitem.iid');
@@ -60,11 +60,30 @@ class delivery extends CI_Model
                 {
                     $cust->iname = $del_item->iname;
                     $cust->qty = $del_item->qty;
+                    $cust->ischk = $del_item->ischk;
                 }
             }
             $customer[$index] = $cust;
         }
             return $customer;
+    }
+
+    public function getCompleted()
+    {
+        $deliveries = $this->getDeliveries();
+        $date = getdate();
+        $date = $date['year'].'-'.$date['mon'].'-'.$date['mday'];
+        $deliveryCount = 0;
+        foreach($deliveries as $delivery)
+        {
+            if($delivery->schd == $date)
+            {
+                if($delivery->ischk = 't') $deliveryCount++;
+                else continue;
+            }
+            else continue;
+        }
+        return $deliveryCount;
     }
 
     /**
