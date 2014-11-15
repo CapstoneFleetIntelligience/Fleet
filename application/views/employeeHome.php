@@ -25,9 +25,13 @@ $pass = array(
 </div>
 <div class="employee hide">
     <?php endif;
-    if (sizeof($deliverer->routes['route']) < 1){
-        ?><div class="small-4 small-centered">
-            <h2>You dont have any routes assigned for today.</h2>
+    if ($deliverer == false){
+        ?><div class="container">
+            <div class="row">
+                <div class="small-12">
+                    <h3>You have no routes assigned for today.</h3>
+                </div>
+            </div>
         </div><?
     }
     else{
@@ -36,8 +40,9 @@ $pass = array(
         var myLatlng = new google.maps.LatLng(<?php echo $business->blat; ?>,<? echo $business->blong; ?>);
         var mapProp = {
             center: myLatlng,
-            zoom:13
+            zoom: 11
         };
+        var bounds = new google.maps.LatLngBounds();
         function initialize(){
 
             var directionsService = new google.maps.DirectionsService();
@@ -45,10 +50,8 @@ $pass = array(
             <?
             $i = 0;
             foreach ($deliverer->routes['route'] as $row){?>
-            var pcolor<?echo $row->rid?> = new google.maps.Polyline({
-                strokeColor: '<?php printf( "#%06X", mt_rand( 0, 0xFFFFFF )); ?>'
-            });
-            var directionsDisplay<?echo $row->rid?> = new google.maps.DirectionsRenderer({polylineOptions: pcolor<?echo $row->rid?>});
+
+            var directionsDisplay<?echo $row->rid?> = new google.maps.DirectionsRenderer({preserveViewport: true , polylineOptions: {strokeColor: "<?php printf( "#%06X", mt_rand( 0, 0xFFFFFF )); ?>" , strokeOpacity: 0.3}});
 
             directionsDisplay<?echo $row->rid?>.setMap(map);
             var request<?echo $row->rid?> = {

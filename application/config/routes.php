@@ -72,6 +72,7 @@ $route['routeM'] = "route_controller/routeM";
 $route['edit_rts'] = "route_controller/edit_rts";
 $route['routeE/:any'] = "route_controller/routeE";
 $route['deleteR'] = "route_controller/deleteR";
+$route['deliveries'] = "employee_controller/deliveries";
 
 
 /* End of file routes.php */
