@@ -27,7 +27,7 @@ $note = array(
 <div class="container">
 
     <div class="row">
-        <?php echo form_open('addCust', 'data-abide', "id = 'add_cust'");
+        <?php echo form_open('addCust', "data-abide id = 'add_cust'");
         echo form_fieldset('Enter details for new delivery');
         ?>
 
@@ -123,46 +123,3 @@ $note = array(
         </div>
     </div>
 </div>
-
-
-<script type="text/javascript">
-    $('#submit_cust').click(function () {
-        var city = $("#city").val();
-        var state = $("#state").val();
-        var zip = $("#zip").val();
-        var address = $("#address").val();
-        var caddress = address + ', ' + city + ', ' + state + ' ' + zip;
-        var form_data = {
-            cname: $('#cname').val(),
-            caddress: caddress,
-            cphone: $('#cphone').val()
-        };
-        var delivery_data = {
-            schd: $('#schd').val(),
-            note: $('#note').val()
-        };
-
-
-        $.ajax({
-            url: "<?php echo site_url('admin_controller/addCust'); ?>",
-            type: 'POST',
-            data: {
-                customer: form_data,
-                delivery: delivery_data,
-                list: $('input:radio[name=list]:checked').val()
-            },
-            success: function (data) {
-                if (data == 'reset') {
-                    $("#add_cust").trigger('reset');
-                    alert('Delivery Set');
-                }
-                else {
-                    $("#add_cust").trigger('reset');
-                    $(".add_items").html(data);
-                    $("#submit_cust").prop('disabled', true);
-                }
-            }
-        });
-        return false;
-    });
-</script>
