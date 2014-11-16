@@ -15,14 +15,16 @@ class employee_controller extends CI_Controller
     {
         $user = $this->user->loadModel();
         $business = $this->business->loadModel();
+        $deliverer = $this->deliverer->getDeliverer();
 
         $data = array(
             'title' => 'home',
             'user' => $user,
-            'business' => $business
+            'business' => $business,
+            'deliverer' => $deliverer
         );
 
-         $this->load->template('employeeHome', $data);
+        $this->load->template('employeeHome', $data);
     }
 
     public function changePass()

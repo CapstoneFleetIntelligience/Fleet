@@ -78,10 +78,8 @@ class route extends CI_Model
         //get size of partial routes
         $y = $R * $C;
 
-
-        //round
-        $P = round($y);
-        if ($P > $y) $P--;
+        //round down to get size of partial routes
+        $P = floor($y);
 
         //get remainder
         $R = $y - $P;
@@ -93,6 +91,9 @@ class route extends CI_Model
 
         //identify the number remaining deliveries to be distributed to the partial routes
         $L = $R * $D;
+
+        //mitigate php math flaw by rounding up
+        $L = ceil($L);
 
         //distribute the remaining delivers to the partial routes
         $count = 1;
@@ -131,7 +132,6 @@ class route extends CI_Model
             $count++;
         }
 
-        //return rarray
         return $rarray;
     }
 
@@ -357,6 +357,22 @@ class route extends CI_Model
             if ($response['status'] != 'OK') {
                 return null;
             };
+
+            //setup variable for distance
+            $distance = 0;
+
+            //loop through api returned json to get diatance of each leg
+            foreach ($response['routes'][0]['legs'] as $leg){
+                //add distance to total
+                $distance += $leg['distance']['value'];
+            }
+
+            //update current route with the distance
+            $this->db->where('bname', $business);
+            $this->db->where('schd', $pdata['schd']);
+            $this->db->where('rid', $i);
+            $this->db->update('capsql.route', array('dist' => $distance));
+
             //store optimized waypoint order from json
             $order = $response['routes'][0]['waypoint_order'];
             //set counter for order position
@@ -452,8 +468,7 @@ class route extends CI_Model
             'schd' => $route->schd,
             'bname' => $route->bname,
             'rid' => $rid,
-            'uname' => $uname,
-            'start' => date("c")
+            'uname' => $uname
         );
         $this->db->insert('capsql.route',$rupdate);
 
@@ -489,11 +504,50 @@ class route extends CI_Model
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $response = json_decode(curl_exec($ch), true);
 
+
         //error check
         if ($response['status'] != 'OK') {
             echo "we have a problem!!";
             return null;
         };
+
+        //setup variables for distance
+        $distance = 0;
+        $distance2 = 0;
+
+        //loop through api returned json to get distance of each leg
+        foreach ($response['routes'][0]['legs'] as $leg){
+            //add distance to total
+            $distance += $leg['distance']['value'];
+        }
+
+        //set counter
+        $z = 1;
+        //get distance to be removed from previous route
+        foreach ($response['routes'][0]['legs'] as $leg){
+            if ($z == 1){
+                $z++;
+                continue;
+            }
+            //add distance to total
+            $distance2 += $leg['distance']['value'];
+        }
+
+        //calculate new distance
+        $distance2 = $route->dist - $distance2;
+
+        //update previous route with the new distance
+        $this->db->where('bname', $business);
+        $this->db->where('schd',$route->schd);
+        $this->db->where('rid', $route->rid);
+        $this->db->update('capsql.route', array('dist' => $distance2));
+
+        //update current route with the distance
+        $this->db->where('bname', $business);
+        $this->db->where('schd',$route->schd);
+        $this->db->where('rid', $rid);
+        $this->db->update('capsql.route', array('dist' => $distance));
+
         //store optimized waypoint order from json
         $order = $response['routes'][0]['waypoint_order'];
         //set counter for order position
@@ -511,6 +565,14 @@ class route extends CI_Model
             $oS++;
         }
 
+
+    }
+
+    /**
+     * function to get the total distance of a route
+     */
+    public function getDist($rid)
+    {
 
     }
 }

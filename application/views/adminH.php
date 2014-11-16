@@ -119,6 +119,7 @@ if ($dquery->num_rows() > 0){
     </div>
 </div>
 
+<<<<<<< HEAD
 <div id="deliveryModal" class="reveal-modal" data-reveal>
     <?php $this->load->view('newDelivery', array('customers' => $customers, 'items' => $items)); ?>
 </div>
@@ -253,6 +254,9 @@ if ($dquery->num_rows() > 0){
     <div id="datepicker" style="font-size: 12px; text-align: center; display: inline-block"></div>
     <a class="close-reveal-modal">&#215;</a>
 </div>
+=======
+
+>>>>>>> 26f0d5849a386aa8ef8fb57d77e1ffcd1cca8109
 <script type="text/javascript">
     $('.delivery_table').on("click", ".delete", function () {
         $(this).unbind('click');
