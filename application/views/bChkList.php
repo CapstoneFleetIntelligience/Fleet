@@ -73,4 +73,22 @@
     ?>
         <div class="row"><h2>There are no items associated with this business. Please add items to your business then you can create checklists.</h2></div>
     <?php endif; ?>
+<script type="text/javascript">
+    $("#add_list").submit(function (e) {
+        var form_data = $("#add_list").serializeArray();
 
+        $.ajax({
+            url: "<?php echo site_url('admin_controller/addList'); ?>",
+            type: "POST",
+            data: form_data,
+            success: function (data) {
+                $("#add_cust :input").prop('disabled', false);
+                $("#add_cust").trigger('reset');
+                $('.add_items').fadeOut(2000, 'swing');
+                $(".add_items").empty();
+            }
+        });
+        $("#submit_cust").prop('disabled', false);
+        return false;
+    });
+</script>
