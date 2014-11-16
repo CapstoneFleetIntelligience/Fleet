@@ -79,18 +79,17 @@
                         <li><?php echo anchor('adminH', 'Home'); ?></li>
                         <li><?php echo anchor('overview', 'Delivery'); ?></li>
                         <li><?php echo anchor('analytics', 'Analytics') ?></li>
-                        <li><?php echo anchor('adminE', 'Edit')?></li>
-						<li class="has-dropdown">
-							<a href="#">System Tools</a>
-							<ul class="dropdown">
-								<li><a href="#" data-reveal-id="editEmployeeModal">Employee(s)</a></li>
-								<li><a href="#" data-reveal-id="editDeliveryModal">Deliveries</a></li>
-								<li><a href="#" data-reveal-id="editItemModal">Checklist Items</a></li>
-								<li><a href="#" data-reveal-id="editPassModal">Business Password</a></li>
-								<li><a href="#" data-reveal-id="editRadiusModal">Delivery Range</a></li>
-								<li><a href="#" data-reveal-id="routeModal">Route Manager</a></li>
-							</ul>
-						</li>
+			<li class="has-dropdown">
+				<a href="#">System Tools</a>
+				<ul class="dropdown">
+					<li><a href="#" data-reveal-id="editEmployeeModal">Employee(s)</a></li>
+					<li><a href="#" data-reveal-id="editDeliveryModal">Deliveries</a></li>
+					<li><a href="#" data-reveal-id="editItemModal">Checklist Items</a></li>
+					<li><a href="#" data-reveal-id="editPassModal">Business Password</a></li>
+					<li><a href="#" data-reveal-id="editRadiusModal">Delivery Range</a></li>
+					<li><a href="#" data-reveal-id="routeModal">Route Manager</a></li>
+				</ul>
+			</li>
                     <?php elseif($role == 'M'): ?>
                         <li><?php echo anchor('managerOverview', 'Home'); ?></li>
                         <li><?php echo anchor('analytics', 'Analytics') ?></li>
@@ -191,4 +190,3 @@
     </div>
 </body>
 </html>
-	

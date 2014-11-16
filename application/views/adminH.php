@@ -6,11 +6,11 @@
  * Time: 8:50 PM
  */
 
+
 $results=$this->db->get_where('capsql.business',array('name'=> $this->session->userdata('bname')));
-
-foreach ($results->result() as $biz)
-
+    foreach ($results->result() as $biz)
 ?>
+
 <?php
 $dquery = $this->db->query("select schd from route where bname = '".$this->session->userdata('bname')."' and schd >= current_date group by schd");
 
@@ -24,57 +24,58 @@ if ($dquery->num_rows() > 0){
     $ddates = '';
 }
 ?>
+
 <script>
 
-    $(function() {
-        var arrayD = [<? echo $ddates ?>];
-        $( "#datepicker" ).datepicker({
-            changeMonth: true,
-            changeYear: true,
-            dateFormat: "yy-mm-dd",
-            beforeShowDay: function(date){
-                var f = $.datepicker.formatDate('yy-mm-dd', date)
-                if ($.inArray(f, arrayD) > -1) {
-                    return [true];
-                }else{
-                    return [false];
-                }
-            },
-            onSelect: function(dateText) {
-                window.location = '<?php echo site_url('routeE')?>/' + dateText;
-            }
-        });
+$(function() {
+    var arrayD = [<? echo $ddates ?>];
+    $( "#datepicker" ).datepicker({
+	changeMonth: true,
+	changeYear: true,
+	dateFormat: "yy-mm-dd",
+	beforeShowDay: function(date){
+	    var f = $.datepicker.formatDate('yy-mm-dd', date)
+	    if ($.inArray(f, arrayD) > -1) {
+		return [true];
+	    }else{
+		return [false];
+	    }
+	},
+	onSelect: function(dateText) {
+	    window.location = '<?php echo site_url('routeE')?>/' + dateText;
+	}
+    });
+});
+
+$('#delDate').datepicker();
+function initialize()
+{
+    var myLatlng = new google.maps.LatLng(<?php echo $biz->blat; ?>,<? echo $biz->blong; ?>);
+
+    var mapProp = {
+	center: myLatlng,
+	zoom:13
+
+    };
+    var map1=new google.maps.Map(document.getElementById("googleMap1")
+	,mapProp);
+
+    var map2=new google.maps.Map(document.getElementById("googleMap2")
+	,mapProp);
+
+    var marker1 = new google.maps.Marker({
+	position: myLatlng,
+	map: map1,
+	title: '<? echo $biz->name; ?>'
     });
 
-    $('#delDate').datepicker();
-    function initialize()
-    {
-        var myLatlng = new google.maps.LatLng(<?php echo $biz->blat; ?>,<? echo $biz->blong; ?>);
+    var marker2 = new google.maps.Marker({
+	position: myLatlng,
+	map: map2,
+	title: '<? echo $biz->name; ?>'
+    });
 
-        var mapProp = {
-            center: myLatlng,
-            zoom:13
-
-        };
-        var map1=new google.maps.Map(document.getElementById("googleMap1")
-            ,mapProp);
-
-        var map2=new google.maps.Map(document.getElementById("googleMap2")
-            ,mapProp);
-
-        var marker1 = new google.maps.Marker({
-            position: myLatlng,
-            map: map1,
-            title: '<? echo $biz->name; ?>'
-        });
-
-        var marker2 = new google.maps.Marker({
-            position: myLatlng,
-            map: map2,
-            title: '<? echo $biz->name; ?>'
-        });
-
-    }
+}
 
 
     google.maps.event.addDomListener(window, 'load', initialize);
@@ -119,7 +120,7 @@ if ($dquery->num_rows() > 0){
     </div>
 </div>
 
-<<<<<<< HEAD
+
 <div id="deliveryModal" class="reveal-modal" data-reveal>
     <?php $this->load->view('newDelivery', array('customers' => $customers, 'items' => $items)); ?>
 </div>
@@ -132,9 +133,6 @@ if ($dquery->num_rows() > 0){
 <div id="addEmployeeModal" class="reveal-modal small" data-reveal>
     <?php $this->load->view('addEmployee') ?>
 </div>
-<<<<<<< HEAD
-
-
 
 
 <div class="row">
@@ -148,15 +146,14 @@ if ($dquery->num_rows() > 0){
             <div class="large-4 small-6 columns">
  
 		<h4>System Tools</h4><hr>
-     
 		<div class="row">
 		    <div class="large-12 small-3 columns">
-			<a href="#" class="button expand">Employee(s)</a>
-			<a href="#" class="button expand">Deliveries</a>
-			<a href="#" class="button expand">Checklist Items</a>
-			<a href="#" class="button expand">Business Password</a>
-			<a href="#" class="button expand">Delivery Range</a>
-			<a href="#" class="button expand">Route Manager</a>
+			<a href="#" data-reveal-id="editEmployeeModal" class="button expand">Employee(s)</a>
+			<a href="#" data-reveal-id="editDeliveryModal" class="button expand">Deliveries</a>
+			<a href="#" data-reveal-id="editItemModal" class="button expand">Checklist Items</a>
+			<a href="#" data-reveal-id="editPassModal" class="button expand">Business Password</a>
+			<a href="#" data-reveal-id="editRadiusModal" class="button expand">Delivery Range</a>
+			<a href="#" data-reveal-id="routeModal" class="button expand">Route Manager</a>
 		    </div>
 		</div>
 	    </div>
@@ -182,9 +179,6 @@ if ($dquery->num_rows() > 0){
 		</div>
 	    </div>
  
-             
- 
-	
           </div>
         </div>
       </div>
@@ -202,7 +196,7 @@ if ($dquery->num_rows() > 0){
   </script>
  
     
-=======
+
 <div id="editEmployeeModal" class="reveal-modal medium" data-reveal>
     <?php $this->load->view('editEmployee', array('employees' => $employees)); ?>
 </div>
@@ -254,9 +248,7 @@ if ($dquery->num_rows() > 0){
     <div id="datepicker" style="font-size: 12px; text-align: center; display: inline-block"></div>
     <a class="close-reveal-modal">&#215;</a>
 </div>
-=======
 
->>>>>>> 26f0d5849a386aa8ef8fb57d77e1ffcd1cca8109
 <script type="text/javascript">
     $('.delivery_table').on("click", ".delete", function () {
         $(this).unbind('click');
@@ -327,10 +319,7 @@ if ($dquery->num_rows() > 0){
 
         return false;
     });
-<<<<<<< HEAD
+
 </script>
->>>>>>> 1e6f58e1999dae60dcddaafda4df6f1f6660fcd4
-=======
     
 </script>
->>>>>>> 6bb2be4ef312768164ee579852d7bd63435d13a7
