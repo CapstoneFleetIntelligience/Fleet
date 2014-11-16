@@ -158,11 +158,9 @@ function initialize()
 		</div>
 	    </div>
              
-            <div class="large-4 small-6 columns">
-		<br />
-		<br />
-		<img src="http://placehold.it/300x430&text=Image">
-            </div>
+		<div class="large-4 small-6 columns">
+			<h4>Analytics Preview</h4><hr>
+		</div>
  
              
 	    <div class="large-4 small-6 columns">
