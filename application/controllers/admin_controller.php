@@ -37,7 +37,6 @@ class admin_controller extends CI_Controller
         $delivery = new delivery();
         $customer = new customer();
 
-
         $cdata = $this->input->post('customer');
         $ddata = $this->input->post('delivery');
         $list = $this->input->post('list');
@@ -75,7 +74,6 @@ class admin_controller extends CI_Controller
         $delivery->setDelv($delData);
         $delivery->insert();
         $this->delivery_item->insert($data);
-
     }
 
     /**
