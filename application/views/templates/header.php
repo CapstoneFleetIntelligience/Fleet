@@ -124,6 +124,69 @@
 			</section>
 		</nav>
 	</div>
+<div id="deliveryModal" class="reveal-modal" data-reveal>
+    <?php $this->load->view('newDelivery', array('customers' => $customers, 'items' => $items)); ?>
+</div>
+<div id="addItemModal" class="reveal-modal" data-reveal>
+    <?php $this->load->view('templates/item_table'); ?>
+</div>
+<div id="customerModal" class="reveal-modal" data-reveal>
+    <?php $this->load->view('custN'); ?>
+</div>
+<div id="addEmployeeModal" class="reveal-modal small" data-reveal>
+    <?php $this->load->view('addEmployee') ?>
+</div>
+<div id="editEmployeeModal" class="reveal-modal medium" data-reveal>
+    <?php $this->load->view('editEmployee', array('employees' => $employees)); ?>
+</div>
+<div id="editDeliveryModal" class="reveal-modal large" data-reveal>
+    <?php $this->load->view('editDelivery', array('deliveries' => $deliveries)); ?>
+    <a class="close-reveal-modal">&#215;</a>
+</div>
+<div id="editItemModal" class="reveal-modal medium" data-reveal>
+    <?php $this->load->view('templates/item_table'); ?>
+</div>
+<div class="reveal-modal tiny" id="editPassModal" data-reveal>
+    <?php echo form_open('changePass');?>
+    <span>New Business Password</span>
+    <?php
+    $bpass = array(
+        'name' => 'bpass',
+        'id' => 'bpass',
+        'class' => 'small-6 small-centered'
+    );
+    ?>
+    <?php echo form_hidden('business', $business->name, 'id= "bname"');
+    echo form_password($bpass);
+    echo form_submit('submit', 'Submit', "class='tiny button' id='updateBusinessPass'");
+    echo form_close();
+    ?>
+    <a class="close-reveal-modal">&#215;</a>
+</div>
+<div id="editRadiusModal" class="reveal-modal tiny" data-reveal>
+    <?php echo form_open('changeRange');
+    $radius = array(
+        'type' => 'number',
+        'name'  => 'radius',
+        'id' => 'radius',
+        'value' => $business->radius,
+        'min' => '0',
+        'max' => '1000',
+        'step' => '1'
+    );?>
+    <span>New Delivery Range</span>
+    <?php echo form_hidden('business', $business->name, 'id = "bname"');
+    echo form_input($radius);
+    echo form_submit('update', 'update', 'id = "updateRange"  class="tiny button radius"');
+    echo form_close();
+    ?>
+    <a class="close-reveal-modal">&#215;</a>
+</div>
+<div id="routeModal" class="reveal-modal tiny text-center" data-reveal>
+    <h4>Select the date of routes to be edited.</h4>
+    <div id="datepicker" style="font-size: 12px; text-align: center; display: inline-block"></div>
+    <a class="close-reveal-modal">&#215;</a>
+</div>
 		<?php endif; ?>
     </div>
 </body>

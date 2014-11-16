@@ -129,12 +129,18 @@ class Site_controller extends CI_Controller
         $employees = $this->user->getEmployees($business->name);
         $deliveryCount = $this->delivery->getCompleted();
         $user = $this->session->userdata('uname');
+        $customers = $this->customer->getCustomers();
+        $items = $this->item->getItems($business->name);
+        $deliveries = $this->delivery->getDeliveries($business->name);
         $data = array(
             'title' => 'analytics',
             'employees'=> $employees,
+            'customers' => $customers,
             'business' => $business,
             'count' => $deliveryCount,
-            'user' => $user
+            'user' => $user,
+            'deliveries' => $deliveries,
+            'items' => $items
         );
         $this->load->template('analytics', $data);
     }
