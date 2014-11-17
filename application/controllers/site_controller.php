@@ -123,7 +123,30 @@ class Site_controller extends CI_Controller
         $this->load->template('adminH', $data);
     }
 
-    public function adminE()
+    public function analytics()
+    {
+        $business = $this->business->loadModel();
+        $employees = $this->user->getEmployees($business->name);
+        $deliveryCount = $this->delivery->getCompleted();
+        $user = $this->session->userdata('uname');
+        $customers = $this->customer->getCustomers();
+        $items = $this->item->getItems($business->name);
+        $deliveries = $this->delivery->getDeliveries($business->name);
+        $data = array(
+            'title' => 'analytics',
+            'employees'=> $employees,
+            'customers' => $customers,
+            'business' => $business,
+            'count' => $deliveryCount,
+            'user' => $user,
+            'deliveries' => $deliveries,
+            'items' => $items
+        );
+        $this->load->template('analytics', $data);
+    }
+
+
+/*    public function adminE()
     {
 
         $business= $this->business->loadModel();
@@ -137,7 +160,7 @@ class Site_controller extends CI_Controller
         );
 
         $this->load->template('settings', $data);
-    }
+    }*/
 
     /**
      * Render the item table for a business
