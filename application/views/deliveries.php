@@ -72,8 +72,20 @@ foreach ($deliverer->routes['route'] as $row)
             ?>
         </div>
         <div class="small-12 small-text-center">
+            <? if ($route->start == NULL && $route->cmplt == NULL){
+            ?>
+            <a id="timer" href="#" class="button round success" data-state="start">Start Timer</a>
+                <a id="cmplt" href="#" class="button round secondary">Route Complete</a><br>
+            <?}elseif($route->cmplt == NULL){?>
+            <a id="timer" href="#" class="button round alert" data-state="stop">Stop Timer</a>
+                <a id="cmplt" href="#" class="button round secondary">Route Complete</a><br>
+            <?}else{?>
+                <h4>This Route was Compleated at <?echo date('jS \of F Y h:i:s A', strtotime($route->cmplt))?></h4>
+                <a id="uncmplt" href="#" class="button round expand">Reopen Route</a><br>
+            <?}?>
             <span class="label">Total Distance:</span><span class="secondary label"><?echo round($route->dist,2)?> Miles</span>    <span class="label">Total deliveries:</span><span class="secondary label"><?echo $route->dcount?></span>    <span class="label">Total Items:</span><span class="secondary label"><?echo $route->icount?></span><br><br>
         </div>
+        <?if ($route->cmplt == NULL){?>
         <div class="small-12">
             <dl class="accordion" data-accordion>
                 <?
@@ -112,6 +124,7 @@ foreach ($deliverer->routes['route'] as $row)
 
             </dl>
         </div>
+        <?}?>
     </div>
 </div>
     <script>
@@ -133,14 +146,13 @@ foreach ($deliverer->routes['route'] as $row)
                 type: 'POST',
                 data: data,
                 success: function (){
-                    alert("we did it");
+                    console.log(msg);
                 }
             });
             return false;
         });
 
         $('.checkit').click(function(){
-            alert($(this).checked);
             if ($(this).data('check') == 'true'){
                 $(this).attr('src','assets/images/checkbox_empty.png');
                 $(this).data('check','false');
@@ -159,10 +171,60 @@ foreach ($deliverer->routes['route'] as $row)
                 type: 'POST',
                 data: data,
                 success: function (){
-                    alert("we did it");
+                    console.log(msg);
                 }
             });
             return false;
+        });
+
+        $('#timer').click(function(){
+            var data = {
+                rid: <?echo $route->rid?>,
+                state: $(this).data('state')
+            };
+            if($(this).data('state') == "start"){
+                $(this).attr('class','button round alert');
+                $(this).data('state',"stop");
+                $(this).text("Stop Timer");
+            }
+            else{
+                $(this).attr('class','button round success');
+                $(this).data('state',"start");
+                $(this).text("Start Timer");
+            }
+
+            $.ajax({
+                url: "<? echo site_url('startR')?>",
+                type: 'POST',
+                data: data
+            });
+            return false;
+        });
+
+        $('#cmplt').click(function(){
+            var data = {
+                rid: <?echo $route->rid?>
+            };
+
+            $.ajax({
+                url: "<? echo site_url('cmpltR')?>",
+                type: 'POST',
+                data: data
+            });
+            location.reload();
+        });
+
+        $('#uncmplt').click(function(){
+            var data = {
+                rid: <?echo $route->rid?>
+            };
+
+            $.ajax({
+                url: "<? echo site_url('uncmpltR')?>",
+                type: 'POST',
+                data: data
+            });
+            location.reload();
         });
     </script>
 <?

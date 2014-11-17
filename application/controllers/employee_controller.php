@@ -113,6 +113,10 @@ class employee_controller extends CI_Controller
 
     }
 
+    /**
+     * Setup run deliveries page
+     * @param null $rid optional rid to retrieve a selectedroute object
+     */
     public function deliveries($rid = null)
     {
         $user = $this->user->loadModel();
@@ -137,6 +141,9 @@ class employee_controller extends CI_Controller
         $this->load->template('deliveries', $data);
     }
 
+    /**
+     * switch to selected route
+     */
     public function changeR()
     {
         $pdata = $this->input->post(NULL, TRUE);
@@ -144,15 +151,48 @@ class employee_controller extends CI_Controller
         $this->deliveries($pdata['rid']);
     }
 
+    /**
+     * set route to completed
+     */
     public function dcheck(){
         $pdata = $this->input->post(NULL, TRUE);
-        //$this->route->cmpltD($pdata);
+        $this->route->cmpltD($pdata);
     }
 
+    /**
+     * set item to checked
+     */
     public function checkit(){
         $pdata = $this->input->post(NULL, TRUE);
 
-        //$this->route->checkI($pdata);
+        $this->route->checkI($pdata);
+    }
+
+    /**
+     * set start time for route
+     */
+    public function startR(){
+        $pdata = $this->input->post(NULL, TRUE);
+
+        $this->route->startR($pdata);
+    }
+
+    /**
+     * set completion time for route
+     */
+    public function cmpltR(){
+        $pdata = $this->input->post(NULL, TRUE);
+
+        $this->route->cmpltR($pdata);
+    }
+
+    /**
+     * unset completion time
+     */
+    public function uncmpltR(){
+        $pdata = $this->input->post(NULL, TRUE);
+
+        $this->route->uncmpltR($pdata);
     }
 
 

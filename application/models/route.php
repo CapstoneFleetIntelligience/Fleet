@@ -619,5 +619,50 @@ class route extends CI_Model
 
     }
 
+    public function cmpltD($data)
+    {
+        if ($data['check'] == 'true'){
+            $sql = "UPDATE delivery SET isdlv = 't' WHERE cid = ? AND schd = ?";
+        }
+        else{
+            $sql = "UPDATE delivery SET isdlv = 'f' WHERE cid = ? AND schd = ?";
+        }
+        $result = $this->db->query($sql,array($data['cid'],date("Y-m-d")));
+    }
+
+    public function checkI($data)
+    {
+        if ($data['check'] == 'true'){
+            $sql = "UPDATE del_item SET ischk = 't' WHERE cid = ? AND ischd = ? AND iid = ?";
+        }
+        else{
+            $sql = "UPDATE del_item SET ischk = 'f' WHERE cid = ? AND ischd = ? AND iid = ?";
+        }
+        $result = $this->db->query($sql,array($data['cid'],date("Y-m-d"),$data['iid']));
+    }
+
+    public function startR($data)
+    {
+        if ($data['state'] == "start"){
+            $sql = "UPDATE route SET start = current_timestamp WHERE bname = ? AND schd = ? AND rid = ?";
+        }
+        else{
+            $sql = "UPDATE route SET start = NULL WHERE bname = ? AND schd = ? AND rid = ?";
+        }
+        $result = $this->db->query($sql,array($this->session->userdata('bname'),date("Y-m-d"),$data['rid']));
+    }
+
+    public function cmpltR($data)
+    {
+        $sql = "UPDATE route SET cmplt = current_timestamp WHERE bname = ? AND schd = ? AND rid = ?";
+        $result = $this->db->query($sql,array($this->session->userdata('bname'),date("Y-m-d"),$data['rid']));
+    }
+
+    public function uncmpltR($data)
+    {
+        $sql = "UPDATE route SET cmplt = NULL WHERE bname = ? AND schd = ? AND rid = ?";
+        $result = $this->db->query($sql,array($this->session->userdata('bname'),date("Y-m-d"),$data['rid']));
+    }
+
 
 }

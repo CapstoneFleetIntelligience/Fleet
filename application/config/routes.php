@@ -77,6 +77,9 @@ $route['deliveries'] = "employee_controller/deliveries";
 $route['changeR'] = "employee_controller/changeR";
 $route['checkit'] = "employee_controller/checkit";
 $route['dcheck'] = "employee_controller/dcheck";
+$route['startR'] = "employee_controller/startR";
+$route['cmpltR'] = "employee_controller/cmpltR";
+$route['uncmpltR'] = "employee_controller/uncmpltR";
 
 
 /* End of file routes.php */
