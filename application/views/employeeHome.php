@@ -51,7 +51,7 @@ $pass = array(
             $i = 0;
             foreach ($deliverer->routes['route'] as $row){?>
 
-            var directionsDisplay<?echo $row->rid?> = new google.maps.DirectionsRenderer({preserveViewport: true , polylineOptions: {strokeColor: "<?php printf( "#%06X", mt_rand( 0, 0xFFFFFF )); ?>" , strokeOpacity: 0.3}});
+            var directionsDisplay<?echo $row->rid?> = new google.maps.DirectionsRenderer({preserveViewport: true , polylineOptions: {strokeColor: "<?php printf( "#%06X", mt_rand( 0, 0xFFFFFF )); ?>" , strokeOpacity: 0.4 , strokeWeight: 10 }});
 
             directionsDisplay<?echo $row->rid?>.setMap(map);
             var request<?echo $row->rid?> = {

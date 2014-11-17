@@ -589,7 +589,7 @@ class route extends CI_Model
         $sql2 = "SELECT * FROM capsql.route WHERE bname = ? AND schd = ? AND uname = ? AND rid = ?";
         $query2 = $this->db->query($sql2, array($this->bname,$this->schd,$this->uname,$rid) );
         $result2 = $query2->result();
-        $this->dist = $result2[0]->dist;
+        $this->dist = $result2[0]->dist * 0.00062137;
         $this->start = $result2[0]->start;
         $this->cmplt = $result2[0]->cmplt;
 

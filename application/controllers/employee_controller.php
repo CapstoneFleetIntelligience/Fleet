@@ -144,5 +144,16 @@ class employee_controller extends CI_Controller
         $this->deliveries($pdata['rid']);
     }
 
+    public function dcheck(){
+        $pdata = $this->input->post(NULL, TRUE);
+        //$this->route->cmpltD($pdata);
+    }
+
+    public function checkit(){
+        $pdata = $this->input->post(NULL, TRUE);
+
+        //$this->route->checkI($pdata);
+    }
+
 
 } 
