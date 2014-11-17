@@ -32,10 +32,9 @@ $query = $this->db->get_where('capsql.user', array('bname' => $business));
         ?>
         <div class="row">
             <div class="small-8 small-centered columns">
-                    <span class="prefix">
-                        Delivery Date
-                    </span>
-                <input type="date" required name="schd">
+				<label>Delivery Date
+					<input type="date" required name="schd">
+				</label>
             </div>
         </div>
         <table>
