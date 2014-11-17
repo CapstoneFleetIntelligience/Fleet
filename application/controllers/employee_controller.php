@@ -27,17 +27,6 @@ class employee_controller extends CI_Controller
         $this->load->template('employeeHome', $data);
     }
 
-    public function summary()
-    {
-
-        $data = array(
-            'title' => 'Summary',
-            'user' => $this->user->loadModel(),
-            'business' => $this->business->loadModel()
-        );
-        $this->load->template('summary', $data);
-    }
-
     public function changePass()
     {
         $this->user->updatePass($_POST['pass']);
@@ -123,4 +112,88 @@ class employee_controller extends CI_Controller
         if(!$this->email->send()) echo $this->email->print_debugger();
 
     }
+
+    /**
+     * Setup run deliveries page
+     * @param null $rid optional rid to retrieve a selectedroute object
+     */
+    public function deliveries($rid = null)
+    {
+        $user = $this->user->loadModel();
+        $business = $this->business->loadModel();
+        $deliverer = $this->deliverer->getDeliverer();
+        if ($deliverer == false){
+            $route = false;
+        }elseif ($rid == null){
+            $route = $this->route->getRoute($deliverer->routes['route'][0]->rid);
+        }else{
+            $route = $this->route->getRoute($rid);
+        }
+
+        $data = array(
+            'title' => 'home',
+            'user' => $user,
+            'business' => $business,
+            'deliverer' => $deliverer,
+            'route' => $route
+        );
+
+        $this->load->template('deliveries', $data);
+    }
+
+    /**
+     * switch to selected route
+     */
+    public function changeR()
+    {
+        $pdata = $this->input->post(NULL, TRUE);
+
+        $this->deliveries($pdata['rid']);
+    }
+
+    /**
+     * set route to completed
+     */
+    public function dcheck(){
+        $pdata = $this->input->post(NULL, TRUE);
+        $this->route->cmpltD($pdata);
+    }
+
+    /**
+     * set item to checked
+     */
+    public function checkit(){
+        $pdata = $this->input->post(NULL, TRUE);
+
+        $this->route->checkI($pdata);
+    }
+
+    /**
+     * set start time for route
+     */
+    public function startR(){
+        $pdata = $this->input->post(NULL, TRUE);
+
+        $this->route->startR($pdata);
+    }
+
+    /**
+     * set completion time for route
+     */
+    public function cmpltR(){
+        $pdata = $this->input->post(NULL, TRUE);
+
+        $this->route->cmpltR($pdata);
+    }
+
+    /**
+     * unset completion time
+     */
+    public function uncmpltR(){
+        $pdata = $this->input->post(NULL, TRUE);
+
+        $this->route->uncmpltR($pdata);
+    }
+
+
 } 
