@@ -96,7 +96,7 @@
                         <li><?php echo anchor('contact', 'Contact')?></li>
                     <?php else: ?>
                     <li><?php echo anchor('overview', 'Home'); ?></li>
-                    <li><?php echo anchor('analytics', 'Analytics') ?></li>
+                    <li><?php echo anchor('summary', 'Summary') ?></li>
                     <li><?php echo anchor('contact', 'Contact')?></li>
                     <?php endif; ?>
                 </ul>

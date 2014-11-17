@@ -27,6 +27,17 @@ class employee_controller extends CI_Controller
         $this->load->template('employeeHome', $data);
     }
 
+    public function summary()
+    {
+
+        $data = array(
+            'title' => 'Summary',
+            'user' => $this->user->loadModel(),
+            'business' => $this->business->loadModel()
+        );
+        $this->load->template('summary', $data);
+    }
+
     public function changePass()
     {
         $this->user->updatePass($_POST['pass']);
