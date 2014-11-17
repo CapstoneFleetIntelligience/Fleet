@@ -203,6 +203,29 @@
         });
         return false;
     });
+
+    $("#showPass").on('click', function(){
+        var text = $("#showPass").text();
+        $(".password").toggle();
+        if(text == 'Change Password') $("#showPass").text('Cancel');
+        else $("#showPass").text('Change Password');
+    });
+
+    $("#updateUser").on('click', function()
+    {
+        var form_data = $("#profileForm").serialize();
+
+        $.ajax({
+            url: "<?php echo site_url('employee_controller/updateUser') ?>",
+            type: "POST",
+            data: form_data,
+            success: function(msg){
+                console.log(msg);
+            }
+        });
+
+        return false;
+    })
 </script>
 
 </body>

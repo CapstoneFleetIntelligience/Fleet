@@ -101,7 +101,6 @@
                     <?php else: ?>
                     <li><?php echo anchor('overview', 'Home'); ?></li>
                     <li><?php echo anchor('deliveries', 'Run Deliveries'); ?></li>
-                    <li><?php echo anchor('analytics', 'Analytics') ?></li>
                     <li><?php echo anchor('contact', 'Contact')?></li>
                     <?php endif; ?>
                 </ul>
@@ -122,6 +121,7 @@
 					<?php elseif($role == 'M'): ?>
 						<li><?php echo anchor('logout', 'Log Out') ?></li>
 					<?php else: ?>
+                        <li><a href="#" data-reveal-id="profileModal">Profile</a></li>
 						<li><?php echo anchor('logout', 'Log Out') ?></li>
 					<?php endif; ?>
 				</ul>
@@ -191,7 +191,9 @@
     <div id="datepicker" style="font-size: 12px; text-align: center; display: inline-block"></div>
     <a class="close-reveal-modal">&#215;</a>
 </div>
+<div id="profileModal" class="reveal-modal small" data-reveal>
+    <?php  $this->load->view('profile', array('user' => $user)) ?>
+</div>
 		<?php endif; ?>
-    </div>
 </body>
 </html>
