@@ -112,4 +112,48 @@ class employee_controller extends CI_Controller
         if(!$this->email->send()) echo $this->email->print_debugger();
 
     }
+
+    public function deliveries($rid = null)
+    {
+        $user = $this->user->loadModel();
+        $business = $this->business->loadModel();
+        $deliverer = $this->deliverer->getDeliverer();
+        if ($deliverer == false){
+            $route = false;
+        }elseif ($rid == null){
+            $route = $this->route->getRoute($deliverer->routes['route'][0]->rid);
+        }else{
+            $route = $this->route->getRoute($rid);
+        }
+
+        $data = array(
+            'title' => 'home',
+            'user' => $user,
+            'business' => $business,
+            'deliverer' => $deliverer,
+            'route' => $route
+        );
+
+        $this->load->template('deliveries', $data);
+    }
+
+    public function changeR()
+    {
+        $pdata = $this->input->post(NULL, TRUE);
+
+        $this->deliveries($pdata['rid']);
+    }
+
+    public function dcheck(){
+        $pdata = $this->input->post(NULL, TRUE);
+        //$this->route->cmpltD($pdata);
+    }
+
+    public function checkit(){
+        $pdata = $this->input->post(NULL, TRUE);
+
+        //$this->route->checkI($pdata);
+    }
+
+
 } 

@@ -36,9 +36,13 @@ class deliverer extends CI_Model
         $result1 = $query1->result();
         $this->bname = $result1[0]->bname;
 
-        //store routes information
+        //get routes information
         $sql1 = "SELECT * FROM capsql.route WHERE bname = ? AND schd = ? AND uname = ?";
         $result1 = $this->db->query($sql1, array($this->bname,date("Y-m-d"),$this->uname) );
+        //store count of total routes
+        $this->rcount = $result1->num_rows();
+        if ($this->rcount == 0) return false;
+        //store route information
         $this->routes['route'] = $result1->result();
 
         //store total distance of routes
@@ -48,8 +52,7 @@ class deliverer extends CI_Model
         }
         $this->dist = $this->dist * 0.00062137;
 
-        //store count of total routes
-        $this->rcount = $result1->num_rows();
+
 
         //query to get delivery data
         $sql2 =  "SELECT * FROM capsql.delivery AS d, capsql.route AS r WHERE r.schd = d.schd AND r.rid = d.rid AND r.schd = ? AND r.uname = ? AND d.cid IN (SELECT cid FROM capsql.customer WHERE bname = ?)";
@@ -69,7 +72,7 @@ class deliverer extends CI_Model
         //loop through all routes
         foreach ($this->routes['route'] as $row){
             //query to get delivery data
-            $sql4 =  "SELECT * FROM capsql.delivery AS d, capsql.route AS r, capsql.customer AS c WHERE r.schd = d.schd AND r.rid = d.rid AND d.cid = c.cid AND r.schd = ? AND r.uname = ? AND r.rid = ? AND d.cid IN (SELECT cid FROM capsql.customer WHERE bname = ?)";
+            $sql4 =  "SELECT * FROM capsql.delivery AS d, capsql.route AS r, capsql.customer AS c WHERE r.schd = d.schd AND r.rid = d.rid AND d.cid = c.cid AND r.schd = ? AND r.uname = ? AND r.rid = ? AND d.cid IN (SELECT cid FROM capsql.customer WHERE bname = ?) ORDER BY d.position";
             $result4 = $this->db->query($sql4 ,array(date("Y-m-d"),$this->uname,$row->rid,$this->bname));
             //assemble waypoint as a single string
             if ($result4->num_rows() != 0){
@@ -87,6 +90,8 @@ class deliverer extends CI_Model
         }
         return $this;
     }
+
+
 
 
 } 

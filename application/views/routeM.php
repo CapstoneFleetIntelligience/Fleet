@@ -76,7 +76,7 @@ if ($success == true)
                 echo form_submit('','Yes, I want to delete these routes',"class='button alert small radius'");
                 echo form_close();
                 ?>
-                <h6>After routes are deleted you will be taken back to the Edit page.</h6>
+                <h6>After routes are deleted you will be taken back to the Home page.</h6>
                 <a class="close-reveal-modal">&#215;</a>
             </div>
         </div>

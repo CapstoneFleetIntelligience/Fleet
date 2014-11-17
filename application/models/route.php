@@ -8,12 +8,16 @@
  */
 class route extends CI_Model
 {
-    public $bname;
     public $uname;
+    public $bname;
+    public $dist;
     public $schd;
-    public $cmplt;
     public $start;
+    public $cmplt;
     public $rid;
+    public $deliveries;
+    public $dcount;
+    public $icount;
 
     /**
      * Construct Method
@@ -568,11 +572,52 @@ class route extends CI_Model
 
     }
 
-    /**
-     * function to get the total distance of a route
-     */
-    public function getDist($rid)
+    public function getRoute($rid)
     {
+        //store rid
+        $this->rid = $rid;
+        //store user name
+        $this->uname = $this->session->userdata('uname');
+
+        //store business name
+        $this->bname = $this->session->userdata('bname');
+
+        //store date
+        $this->schd = date("Y-m-d");
+
+        //get and store route data
+        $sql2 = "SELECT * FROM capsql.route WHERE bname = ? AND schd = ? AND uname = ? AND rid = ?";
+        $query2 = $this->db->query($sql2, array($this->bname,$this->schd,$this->uname,$rid) );
+        $result2 = $query2->result();
+        $this->dist = $result2[0]->dist * 0.00062137;
+        $this->start = $result2[0]->start;
+        $this->cmplt = $result2[0]->cmplt;
+
+        //query to get delivery data
+        $sql3 =  "SELECT * FROM capsql.delivery AS d, capsql.route AS r, capsql.customer AS c WHERE r.schd = d.schd AND r.rid = d.rid AND d.cid = c.cid AND r.schd = ? AND r.uname = ? AND r.rid = ? AND d.cid IN (SELECT cid FROM capsql.customer WHERE bname = ?) ORDER BY d.position";
+        $result3 = $this->db->query($sql3 ,array($this->schd,$this->uname,$rid,$this->bname));
+        //get count of all deliveries
+        $this->dcount = $result3->num_rows();
+
+        //store delivery data
+        $this->deliveries['deliveries'] = $result3->result();
+
+        $count = 0;
+        foreach ($this->deliveries['deliveries'] as $row){
+            $sql3 = "SELECT * FROM capsql.del_item AS d, capsql.chkitem AS i WHERE d.iid = i.iid AND d.cid = ? AND d.ischd = ?";
+            $result3 = $this->db->query($sql3,array($row->cid,$this->schd));
+            $temp = $result3->result();
+            $this->deliveries['checklist'][] = $temp;
+            foreach ($temp as $row2){
+                $count += $row2->qty;
+            }
+
+        }
+        $this->icount = $count;
+
+        return $this;
 
     }
+
+
 }

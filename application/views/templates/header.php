@@ -31,6 +31,7 @@
     <?php echo script_tag('assets/js/foundation/foundation.reveal.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.topbar.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.alert.js'); ?>
+    <?php echo script_tag('assets/js/foundation/foundation.accordion.js'); ?>
     <?php echo script_tag('assets/js/utility.js'); ?>
     <title><?php echo $title ?></title>
     <script type="text/javascript">
@@ -77,7 +78,8 @@
                     <?php
                     if($role == 'A'): ?>
                         <li><?php echo anchor('adminH', 'Home'); ?></li>
-                        <li><?php echo anchor('overview', 'Delivery'); ?></li>
+                        <li><?php echo anchor('overview', 'Routes Overview'); ?></li>
+                        <li><?php echo anchor('deliveries', 'Run Deliveries'); ?></li>
                         <li><?php echo anchor('analytics', 'Analytics') ?></li>
 			<li class="has-dropdown">
 				<a href="#">System Tools</a>
@@ -92,10 +94,13 @@
 			</li>
                     <?php elseif($role == 'M'): ?>
                         <li><?php echo anchor('managerOverview', 'Home'); ?></li>
+                        <li><?php echo anchor('overview', 'Routes Overview'); ?></li>
+                        <li><?php echo anchor('deliveries', 'Run Deliveries'); ?></li>
                         <li><?php echo anchor('analytics', 'Analytics') ?></li>
                         <li><?php echo anchor('contact', 'Contact')?></li>
                     <?php else: ?>
                     <li><?php echo anchor('overview', 'Home'); ?></li>
+                    <li><?php echo anchor('deliveries', 'Run Deliveries'); ?></li>
                     <li><?php echo anchor('analytics', 'Analytics') ?></li>
                     <li><?php echo anchor('contact', 'Contact')?></li>
                     <?php endif; ?>

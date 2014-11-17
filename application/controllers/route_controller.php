@@ -85,6 +85,6 @@ class route_controller extends CI_Controller
         $this->route->destNclnR($pdata['schd']);
 
         //return to edit page
-        redirect(site_url("adminE"));
+        redirect(site_url("adminH"));
     }
 }
