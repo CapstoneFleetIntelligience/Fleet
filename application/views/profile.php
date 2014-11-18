@@ -44,7 +44,7 @@
                 </label>
             </div>
             <div class="small-9 columns">
-                <input type="password" name="currentPass" placeholder="Current Password">
+                <input type="password" name="pass" placeholder="Current Password">
             </div>
         </div>
         <div class="row">

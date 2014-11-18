@@ -220,6 +220,7 @@
             type: "POST",
             data: form_data,
             success: function(data){
+                console.log(data);
                 alert('Update successful');
             }
         });

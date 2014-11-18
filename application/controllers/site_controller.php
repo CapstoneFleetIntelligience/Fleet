@@ -106,6 +106,7 @@ class Site_controller extends CI_Controller
      */
     public function adminH()
     {
+
         $business = $this->business->loadModel();
         $customers = $this->customer->getCustomers();
         $items = $this->item->getItems($business->name);
