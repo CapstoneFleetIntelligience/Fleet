@@ -13,6 +13,10 @@ class employee_controller extends CI_Controller
      */
     public function index()
     {
+        $role = $this->session->userdata('role');
+
+        if($role)
+        {
         $user = $this->user->loadModel();
         $business = $this->business->loadModel();
         $deliverer = $this->deliverer->getDeliverer();
@@ -25,6 +29,8 @@ class employee_controller extends CI_Controller
         );
 
         $this->load->template('employeeHome', $data);
+        }
+       else redirect('');
     }
 
     public function changePass()
@@ -119,6 +125,10 @@ class employee_controller extends CI_Controller
      */
     public function deliveries($rid = null)
     {
+        $role = $this->session->userdata('role');
+
+        if ($role)
+        {
         $user = $this->user->loadModel();
         $business = $this->business->loadModel();
         $deliverer = $this->deliverer->getDeliverer();
@@ -139,6 +149,9 @@ class employee_controller extends CI_Controller
         );
 
         $this->load->template('deliveries', $data);
+        }
+        else redirect('');
+
     }
 
     /**

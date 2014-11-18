@@ -133,6 +133,10 @@ class Site_controller extends CI_Controller
 
     public function analytics()
     {
+        $role = $this->session->userdata('role');
+
+        if($role)
+        {
         $business = $this->business->loadModel();
         $employees = $this->user->getEmployees($business->name);
         $deliveryCount = $this->delivery->getCompleted();
@@ -151,6 +155,8 @@ class Site_controller extends CI_Controller
             'items' => $items
         );
         $this->load->template('analytics', $data);
+        }
+        else redirect('');
     }
 
 
