@@ -6,6 +6,7 @@
  * Time: 6:16 PM
  */
 ?>
+
 <div class="container">
     <div class="row">
         <div class="small-centered">
@@ -14,9 +15,7 @@
                     .$business->bphone
                     .'</a>' ?>
             </h4>
-            <b><h4 class="text-center">Address:</b> <?php echo '<a href="https://www.google
-            .com/maps/dir/Current+Location/'
-                    .$business->baddress.'" target="_blank" rel="external">'.$business->baddress.'</a>' ?>
+            <b><h4 class="text-center">Address:</b> <?php echo '<a href="https://www.google.com/maps/dir/Current+Location/'.$business->baddress.'" target="_blank" rel="external">'.$business->baddress.'</a>' ?>
             </h4>
         </div>
     </div>

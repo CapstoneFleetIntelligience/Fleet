@@ -28,7 +28,7 @@
             <label for="phone" class="right inline">Phone:</label>
         </div>
         <div class="small-9 columns">
-            <input name="phone" type="tel" placeholder="telephone" value="<?php echo $user->uphone ?>">
+            <input name="uphone" type="tel" placeholder="telephone" value="<?php echo $user->uphone ?>">
         </div>
     </div>
     <div class="row">

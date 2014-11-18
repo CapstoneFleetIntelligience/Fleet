@@ -145,7 +145,7 @@ class user extends CI_Model
         $update = array(
             'email' => $user['email'],
             'role' => $user['role'],
-            'uphone' => $user['phone']
+            'uphone' => $user['uphone']
         );
         $this->db->where('uname', $user['uname']);
         if ($this->db->update('user', $update)) {

@@ -27,6 +27,29 @@ class employee_controller extends CI_Controller
         $this->load->template('employeeHome', $data);
     }
 
+    public function managerOverview()
+    {
+        $user = $this->user->loadModel();
+        $deliverer = $this->deliverer->getDeliverer();
+        $business = $this->business->loadModel();
+        $customers = $this->customer->getCustomers();
+        $deliveries = $this->delivery->getDeliveries($business->name);
+        $employees = $this->user->getEmployees($business->name);
+
+        $data = array(
+            'title' => 'Overview',
+            'user' => $user,
+            'business' => $business,
+            'customers' => $customers,
+            'employees' => $employees,
+            'deliveries' => $deliveries,
+            'deliverer' => $deliverer
+        );
+
+        $this->load->template('managerOverview', $data);
+    }
+
+
     public function updateUser()
     {
         $user = array_chunk($this->input->post(NULL, true), 4, true);
@@ -48,10 +71,11 @@ class employee_controller extends CI_Controller
     public function contact()
     {
         $business = $this->business->loadModel();
-
+        $user = $this->user->loadModel();
         $data = array(
           'title' => 'Contact',
-          'business'=>$business
+          'business'=>$business,
+          'user' => $user
         );
 
         $this->load->template('contact', $data);
