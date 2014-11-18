@@ -18,6 +18,7 @@ class route extends CI_Model
     public $deliveries;
     public $dcount;
     public $icount;
+    public $gmapsite;
 
     /**
      * Construct Method
@@ -582,6 +583,12 @@ class route extends CI_Model
         //store business name
         $this->bname = $this->session->userdata('bname');
 
+        //get business address
+        $sql1 = "SELECT * FROM business WHERE name = ?";
+        $query1 = $this->db->query($sql1,array($this->bname));
+        $result1 = $query1->result();
+        $origin = str_replace(' ','+',$result1[0]->baddress);
+
         //store date
         $this->schd = date("Y-m-d");
 
@@ -598,6 +605,14 @@ class route extends CI_Model
         $result3 = $this->db->query($sql3 ,array($this->schd,$this->uname,$rid,$this->bname));
         //get count of all deliveries
         $this->dcount = $result3->num_rows();
+
+        //delivery url
+        foreach ($result3->result() as $drow)
+        {
+            $address[] = str_replace(' ','+',$drow->caddress);
+        }
+        $addresses = implode("+to:",$address);
+        $this->gmapsite = "https://maps.google.com/maps?saddr=".$origin."&daddr=".$addresses."+to:".$origin;
 
         //store delivery data
         $this->deliveries['deliveries'] = $result3->result();

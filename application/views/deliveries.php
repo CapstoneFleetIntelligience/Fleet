@@ -75,10 +75,10 @@ foreach ($deliverer->routes['route'] as $row)
             <? if ($route->start == NULL && $route->cmplt == NULL){
             ?>
             <a id="timer" href="#" class="button round success" data-state="start">Start Timer</a>
-                <a id="cmplt" href="#" class="button round secondary">Route Complete</a><br>
+                <a id="cmplt" href="#" class="button round secondary">Route Complete</a><a href="<?echo $route->gmapsite ?>" target="_blank"><img src="assets\images\Google-Maps-icon.png" alt="GMaps" width="96" height="96"></a><br>
             <?}elseif($route->cmplt == NULL){?>
             <a id="timer" href="#" class="button round alert" data-state="stop">Stop Timer</a>
-                <a id="cmplt" href="#" class="button round secondary">Route Complete</a><br>
+                <a id="cmplt" href="#" class="button round secondary">Route Complete</a><a href="<?echo $route->gmapsite ?>" target="_blank"><img src="assets\images\Google-Maps-icon.png" alt="GMaps" width="96" height="96"></a><br>
             <?}else{?>
                 <h4>This Route was Compleated at <?echo date('jS \of F Y h:i:s A', strtotime($route->cmplt))?></h4>
                 <a id="uncmplt" href="#" class="button round expand">Reopen Route</a><br>
@@ -95,6 +95,7 @@ foreach ($deliverer->routes['route'] as $row)
                     <dd class="accordion-navigation">
                         <a href="#panel<?echo $count?>"><?echo $leg->cname." at ".$leg->caddress?></a>
                         <div id="panel<?echo $count?>" class="content">
+                            <a href="https://www.google.com/maps/dir/Current+Location/<?echo str_replace(' ','+',$leg->caddress)?>" target="_blank"><img src="assets\images\Google-Maps-icon.png" alt="GMaps" width="48" height="48"></a>
                         <?
                         echo "<h4>";
                         if ($leg->isdlv == 't')echo "<input class=\"dcheck\" type=\"image\" src=\"assets\\images\\checkbox_checked.png\" alt=\"Delivered\" width=\"48\" height=\"48\" data-cid=\"".$leg->cid."\" data-check='true'>";
