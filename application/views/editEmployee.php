@@ -20,7 +20,8 @@ $options = array(
             <thead>
             <tr>
                 <th width="200">Username</th>
-                <th width="240">Email</th>
+                <th width="200">Email</th>
+                <th width="200">Phone</th>
                 <th width="150">Role</th>
                 <th width="80">Update</th>
                 <th width="80">Delete</th>
@@ -32,6 +33,7 @@ $options = array(
                 echo '<tr id="updateUser-' . $employee->uname . '">';
                 echo '<td>' . $employee->uname . '</td>';
                 echo '<td>' . form_input('email', $employee->email) . '</td>';
+                echo '<td>' . form_input('uphone', $employee->uphone) . '</td>';
                 echo '<td>' . form_dropdown('role', $options, $employee->role) . '</td>';
                 echo '<td><button type="button" class="button tiny radius update" id="' . $employee->uname . '">Update</button></td>';
                 echo '<td><button type="button" class="button tiny radius delete" id="' . $employee->uname . '">Delete</button></td>';

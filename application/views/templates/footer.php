@@ -219,8 +219,8 @@
             url: "<?php echo site_url('employee_controller/updateUser') ?>",
             type: "POST",
             data: form_data,
-            success: function(msg){
-                console.log(msg);
+            success: function(data){
+                alert('Update successful');
             }
         });
 

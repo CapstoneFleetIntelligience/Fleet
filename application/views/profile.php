@@ -7,14 +7,14 @@
  */
 ?>
 
-<div class="container">
+<div class="container profile">
     <div class="small-centered">
         <div class="row">
             <h3 class="text-center">Edit <?php echo $user->uname ?>'s Profile</h3>
             <hr/>
         </div>
     </div>
-    <?php echo form_open('', 'id="profileForm" '); ?>
+    <?php echo form_open('', 'id="profileForm" ', array('uname' => $user->uname, 'role' => $user->role)); ?>
     <div class="row">
         <div class="small-3 columns">
             <label for="email" class="right inline">Email:</label>

@@ -144,13 +144,14 @@ class user extends CI_Model
     {
         $update = array(
             'email' => $user['email'],
-            'role' => $user['role']
+            'role' => $user['role'],
+            'uphone' => $user['phone']
         );
         $this->db->where('uname', $user['uname']);
         if ($this->db->update('user', $update)) {
-            $employees = $this->getEmployees($user['bname']);
-            echo $this->load->view('editEmployee', array('employees' => $employees));
+            return true;
         }
+        else throw new Exception('Failed to update user');
     }
 
     /**

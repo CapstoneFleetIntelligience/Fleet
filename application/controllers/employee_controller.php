@@ -29,7 +29,12 @@ class employee_controller extends CI_Controller
 
     public function updateUser()
     {
-        
+        $user = array_chunk($this->input->post(NULL, true), 4, true);
+        $this->user->update($user[0]);
+        if(!empty($user[1]['newPass']))
+        {
+            $this->user->changePass($user[1]);
+        }
     }
 
     public function changePass()
@@ -84,8 +89,11 @@ class employee_controller extends CI_Controller
     public function updateEmployee()
     {
         $data = $this->input->post(NULL, TRUE);
-        $this->user->update($data);
-
+        if($this->user->update($data))
+        {
+            $employees = $this->user->getEmployees($data['bname']);
+            echo $this->load->view('editEmployee', array('employees' => $employees));;
+        }
     }
 
 
