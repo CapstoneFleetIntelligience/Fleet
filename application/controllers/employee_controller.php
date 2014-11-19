@@ -33,6 +33,39 @@ class employee_controller extends CI_Controller
        else redirect('');
     }
 
+    public function managerOverview()
+    {
+        $user = $this->user->loadModel();
+        $deliverer = $this->deliverer->getDeliverer();
+        $business = $this->business->loadModel();
+        $customers = $this->customer->getCustomers();
+        $deliveries = $this->delivery->getDeliveries($business->name);
+        $employees = $this->user->getEmployees($business->name);
+
+        $data = array(
+            'title' => 'Overview',
+            'user' => $user,
+            'business' => $business,
+            'customers' => $customers,
+            'employees' => $employees,
+            'deliveries' => $deliveries,
+            'deliverer' => $deliverer
+        );
+
+        $this->load->template('managerOverview', $data);
+    }
+
+
+    public function updateUser()
+    {
+        $user = array_chunk($this->input->post(NULL, true), 4, true);
+        $this->user->update($user[0]);
+        if(!empty($user[1]['newPass']))
+        {
+            $this->user->changePass($user[1]);
+        }
+    }
+
     public function changePass()
     {
         $this->user->updatePass($_POST['pass']);
@@ -44,10 +77,11 @@ class employee_controller extends CI_Controller
     public function contact()
     {
         $business = $this->business->loadModel();
-
+        $user = $this->user->loadModel();
         $data = array(
           'title' => 'Contact',
-          'business'=>$business
+          'business'=>$business,
+          'user' => $user
         );
 
         $this->load->template('contact', $data);
@@ -85,8 +119,11 @@ class employee_controller extends CI_Controller
     public function updateEmployee()
     {
         $data = $this->input->post(NULL, TRUE);
-        $this->user->update($data);
-
+        if($this->user->update($data))
+        {
+            $employees = $this->user->getEmployees($data['bname']);
+            echo $this->load->view('editEmployee', array('employees' => $employees));;
+        }
     }
 
 

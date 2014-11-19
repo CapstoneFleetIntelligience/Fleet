@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="small-centered">
-            <h2 class="text-center"><?php echo $user ?></h2>
+            <h2 class="text-center"><?php echo $user->uname ?></h2>
 
             <p class="text-justify"><b>Total deliveries made today: </b><?php echo $count ?></p>
         </div>
