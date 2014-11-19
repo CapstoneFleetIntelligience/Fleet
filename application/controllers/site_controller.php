@@ -106,7 +106,7 @@ class Site_controller extends CI_Controller
      */
     public function adminH()
     {
-
+        $user = $this->user->loadModel();
         $business = $this->business->loadModel();
         $customers = $this->customer->getCustomers();
         $items = $this->item->getItems($business->name);
@@ -119,7 +119,8 @@ class Site_controller extends CI_Controller
             'items' => $items,
             'deliveries' => $deliveries,
             'employees' => $employees,
-            'business' => $business
+            'business' => $business,
+            'user' => $user,
         );
         $this->load->template('adminH', $data);
     }
@@ -129,7 +130,7 @@ class Site_controller extends CI_Controller
         $business = $this->business->loadModel();
         $employees = $this->user->getEmployees($business->name);
         $deliveryCount = $this->delivery->getCompleted();
-        $user = $this->session->userdata('uname');
+        $user = $this->user->loadModel();
         $customers = $this->customer->getCustomers();
         $items = $this->item->getItems($business->name);
         $deliveries = $this->delivery->getDeliveries($business->name);
