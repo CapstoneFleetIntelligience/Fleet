@@ -34,6 +34,7 @@
     <?php echo script_tag('assets/js/foundation/foundation.alert.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.accordion.js'); ?>
     <?php echo script_tag('assets/js/utility.js'); ?>
+	<?php echo script_tag('assets/foundation/foundation.joyride.js'); ?>
     <title><?php echo $title ?></title>
     <script type="text/javascript">
         $(function () {

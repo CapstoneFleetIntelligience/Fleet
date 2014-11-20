@@ -1,3 +1,4 @@
+
 <div class="row">
 	<div class="small-12 columns">
 		<img src="http://placehold.it/1000x400&text=[img]">
