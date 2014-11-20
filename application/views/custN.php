@@ -56,6 +56,9 @@ $note = array(
 						</div>
 					</div>
 				</div>
+        <?php echo form_open('addCust', "data-abide", "id = 'add_cust'");
+        echo form_fieldset('Enter details for new delivery');
+        ?>
 
         <div class="row">
             <div class="small-3 large-4 columns">
@@ -98,14 +101,14 @@ $note = array(
                 <div class="small-2 columns right">
                     <?php
                     echo form_label("No", 'n');
-                    echo form_radio($nolist);
                     ?>
+                    <input type="radio" id="nolist" name="nolist" required>
                 </div>
                 <div class="small-2 columns right">
                     <?php
                     echo form_label("Yes", 'y');
-                    echo form_radio($haslist);
                     ?>
+                    <input type="radio" id="haslist" name="haslist" required>
                 </div>
                 <small class="error">Please select "Yes" or "No".</small>
             </div>

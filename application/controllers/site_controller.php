@@ -106,29 +106,43 @@ class Site_controller extends CI_Controller
      */
     public function adminH()
     {
-        $business = $this->business->loadModel();
-        $customers = $this->customer->getCustomers();
-        $items = $this->item->getItems($business->name);
-        $deliveries = $this->delivery->getDeliveries($business->name);
-        $employees = $this->user->getEmployees($business->name);
+        $role = $this->session->userdata('role');
 
-        $data = array(
-            'title' => 'Managers Home',
-            'customers' => $customers,
-            'items' => $items,
-            'deliveries' => $deliveries,
-            'employees' => $employees,
-            'business' => $business
-        );
-        $this->load->template('adminH', $data);
+       if($role == 'A')
+       {
+           $user = $this->user->loadModel();
+           $business = $this->business->loadModel();
+           $customers = $this->customer->getCustomers();
+           $items = $this->item->getItems($business->name);
+           $deliveries = $this->delivery->getDeliveries($business->name);
+           $employees = $this->user->getEmployees($business->name);
+
+           $data = array(
+               'title' => 'Managers Home',
+               'customers' => $customers,
+               'items' => $items,
+               'deliveries' => $deliveries,
+               'employees' => $employees,
+               'business' => $business,
+               'user' => $user,
+           );
+
+           $this->load->template('adminH', $data);
+       }
+        else redirect('');
+
     }
 
     public function analytics()
     {
+        $role = $this->session->userdata('role');
+
+        if($role)
+        {
         $business = $this->business->loadModel();
         $employees = $this->user->getEmployees($business->name);
         $deliveryCount = $this->delivery->getCompleted();
-        $user = $this->session->userdata('uname');
+        $user = $this->user->loadModel();
         $customers = $this->customer->getCustomers();
         $items = $this->item->getItems($business->name);
         $deliveries = $this->delivery->getDeliveries($business->name);
@@ -143,6 +157,8 @@ class Site_controller extends CI_Controller
             'items' => $items
         );
         $this->load->template('analytics', $data);
+        }
+        else redirect('');
     }
 
 

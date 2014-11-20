@@ -111,6 +111,7 @@ class user extends CI_Model
     public function authenticate($credentials)
     {
 
+        $this->db->select('uname, role, pass, salt, email, bname, uphone');
         $query = $this->db->get_where('user', array('uname' => $credentials['uname']));
 
         foreach ($query->row() as $key => $value) {
@@ -120,7 +121,7 @@ class user extends CI_Model
         $pass = $this->salt . sha1($credentials['pass']);
 
         if ($this->pass == $pass) return $this;
-        else return 'failed';
+        else return false;
     }
 
     /**
@@ -144,13 +145,14 @@ class user extends CI_Model
     {
         $update = array(
             'email' => $user['email'],
-            'role' => $user['role']
+            'role' => $user['role'],
+            'uphone' => $user['uphone']
         );
         $this->db->where('uname', $user['uname']);
         if ($this->db->update('user', $update)) {
-            $employees = $this->getEmployees($user['bname']);
-            echo $this->load->view('editEmployee', array('employees' => $employees));
+            return true;
         }
+        else throw new Exception('Failed to update user');
     }
 
     /**
@@ -165,6 +167,21 @@ class user extends CI_Model
         $this->encryptPass();
         if($this->db->update('user', array('pass' => $this->pass, 'salt' => $this->salt), array('uname' => $user)));
         else throw new Exception('failed to update', 404);
+    }
+
+    public function changePass($passData)
+    {
+        $passData['uname'] = $this->session->userdata('uname');
+        $user = $this->authenticate($passData);
+        if($user)
+        {
+            $user->pass = $passData['newPass'];
+            $user->encryptPass();
+            $this->db->update('user', $user, "uname = '$user->uname'");
+            return true;
+        }
+        else
+            return false;
     }
 
 

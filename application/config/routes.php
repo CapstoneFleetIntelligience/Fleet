@@ -41,6 +41,7 @@
 $route['default_controller'] = "site_controller";
 $route[''] = "site_controller/index";
 $route['404_override'] = '';
+$route['managerOverview'] = "employee_controller/managerOverview";
 $route['registration'] = "site_controller/registration";
 $route['register'] = "site_controller/register";
 $route['login'] = "site_controller/login";
@@ -77,6 +78,9 @@ $route['deliveries'] = "employee_controller/deliveries";
 $route['changeR'] = "employee_controller/changeR";
 $route['checkit'] = "employee_controller/checkit";
 $route['dcheck'] = "employee_controller/dcheck";
+$route['startR'] = "employee_controller/startR";
+$route['cmpltR'] = "employee_controller/cmpltR";
+$route['uncmpltR'] = "employee_controller/uncmpltR";
 
 
 /* End of file routes.php */

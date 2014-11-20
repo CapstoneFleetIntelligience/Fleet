@@ -18,6 +18,7 @@ class route extends CI_Model
     public $deliveries;
     public $dcount;
     public $icount;
+    public $gmapsite;
 
     /**
      * Construct Method
@@ -582,6 +583,12 @@ class route extends CI_Model
         //store business name
         $this->bname = $this->session->userdata('bname');
 
+        //get business address
+        $sql1 = "SELECT * FROM business WHERE name = ?";
+        $query1 = $this->db->query($sql1,array($this->bname));
+        $result1 = $query1->result();
+        $origin = str_replace(' ','+',$result1[0]->baddress);
+
         //store date
         $this->schd = date("Y-m-d");
 
@@ -598,6 +605,14 @@ class route extends CI_Model
         $result3 = $this->db->query($sql3 ,array($this->schd,$this->uname,$rid,$this->bname));
         //get count of all deliveries
         $this->dcount = $result3->num_rows();
+
+        //delivery url
+        foreach ($result3->result() as $drow)
+        {
+            $address[] = str_replace(' ','+',$drow->caddress);
+        }
+        $addresses = implode("+to:",$address);
+        $this->gmapsite = "https://maps.google.com/maps?saddr=".$origin."&daddr=".$addresses."+to:".$origin;
 
         //store delivery data
         $this->deliveries['deliveries'] = $result3->result();
@@ -617,6 +632,51 @@ class route extends CI_Model
 
         return $this;
 
+    }
+
+    public function cmpltD($data)
+    {
+        if ($data['check'] == 'true'){
+            $sql = "UPDATE delivery SET isdlv = 't' WHERE cid = ? AND schd = ?";
+        }
+        else{
+            $sql = "UPDATE delivery SET isdlv = 'f' WHERE cid = ? AND schd = ?";
+        }
+        $result = $this->db->query($sql,array($data['cid'],date("Y-m-d")));
+    }
+
+    public function checkI($data)
+    {
+        if ($data['check'] == 'true'){
+            $sql = "UPDATE del_item SET ischk = 't' WHERE cid = ? AND ischd = ? AND iid = ?";
+        }
+        else{
+            $sql = "UPDATE del_item SET ischk = 'f' WHERE cid = ? AND ischd = ? AND iid = ?";
+        }
+        $result = $this->db->query($sql,array($data['cid'],date("Y-m-d"),$data['iid']));
+    }
+
+    public function startR($data)
+    {
+        if ($data['state'] == "start"){
+            $sql = "UPDATE route SET start = current_timestamp WHERE bname = ? AND schd = ? AND rid = ?";
+        }
+        else{
+            $sql = "UPDATE route SET start = NULL WHERE bname = ? AND schd = ? AND rid = ?";
+        }
+        $result = $this->db->query($sql,array($this->session->userdata('bname'),date("Y-m-d"),$data['rid']));
+    }
+
+    public function cmpltR($data)
+    {
+        $sql = "UPDATE route SET cmplt = current_timestamp WHERE bname = ? AND schd = ? AND rid = ?";
+        $result = $this->db->query($sql,array($this->session->userdata('bname'),date("Y-m-d"),$data['rid']));
+    }
+
+    public function uncmpltR($data)
+    {
+        $sql = "UPDATE route SET cmplt = NULL WHERE bname = ? AND schd = ? AND rid = ?";
+        $result = $this->db->query($sql,array($this->session->userdata('bname'),date("Y-m-d"),$data['rid']));
     }
 
 
