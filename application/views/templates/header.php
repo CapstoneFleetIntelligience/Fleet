@@ -40,6 +40,44 @@
             $("#scd").datepicker();
         });
 
+    <?php
+        $sql = "select schd from route where bname = ? and schd >= current_date group by schd";
+        $dquery = $this->db->query($sql,$this->session->userdata('bname'));
+
+        if ($dquery->num_rows() > 0){
+            foreach ($dquery->result() as $row)
+            {
+                $ddate[] = "'".$row->schd."'";
+            }
+            $ddates = implode(",",$ddate);
+        }else{
+            $ddates = '';
+        }
+    ?>
+
+
+        $(function() {
+            var arrayD = [<? echo $ddates ?>];
+            $( "#datepicker" ).datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: "yy-mm-dd",
+                beforeShowDay: function(date){
+                    var f = $.datepicker.formatDate('yy-mm-dd', date)
+                    if ($.inArray(f, arrayD) > -1) {
+                        return [true];
+                    }else{
+                        return [false];
+                    }
+                },
+                onSelect: function(dateText) {
+                    window.location = '<?php echo site_url('routeE')?>/' + dateText;
+                }
+            });
+        });
+
+        $('#delDate').datepicker();
+
     </script>
 </head>
 <body>
