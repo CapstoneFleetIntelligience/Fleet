@@ -15,8 +15,19 @@ class route_controller extends CI_Controller
     //open view for route preparation to gather date of delivery and selection of user to perform deliveries
     public function routeN()
     {
+        $user = $this->user->loadModel();
+        $business = $this->business->loadModel();
+        $customers = $this->customer->getCustomers();
+        $items = $this->item->getItems($business->name);
+        $deliveries = $this->delivery->getDeliveries($business->name);
+        $employees = $this->user->getEmployees($business->name);
         $data = array(
-            'title' => 'Setup Routes'
+            'title' => 'Setup Routes',
+            'user' => $user,
+            'customers' => $customers,
+            'items' => $items,
+            'deliveries' => $deliveries,
+            'employees' => $employees
         );
 
         $this->load->template('routeN', $data);
@@ -25,10 +36,23 @@ class route_controller extends CI_Controller
     //open view for route management to delete routes or change the users assigned to those routes
     public function routeM($schd, $success = false)
     {
+        $user = $this->user->loadModel();
+        $business = $this->business->loadModel();
+        $customers = $this->customer->getCustomers();
+        $items = $this->item->getItems($business->name);
+        $deliveries = $this->delivery->getDeliveries($business->name);
+        $employees = $this->user->getEmployees($business->name);
+
         $data = array(
             'title' => 'Manage Routes',
             'schd' => $schd,
-            'success' => $success
+            'success' => $success,
+            'user' => $user,
+            'business' => $business,
+            'items' => $items,
+            'customers' => $customers,
+            'deliveries' => $deliveries,
+            'employees' => $employees
         );
 
         $this->load->template('routeM', $data);

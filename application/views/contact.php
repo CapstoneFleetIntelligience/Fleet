@@ -17,14 +17,12 @@ rel="external">'.$business->baddress.'</a>';
             if($this->agent->is_mobile())
             {
                 $platform = $this->agent->platform();
-                //echo $platform;
                 if($platform=='Linux') $url =  '<a href="geo://0,0?q='.$business->baddress.'" data-rel="external">'
                     .$business->baddress.'</a>';
                 elseif($platform=='Mac OS X')  $url =  '<a href="geo://0,0?q='.$business->baddress.'" data-rel="external">'.$business->baddress.'</a>';
                 else $url = '<a href="maps:'.$business->baddress.'">'.$business->baddress.'</a>';
             }
             ?>
-
             <h2 class="text-center"><?php echo $business->name ?></h2>
             <b><h4 class="text-center">Phone Number:</b> <?php echo '<a href="tel:'.$business->bphone.'">'
                     .$business->bphone
