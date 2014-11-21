@@ -39,8 +39,10 @@
         $(function () {
             $("#scd").datepicker();
         });
-
+    </script>
     <?php
+    $set = $this->session->userdata('bname');
+    if ($set){
         $sql = "select schd from route where bname = ? and schd >= current_date group by schd";
         $dquery = $this->db->query($sql,$this->session->userdata('bname'));
 
@@ -54,7 +56,7 @@
             $ddates = '';
         }
     ?>
-
+        <script>
 
         $(function() {
             var arrayD = [<? echo $ddates ?>];
@@ -79,6 +81,7 @@
         $('#delDate').datepicker();
 
     </script>
+    <?}?>
 </head>
 <body>
 <div class="row header">
