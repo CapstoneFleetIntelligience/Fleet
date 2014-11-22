@@ -92,17 +92,15 @@
 
 
     $('#updateBusinessPass').click(function() {
-        var pass = {
-            bpass: $('#bpass').val(),
-            name: $('#bname').val()
-        };
+        var info = $("#editBusinessPass").serialize();
 
         $.ajax({
             url: "<?php echo site_url('Settings_controller/editPass')?>",
             type: 'POST',
-            data: pass,
+            data: info,
             success: function (msg) {
                 $('#editPassModal').foundation('reveal', 'close');
+                alert(msg);
             }
         });
         return false;
@@ -226,7 +224,37 @@
         });
 
         return false;
-    })
+    });
+
+    $('.employee_table').on("click", ".update", function(){
+        $(this).unbind('click');
+        var id = $(this).attr('id');
+        var data = $('#updateUser-'+id+' :input').serialize();
+        editEmployee('update', data);
+    });
+
+    $('.employee_table').on("click", ".delete", function(){
+        $(this).unbind('click');
+        var id = $(this).attr('id');
+        var data = $('#updateUser-'+id+' :input').serialize();
+        editEmployee('delete', data);
+    });
+
+    $("button[name*='remove']").on("click", function(){
+         var id ={
+             id: this.id
+        };
+
+        $.ajax({
+          url: "<?php echo site_url('business_controller/removeItem') ?>",
+            type: 'POST',
+            data: id,
+            success: function(msg){
+                console.log(msg);
+            }
+        })
+    });
+
 </script>
 
 </body>

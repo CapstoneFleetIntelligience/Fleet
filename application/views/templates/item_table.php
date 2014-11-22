@@ -2,13 +2,15 @@
 $name = array(
     'name' => 'iname',
     'id' => 'itemN',
+    'placeholder' => 'Enter new item here'
 );
 $description = array(
     'name' => 'description',
     'id' => 'description',
+    'placeholder' => 'Enter items description',
     'rows' => '4',
 );
-$query = $this->db->get_where('capsql.chkitem',array('bname' => $this->session->userdata('bname')));
+
 ?>
    <div class="row item_table">
     <table>
@@ -16,24 +18,31 @@ $query = $this->db->get_where('capsql.chkitem',array('bname' => $this->session->
         <tr>
             <th>Item name</th>
             <th>Item Description</th>
+            <th>Remove</th>
         </tr>
         </thead>
         <tbody>
         <?php
-        if(($query->result())):
-        foreach ($query->result() as $row)
+        if(!empty($items)):
+        foreach ($items as $item)
         {
-            echo '<tr>';
-            echo '<td>'.$row->iname.'</td>';
-            echo '<td>'.$row->description.'</td>';
-            echo '</tr>';
+            if($item->active == 't')
+            {
+                echo '<tr>';
+                echo '<td>'.$item->iname.'</td>';
+                echo '<td>'.$item->description.'</td>';
+                echo '<td><button name="remove" id="'.$item->iid.'" class="button small radius">Remove</button>';
+                echo '</tr>';
+            }
         }
         ?>
         <?php endif; ?>
-        <?php echo form_open('addItem');
+        <?php echo form_open('');
         ?>
         <tr>
-            <td><?php echo form_input($name); ?></td>
+            <td>
+                <?php echo form_input($name); ?>
+            </td>
             <td><?php echo form_textarea($description); ?></td>
         </tr>
         </tbody>

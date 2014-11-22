@@ -221,14 +221,13 @@ switch ($role) {
         $this->load->view('templates/item_table');
         echo '</div>';
         echo '<div class="reveal-modal tiny" id="editPassModal" data-reveal>';
-        echo form_open('changePass');
+        echo form_open('changePass', array('id' => 'editBusinessPass'), array('name'=>$business->name));
         echo '<span>New Business Password</span>';
         $bpass = array(
             'name' => 'bpass',
             'id' => 'bpass',
             'class' => 'small-6 small-centered'
         );
-        echo form_hidden('business', $business->name, 'id= "bname"');
         echo form_password($bpass);
         echo form_submit('submit', 'Submit', "class='tiny button' id='updateBusinessPass'");
         echo form_close();
