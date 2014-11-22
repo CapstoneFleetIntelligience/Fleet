@@ -123,7 +123,10 @@ function initialize()
 	    </div>
              
 		<div class="large-4 small-6 columns">
-			<h4>Analytics Preview</h4><hr>
+			<h4>Today's Preview</h4><hr>
+				<p class="text-justify"><b>Total Deliveries Made Today: </b></p>
+				<br />
+				<a href="analytics" class="button expand">Details</a>
 		</div>
  
              

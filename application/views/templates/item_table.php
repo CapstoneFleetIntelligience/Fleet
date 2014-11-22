@@ -30,10 +30,9 @@ $query = $this->db->get_where('capsql.chkitem',array('bname' => $this->session->
         }
         ?>
         <?php endif; ?>
-        <?php echo form_open('addItem');
-        ?>
+        <?php echo form_open('addItem');?>
         <tr>
-            <td><?php echo form_input($name); ?></td>
+            <td><input type="text" placeholder="Enter New Item" name="name"></td>
             <td><?php echo form_textarea($description); ?></td>
         </tr>
         </tbody>

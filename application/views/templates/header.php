@@ -34,11 +34,15 @@
     <?php echo script_tag('assets/js/foundation/foundation.alert.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.accordion.js'); ?>
     <?php echo script_tag('assets/js/utility.js'); ?>
+    <?php echo script_tag('assets/foundation/foundation.joyride.js'); ?>
     <title><?php echo $title ?></title>
     <script type="text/javascript">
         $(function () {
             $("#scd").datepicker();
         });
+<<<<<<< HEAD
+
+=======
     </script>
     <?php
     $set = $this->session->userdata('bname');
@@ -79,6 +83,7 @@
         });
 
         $('#delDate').datepicker();
+>>>>>>> f5035cb1fbbbd5b2e044a7730488fc965d9b77aa
 
     </script>
     <?}?>
@@ -125,33 +130,27 @@
                 if ($role == 'A'): ?>
                     <li><?php echo anchor('adminH', 'Home'); ?></li>
                     <li><?php echo anchor('overview', 'Routes Overview'); ?></li>
+					<li><?php echo anchor('route_controller/routeN', 'Create Routes'); ?></li>
                     <li><?php echo anchor('deliveries', 'Run Deliveries'); ?></li>
-                    <li><?php echo anchor('analytics', 'Analytics') ?></li>
                     <li class="has-dropdown">
-                        <a href="#">System Tools</a>
+                        <a href="#">Delivery Tools</a>
                         <ul class="dropdown">
-                            <li><a href="#" data-reveal-id="editEmployeeModal">Employee(s)</a></li>
                             <li><a href="#" data-reveal-id="editDeliveryModal">Deliveries</a></li>
-                            <li><a href="#" data-reveal-id="editItemModal">Checklist Items</a></li>
-                            <li><a href="#" data-reveal-id="editPassModal">Business Password</a></li>
-                            <li><a href="#" data-reveal-id="editRadiusModal">Delivery Range</a></li>
                             <li><a href="#" data-reveal-id="routeModal">Route Manager</a></li>
                         </ul>
                     </li>
                 <?php elseif ($role == 'M'): ?>
                     <li><?php echo anchor('managerOverview', 'Home'); ?></li>
                     <li><?php echo anchor('overview', 'Routes Overview'); ?></li>
-                    <li><?php echo anchor('deliveries', 'Run Deliveries'); ?></li>
-                    <li><?php echo anchor('analytics', 'Analytics') ?></li>
-                    <li><?php echo anchor('contact', 'Contact') ?></li>
+                    <li><?php echo anchor('deliveries', 'Run Deliveries'); ?></li> 
                     <li class="has-dropdown">
-                        <a href="#">System Tools</a>
+                        <a href="#">Delivery Tools</a>
                         <ul class="dropdown">
-                            <li><a href="#" data-reveal-id="editEmployeeModal">Employee(s)</a></li>
                             <li><a href="#" data-reveal-id="editDeliveryModal">Deliveries</a></li>
                             <li><a href="#" data-reveal-id="routeModal">Route Manager</a></li>
                         </ul>
                     </li>
+					<li><?php echo anchor('contact', 'Contact') ?></li>
                 <?php
                 else: ?>
                     <li><?php echo anchor('overview', 'Home'); ?></li>
@@ -163,24 +162,35 @@
             <ul class="right">
                 <?php if ($role == 'A'): ?>
                     <li class="has-dropdown">
-                        <a href="#">Tools</a>
+                        <a href="#">Business Tools</a>
                         <ul class="dropdown">
-                            <li><a href="#" data-reveal-id="customerModal">New Customer</a></li>
-                            <li><a href="#" data-reveal-id="deliveryModal">New Delivery</a></li>
-                            <li><a href="#" data-reveal-id="addItemModal">Add New Items(s)</a></li>
-                            <li><a href="#" data-reveal-id="addEmployeeModal">Add Employee(s)</a></li>
-                            <li><?php echo anchor('route_controller/routeN', 'Create Routes') ?></li>
+							<li class="has-dropdown"><a href="#">Employee(s)</a>
+								<ul class="dropdown">
+									<li><a href="#" data-reveal-id="addEmployeeModal">Add</a></li>
+									<li><a href="#" data-reveal-id="editEmployeeModal">Edit</a></li>
+								</ul>
+							</li>
+                            <li><a href="#" data-reveal-id="addItemModal">Add New Checklist Item</a></li>
+							<li><?php echo anchor('analytics', 'Analytics') ?></li>
+							<li><a href="#" data-reveal-id="editPassModal">Business Password</a></li>
+							<li><a href="#" data-reveal-id="editRadiusModal">Delivery Range</a></li>
                         </ul>
                     </li>
                     <li><a href="#" data-reveal-id="profileModal">Profile</a></li>
                     <li><?php echo anchor('logout', 'Log Out') ?></li>
                 <?php elseif ($role == 'M'): ?>
                     <li class="has-dropdown">
-                        <a href="#">Tools</a>
+                        <a href="#">Business Tools</a>
                         <ul class="dropdown">
+							<li class="has-dropdown"><a href="#">Employee(s)</a>
+								<ul class="dropdown">
+									<li><a href="#" data-reveal-id="addEmployeeModal">Add</a></li>
+									<li><a href="#" data-reveal-id="editEmployeeModal">Edit</a></li>
+								</ul>
+							<li>
                             <li><a href="#" data-reveal-id="customerModal">New Customer</a></li>
                             <li><a href="#" data-reveal-id="deliveryModal">New Delivery</a></li>
-                            <li><a href="#" data-reveal-id="addEmployeeModal">Add Employee(s)</a></li>
+							<li><?php echo anchor('analytics', 'Analytics') ?></li>
                             <li><?php echo anchor('route_controller/routeN', 'Create Routes') ?></li>
                         </ul>
                     </li>
