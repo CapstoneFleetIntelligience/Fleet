@@ -14,7 +14,7 @@ $results=$this->db->get_where('capsql.business',array('name'=> $this->session->u
 <script>
 function initialize()
 {
-    var myLatlng = new google.maps.LatLng(<?php echo $biz->blat; ?>,<? echo $biz->blong; ?>);
+    var myLatlng = new google.maps.LatLng(<?php echo $business->blat; ?>,<? echo $business->blong; ?>);
 
     var mapProp = {
 	center: myLatlng,
@@ -30,13 +30,13 @@ function initialize()
     var marker1 = new google.maps.Marker({
 	position: myLatlng,
 	map: map1,
-	title: '<? echo $biz->name; ?>'
+	title: '<? echo $business->name; ?>'
     });
 
     var marker2 = new google.maps.Marker({
 	position: myLatlng,
 	map: map2,
-	title: '<? echo $biz->name; ?>'
+	title: '<? echo $business->name; ?>'
     });
 
 }

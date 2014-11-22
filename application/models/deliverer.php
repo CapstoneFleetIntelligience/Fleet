@@ -61,8 +61,8 @@ class deliverer extends CI_Model
         $this->dcount = $result2->num_rows();
 
         //query to get delivery item data
-        $sql3 = "SELECT i.qty FROM capsql.customer AS c, capsql.del_item AS i WHERE i.cid = c.cid AND c.bname = ? AND c.cid IN (SELECT d.cid FROM capsql.delivery AS d, capsql.route AS r WHERE r.schd = d.schd AND r.rid = d.rid AND r.schd = ? AND r.uname = ?)";
-        $result3 = $this->db->query($sql3,array($this->bname,date("Y-m-d"),$this->uname));
+        $sql3 = "SELECT i.qty FROM capsql.customer AS c, capsql.del_item AS i WHERE i.cid = c.cid AND c.bname = ? AND i.ischd = ? AND c.cid IN (SELECT d.cid FROM capsql.delivery AS d, capsql.route AS r WHERE r.schd = d.schd AND r.rid = d.rid AND r.schd = ? AND r.uname = ?)";
+        $result3 = $this->db->query($sql3,array($this->bname,date("Y-m-d"),date("Y-m-d"),$this->uname));
         //get total delivery items
         $this->icount = 0;
         foreach ($result3->result() as $row){

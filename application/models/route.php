@@ -453,12 +453,15 @@ class route extends CI_Model
     {
         //get number of routes
         $rary = array(
-            'schd' => $route->schd,
-            'bname' => $route->bname
+            $route->schd,
+            $route->bname
         );
+        $sql1 = "SELECT MAX(rid) FROM route WHERE schd = ? AND bname = ?";
         //execute query
-        $rquery = $this->db->get_where('capsql.route',$rary);
-        $rid = $rquery->num_rows();
+        $rquery = $this->db->query($sql1,$rary);
+        $rResults = $rquery->result();
+        $rid = $rResults[0]->max;
+        $rid = $rid + 1;
 
         $rupdate = array(
             'cmplt' => date("c")
@@ -538,14 +541,25 @@ class route extends CI_Model
             $distance2 += $leg['distance']['value'];
         }
 
-        //calculate new distance
-        $distance2 = $route->dist - $distance2;
+        //check if any progress has been made on previous route
+        //this indirectly indicates if a delivery has been made
+        if ($route->dist == $distance){
+            //delete previous route if no deliveries have been made
+            $this->db->where('bname', $business);
+            $this->db->where('schd',$route->schd);
+            $this->db->where('rid', $route->rid);
+            $this->db->delete('route');
+        }
+        else{
+            //calculate new distance
+            $distance2 = $route->dist - $distance2;
 
-        //update previous route with the new distance
-        $this->db->where('bname', $business);
-        $this->db->where('schd',$route->schd);
-        $this->db->where('rid', $route->rid);
-        $this->db->update('capsql.route', array('dist' => $distance2));
+            //update previous route with the new distance
+            $this->db->where('bname', $business);
+            $this->db->where('schd',$route->schd);
+            $this->db->where('rid', $route->rid);
+            $this->db->update('capsql.route', array('dist' => $distance2));
+        }
 
         //update current route with the distance
         $this->db->where('bname', $business);
