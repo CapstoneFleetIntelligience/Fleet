@@ -40,9 +40,6 @@
         $(function () {
             $("#scd").datepicker();
         });
-<<<<<<< HEAD
-
-=======
     </script>
     <?php
     $set = $this->session->userdata('bname');
@@ -83,8 +80,6 @@
         });
 
         $('#delDate').datepicker();
->>>>>>> f5035cb1fbbbd5b2e044a7730488fc965d9b77aa
-
     </script>
     <?}?>
 </head>

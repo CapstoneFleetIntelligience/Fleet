@@ -6,7 +6,6 @@
  * Time: 8:50 PM
  */
 
-
 $results=$this->db->get_where('capsql.business',array('name'=> $this->session->userdata('bname')));
     foreach ($results->result() as $biz)
 ?>

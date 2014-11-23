@@ -23,6 +23,7 @@ class route_controller extends CI_Controller
         $employees = $this->user->getEmployees($business->name);
         $data = array(
             'title' => 'Setup Routes',
+            'business' => $business,
             'user' => $user,
             'customers' => $customers,
             'items' => $items,
