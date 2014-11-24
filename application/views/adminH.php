@@ -115,7 +115,6 @@ function initialize()
 			<a href="#" data-reveal-id="editDeliveryModal" class="button expand">Deliveries</a>
 			<a href="#" data-reveal-id="editItemModal" class="button expand">Checklist Items</a>
 			<a href="#" data-reveal-id="editPassModal" class="button expand">Business Password</a>
-			<a href="#" data-reveal-id="editRadiusModal" class="button expand">Delivery Range</a>
 			<a href="#" data-reveal-id="routeModal" class="button expand">Route Manager</a>
 		    </div>
 		</div>
@@ -184,25 +183,6 @@ function initialize()
     <?php echo form_hidden('business', $business->name, 'id= "bname"');
     echo form_password($bpass);
     echo form_submit('submit', 'Submit', "class='tiny button' id='updateBusinessPass'");
-    echo form_close();
-    ?>
-    <a class="close-reveal-modal">&#215;</a>
-</div>
-<div id="editRadiusModal" class="reveal-modal tiny" data-reveal>
-    <?php echo form_open('changeRange');
-    $radius = array(
-        'type' => 'number',
-        'name'  => 'radius',
-        'id' => 'radius',
-        'value' => $business->radius,
-        'min' => '0',
-        'max' => '1000',
-        'step' => '1'
-    );?>
-    <span>New Delivery Range</span>
-    <?php echo form_hidden('business', $business->name, 'id = "bname"');
-    echo form_input($radius);
-    echo form_submit('update', 'update', 'id = "updateRange"  class="tiny button radius"');
     echo form_close();
     ?>
     <a class="close-reveal-modal">&#215;</a>

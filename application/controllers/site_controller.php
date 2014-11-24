@@ -44,7 +44,7 @@ class Site_controller extends CI_Controller
         $business = new business();
 
         $data = $this->input->post(NULL, TRUE);
-        $userData = array_chunk($data, 6, TRUE);
+        $userData = array_chunk($data, 5, TRUE);
 
         $business->createBusiness($userData[0]);
         $business->setLatLong($business->baddress);

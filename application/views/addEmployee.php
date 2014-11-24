@@ -18,7 +18,7 @@ $options = array(
             <span>Employee's Email Address</span>
             <input type="text" placeholder="Required" required name="email">
             <span>Employee Role</span><br>
-            <?php echo form_dropdown('Role', $options, '', 'class="small-8" id="role"');?>
+            <?php echo form_dropdown('role', $options, '', 'class="small-8" id="role"');?>
             <br><br><button type="submit" id="submit_employ" class="tiny button">Add</button>
         </div>
         <?php echo form_close(); ?>

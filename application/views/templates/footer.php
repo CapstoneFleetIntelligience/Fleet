@@ -29,7 +29,7 @@
         var form_data = $('#registration_form').serialize();
         console.log(form_data);
         $.ajax({
-            url:"<?php echo site_url('site_controller/register') ?>",
+            url:"<?php echo site_url('register') ?>",
             type: 'POST',
             data: form_data,
             success: function (data) {
@@ -105,24 +105,6 @@
                 $('#editPassModal').foundation('reveal', 'close');
             }
         });
-        return false;
-    });
-
-
-    $('#updateRange').click(function(){
-        var radius = {
-            radius: $('#radius').val(),
-            name: $('#bname').val()
-        };
-        $.ajax({
-            url: "<?php echo site_url('Settings_controller/editRange')?>",
-            type: 'POST',
-            data: radius,
-            success: function (data) {
-                $('#editRadiusModal').foundation('reveal', 'close');
-            }
-        });
-
         return false;
     });
 
