@@ -12,7 +12,49 @@ $schd = array(
 );
 $business = $this->session->userdata('bname');
 $query = $this->db->get_where('capsql.user', array('bname' => $business));
+
+$SQL = "select schd from delivery as d , customer as c where c.cid = d.cid and c.bname = ? and d.schd >= current_date group by schd";
+
+$dquery = $this->db->query($SQL,$this->session->userdata('bname'));
+
+if ($dquery->num_rows() > 0){
+    foreach ($dquery->result() as $row)
+    {
+        $ddate[] = "'".$row->schd."'";
+    }
+    $ddates = implode(",",$ddate);
+}else{
+    $ddates = '';
+}
 ?>
+
+<script>
+
+    $(function() {
+        var arrayD = [<? echo $ddates ?>];
+        $( "#datepicker2" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd",
+            beforeShowDay: function(date)
+            {
+
+                var f = $.datepicker.formatDate('yy-mm-dd', date)
+                if ($.inArray(f, arrayD) > -1) {
+                    return [true];
+                }else{
+                    return [false];
+                }
+            },
+            onSelect: function(dateText) {
+                $('#dateoutput').attr('value', dateText);
+            }
+        });
+    });
+
+    $('#delDate').datepicker();
+</script>
+
 <div class="container">
     <?php
     if ($this->uri->segment(2) == "baddate"){?>
@@ -33,7 +75,7 @@ $query = $this->db->get_where('capsql.user', array('bname' => $business));
         <div class="row">
             <div class="small-8 small-centered columns">
 				<label>Delivery Date
-					<input type="date" required name="schd">
+                    <div id="datepicker2"></div> <input type="text" name="schd" id="dateoutput" disabled>
 				</label>
             </div>
         </div>
