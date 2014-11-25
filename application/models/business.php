@@ -17,7 +17,6 @@
 class business extends CI_Model
 {
     public $name;
-    public $radius;
     public $bphone;
     public $capacity;
     public $dpass;
@@ -66,15 +65,6 @@ class business extends CI_Model
         $this->db->where('name', $this->name);
         $this->encryptPass();
         if($this->db->update('business', array('dpass' => $this->dpass, 'dsalt' => $this->dsalt))) echo 'success';
-        else throw new Exception();
-    }
-
-    public function updateRange($range)
-    {
-        $this->name = $range['name'];
-        $this->radius = $range['radius'];
-       $this->db->where('name', $this->name);
-        if($this->db->update('business', array('radius' => $this->radius))) echo 'success';
         else throw new Exception();
     }
 

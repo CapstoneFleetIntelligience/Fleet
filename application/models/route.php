@@ -153,14 +153,17 @@ class route extends CI_Model
         }
 
         //gather delivery data
-        $dquery = $this->db->query("select * from delivery as d, customer as c where d.cid = c.cid and d.schd = '" . $pdata['schd'] . "' and c.bname = '" . $business . "'");
+        $dsql = "select * from delivery as d, customer as c where d.cid = c.cid and d.schd = ? and c.bname = ?";
+        $dquery = $this->db->query($dsql, array($pdata['schd'],$business));
 
         //set position lat and long of business
         $CX = $bdata->blat;
         $CY = $bdata->blong;
 
+        //calculate the radius of great circle
+        $R = $this->getRadius($dquery);
         //increase the radius to compensate for margin of error
-        $R = $bdata->radius * 1.002;
+        $R = round($R,5) * 1.005;
 
         //get latitude and longitude of point at 360 degrees as starting and ending point
         $sLatLng = $this->ComputeLatLng($CX, $CY, 360, $R);
@@ -453,12 +456,15 @@ class route extends CI_Model
     {
         //get number of routes
         $rary = array(
-            'schd' => $route->schd,
-            'bname' => $route->bname
+            $route->schd,
+            $route->bname
         );
+        $sql1 = "SELECT MAX(rid) FROM route WHERE schd = ? AND bname = ?";
         //execute query
-        $rquery = $this->db->get_where('capsql.route',$rary);
-        $rid = $rquery->num_rows();
+        $rquery = $this->db->query($sql1,$rary);
+        $rResults = $rquery->result();
+        $rid = $rResults[0]->max;
+        $rid = $rid + 1;
 
         $rupdate = array(
             'cmplt' => date("c")
@@ -538,14 +544,25 @@ class route extends CI_Model
             $distance2 += $leg['distance']['value'];
         }
 
-        //calculate new distance
-        $distance2 = $route->dist - $distance2;
+        //check if any progress has been made on previous route
+        //this indirectly indicates if a delivery has been made
+        if ($route->dist == $distance){
+            //delete previous route if no deliveries have been made
+            $this->db->where('bname', $business);
+            $this->db->where('schd',$route->schd);
+            $this->db->where('rid', $route->rid);
+            $this->db->delete('route');
+        }
+        else{
+            //calculate new distance
+            $distance2 = $route->dist - $distance2;
 
-        //update previous route with the new distance
-        $this->db->where('bname', $business);
-        $this->db->where('schd',$route->schd);
-        $this->db->where('rid', $route->rid);
-        $this->db->update('capsql.route', array('dist' => $distance2));
+            //update previous route with the new distance
+            $this->db->where('bname', $business);
+            $this->db->where('schd',$route->schd);
+            $this->db->where('rid', $route->rid);
+            $this->db->update('capsql.route', array('dist' => $distance2));
+        }
 
         //update current route with the distance
         $this->db->where('bname', $business);
@@ -573,6 +590,11 @@ class route extends CI_Model
 
     }
 
+    /**
+     * @param $rid
+     * @return $this (the route object)
+     * function to build a route object with various information used for delivery actions
+     */
     public function getRoute($rid)
     {
         //store rid
@@ -617,6 +639,7 @@ class route extends CI_Model
         //store delivery data
         $this->deliveries['deliveries'] = $result3->result();
 
+        //calculate number of all items
         $count = 0;
         foreach ($this->deliveries['deliveries'] as $row){
             $sql3 = "SELECT * FROM capsql.del_item AS d, capsql.chkitem AS i WHERE d.iid = i.iid AND d.cid = ? AND d.ischd = ?";
@@ -634,6 +657,10 @@ class route extends CI_Model
 
     }
 
+    /**
+     * @param $data
+     * Function to set delivery as completed
+     */
     public function cmpltD($data)
     {
         if ($data['check'] == 'true'){
@@ -645,6 +672,10 @@ class route extends CI_Model
         $result = $this->db->query($sql,array($data['cid'],date("Y-m-d")));
     }
 
+    /**
+     * @param $data
+     * function to set delivery item as checked
+     */
     public function checkI($data)
     {
         if ($data['check'] == 'true'){
@@ -656,6 +687,10 @@ class route extends CI_Model
         $result = $this->db->query($sql,array($data['cid'],date("Y-m-d"),$data['iid']));
     }
 
+    /**
+     * @param $data
+     * function to set start time for route or unset start time if stopped
+     */
     public function startR($data)
     {
         if ($data['state'] == "start"){
@@ -667,17 +702,53 @@ class route extends CI_Model
         $result = $this->db->query($sql,array($this->session->userdata('bname'),date("Y-m-d"),$data['rid']));
     }
 
+    /**
+     * @param $data
+     * function to set route as completed by setting timestamp
+     */
     public function cmpltR($data)
     {
         $sql = "UPDATE route SET cmplt = current_timestamp WHERE bname = ? AND schd = ? AND rid = ?";
         $result = $this->db->query($sql,array($this->session->userdata('bname'),date("Y-m-d"),$data['rid']));
     }
 
+    /**
+     * @param $data
+     * function to unset timestamp if route is undone
+     */
     public function uncmpltR($data)
     {
         $sql = "UPDATE route SET cmplt = NULL WHERE bname = ? AND schd = ? AND rid = ?";
         $result = $this->db->query($sql,array($this->session->userdata('bname'),date("Y-m-d"),$data['rid']));
     }
 
+    /**
+     * @param $query (database query with all deliveries to be checked against)
+     * @return float (The radius)
+     * Function to calculate radius based on delivery farthest from origin
+     * Haversine formula
+     */
+    public function getRadius($query)
+    {
+        //set business name to variable
+        $business = $this->session->userdata('bname');
+
+        //gather business's data as results object
+        $bquery = $this->db->get_where('capsql.business', array('name' => $business));
+        $bdata = $bquery->row();
+
+        $R = 0.0;
+        foreach($query->result() as $row){
+            $dlon = deg2rad($bdata->blong - $row->clong);
+            $dlat = deg2rad($bdata->blat - $row->clat);
+
+            $a = (sin($dlat/2)) * (sin($dlat/2)) + cos(deg2rad($row->clat)) * cos(deg2rad($bdata->blat)) * (sin($dlon/2)) * (sin($dlon/2));
+            $c = 2 * atan2(sqrt($a),sqrt(1-$a));
+            $d = 3961 * $c;
+
+            if ($d > $R)$R = $d;
+        }
+        return $R;
+    }
 
 }

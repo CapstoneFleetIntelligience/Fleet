@@ -1,11 +1,11 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: student
  * Date: 10/2/14
  * Time: 12:55 PM
  */
-
 class employee_controller extends CI_Controller
 {
     /**
@@ -15,22 +15,41 @@ class employee_controller extends CI_Controller
     {
         $role = $this->session->userdata('role');
 
-        if($role)
-        {
-        $user = $this->user->loadModel();
-        $business = $this->business->loadModel();
-        $deliverer = $this->deliverer->getDeliverer();
+        if ($role) {
+            $user = $this->user->loadModel();
+            $business = $this->business->loadModel();
+            $deliverer = $this->deliverer->getDeliverer();
+            if($role == 'A' || 'M')
+            {
+                $customers = $this->customer->getCustomers();
+                $deliveries = $this->delivery->getDeliveries($business->name);
+                $employees = $this->user->getEmployees($business->name);
+                $items = $this->item->getItems($business->name);
 
-        $data = array(
-            'title' => 'home',
-            'user' => $user,
-            'business' => $business,
-            'deliverer' => $deliverer
-        );
+                $data = array(
+                    'title' => 'Overview',
+                    'user' => $user,
+                    'business' => $business,
+                    'customers' => $customers,
+                    'employees' => $employees,
+                    'deliveries' => $deliveries,
+                    'deliverer' => $deliverer,
+                    'items' => $items
+                );
 
-        $this->load->template('employeeHome', $data);
-        }
-       else redirect('');
+            }
+           else
+           {
+               $data = array(
+                   'title' => 'home',
+                   'user' => $user,
+                   'business' => $business,
+                   'deliverer' => $deliverer
+               );
+           }
+
+            $this->load->template('overview', $data);
+        } else redirect('');
     }
 
     public function managerOverview()
@@ -52,7 +71,7 @@ class employee_controller extends CI_Controller
             'deliverer' => $deliverer
         );
 
-        $this->load->template('managerOverview', $data);
+        $this->load->template('adminH', $data);
     }
 
 
@@ -60,8 +79,7 @@ class employee_controller extends CI_Controller
     {
         $user = array_chunk($this->input->post(NULL, true), 4, true);
         $this->user->update($user[0]);
-        if(!empty($user[1]['newPass']))
-        {
+        if (!empty($user[1]['newPass'])) {
             $this->user->changePass($user[1]);
         }
     }
@@ -76,12 +94,18 @@ class employee_controller extends CI_Controller
      */
     public function contact()
     {
-        $business = $this->business->loadModel();
         $user = $this->user->loadModel();
+        $business = $this->business->loadModel();
+        $items = $this->item->getItems($business->name);
+        $deliveries = $this->delivery->getDeliveries($business->name);
+        $employees = $this->user->getEmployees($business->name);
         $data = array(
-          'title' => 'Contact',
-          'business'=>$business,
-          'user' => $user
+            'title' => 'Contact',
+            'business' => $business,
+            'user' => $user,
+            'items' => $items,
+            'deliveries' => $deliveries,
+            'employees' => $employees
         );
 
         $this->load->template('contact', $data);
@@ -105,7 +129,7 @@ class employee_controller extends CI_Controller
     public function addNew()
     {
         $data = array(
-          'title' => 'add new'
+            'title' => 'add new'
         );
         $this->load->template('addEmployee', $data);
     }
@@ -119,8 +143,7 @@ class employee_controller extends CI_Controller
     public function updateEmployee()
     {
         $data = $this->input->post(NULL, TRUE);
-        if($this->user->update($data))
-        {
+        if ($this->user->update($data)) {
             $employees = $this->user->getEmployees($data['bname']);
             echo $this->load->view('editEmployee', array('employees' => $employees));;
         }
@@ -132,7 +155,7 @@ class employee_controller extends CI_Controller
      */
     public function create()
     {
-       $user = $this->user->createEmployee($this->input->post(null,true));
+        $user = $this->user->createEmployee($this->input->post(null, true));
         $this->sendEmail($user);
         echo $this->load->view('templates/success', array('user' => $user));
     }
@@ -145,14 +168,14 @@ class employee_controller extends CI_Controller
     {
         $this->load->library('email');
 
-       $message = 'This email contains information regarding your recent registration to Fleet Intelligience. To log
-         in use your user id '.$user->uname.' finally use the password which your boss should provide you with to log
+        $message = 'This email contains information regarding your recent registration to Fleet Intelligience. To log
+         in use your user id ' . $user->uname . ' finally use the password which your boss should provide you with to log
           in for the first time';
         $this->email->from('Fleetintelligience0@gmail.com', 'Fleet Intelligience');
         $this->email->to($user->email);
         $this->email->subject('Welcome to Fleet Intelligience');
         $this->email->message($message);
-        if(!$this->email->send()) echo $this->email->print_debugger();
+        if (!$this->email->send()) echo $this->email->print_debugger();
 
     }
 
@@ -164,30 +187,37 @@ class employee_controller extends CI_Controller
     {
         $role = $this->session->userdata('role');
 
-        if ($role)
-        {
-        $user = $this->user->loadModel();
-        $business = $this->business->loadModel();
-        $deliverer = $this->deliverer->getDeliverer();
-        if ($deliverer == false){
-            $route = false;
-        }elseif ($rid == null){
-            $route = $this->route->getRoute($deliverer->routes['route'][0]->rid);
-        }else{
-            $route = $this->route->getRoute($rid);
-        }
+        if ($role) {
+            $user = $this->user->loadModel();
+            $business = $this->business->loadModel();
+            $customers = $this->customer->getCustomers();
+            $items = $this->item->getItems($business->name);
+            $deliveries = $this->delivery->getDeliveries($business->name);
+            $employees = $this->user->getEmployees($business->name);
+            $deliverer = $this->deliverer->getDeliverer();
 
-        $data = array(
-            'title' => 'home',
-            'user' => $user,
-            'business' => $business,
-            'deliverer' => $deliverer,
-            'route' => $route
-        );
+            if ($deliverer == false) {
+                $route = false;
+            } elseif ($rid == null) {
+                $route = $this->route->getRoute($deliverer->routes['route'][0]->rid);
+            } else {
+                $route = $this->route->getRoute($rid);
+            }
 
-        $this->load->template('deliveries', $data);
-        }
-        else redirect('');
+            $data = array(
+                'title' => 'home',
+                'user' => $user,
+                'business' => $business,
+                'deliverer' => $deliverer,
+                'route' => $route,
+                'customers' => $customers,
+                'items' => $items,
+                'deliveries' => $deliveries,
+                'employees' => $employees
+            );
+
+            $this->load->template('deliveries', $data);
+        } else redirect('');
 
     }
 
@@ -204,7 +234,8 @@ class employee_controller extends CI_Controller
     /**
      * set route to completed
      */
-    public function dcheck(){
+    public function dcheck()
+    {
         $pdata = $this->input->post(NULL, TRUE);
         $this->route->cmpltD($pdata);
     }
@@ -212,7 +243,8 @@ class employee_controller extends CI_Controller
     /**
      * set item to checked
      */
-    public function checkit(){
+    public function checkit()
+    {
         $pdata = $this->input->post(NULL, TRUE);
 
         $this->route->checkI($pdata);
@@ -221,7 +253,8 @@ class employee_controller extends CI_Controller
     /**
      * set start time for route
      */
-    public function startR(){
+    public function startR()
+    {
         $pdata = $this->input->post(NULL, TRUE);
 
         $this->route->startR($pdata);
@@ -230,7 +263,8 @@ class employee_controller extends CI_Controller
     /**
      * set completion time for route
      */
-    public function cmpltR(){
+    public function cmpltR()
+    {
         $pdata = $this->input->post(NULL, TRUE);
 
         $this->route->cmpltR($pdata);
@@ -239,7 +273,8 @@ class employee_controller extends CI_Controller
     /**
      * unset completion time
      */
-    public function uncmpltR(){
+    public function uncmpltR()
+    {
         $pdata = $this->input->post(NULL, TRUE);
 
         $this->route->uncmpltR($pdata);

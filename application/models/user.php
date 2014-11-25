@@ -218,7 +218,7 @@ class user extends CI_Model
         $this->db->where("role", 'E');
         $this->db->or_where('role', 'M');
         $this->db->where('bname', $id);
-        $this->db->select('uname, bname, role, email, uphone, tdist, avgtime, titems, tdelivery');
+        $this->db->select('uname, bname, role, email, uphone');
         $query = $this->db->get('user');
         $employees = array();
 
@@ -230,6 +230,33 @@ class user extends CI_Model
             {
                 $employ->$key = $value;
             }
+            //query to get total deliveries
+            $sql1 = "SELECT count(*) FROM delivery AS d, route AS r, customer AS c WHERE r.schd = d.schd AND r.rid = d.rid AND d.cid = c.cid AND r.uname = ? AND d.cid IN (SELECT cid FROM capsql.customer WHERE bname = ?)";
+            $result1 = $this->db->query($sql1 ,array($employ->uname,$employ->bname));
+            $tdelivery = $result1->row();
+            $employ->tdelivery = $tdelivery->count;
+
+            //query to get total distance
+            $sql2 = "SELECT sum(dist) FROM route WHERE uname = ?";
+            $result2 = $this->db->query($sql2, array($employ->uname));
+            $tdist = $result2->row();
+            $employ->tdist = round($tdist->sum * 0.00062137 , 2);
+
+            //query to get total items
+            $sql3 = "SELECT sum(di.qty) FROM delivery AS d, route AS r, customer AS c, del_item AS di, chkitem AS i WHERE r.schd = d.schd AND r.rid = d.rid AND d.cid = c.cid AND di.iid = i.iid AND di.cid = c.cid AND di.ischd = d.schd AND r.uname = ? AND d.cid IN (SELECT cid FROM capsql.customer WHERE bname = ?)";
+            $result3 = $this->db->query($sql3 ,array($employ->uname,$employ->bname));
+            $titems = $result3->row();
+            $employ->titems = $titems->sum;
+
+            //query to get average time
+            $sql4 = "SELECT AVG(cmplt - start) as avgtime FROM route WHERE uname = ?";
+            $result4 = $this->db->query($sql4, array($employ->uname));
+            $avgtime = $result4->row();
+            if ($avgtime->avgtime)$seconds = strtotime($avgtime->avgtime);
+
+            else $seconds = 0;
+
+            $employ->avgtime = $seconds;
 
             $employees[$index] = $employ;
         }

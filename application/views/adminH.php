@@ -6,52 +6,14 @@
  * Time: 8:50 PM
  */
 
-
 $results=$this->db->get_where('capsql.business',array('name'=> $this->session->userdata('bname')));
     foreach ($results->result() as $biz)
 ?>
 
-<?php
-$dquery = $this->db->query("select schd from route where bname = '".$this->session->userdata('bname')."' and schd >= current_date group by schd");
-
-if ($dquery->num_rows() > 0){
-    foreach ($dquery->result() as $row)
-    {
-        $ddate[] = "'".$row->schd."'";
-    }
-    $ddates = implode(",",$ddate);
-}else{
-    $ddates = '';
-}
-?>
-
 <script>
-
-$(function() {
-    var arrayD = [<? echo $ddates ?>];
-    $( "#datepicker" ).datepicker({
-	changeMonth: true,
-	changeYear: true,
-	dateFormat: "yy-mm-dd",
-	beforeShowDay: function(date){
-	    var f = $.datepicker.formatDate('yy-mm-dd', date)
-	    if ($.inArray(f, arrayD) > -1) {
-		return [true];
-	    }
-        else{
-		    return [false];
-	    }
-	},
-	onSelect: function(dateText) {
-	    window.location = '<?php echo site_url('routeE')?>/' + dateText;
-	}
-    });
-});
-
-$('#delDate').datepicker();
 function initialize()
 {
-    var myLatlng = new google.maps.LatLng(<?php echo $biz->blat; ?>,<? echo $biz->blong; ?>);
+    var myLatlng = new google.maps.LatLng(<?php echo $business->blat; ?>,<? echo $business->blong; ?>);
 
     var mapProp = {
 	center: myLatlng,
@@ -67,13 +29,13 @@ function initialize()
     var marker1 = new google.maps.Marker({
 	position: myLatlng,
 	map: map1,
-	title: '<? echo $biz->name; ?>'
+	title: '<? echo $business->name; ?>'
     });
 
     var marker2 = new google.maps.Marker({
 	position: myLatlng,
 	map: map2,
-	title: '<? echo $biz->name; ?>'
+	title: '<? echo $business->name; ?>'
     });
 
 }
@@ -153,14 +115,16 @@ function initialize()
 			<a href="#" data-reveal-id="editDeliveryModal" class="button expand">Deliveries</a>
 			<a href="#" data-reveal-id="editItemModal" class="button expand">Checklist Items</a>
 			<a href="#" data-reveal-id="editPassModal" class="button expand">Business Password</a>
-			<a href="#" data-reveal-id="editRadiusModal" class="button expand">Delivery Range</a>
 			<a href="#" data-reveal-id="routeModal" class="button expand">Route Manager</a>
 		    </div>
 		</div>
 	    </div>
              
 		<div class="large-4 small-6 columns">
-			<h4>Analytics Preview</h4><hr>
+			<h4>Today's Preview</h4><hr>
+				<p class="text-justify"><b>Total Deliveries Made Today: </b></p>
+				<br />
+				<a href="analytics" class="button expand">Details</a>
 		</div>
  
              
@@ -219,25 +183,6 @@ function initialize()
     <?php echo form_hidden('business', $business->name, 'id= "bname"');
     echo form_password($bpass);
     echo form_submit('submit', 'Submit', "class='tiny button' id='updateBusinessPass'");
-    echo form_close();
-    ?>
-    <a class="close-reveal-modal">&#215;</a>
-</div>
-<div id="editRadiusModal" class="reveal-modal tiny" data-reveal>
-    <?php echo form_open('changeRange');
-    $radius = array(
-        'type' => 'number',
-        'name'  => 'radius',
-        'id' => 'radius',
-        'value' => $business->radius,
-        'min' => '0',
-        'max' => '1000',
-        'step' => '1'
-    );?>
-    <span>New Delivery Range</span>
-    <?php echo form_hidden('business', $business->name, 'id = "bname"');
-    echo form_input($radius);
-    echo form_submit('update', 'update', 'id = "updateRange"  class="tiny button radius"');
     echo form_close();
     ?>
     <a class="close-reveal-modal">&#215;</a>

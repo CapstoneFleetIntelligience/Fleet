@@ -34,13 +34,54 @@
     <?php echo script_tag('assets/js/foundation/foundation.alert.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.accordion.js'); ?>
     <?php echo script_tag('assets/js/utility.js'); ?>
+    <?php echo script_tag('assets/foundation/foundation.joyride.js'); ?>
     <title><?php echo $title ?></title>
     <script type="text/javascript">
         $(function () {
             $("#scd").datepicker();
         });
-
     </script>
+    <?php
+    $set = $this->session->userdata('bname');
+    if ($set){
+        $sql = "select schd from route where bname = ? and schd >= current_date group by schd";
+        $dquery = $this->db->query($sql,$this->session->userdata('bname'));
+
+        if ($dquery->num_rows() > 0){
+            foreach ($dquery->result() as $row)
+            {
+                $ddate[] = "'".$row->schd."'";
+            }
+            $ddates = implode(",",$ddate);
+        }else{
+            $ddates = '';
+        }
+    ?>
+        <script>
+
+        $(function() {
+            var arrayD = [<? echo $ddates ?>];
+            $( "#datepicker" ).datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: "yy-mm-dd",
+                beforeShowDay: function(date){
+                    var f = $.datepicker.formatDate('yy-mm-dd', date)
+                    if ($.inArray(f, arrayD) > -1) {
+                        return [true];
+                    }else{
+                        return [false];
+                    }
+                },
+                onSelect: function(dateText) {
+                    window.location = '<?php echo site_url('routeE')?>/' + dateText;
+                }
+            });
+        });
+
+        $('#delDate').datepicker();
+    </script>
+    <?}?>
 </head>
 <body>
 <div class="row header">
@@ -84,33 +125,27 @@
                 if ($role == 'A'): ?>
                     <li><?php echo anchor('adminH', 'Home'); ?></li>
                     <li><?php echo anchor('overview', 'Routes Overview'); ?></li>
+					<li><?php echo anchor('route_controller/routeN', 'Create Routes'); ?></li>
                     <li><?php echo anchor('deliveries', 'Run Deliveries'); ?></li>
-                    <li><?php echo anchor('analytics', 'Analytics') ?></li>
                     <li class="has-dropdown">
-                        <a href="#">System Tools</a>
+                        <a href="#">Delivery Tools</a>
                         <ul class="dropdown">
-                            <li><a href="#" data-reveal-id="editEmployeeModal">Employee(s)</a></li>
                             <li><a href="#" data-reveal-id="editDeliveryModal">Deliveries</a></li>
-                            <li><a href="#" data-reveal-id="editItemModal">Checklist Items</a></li>
-                            <li><a href="#" data-reveal-id="editPassModal">Business Password</a></li>
-                            <li><a href="#" data-reveal-id="editRadiusModal">Delivery Range</a></li>
                             <li><a href="#" data-reveal-id="routeModal">Route Manager</a></li>
                         </ul>
                     </li>
                 <?php elseif ($role == 'M'): ?>
                     <li><?php echo anchor('managerOverview', 'Home'); ?></li>
                     <li><?php echo anchor('overview', 'Routes Overview'); ?></li>
-                    <li><?php echo anchor('deliveries', 'Run Deliveries'); ?></li>
-                    <li><?php echo anchor('analytics', 'Analytics') ?></li>
-                    <li><?php echo anchor('contact', 'Contact') ?></li>
+                    <li><?php echo anchor('deliveries', 'Run Deliveries'); ?></li> 
                     <li class="has-dropdown">
-                        <a href="#">System Tools</a>
+                        <a href="#">Delivery Tools</a>
                         <ul class="dropdown">
-                            <li><a href="#" data-reveal-id="editEmployeeModal">Employee(s)</a></li>
                             <li><a href="#" data-reveal-id="editDeliveryModal">Deliveries</a></li>
                             <li><a href="#" data-reveal-id="routeModal">Route Manager</a></li>
                         </ul>
                     </li>
+					<li><?php echo anchor('contact', 'Contact') ?></li>
                 <?php
                 else: ?>
                     <li><?php echo anchor('overview', 'Home'); ?></li>
@@ -122,24 +157,34 @@
             <ul class="right">
                 <?php if ($role == 'A'): ?>
                     <li class="has-dropdown">
-                        <a href="#">Tools</a>
+                        <a href="#">Business Tools</a>
                         <ul class="dropdown">
-                            <li><a href="#" data-reveal-id="customerModal">New Customer</a></li>
-                            <li><a href="#" data-reveal-id="deliveryModal">New Delivery</a></li>
-                            <li><a href="#" data-reveal-id="addItemModal">Add New Items(s)</a></li>
-                            <li><a href="#" data-reveal-id="addEmployeeModal">Add Employee(s)</a></li>
-                            <li><?php echo anchor('route_controller/routeN', 'Create Routes') ?></li>
+							<li class="has-dropdown"><a href="#">Employee(s)</a>
+								<ul class="dropdown">
+									<li><a href="#" data-reveal-id="addEmployeeModal">Add</a></li>
+									<li><a href="#" data-reveal-id="editEmployeeModal">Edit</a></li>
+								</ul>
+							</li>
+                            <li><a href="#" data-reveal-id="addItemModal">Add New Checklist Item</a></li>
+							<li><?php echo anchor('analytics', 'Analytics') ?></li>
+							<li><a href="#" data-reveal-id="editPassModal">Business Password</a></li>
                         </ul>
                     </li>
                     <li><a href="#" data-reveal-id="profileModal">Profile</a></li>
                     <li><?php echo anchor('logout', 'Log Out') ?></li>
                 <?php elseif ($role == 'M'): ?>
                     <li class="has-dropdown">
-                        <a href="#">Tools</a>
+                        <a href="#">Business Tools</a>
                         <ul class="dropdown">
+							<li class="has-dropdown"><a href="#">Employee(s)</a>
+								<ul class="dropdown">
+									<li><a href="#" data-reveal-id="addEmployeeModal">Add</a></li>
+									<li><a href="#" data-reveal-id="editEmployeeModal">Edit</a></li>
+								</ul>
+							<li>
                             <li><a href="#" data-reveal-id="customerModal">New Customer</a></li>
                             <li><a href="#" data-reveal-id="deliveryModal">New Delivery</a></li>
-                            <li><a href="#" data-reveal-id="addEmployeeModal">Add Employee(s)</a></li>
+							<li><?php echo anchor('analytics', 'Analytics') ?></li>
                             <li><?php echo anchor('route_controller/routeN', 'Create Routes') ?></li>
                         </ul>
                     </li>
@@ -190,24 +235,6 @@ switch ($role) {
         echo form_hidden('business', $business->name, 'id= "bname"');
         echo form_password($bpass);
         echo form_submit('submit', 'Submit', "class='tiny button' id='updateBusinessPass'");
-        echo form_close();
-        echo '<a class="close-reveal-modal">&#215;</a>';
-        echo '</div>';
-        echo '<div id="editRadiusModal" class="reveal-modal tiny" data-reveal>';
-        echo form_open('changeRange');
-        $radius = array(
-            'type' => 'number',
-            'name' => 'radius',
-            'id' => 'radius',
-            'value' => $business->radius,
-            'min' => '0',
-            'max' => '1000',
-            'step' => '1'
-        );
-        echo '<span>New Delivery Range</span>';
-        echo form_hidden('business', $business->name, 'id = "bname"');
-        echo form_input($radius);
-        echo form_submit('update', 'update', 'id = "updateRange"  class="tiny button radius"');
         echo form_close();
         echo '<a class="close-reveal-modal">&#215;</a>';
         echo '</div>';
