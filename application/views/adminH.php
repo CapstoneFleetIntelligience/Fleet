@@ -37,8 +37,9 @@ $(function() {
 	    var f = $.datepicker.formatDate('yy-mm-dd', date)
 	    if ($.inArray(f, arrayD) > -1) {
 		return [true];
-	    }else{
-		return [false];
+	    }
+        else{
+		    return [false];
 	    }
 	},
 	onSelect: function(dateText) {
