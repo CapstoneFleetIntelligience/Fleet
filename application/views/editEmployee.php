@@ -9,10 +9,6 @@ $options = array(
     'M' => 'Manager',
     'E' => 'Employee'
 );
-
-/**
- * @todo Make sure to change the view here to allow updating and deleting employees properly
- */
 ?>
 
 <div class="employee_table">

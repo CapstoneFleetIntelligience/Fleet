@@ -84,21 +84,6 @@ function initialize()
     </div>
 </div>
 
-
-<div id="deliveryModal" class="reveal-modal" data-reveal>
-    <?php $this->load->view('newDelivery', array('customers' => $customers, 'items' => $items)); ?>
-</div>
-<div id="addItemModal" class="reveal-modal" data-reveal>
-    <?php $this->load->view('templates/item_table'); ?>
-</div>
-<div id="customerModal" class="reveal-modal" data-reveal>
-    <?php $this->load->view('custN'); ?>
-</div>
-<div id="addEmployeeModal" class="reveal-modal small" data-reveal>
-    <?php $this->load->view('addEmployee') ?>
-</div>
-
-
 <div class="row">
     <div class="large-12 columns"> 
  
@@ -123,7 +108,10 @@ function initialize()
 	    </div>
              
 		<div class="large-4 small-6 columns">
-			<h4>Analytics Preview</h4><hr>
+			<h4>Today's Preview</h4><hr>
+				<p class="text-justify"><b>Total Deliveries Made Today: </b></p>
+				<br />
+				<a href="analytics" class="button expand">Details</a>
 		</div>
  
              

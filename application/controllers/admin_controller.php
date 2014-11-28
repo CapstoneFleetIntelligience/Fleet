@@ -25,7 +25,8 @@ class admin_controller extends CI_Controller
         $item->bname = $bname;
         if($this->db->insert('chkitem', $item))
         {
-            echo $this->load->view('templates/item_table', array('bname' => $item->bname));
+            $items = $this->item->getItems($bname);
+            echo $this->load->view('templates/item_table', array('items' => $items));
         }
     }
 

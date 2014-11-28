@@ -27,7 +27,6 @@
 
     $('#register_user').click(function () {
         var form_data = $('#registration_form').serialize();
-        console.log(form_data);
         $.ajax({
             url:"<?php echo site_url('site_controller/register') ?>",
             type: 'POST',
@@ -74,21 +73,6 @@
         return false
     });
 
-    $('#add_item').click(function(){
-        var form_data = {
-            iname: $('#itemN').val(),
-            description: $('#description').val()
-        };
-
-        $.ajax({
-            url: "<?php echo site_url('admin_controller/addItem'); ?>",
-            type: 'POST',
-            data: form_data,
-            success: function(data){$(".item_table").html(data);}
-        });
-
-        return false
-    });
 
 
     $('#updateBusinessPass').click(function() {
@@ -127,7 +111,6 @@
     $("#submit_delivery").click(function()
     {
        var form_data = $("#add_delivery").serializeArray();
-        console.log(form_data);
 
         $.ajax({
            url: "<?php echo site_url('admin_controller/newDelivery') ?>",
@@ -240,7 +223,27 @@
         editEmployee('delete', data);
     });
 
-    $("button[name*='remove']").on("click", function(){
+    $('#add_item').click(function(){
+        $(this).unbind('click');
+        var form_data = {
+            iname: $('#itemN').val(),
+            description: $('#description').val()
+        };
+
+        $.ajax({
+            url: "admin_controller/addItem",
+            type: 'POST',
+            data: form_data,
+            success: function(data){
+                $(".item_table").replaceWith(data);
+            }
+        });
+        return false
+    });
+
+    /*$(".item_table").on("click", '.remove-btn', function(){
+        console.log($(this));
+        $(this).unbind('click');
          var id ={
              id: this.id
         };
@@ -249,11 +252,9 @@
           url: "<?php echo site_url('business_controller/removeItem') ?>",
             type: 'POST',
             data: id,
-            success: function(msg){
-                console.log(msg);
-            }
+            success: function(data){$("#addItemModal").html(data);}
         })
-    });
+    });*/
 
 </script>
 
