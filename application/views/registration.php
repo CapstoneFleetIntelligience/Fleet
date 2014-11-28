@@ -14,7 +14,7 @@
 			<div class="small-10 medium-12 large-12 columns">
 				<fieldset>
 					<legend>Please fill-out the following fields</legend>
-                    <?php echo form_open('registration', 'data-abide'); ?>
+                    <?php echo form_open('registration', 'data-abide id="registration_form"'); ?>
 						<div class="row">
 							<div class="small-5 medium-6 large-6 columns">
 								<div class="name-field">
