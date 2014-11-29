@@ -1,3 +1,4 @@
+<?//print_r($employees)?>
 <div class="container">
     <div class="row">
         <div class="small-centered">
@@ -33,10 +34,12 @@
                         foreach ($employees as $employee) {
                             echo '<tr>';
                             echo '<td>' . $employee->uname . '</td>';
-                            echo '<td>' . date('H:i',mktime(null, $employee->avgtime)) . '</td>';
-                            echo '<td>'.$employee->titems.'</td>';
+                            if ($employee->avgtime == 0)echo '<td> 00:00 </td>';
+                            else echo '<td>' . date('H:i',$employee->avgtime) . '</td>';
+                            if (empty($employee->titems)) echo '<td>0</td>';
+                            else echo '<td>'.$employee->titems.'</td>';
                             if(empty($employee->tdelivery)) echo '<td>0</td>';
-                            else echo '<td>' . ($employee->titems/$employee->tdelivery) . '</td>';
+                            else echo '<td>' . round($employee->titems/$employee->tdelivery , 2) . '</td>';
                             echo '<td>' . $employee->tdelivery . '</td>';
                             echo '<td>' . $employee->tdist . ' Miles</td>';
                             echo '</tr>';

@@ -28,33 +28,16 @@
     $('#register_user').click(function () {
         var form_data = $('#registration_form').serialize();
         $.ajax({
-            url:"<?php echo site_url('site_controller/register') ?>",
+            url:"<?php echo site_url('register') ?>",
             type: 'POST',
             data: form_data,
             success: function (data) {
-                console.log(data);
+                $(".registration").html(data);
             }
         });
         return false;
     });
 
-    $('#submit_employ').click(function(){
-        var form_data = {
-            email: $('#email').val(),
-            role: $('#role').val()
-        };
-
-        $.ajax({
-            url: "<?php echo site_url('employee_controller/create'); ?>",
-            type: 'POST',
-            data: form_data,
-            success: function(msg){
-                $("#employee").html(msg).fadeIn();
-                $("#new_employ").trigger('reset');
-            }
-        });
-        return false
-    });
 
     $("#submit_pass").click(function () {
         var pass = {
@@ -87,24 +70,6 @@
                 alert(msg);
             }
         });
-        return false;
-    });
-
-
-    $('#updateRange').click(function(){
-        var radius = {
-            radius: $('#radius').val(),
-            name: $('#bname').val()
-        };
-        $.ajax({
-            url: "<?php echo site_url('Settings_controller/editRange')?>",
-            type: 'POST',
-            data: radius,
-            success: function (data) {
-                $('#editRadiusModal').foundation('reveal', 'close');
-            }
-        });
-
         return false;
     });
 
@@ -222,40 +187,6 @@
         var data = $('#updateUser-'+id+' :input').serialize();
         editEmployee('delete', data);
     });
-
-    $('#add_item').click(function(){
-        $(this).unbind('click');
-        var form_data = {
-            iname: $('#itemN').val(),
-            description: $('#description').val()
-        };
-
-        $.ajax({
-            url: "admin_controller/addItem",
-            type: 'POST',
-            data: form_data,
-            success: function(data){
-                $(".item_table").replaceWith(data);
-            }
-        });
-        return false
-    });
-
-    /*$(".item_table").on("click", '.remove-btn', function(){
-        console.log($(this));
-        $(this).unbind('click');
-         var id ={
-             id: this.id
-        };
-
-        $.ajax({
-          url: "<?php echo site_url('business_controller/removeItem') ?>",
-            type: 'POST',
-            data: id,
-            success: function(data){$("#addItemModal").html(data);}
-        })
-    });*/
-
 </script>
 
 </body>

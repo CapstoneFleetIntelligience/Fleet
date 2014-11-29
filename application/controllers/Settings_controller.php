@@ -29,13 +29,4 @@ class Settings_controller extends CI_Controller {
     {
        $this->business->changePass($this->input->post(NULL, true));
     }
-
-    /**
-     * Edit the range of the business
-     */
-    public function editRange()
-    {
-        $range = $this->input->post(NULL, TRUE);
-        $this->business->updateRange($range);
-    }
 } 

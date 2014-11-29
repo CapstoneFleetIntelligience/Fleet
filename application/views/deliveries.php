@@ -91,11 +91,20 @@ foreach ($deliverer->routes['route'] as $row)
                 <?
                 $count = 1;
                 foreach ($route->deliveries['deliveries'] as $leg){
+                    $url = '<a href="https://www.google.com/maps/dir/Current+Location/'.str_replace(' ','+',$leg->caddress).'" target="_blank"><img src="assets\images\Google-Maps-icon.png" alt="GMaps" width="48" height="48"></a>';
+                    if($this->agent->is_mobile())
+                    {
+                        $platform = $this->agent->platform();
+                        if($platform=='Linux') $url =  '<a href="geo://0,0?q='.$leg->caddress.'"><img src="assets\images\Google-Maps-icon.png" alt="GMaps" width="48" height="48"></a>';
+                        elseif($platform=='Mac OS X')  $url =  '<a href="https://maps.apple.com/maps?q='.str_replace(' ','+',$leg->caddress).'"><img src="assets\images\Google-Maps-icon.png" alt="GMaps" width="48" height="48"></a>';
+                        elseif($platform=='Unknown Windows OS') $url = '<a href="bingmaps:?where='.$leg->caddress.'"><img src="assets\images\Google-Maps-icon.png" alt="GMaps" width="48" height="48"></a>';
+                        else $url = '<a href="maps:'.$leg->caddress.'"><img src="assets\images\Google-Maps-icon.png" alt="GMaps" width="48" height="48"></a>';
+                    }
                     ?>
                     <dd class="accordion-navigation">
                         <a href="#panel<?echo $count?>"><?echo $leg->cname." at ".$leg->caddress?></a>
                         <div id="panel<?echo $count?>" class="content">
-                            <a href="https://www.google.com/maps/dir/Current+Location/<?echo str_replace(' ','+',$leg->caddress)?>" target="_blank"><img src="assets\images\Google-Maps-icon.png" alt="GMaps" width="48" height="48"></a>
+                            <?echo $url?>
                         <?
                         echo "<h4>";
                         if ($leg->isdlv == 't')echo "<input class=\"dcheck\" type=\"image\" src=\"assets\\images\\checkbox_checked.png\" alt=\"Delivered\" width=\"48\" height=\"48\" data-cid=\"".$leg->cid."\" data-check='true'>";

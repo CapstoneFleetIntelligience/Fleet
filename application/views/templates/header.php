@@ -36,6 +36,7 @@
     <?php echo script_tag('assets/js/utility.js'); ?>
     <?php //echo script_tag('assets/foundation/foundation.joyride.js'); ?>
     <title><?php echo $title ?></title>
+
     <?php
     $set = $this->session->userdata('bname');
     if ($set) {
@@ -165,7 +166,6 @@
                             <li><a href="#" data-reveal-id="addItemModal">Add New Checklist Item</a></li>
                             <li><?php echo anchor('analytics', 'Analytics') ?></li>
                             <li><a href="#" data-reveal-id="editPassModal">Business Password</a></li>
-                            <li><a href="#" data-reveal-id="editRadiusModal">Delivery Range</a></li>
                         </ul>
                     </li>
                     <li><a href="#" data-reveal-id="profileModal">Profile</a></li>
@@ -204,8 +204,9 @@ switch ($role) {
         $this->load->view('newDelivery', array('customers' => $customers, 'items' => $items));
         echo '</div>';
         echo '<div id="addItemModal" class="reveal-modal" data-reveal>';
+        echo '<div class="item_table">';
         $this->load->view('templates/item_table');
-        echo '</div>';
+        echo '</div></div>';
         echo '<div id="customerModal" class="reveal-modal" data-reveal>';
         $this->load->view('custN');
         echo '</div>';
@@ -229,24 +230,6 @@ switch ($role) {
         );
         echo form_password($bpass);
         echo form_submit('submit', 'Submit', "class='tiny button' id='updateBusinessPass'");
-        echo form_close();
-        echo '<a class="close-reveal-modal">&#215;</a>';
-        echo '</div>';
-        echo '<div id="editRadiusModal" class="reveal-modal tiny" data-reveal>';
-        echo form_open('changeRange');
-        $radius = array(
-            'type' => 'number',
-            'name' => 'radius',
-            'id' => 'radius',
-            'value' => $business->radius,
-            'min' => '0',
-            'max' => '1000',
-            'step' => '1'
-        );
-        echo '<span>New Delivery Range</span>';
-        echo form_hidden('business', $business->name, 'id = "bname"');
-        echo form_input($radius);
-        echo form_submit('update', 'update', 'id = "updateRange"  class="tiny button radius"');
         echo form_close();
         echo '<a class="close-reveal-modal">&#215;</a>';
         echo '</div>';

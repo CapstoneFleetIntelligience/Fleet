@@ -6,7 +6,6 @@
  * Time: 8:50 PM
  */
 
-
 $results=$this->db->get_where('capsql.business',array('name'=> $this->session->userdata('bname')));
     foreach ($results->result() as $biz)
 ?>
@@ -14,7 +13,7 @@ $results=$this->db->get_where('capsql.business',array('name'=> $this->session->u
 <script>
 function initialize()
 {
-    var myLatlng = new google.maps.LatLng(<?php echo $biz->blat; ?>,<? echo $biz->blong; ?>);
+    var myLatlng = new google.maps.LatLng(<?php echo $business->blat; ?>,<? echo $business->blong; ?>);
 
     var mapProp = {
 	center: myLatlng,
@@ -30,13 +29,13 @@ function initialize()
     var marker1 = new google.maps.Marker({
 	position: myLatlng,
 	map: map1,
-	title: '<? echo $biz->name; ?>'
+	title: '<? echo $business->name; ?>'
     });
 
     var marker2 = new google.maps.Marker({
 	position: myLatlng,
 	map: map2,
-	title: '<? echo $biz->name; ?>'
+	title: '<? echo $business->name; ?>'
     });
 
 }
@@ -101,7 +100,6 @@ function initialize()
 			<a href="#" data-reveal-id="editDeliveryModal" class="button expand">Deliveries</a>
 			<a href="#" data-reveal-id="editItemModal" class="button expand">Checklist Items</a>
 			<a href="#" data-reveal-id="editPassModal" class="button expand">Business Password</a>
-			<a href="#" data-reveal-id="editRadiusModal" class="button expand">Delivery Range</a>
 			<a href="#" data-reveal-id="routeModal" class="button expand">Route Manager</a>
 		    </div>
 		</div>
@@ -134,3 +132,4 @@ function initialize()
       </div>
     </div>
   </div>
+

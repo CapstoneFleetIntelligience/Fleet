@@ -17,7 +17,7 @@
     <div class="small-4 columns prompt">
         <p>Step 1: Create your first employee(s)</p>
     </div>
-    <div class="small-8 columns add">
+    <div class="small-8 columns add item_table">
         <?php $this->load->view('addEmployee'); ?>
     </div>
 </div>
