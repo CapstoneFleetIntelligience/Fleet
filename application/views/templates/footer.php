@@ -27,35 +27,17 @@
 
     $('#register_user').click(function () {
         var form_data = $('#registration_form').serialize();
-        console.log(form_data);
         $.ajax({
             url:"<?php echo site_url('register') ?>",
             type: 'POST',
             data: form_data,
             success: function (data) {
-                console.log(data);
+                $(".registration").html(data);
             }
         });
         return false;
     });
 
-    $('#submit_employ').click(function(){
-        var form_data = {
-            email: $('#email').val(),
-            role: $('#role').val()
-        };
-
-        $.ajax({
-            url: "<?php echo site_url('employee_controller/create'); ?>",
-            type: 'POST',
-            data: form_data,
-            success: function(msg){
-                $("#employee").html(msg).fadeIn();
-                $("#new_employ").trigger('reset');
-            }
-        });
-        return false
-    });
 
     $("#submit_pass").click(function () {
         var pass = {
@@ -74,35 +56,18 @@
         return false
     });
 
-    $('#add_item').click(function(){
-        var form_data = {
-            iname: $('#itemN').val(),
-            description: $('#description').val()
-        };
-
-        $.ajax({
-            url: "<?php echo site_url('admin_controller/addItem'); ?>",
-            type: 'POST',
-            data: form_data,
-            success: function(data){$(".item_table").html(data);}
-        });
-
-        return false
-    });
 
 
     $('#updateBusinessPass').click(function() {
-        var pass = {
-            bpass: $('#bpass').val(),
-            name: $('#bname').val()
-        };
+        var info = $("#editBusinessPass").serialize();
 
         $.ajax({
             url: "<?php echo site_url('Settings_controller/editPass')?>",
             type: 'POST',
-            data: pass,
+            data: info,
             success: function (msg) {
                 $('#editPassModal').foundation('reveal', 'close');
+                alert(msg);
             }
         });
         return false;
@@ -111,7 +76,6 @@
     $("#submit_delivery").click(function()
     {
        var form_data = $("#add_delivery").serializeArray();
-        console.log(form_data);
 
         $.ajax({
            url: "<?php echo site_url('admin_controller/newDelivery') ?>",
@@ -208,7 +172,21 @@
         });
 
         return false;
-    })
+    });
+
+    $('.employee_table').on("click", ".update", function(){
+        $(this).unbind('click');
+        var id = $(this).attr('id');
+        var data = $('#updateUser-'+id+' :input').serialize();
+        editEmployee('update', data);
+    });
+
+    $('.employee_table').on("click", ".delete", function(){
+        $(this).unbind('click');
+        var id = $(this).attr('id');
+        var data = $('#updateUser-'+id+' :input').serialize();
+        editEmployee('delete', data);
+    });
 </script>
 
 </body>

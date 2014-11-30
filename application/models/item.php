@@ -54,4 +54,11 @@ class item extends CI_Model
         else return null;
     }
 
+    public function updateItem($id)
+    {
+        $this->db->update('chkitem', array('active' => 'f'), array('iid' => $id));
+        $items = $this->getItems($this->session->userdata('bname'));
+        echo $this->load->view('templates/item_table', array('items' => $items));
+    }
+
 }

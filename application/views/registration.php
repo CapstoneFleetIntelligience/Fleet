@@ -8,13 +8,12 @@
  */
 ?>
 
-<div class="row">
-
+<div class="row registration">
 		<div class="row">
 			<div class="small-10 medium-12 large-12 columns">
 				<fieldset>
 					<legend>Please fill-out the following fields</legend>
-                    <?php echo form_open('register', 'data-abide'); ?>
+                    <?php echo form_open('registration', 'data-abide id="registration_form"'); ?>
 						<div class="row">
 							<div class="small-5 medium-6 large-6 columns">
 								<div class="name-field">
@@ -89,7 +88,7 @@
 								<small class="error">A phone number is required.</small>
 							</div>
 						</div>
-                    <button type="submit" class="button radius small">Continue</button>
+                    <button type="submit" id ="register_user" class="button radius small">Continue</button>
 				</fieldset>
 			</div>
 		</div>

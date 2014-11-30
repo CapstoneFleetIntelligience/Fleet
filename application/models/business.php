@@ -60,7 +60,7 @@ class business extends CI_Model
 
     public function changePass($newPass)
     {
-       $this->name = $newPass['name'];
+        $this->name = $newPass['name'];
         $this->dpass = $newPass['bpass'];
         $this->db->where('name', $this->name);
         $this->encryptPass();

@@ -167,18 +167,18 @@
                   Risus ligula, aliquam nec fermentum vitae, sollicitudin eget urna. Suspendisse ultrices ornare tempor...
                 </h6>
  
-                <h6><a href="#">Read More È</a></h6>
+                <h6><a href="#">Read More ï¿½</a></h6>
               </div>
  
               <div class="panel hide-for-small">
-                <h5><a href="#">Post Title 2 È</a></h5>
+                <h5><a href="#">Post Title 2 ï¿½</a></h5>
               </div>
  
               <div class="panel hide-for-small">
-                <h5><a href="#">Post Title 3 È</a></h5>
+                <h5><a href="#">Post Title 3 ï¿½</a></h5>
               </div>
  
-              <a href="#" class="right">Go To Blog È</a>
+              <a href="#" class="right">Go To Blog ï¿½</a>
  
             </div>
  
@@ -198,7 +198,7 @@
             <div class="row">
  
               <div class="large-6 columns">
-                  <p>© Copyright no one at all. Go to town.</p>
+                  <p>ï¿½ Copyright no one at all. Go to town.</p>
               </div>
  
               <div class="large-6 small-12 columns">
@@ -219,12 +219,3 @@
     </div>
   </div>
  
-  <script>
-  document.write('<script src=js/vendor/' +
-  ('__proto__' in {} ? 'zepto' : 'jquery') +
-  '.js><\/script>')
-  </script>
-  <script src="js/foundation.min.js"></script>
-  <script>
-    $(document).foundation();
-  </script>
