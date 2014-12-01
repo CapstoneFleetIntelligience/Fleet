@@ -36,8 +36,8 @@ class delivery extends CI_Model
     public function getDeliveries()
     {
         $business = $this->session->userdata('bname');
-        $dsql = "select * from delivery as d, customer as c where d.cid = c.cid and c.bname = ?";
-        $dquery = $this->db->query($dsql, array($business));
+        $dsql = "select * from delivery as d, customer as c where d.cid = c.cid and c.bname = ? and d.schd >= ?";
+        $dquery = $this->db->query($dsql, array($business, date("Y-m-d")));
         $customer = array();
         foreach($dquery->result() as $index => $delivery)
         {
@@ -49,20 +49,18 @@ class delivery extends CI_Model
             $cust->name = $delivery->cname;
             $cust->iname = null;
             $cust->qty = null;
-            if($delivery->cid)
+            $this->db->select('qty, iname, ischk');
+            $this->db->from('del_item');
+            $this->db->where(array('cid' => $delivery->cid));
+            $this->db->join('chkitem', 'del_item.iid = chkitem.iid');
+            $query = $this->db->get();
+            foreach($query->result() as $del_item)
             {
-                $this->db->select('qty, iname, ischk');
-                $this->db->from('del_item');
-                $this->db->where(array('cid' => $delivery->cid));
-                $this->db->join('chkitem', 'del_item.iid = chkitem.iid');
-                $query = $this->db->get();
-                foreach($query->result() as $del_item)
-                {
-                    $cust->iname = $del_item->iname;
-                    $cust->qty = $del_item->qty;
-                    $cust->ischk = $del_item->ischk;
-                }
+                $cust->iname = $del_item->iname;
+                $cust->qty = $del_item->qty;
+                $cust->ischk = $del_item->ischk;
             }
+
             $customer[$index] = $cust;
         }
             return $customer;
@@ -70,20 +68,11 @@ class delivery extends CI_Model
 
     public function getCompleted()
     {
-        $deliveries = $this->getDeliveries();
-        $date = getdate();
-        $date = $date['year'].'-'.$date['mon'].'-'.$date['mday'];
-        $deliveryCount = 0;
-        foreach($deliveries as $delivery)
-        {
-            if($delivery->schd == $date)
-            {
-                if($delivery->ischk = 't') $deliveryCount++;
-                else continue;
-            }
-            else continue;
-        }
-        return $deliveryCount;
+        $business = $this->session->userdata('bname');
+        $dsql = "select count(*) from delivery as d, customer as c where d.cid = c.cid and c.bname = ? and d.schd = ? and d.ischk = TRUE ";
+        $dquery = $this->db->query($dsql, array($business,date("Y-m-d")));
+        $dresult = $dquery->row();
+        return $dresult->count;
     }
 
     /**
