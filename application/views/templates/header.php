@@ -106,8 +106,8 @@
             </div>
 			<div class="right small-5 medium-3 columns">
 				<ul class="button-group">
-					<li><a href="#" data-reveal-id="loginModal" class="button tiny">Login</a></li>
-					<li><a href="#" data-reveal-id="registrationModal" class="button tiny">Register</a></li>
+					<li><a href="#" data-reveal-id="loginModal" class="button tiny alert">Login</a></li>
+					<li><a href="#" data-reveal-id="registrationModal" class="button tiny alert">Register</a></li>
 				</ul>
 			</div>
         </div>
@@ -115,10 +115,9 @@
 </div>
 
 <!--sticky top bar for large screens-->
-<div class="sticky">
+<div class="sticky show-for-large-only">
     <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
         <ul class="title-area">
-            <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
             <li class="toggle-topbar"></li>
         </ul>
         <section class="top-bar-section">
@@ -206,6 +205,21 @@
 </div>
 
 <!--medium and small screens menu-->
+<div class="off-canvas-wrap show-for-small-up hide-for-large" data-offcanvas>
+    <div class="inner-wrap">
+	<nav class="tab-bar">
+	    <section class="left-small">
+		<a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
+	    </section>
+	    <section class="middle tab-bar-section">
+		<h1 class="title">Administration Menu</h1>
+	    </section>
+	    <section class="right-small">
+		<a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
+	    </section>
+	</nav>
+    </div>
+</div>
 
 <?php
 switch ($role) {
