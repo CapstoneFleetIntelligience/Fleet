@@ -12,4 +12,11 @@ class business_controller extends CI_Controller
     {
         return parent::__construct();
     }
+
+    public function removeItem()
+    {
+        $data = $this->input->post(NULL, TRUE);
+        $this->item->updateItem($data['id']);
+    }
+
 }

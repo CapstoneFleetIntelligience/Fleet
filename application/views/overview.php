@@ -32,7 +32,7 @@ $pass = array(
                     <h3>You have no routes assigned for today.</h3>
                 </div>
             </div>
-        </div><?
+        </div><?php
     }
     else{
     ?>

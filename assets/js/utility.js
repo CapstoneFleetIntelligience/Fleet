@@ -25,3 +25,9 @@ function editEmployee(action, form_data){
             });
         }
 }
+
+function addItem(info)
+{
+
+
+}
