@@ -1,11 +1,10 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Clifford
- * Date: 9/17/14
- * Time: 9:32 PM
- */
-?>
+<!--
+    Created by PhpStorm.
+    User: Clifford
+    Date: 9/17/14
+    Time: 9:32 PM
+-->
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -51,6 +50,7 @@
         } else {
             $ddates = '';
         }
+
         ?>
         <script>
 
@@ -81,24 +81,21 @@
         </script>
     <? } ?>
 </head>
+
 <body>
-<div class="row header">
-    <div class="small-6 medium-6 large-8 columns">
+	<!--large header-->
+    <div class="medium-6 large-8 show-for-medium-up columns show-for-landscape">
         <h1>Fleet Intelligence</h1>
     </div>
 
+<div class="row header">
+
+	<!--Login/Registration Bar-->
     <?php $role = $this->session->userdata('role'); ?>
     <?php if (!($role)): ?>
         <div class="row">
-            <div class="small-4 columns">
+            <div class="small-5 medium-3 columns">
                 <?php
-                echo anchor(
-                    '', 'Register', array(
-                        'class' => 'button',
-                        'data-reveal-id' => 'registrationModal'
-                    )
-                );
-                echo anchor('', 'Log In', array('class' => 'button', 'data-reveal-id' => 'loginModal',));
                 echo '<div id="loginModal" class="small reveal-modal" data-reveal>';
                 $this->load->view('login');
                 echo '</div>';
@@ -107,9 +104,17 @@
                 echo '</div>';
                 ?>
             </div>
+			<div class="right small-5 medium-3 columns">
+				<ul class="button-group">
+					<li><a href="#" data-reveal-id="loginModal" class="button tiny">Login</a></li>
+					<li><a href="#" data-reveal-id="registrationModal" class="button tiny">Register</a></li>
+				</ul>
+			</div>
         </div>
     <?php else: ?>
 </div>
+
+<!--sticky top bar for large screens-->
 <div class="sticky">
     <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
         <ul class="title-area">
@@ -164,6 +169,8 @@
                                 </ul>
                             </li>
                             <li><a href="#" data-reveal-id="addItemModal">Add New Checklist Item</a></li>
+			    <li><a href="#" data-reveal-id="customerModal">New Customer</a></li>
+			    <li><a href="#" data-reveal-id="deliveryModal">New Delivery</a></li>
                             <li><?php echo anchor('analytics', 'Analytics') ?></li>
                             <li><a href="#" data-reveal-id="editPassModal">Business Password</a></li>
                         </ul>
