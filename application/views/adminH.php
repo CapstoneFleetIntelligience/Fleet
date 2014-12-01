@@ -5,9 +5,6 @@
  * Date: 9/26/14
  * Time: 8:50 PM
  */
-
-$results=$this->db->get_where('capsql.business',array('name'=> $this->session->userdata('bname')));
-    foreach ($results->result() as $biz)
 ?>
 
 <script>
@@ -60,7 +57,7 @@ function initialize()
 			<div class="small-10 medium-12 large-12 columns">
 				<div class="large-12 medium-12 small-12 columns">
 					<div class="panel">
-						<h2 style="text-align: center;">Active Delivery Drivers</h2>
+						<h2 style="text-align: center;">Today's Scheduled Deliveries</h2>
 					</div>
 				</div>
 				<div class=" medium-10 show-for-medium-only columns">
