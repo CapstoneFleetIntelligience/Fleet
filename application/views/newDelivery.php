@@ -24,7 +24,6 @@ foreach ($customers as $index => $customer) {
             <div class="small-12 columns">
                 <label class="prefix">Select Customer</label>
                 <?php echo form_dropdown('cid', $options); ?>
-                <?php /*echo form_hidden('bname', $customer->bname);*/ ?>
             </div>
         </div>
         <div class="row">
