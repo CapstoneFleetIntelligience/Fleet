@@ -204,6 +204,9 @@
         </section>
     </nav>
 </div>
+
+<!--medium and small screens menu-->
+
 <?php
 switch ($role) {
     case 'A':
