@@ -1,11 +1,10 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Clifford
- * Date: 9/17/14
- * Time: 9:32 PM
- */
-?>
+<!--
+    Created by PhpStorm.
+    User: Clifford
+    Date: 9/17/14
+    Time: 9:32 PM
+-->
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -85,7 +84,7 @@
 
 <body>
 	<!--large header-->
-    <div class="medium-6 large-8 show-for-medium-up columns">
+    <div class="medium-6 large-8 show-for-medium-up columns show-for-landscape">
         <h1>Fleet Intelligence</h1>
     </div>
 
@@ -115,6 +114,7 @@
     <?php else: ?>
 </div>
 
+<!--sticky top bar for large screens-->
 <div class="sticky">
     <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
         <ul class="title-area">
@@ -169,6 +169,8 @@
                                 </ul>
                             </li>
                             <li><a href="#" data-reveal-id="addItemModal">Add New Checklist Item</a></li>
+			    <li><a href="#" data-reveal-id="customerModal">New Customer</a></li>
+			    <li><a href="#" data-reveal-id="deliveryModal">New Delivery</a></li>
                             <li><?php echo anchor('analytics', 'Analytics') ?></li>
                             <li><a href="#" data-reveal-id="editPassModal">Business Password</a></li>
                         </ul>
