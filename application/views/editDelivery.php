@@ -5,6 +5,7 @@
  * Date: 11/3/14
  * Time: 9:30 PM
  */
+
 ?>
 <div class="delivery_table">
     <div class="row">
@@ -29,8 +30,9 @@
                 echo '<td><ul>';
                   foreach($customer->iname as $index => $item)
                   {
-                      if(!empty($customer->qty[$index]))
-                      {
+
+                          if(!empty($customer->qty[$index]))
+                          {
                           echo '<li>';
                           echo $item;
                           echo '</li>';
