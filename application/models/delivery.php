@@ -72,21 +72,6 @@ class delivery extends CI_Model
         $dsql = "select count(*) from delivery as d, customer as c where d.cid = c.cid and c.bname = ? and d.schd = ? and d.ischk = TRUE ";
         $dquery = $this->db->query($dsql, array($business,date("Y-m-d")));
         $dresult = $dquery->row();
-        /*
-        $deliveries = $this->getDeliveries();
-        $date = getdate();
-        $date = $date['year'].'-'.$date['mon'].'-'.$date['mday'];
-        $deliveryCount = 0;
-        foreach($deliveries as $delivery)
-        {
-            if($delivery->schd == $date)
-            {
-                if($delivery->ischk = 't') $deliveryCount++;
-                else continue;
-            }
-            else continue;
-        }
-        */
         return $dresult->count;
     }
 

@@ -161,23 +161,6 @@ class Site_controller extends CI_Controller
         else redirect('');
     }
 
-
-/*    public function adminE()
-    {
-
-        $business= $this->business->loadModel();
-        $employees = $this->user->getEmployees($business->name);
-        $deliveries = $this->delivery->getDeliveries($business->name);
-        $data = array(
-            'title' => 'Edit',
-            'business' => $business,
-            'employees' => $employees,
-            'deliveries' => $deliveries,
-        );
-
-        $this->load->template('settings', $data);
-    }*/
-
     /**
      * Render the item table for a business
      */

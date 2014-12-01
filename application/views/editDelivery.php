@@ -11,10 +11,10 @@
         <table>
             <thead>
             <tr>
-                <th width="150">Customer</th>
+                <th width="100">Customer</th>
                 <th width="250">Address</th>
                 <th width="150">Delivery Date</th>
-                <th width="80">Item</th>
+                <th width="150">Items</th>
                 <th width="80">Qty</th>
                 <th width="80">Remove</th>
             </tr>
@@ -26,8 +26,28 @@
                 echo '<td>' . $customer->name . '</td>';
                 echo '<td>' . $customer->address . '</td>';
                 echo '<td>' . $customer->schd . '</td>';
-                echo '<td>' . $customer->iname. '</td>';
-                echo '<td>' . $customer->qty . '</td>';
+                echo '<td><ul>';
+                  foreach($customer->iname as $index => $item)
+                  {
+                      if(!empty($customer->qty[$index]))
+                      {
+                          echo '<li>';
+                          echo $item;
+                          echo '</li>';
+                      }
+                  }
+                echo '</ul></td>';
+                echo '<td><ul>';
+                foreach($customer->qty as $qty)
+                {
+                    if(!empty($qty))
+                    {
+                        echo '<li>';
+                        echo $qty;
+                        echo '</li>';
+                    }
+                }
+                echo '</ul></td>';
                 echo '<td><button type="button" id="'.$customer->cid.'" class="button tiny radius delete"
                 >Delete</button>'. form_hidden('schd', $customer->schd).'</td>';
                 echo form_hidden('cid', $customer->cid);
