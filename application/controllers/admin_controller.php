@@ -1,11 +1,11 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Brian
  * Date: 9/30/14
  * Time: 4:17 PM
  */
-
 class admin_controller extends CI_Controller
 {
     public function __construct()
@@ -23,8 +23,7 @@ class admin_controller extends CI_Controller
         $item->createItem($this->input->post(NULL, TRUE));
         $bname = $this->session->userdata('bname');
         $item->bname = $bname;
-        if($this->db->insert('chkitem', $item))
-        {
+        if ($this->db->insert('chkitem', $item)) {
             $items = $this->item->getItems($bname);
             echo $this->load->view('templates/item_table', array('items' => $items));
         }
@@ -38,16 +37,26 @@ class admin_controller extends CI_Controller
         $delivery = new delivery();
         $customer = new customer();
 
-        $cdata = $this->input->post('customer');
-        $ddata = $this->input->post('delivery');
+        $data = $this->input->post(NULL, true);
+
+        $cdata = array(
+            'cname' => $data['cname'],
+            'caddress' => $data['address'] . ', ' . $data['city'] . ',' . $data['state'] . ' ' . $data['zip'],
+            'cphone' => $data['cphone']
+        );
+        $ddata = array(
+            'schd' => $data['schd'],
+            'note' => $data['note']
+        );
         $list = $this->input->post('list');
         $customer->setData($cdata);
         $delivery->setDelv($ddata);
         $delivery->cid = $customer->cid;
-        $items =  $this->item->getItems($customer->bname);
-        $this->db->insert('capsql.delivery', $delivery);
+        $items = $this->item->getItems($customer->bname);
         if ($list == 'Yes') $this->load->view('bChkList', array('delivery' => $delivery, 'items' => $items));
         else echo 'reset';
+
+        $this->db->insert('capsql.delivery', $delivery);
     }
 
     /**
@@ -66,9 +75,9 @@ class admin_controller extends CI_Controller
     {
         $data = $this->input->post(NULL, TRUE);
         $delData = array(
-          'cid' => $data['cid'],
-          'schd' => $data['ischd'],
-          'note' => $data['note'],
+            'cid' => $data['cid'],
+            'schd' => $data['ischd'],
+            'note' => $data['note'],
         );
         array_pop($data);
         $delivery = new delivery();

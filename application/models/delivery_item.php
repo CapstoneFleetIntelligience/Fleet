@@ -34,7 +34,10 @@ class delivery_item extends CI_Model
         {
             $this->iid = $key;
             $this->qty = $value;
-            $this->db->insert('del_item', $this);
+            if(!empty($this->qty))
+            {
+                $this->db->insert('del_item', $this);
+            }
         }
     }
 }
