@@ -47,24 +47,24 @@ class delivery extends CI_Model
             $cust->note = $delivery->note;
             $cust->address = $delivery->caddress;
             $cust->name = $delivery->cname;
-            $cust->iname = null;
-            $cust->qty = null;
+            $cust->iname = array();
+            $cust->qty = array();
             $this->db->select('qty, iname, ischk');
             $this->db->from('del_item');
             $this->db->where(array('cid' => $delivery->cid));
             $this->db->join('chkitem', 'del_item.iid = chkitem.iid');
             $query = $this->db->get();
-            foreach($query->result() as $del_item)
+            foreach($query->result() as $key => $del_item)
             {
-                $cust->iname = $del_item->iname;
-                $cust->qty = $del_item->qty;
+                $cust->iname[$key] = $del_item->iname;
+                $cust->qty[$key] = $del_item->qty;
                 $cust->ischk = $del_item->ischk;
             }
 
             $customer[$index] = $cust;
         }
             return $customer;
-    }
+    } 
 
     public function getCompleted()
     {
