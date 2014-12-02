@@ -69,13 +69,13 @@ if ($dquery->num_rows() > 0){
     <?php } ?>
     <div class="row">
         <?php
-        echo form_open('routePrep', "id='route_prep'");
-        echo form_fieldset('Select a Delivery date and the Deliverers to execute the routes.');
+        echo form_open('routePrep', 'data-abide', "id='route_prep'");
+        echo form_fieldset('Select a Delivery Date and the Deliverers to execute the routes.');
         ?>
         <div class="row">
             <div class="small-8 small-centered columns">
-				<label>Delivery Date
-                    <div id="datepicker2"></div> <input type="text" name="schd" id="dateoutput" disabled>
+				<label> <b>Delivery Date</b>
+                    <div align="center" id="datepicker2"></div> <input type="text" name="schd" id="dateoutput" disabled>
 				</label>
             </div>
         </div>
