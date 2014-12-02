@@ -31,7 +31,8 @@ foreach ($customers as $index => $customer) {
                   <span class="prefix">
                      Delivery Date
                 </span>
-                <input name="ischd" type="date" id="delDate">
+                <input name="ischd" type="text" id="delDate">
+
             </div>
         </div>
     </div>

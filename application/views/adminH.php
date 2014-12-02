@@ -7,6 +7,47 @@
  */
 ?>
 
+<?php
+$dquery = $this->db->query("select schd from route where bname = '".$this->session->userdata('bname')."' and schd >= current_date group by schd");
+
+if ($dquery->num_rows() > 0){
+    foreach ($dquery->result() as $row)
+    {
+        $ddate[] = "'".$row->schd."'";
+    }
+    $ddates = implode(",",$ddate);
+}else{
+    $ddates = '';
+}
+?>
+
+<script>
+
+    $(function() {
+        var arrayD = [<? echo $ddates ?>];
+        $( "#datepicker" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd",
+            beforeShowDay: function(date){
+                var f = $.datepicker.formatDate('yy-mm-dd', date)
+                if ($.inArray(f, arrayD) > -1) {
+                    return [true];
+                }
+                else{
+                    return [false];
+                }
+            },
+            onSelect: function(dateText) {
+                window.location = '<?php echo site_url('routeE')?>/' + dateText;
+            }
+        });
+    });
+
+    $('#delDate').datepicker();
+
+    </script>
+
 <script>
 function initialize()
 {
