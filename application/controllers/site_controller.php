@@ -113,6 +113,7 @@ class Site_controller extends CI_Controller
     public function authenticate()
     {
         $user = $this->user->authenticate($this->input->post(NULL, TRUE));
+
         if ($user) {
             $index = $this->user->checkAccess($user);
 
@@ -124,7 +125,11 @@ class Site_controller extends CI_Controller
 
             $this->session->set_userdata($sessionD);
             redirect($index);
-        } else return $user;
+        } else
+            {
+                redirect('');
+                return $user;
+            }
     }
 
     /**
