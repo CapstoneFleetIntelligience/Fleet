@@ -36,7 +36,7 @@ class delivery extends CI_Model
     public function getDeliveries()
     {
         $business = $this->session->userdata('bname');
-        $dsql = "select * from delivery as d, customer as c where d.cid = c.cid and c.bname = ? and d.schd >= ?";
+        $dsql = "select * from delivery as d, customer as c where d.cid = c.cid and c.bname = ? and d.schd >=? ";
         $dquery = $this->db->query($dsql, array($business, date("Y-m-d")));
         $customer = array();
         foreach($dquery->result() as $index => $delivery)
@@ -51,20 +51,18 @@ class delivery extends CI_Model
             $cust->qty = array();
             $this->db->select('qty, iname, ischk');
             $this->db->from('del_item');
-            $this->db->where(array('cid' => $delivery->cid));
+            $this->db->where(array('cid' => $delivery->cid, 'ischd >=' => date("Y-m-d")));
             $this->db->join('chkitem', 'del_item.iid = chkitem.iid');
             $query = $this->db->get();
-            foreach($query->result() as $key => $del_item)
-            {
+            foreach ($query->result() as $key => $del_item) {
                 $cust->iname[$key] = $del_item->iname;
                 $cust->qty[$key] = $del_item->qty;
                 $cust->ischk = $del_item->ischk;
             }
-
             $customer[$index] = $cust;
         }
             return $customer;
-    } 
+    }
 
     public function getCompleted()
     {
@@ -91,7 +89,7 @@ class delivery extends CI_Model
      */
     public function insert()
     {
-        if($this->db->insert('delivery', $this));
+        if ($this->db->insert('delivery', $this));
         else throw new Exception('Failed to insert');
     }
 }

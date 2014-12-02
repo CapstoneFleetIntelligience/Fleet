@@ -51,7 +51,7 @@ $note = array(
 					<div class="small-3 large-4 columns">
 						<div class="name-field">
 							<label>Delivery Date
-								<input type="date" id="schd">
+								<input type="date" id="schd" name="schd">
 							</label>
 						</div>
 					</div>
@@ -94,21 +94,11 @@ $note = array(
         </div>
         <div class="row">
             <div class="small-4 column">
-				<div class="name-field">
-					Does delivery need a checklist?
-				</div>
-
-                <div class="small-2 columns right">
-                    <?php
-                    echo form_label("No", 'n');
-                    ?>
-                    <input type="radio" id="nolist" name="nolist" required>
-                </div>
-                <div class="small-2 columns right">
-                    <?php
-                    echo form_label("Yes", 'y');
-                    ?>
-                    <input type="radio" id="haslist" name="haslist" required>
+                <div class="right">
+                        <label class="name-field">Does delivery need a checklist?</label>
+                        <input type="radio" name="list" value="Yes" id="hasList"><label for="hasList">Yes</label>
+                        <input type="radio" name="list" value="No" id="noList"><label
+                            for="noList">No</label>
                 </div>
                 <small class="error">Please select "Yes" or "No".</small>
             </div>

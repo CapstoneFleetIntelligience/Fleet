@@ -65,6 +65,7 @@ class customer extends CI_Model
         }
         $this->setLatLong($this->caddress);
         $this->custCheck();
+        $this->bname = $this->session->userdata('bname');
 
         return $this;
     }
