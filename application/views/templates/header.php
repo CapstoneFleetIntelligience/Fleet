@@ -114,8 +114,8 @@
     <?php else: ?>
 </div>
 
-<!--sticky top bar for large screens-->
-<div class="sticky show-for-large-only">
+<!--sticky top bar for large screens (omitted show for large only)-->
+<div class="sticky">
     <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
         <ul class="title-area">
             <li class="toggle-topbar"></li>
@@ -204,7 +204,7 @@
     </nav>
 </div>
 
-<!--medium and small screens menu-->
+<!--medium and small screens menu
 <div class="off-canvas-wrap show-for-small-up hide-for-large" data-offcanvas>
     <div class="inner-wrap">
 	<nav class="tab-bar">
@@ -220,6 +220,7 @@
 	</nav>
     </div>
 </div>
+-->
 
 <?php
 switch ($role) {
