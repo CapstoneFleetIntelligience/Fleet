@@ -67,7 +67,7 @@ class delivery extends CI_Model
     public function getCompleted()
     {
         $business = $this->session->userdata('bname');
-        $dsql = "select count(*) from delivery as d, customer as c where d.cid = c.cid and c.bname = ? and d.schd = ? and d.ischk = TRUE ";
+        $dsql = "select count(*) from delivery as d, customer as c where d.cid = c.cid and c.bname = ? and d.schd = ? and d.isdlv = TRUE ";
         $dquery = $this->db->query($dsql, array($business,date("Y-m-d")));
         $dresult = $dquery->row();
         return $dresult->count;
