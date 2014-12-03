@@ -1,9 +1,46 @@
-<?//print_r($employees)?>
+<script type="text/javascript">
+
+    // Load the Visualization API and the piechart package.
+    google.load('visualization', '1.0', {'packages':['corechart']});
+
+    // Set a callback to run when the Google Visualization API is loaded.
+    google.setOnLoadCallback(drawChart);
+
+
+
+    // Callback that creates and populates a data table,
+    // instantiates the pie chart, passes in the data and
+    // draws it.
+    function drawChart() {
+
+       var jsonData = $.ajax({
+           url: "business_controller/getItemsSold",
+           dataType:"json",
+           async: false
+       }).responseText;
+        jsonData = JSON.parse(jsonData);
+
+        // Create the data table.
+        var data = new google.visualization.DataTable(jsonData);
+        // Set chart options
+        var options = {
+            'title':'Total Items delivered',
+            'backgroundColor': '#f2f2f2',
+            'width':1000,
+            'height':500,
+            'pieHole':.3
+        };
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }
+</script>
 <div class="container">
     <div class="row">
-        <div class="small-centered">
-            <h2 class="text-center"><?php echo $user->uname ?></h2>
-
+        <div class="small-centered ">
+            <h2 class="text-center"><?php echo $user->bname ?></h2>
+            <div id="chart_div"></div>
             <p class="text-justify"><b>Total deliveries made today: </b><?php echo $count ?></p>
         </div>
         <div class="row">
