@@ -147,7 +147,7 @@ class Site_controller extends CI_Controller
            $items = $this->item->getItems($business->name);
            $deliveries = $this->delivery->getDeliveries($business->name);
            $employees = $this->user->getEmployees($business->name);
-
+           $coordinates = $this->delivery->getDCoor();
            $data = array(
                'title' => 'Managers Home',
                'customers' => $customers,
@@ -156,6 +156,7 @@ class Site_controller extends CI_Controller
                'employees' => $employees,
                'business' => $business,
                'user' => $user,
+               'coordinates' => $coordinates
            );
 
            $this->load->template('adminH', $data);

@@ -92,4 +92,11 @@ class delivery extends CI_Model
         if ($this->db->insert('delivery', $this));
         else throw new Exception('Failed to insert');
     }
+
+    public function getDCoor(){
+        $business = $this->session->userdata('bname');
+        $dsql = "select c.clat, c.clong from delivery as d, customer as c where d.cid = c.cid and c.bname = ? and d.schd = ? ";
+        $dquery = $this->db->query($dsql, array($business, date("Y-m-d")));
+        return $dquery->result();
+    }
 }
