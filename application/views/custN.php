@@ -56,7 +56,7 @@ $note = array(
 						</div>
 					</div>
 				</div>
-        <?php echo form_open('addCust', "data-abide", "id = 'add_cust'");
+        <?php echo form_open('addCust', 'data-abide', "id = 'add_cust'");
         echo form_fieldset('Enter details for new delivery');
         ?>
 
@@ -80,7 +80,59 @@ $note = array(
             <div class="small-2 columns">
                 <div class="name-field">
 					<label>State
-						<input type="text" placeholder="Required" required pattern="[a-zA-Z]+" id="state" name="state">
+                        <select id="state" name="state" size="1">
+                            <option value="AL">Alabama</option>
+                            <option value="AK">Alaska</option>
+                            <option value="AZ">Arizona</option>
+                            <option value="AR">Arkansas</option>
+                            <option value="CA">California</option>
+                            <option value="CO">Colorado</option>
+                            <option value="CT">Connecticut</option>
+                            <option value="DE">Delaware</option>
+                            <option value="DC">District Of Columbia</option>
+                            <option value="FL">Florida</option>
+                            <option value="GA">Georgia</option>
+                            <option value="HI">Hawaii</option>
+                            <option value="ID">Idaho</option>
+                            <option value="IL">Illinois</option>
+                            <option value="IN">Indiana</option>
+                            <option value="IA">Iowa</option>
+                            <option value="KS">Kansas</option>
+                            <option value="KY">Kentucky</option>
+                            <option value="LA">Louisiana</option>
+                            <option value="ME">Maine</option>
+                            <option value="MD">Maryland</option>
+                            <option value="MA">Massachusetts</option>
+                            <option value="MI">Michigan</option>
+                            <option value="MN">Minnesota</option>
+                            <option value="MS">Mississippi</option>
+                            <option value="MO">Missouri</option>
+                            <option value="MT">Montana</option>
+                            <option value="NE">Nebraska</option>
+                            <option value="NV">Nevada</option>
+                            <option value="NH">New Hampshire</option>
+                            <option value="NJ">New Jersey</option>
+                            <option value="NM">New Mexico</option>
+                            <option value="NY">New York</option>
+                            <option value="NC">North Carolina</option>
+                            <option value="ND">North Dakota</option>
+                            <option value="OH">Ohio</option>
+                            <option value="OK">Oklahoma</option>
+                            <option value="OR">Oregon</option>
+                            <option value="PA">Pennsylvania</option>
+                            <option value="RI">Rhode Island</option>
+                            <option value="SC">South Carolina</option>
+                            <option value="SD">South Dakota</option>
+                            <option value="TN">Tennessee</option>
+                            <option value="TX">Texas</option>
+                            <option value="UT">Utah</option>
+                            <option value="VT">Vermont</option>
+                            <option value="VA">Virginia</option>
+                            <option value="WA">Washington</option>
+                            <option value="WV">West Virginia</option>
+                            <option value="WI">Wisconsin</option>
+                            <option value="WY">Wyoming</option>
+                        </select>
 					</label>
 					<small class="error">A state is required.</small>
 				</div>
@@ -96,8 +148,8 @@ $note = array(
             <div class="small-4 column">
                 <div class="right">
                         <label class="name-field">Does delivery need a checklist?</label>
-                        <input type="radio" name="list" value="Yes" id="hasList"><label for="hasList">Yes</label>
-                        <input type="radio" name="list" value="No" id="noList"><label
+                        <input type="radio" name="list" value="Yes" id="hasList" required><label for="hasList">Yes</label>
+                        <input type="radio" name="list" value="No" id="noList" required><label
                             for="noList">No</label>
                 </div>
                 <small class="error">Please select "Yes" or "No".</small>

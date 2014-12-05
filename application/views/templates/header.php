@@ -1,22 +1,15 @@
-<!--
-    Created by PhpStorm.
-    User: Clifford
-    Date: 9/17/14
-    Time: 9:32 PM
--->
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <?php echo link_tag('assets/css/main.css'); ?>
+
     <script type="text/javascript"
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsl9m5vNRyfN_82WPuUUDpycK6FjwcPEY">
     </script>
 
     <?php echo link_tag('assets/css/foundation.css'); ?>
     <?php echo link_tag('assets/css/normalize.css'); ?>
+    <?php echo link_tag('assets/css/main.css'); ?>
     <?php echo link_tag('assets/css/jquery-ui.css'); ?>
     <?php echo link_tag('assets/css/jquery-ui.structure.css'); ?>
     <?php echo link_tag('assets/css/jquery-ui.theme.css'); ?>
@@ -36,7 +29,7 @@
     <?php echo script_tag('assets/js/utility.js'); ?>
     <?php //echo script_tag('assets/foundation/foundation.joyride.js'); ?>
     <title><?php echo $title ?></title>
-
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <?php
     $set = $this->session->userdata('bname');
     if ($set) {
@@ -65,7 +58,7 @@
                     changeYear: true,
                     dateFormat: "yy-mm-dd",
                     beforeShowDay: function (date) {
-                        var f = $.datepicker.formatDate('yy-mm-dd', date)
+                        var f = $.datepicker.formatDate('yy-mm-dd', date);
                         if ($.inArray(f, arrayD) > -1) {
                             return [true];
                         } else {
@@ -77,7 +70,6 @@
                     }
                 });
             });
-
             $('#delDate').datepicker();
         </script>
     <? } ?>
