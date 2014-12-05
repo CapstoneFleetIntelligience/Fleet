@@ -26,6 +26,7 @@
     <?php echo script_tag('assets/js/vendor/jquery-ui.js'); ?>
     <?php echo script_tag('assets/js/vendor/jquery.cookie.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.js'); ?>
+	<?php echo script_tag('assets/js/foundation/foundation.offcanvas.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.tab.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.abide.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.reveal.js'); ?>
@@ -204,23 +205,37 @@
     </nav>
 </div>
 
-<!--medium and small screens menu
-<div class="off-canvas-wrap show-for-small-up hide-for-large" data-offcanvas>
+<!--medium and small screens off canvas menu-->
+<div class="off-canvas-wrap show-for-small-only hide-for-large" data-offcanvas>
     <div class="inner-wrap">
-	<nav class="tab-bar">
-	    <section class="left-small">
-		<a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
-	    </section>
-	    <section class="middle tab-bar-section">
-		<h1 class="title">Administration Menu</h1>
-	    </section>
-	    <section class="right-small">
-		<a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
-	    </section>
-	</nav>
+		<nav class="tab-bar">
+			<section class="left-small">
+			<a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
+			</section>
+			<section class="middle tab-bar-section">
+			<h1 class="title">Administration Menu</h1>
+			</section>
+			<section class="right-small">
+			<a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
+			</section>
+		</nav>
+		
+		<aside class="left-off-canvas-menu">
+			<ul class="off-canvas-list">
+				<li><a href="#">Home</a></li>
+				<li><a href="#"></a></li>
+			</ul>
+		</aside>
+		
+		<section class="main-section">
+			<!--page content goes here-->
+		</section>
+		
+		<a class="exit-off-canvas"></a>
+		
     </div>
 </div>
--->
+
 
 <?php
 switch ($role) {
@@ -303,5 +318,8 @@ switch ($role) {
 }
 ?>
 <?php endif; ?>
+
+
+
 </body>
 </html>
