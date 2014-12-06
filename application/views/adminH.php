@@ -75,6 +75,29 @@ function initialize()
 	map: map2,
 	title: '<? echo $business->name; ?>'
     });
+    <?
+    if (sizeof($coordinates) > 0){
+        $cnt = 1;
+        foreach ($coordinates as $coor){
+        ?>
+            var myLatlng<?echo $cnt?> = new google.maps.LatLng(<?echo $coor->clat?>,<?echo $coor->clong?>);
+            var marker1<?echo $cnt?> = new google.maps.Marker({
+            position: myLatlng<?echo $cnt?>,
+            map: map1,
+            title: 'Delivery #<?echo $cnt?>',
+            icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+            });
+
+            var marker2<?echo $cnt?> = new google.maps.Marker({
+            position: myLatlng<?echo $cnt?>,
+            map: map2,
+            title: 'Delivery #<?echo $cnt?>',
+            icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+            });
+        <?
+        }
+    }
+ ?>
 
 }
 
@@ -120,54 +143,3 @@ function initialize()
 		</div>
     </div>
 </div>
-<!--
-<div class="row">
-    <div class="large-12 columns"> 
- 
-    <br />
-    
-      <div class="row">
-        <div class="large-12 columns">
-          <div class="row">
-            <div class="large-4 small-6 columns">
- 
-		<h4>System Tools</h4><hr>
-		<div class="row">
-		    <div class="large-12 small-3 columns">
-			<a href="#" data-reveal-id="editEmployeeModal" class="button expand">Employee(s)</a>
-			<a href="#" data-reveal-id="editDeliveryModal" class="button expand">Deliveries</a>
-			<a href="#" data-reveal-id="editItemModal" class="button expand">Checklist Items</a>
-			<a href="#" data-reveal-id="editPassModal" class="button expand">Business Password</a>
-			<a href="#" data-reveal-id="routeModal" class="button expand">Route Manager</a>
-		    </div>
-		</div>
-	    </div>
-             
-		<div class="large-4 small-6 columns">
-			<h4>Today's Preview</h4><hr>
-				<p class="text-justify"><b>Total Deliveries Made Today: </b></p>
-				<br />
-				<a href="analytics" class="button expand">Details</a>
-		</div>
- 
-             
-	    <div class="large-4 small-6 columns">
- 
-		<h4>Admin Tools</h4><hr>
-     
-		<div class="row">
-		    <div class="large-12 small-3 columns">
-			<a href="#" class="button expand" data-reveal-id="deliveryModal">New Delivery</a>
-			<a href="#" class="button expand" data-reveal-id="addItemModal">Add New Item(s)</a>
-			<a href="#" class="button expand" data-reveal-id="addEmployeeModal">Add Employee(s)</a>
-			<a href="route_controller/routeN" class="button expand">Create Routes</a>
-		    </div>
-		</div>
-	    </div>
- 
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
--->
