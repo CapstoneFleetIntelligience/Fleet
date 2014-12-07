@@ -39,7 +39,7 @@ $pass = array(
 							<small class="error">Please enter a password.</small>
 						</div>
 					</div>
-                    <button type="submit" class="button tiny radius">Submit</button>
+					<button type="submit" class="button tiny radius">Submit</button>
 
 				</fieldset>
 

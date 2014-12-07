@@ -1,3 +1,10 @@
+<!--mini navigation tab for this page only-->
+<nav class="top-bar hide-for-large-up" data-top-bar role="navigation" data-options="is_hover: false">
+	<ul class="title-area">
+		<li class="name">
+			<h1><?php echo anchor('adminH', 'Home'); ?></h1>
+	</ul>
+</nav>
 <?php
 /**
  * Created by PhpStorm.
@@ -72,10 +79,13 @@ if ($dquery->num_rows() > 0){
         echo form_open('routePrep', 'data-abide', "id='route_prep'");
         echo form_fieldset('Select a Delivery Date and the Deliverers to execute the routes.');
         ?>
+		</br>
         <div class="row">
             <div class="small-8 small-centered columns">
 				<label> <b>Delivery Date</b>
-                    <div align="center" id="datepicker2"></div> <input type="text" name="schd" id="dateoutput" disabled>
+					<div class="row">
+						<div align="center" id="datepicker2"></div> <input type="text" name="schd" id="dateoutput" disabled>
+					</div>
 				</label>
             </div>
         </div>

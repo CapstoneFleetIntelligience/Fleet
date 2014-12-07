@@ -25,14 +25,13 @@ $note = array(
 
 ?>
 <div class="container">
-
     <div class="row">
-		<div class="small-10 medium-12 large-12 columns">
+		<div class="small-12 medium-12 large-12 columns">
 		<fieldset>
 			<legend>Enter details for new delivery</legend>
 			<?php echo form_open('addCust', "data-abide id = 'add_cust'"); ?>
 				<div class="row">
-					<div class="small-3 large-4 columns">
+					<div class="small-12 medium-4 large-4 columns">
 						<div class="name-field">
 							<label>Customer Name
 								<input type="text" placeholder="Required" required pattern="[a-zA-Z]+" id="cname" name="cname">
@@ -40,7 +39,7 @@ $note = array(
 							<small class="error">A customer name is required.</small>
 						</div>
 					</div>
-					<div class="small-3 large-4 columns">
+					<div class="small-12 medium-4 large-4 columns">
 						<div class="name-field">
 							<label>Customer Phone
 								<input type="text" placeholder="Required" required pattern="[0-9]+" id="cphone" name="cphone">
@@ -48,7 +47,7 @@ $note = array(
 							<small class="error">A customer phone number is required.</small>
 						</div>
 					</div>
-					<div class="small-3 large-4 columns">
+					<div class="small-12 medium-3 large-4 columns">
 						<div class="name-field">
 							<label>Delivery Date
 								<input type="date" id="schd" name="schd">
@@ -61,7 +60,7 @@ $note = array(
         ?>
 
         <div class="row">
-            <div class="small-3 large-4 columns">
+            <div class="small-12 medium-6 columns">
 				<div class="name-field">
 					<label>Customer Address
 						<input type="text" placeholder="Required" required pattern="[a-zA-Z0-9]+" id="address" name="address">
@@ -69,7 +68,7 @@ $note = array(
 					<small class="error">A customer address is required.</small>
 				</div>
             </div>
-            <div class="small-3 large-4 columns">
+            <div class="small-12 medium-6 columns">
                 <div class="name-field">
 					<label>City
 						<input type="text" placeholder="Required" required pattern="[a-zA-Z]+" id="city" name="city">
@@ -77,7 +76,7 @@ $note = array(
 					<small class="error">A city is required.</small>
 				</div>
 			</div>
-            <div class="small-2 columns">
+            <div class="small-12 medium-6 columns">
                 <div class="name-field">
 					<label>State
                         <select id="state" name="state" size="1">
@@ -137,7 +136,7 @@ $note = array(
 					<small class="error">A state is required.</small>
 				</div>
             </div>
-            <div class="small-2 column">
+            <div class="small-12 medium-6 columns">
 				<label>Zip
 					<input type="text" placeholder="Required" required pattern="[0-9]+" id="zip" name="zip">
 				</label>
@@ -145,7 +144,7 @@ $note = array(
             </div>
         </div>
         <div class="row">
-            <div class="small-4 column">
+            <div class="small-12 medium-4 columns">
                 <div class="right">
                         <label class="name-field">Does delivery need a checklist?</label>
                         <input type="radio" name="list" value="Yes" id="hasList" required><label for="hasList">Yes</label>
@@ -154,18 +153,20 @@ $note = array(
                 </div>
                 <small class="error">Please select "Yes" or "No".</small>
             </div>
-            <div class="small-8 column">
+            <div class="small-12 medium-8 column">
                 <div class="name-field">
                     Notes (optional):
                 </div>
                 <?php echo form_textarea($note); ?>
             </div>
         </div>
+	
+	</br>
 
 		<button type="submit" id="submit_cust" class="small button">Continue</button>
 		
-		</fieldset>
-		</div>
+    </fieldset>
+    </div>
 		
         <?php echo form_close(); ?>
     </div>

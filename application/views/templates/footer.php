@@ -7,7 +7,7 @@
  */
 ?>
 
-  <footer class="row">
+  <footer class="row show-for-medium-up">
     <div class="large-12 columns">
       <hr/>
       <div class="row">

@@ -19,7 +19,8 @@
     <?php echo script_tag('assets/js/vendor/jquery-ui.js'); ?>
     <?php echo script_tag('assets/js/vendor/jquery.cookie.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.js'); ?>
-	<?php echo script_tag('assets/js/foundation/foundation.offcanvas.js'); ?>
+    <?php echo script_tag('assets/js/foundation/foundation.offcanvas.js'); ?>
+    <?php echo script_tag('assets/js/foundation/foundation.interchange.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.tab.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.abide.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.reveal.js'); ?>
@@ -27,7 +28,6 @@
     <?php echo script_tag('assets/js/foundation/foundation.alert.js'); ?>
     <?php echo script_tag('assets/js/foundation/foundation.accordion.js'); ?>
     <?php echo script_tag('assets/js/utility.js'); ?>
-    <?php //echo script_tag('assets/foundation/foundation.joyride.js'); ?>
     <title><?php echo $title ?></title>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <?php
@@ -76,39 +76,50 @@
 </head>
 
 <body>
-	<!--large header-->
-    <div class="medium-6 large-8 show-for-medium-up columns show-for-landscape">
-        <h1>Fleet Intelligence</h1>
-    </div>
-
 <div class="row header">
-
-	<!--Login/Registration Bar-->
-    <?php $role = $this->session->userdata('role'); ?>
-    <?php if (!($role)): ?>
-        <div class="row">
-            <div class="small-5 medium-3 columns">
-                <?php
-                echo '<div id="loginModal" class="small reveal-modal" data-reveal>';
-                $this->load->view('login');
-                echo '</div>';
-                echo '<div id="registrationModal" class="reveal-modal" data-reveal>';
-                $this->load->view('registration');
-                echo '</div>';
-                ?>
-            </div>
-			<div class="right small-5 medium-3 columns">
-				<ul class="button-group">
-					<li><a href="#" data-reveal-id="loginModal" class="button tiny alert">Login</a></li>
-					<li><a href="#" data-reveal-id="registrationModal" class="button tiny alert">Register</a></li>
-				</ul>
-			</div>
-        </div>
-    <?php else: ?>
+    <!--large header-->
+    <div class="row">
+	<div class="small-12 columns">	
+	    <!--Login/Registration Bar-->
+	    <?php $role = $this->session->userdata('role'); ?>
+	    <?php if (!($role)): ?>
+		<div class="small-12 medium-12 large-12 columns">
+		    <?php
+		    echo '<div id="loginModal" class="small reveal-modal" data-reveal>';
+		    $this->load->view('login');
+		    echo '</div>';
+		    echo '<div id="registrationModal" class="reveal-modal" data-reveal>';
+		    $this->load->view('registration');
+		    echo '</div>';
+		    ?>
+		</div>
+		<!--login/registration buttons-->
+		<div class="right medium-3 large-3 columns show-for-medium-up">
+		    <ul class="button-group">
+			<li><a href="#" data-reveal-id="loginModal" class="button tiny alert">Login</a></li>
+			<li><a href="#" data-reveal-id="registrationModal" class="button tiny alert">Register</a></li>
+		    </ul>
+		</div>
+		<!--medium and large header-->
+		<div class="medium-4 large-4 show-for-medium-up columns hide-for-portrait hide-for-small">
+		    <h1>Fleet Intelligence</h1>
+		</div>	
+		<!--small login/reg buttons-->
+		<div class="row show-for-small-only">
+		    <div class="right small-7 columns">
+			<ul class="button-group">
+			    <li><a href="#" data-reveal-id="loginModal" class="button tiny alert">Login</a></li>
+			    <li><a href="#" data-reveal-id="registrationModal" class="button tiny alert">Register</a></li>
+			</ul>
+		    </div>
+		</div>
+	    <?php else: ?>
+	</div>
+    </div>
 </div>
 
 <!--sticky top bar for large screens (omitted show for large only)-->
-<div class="sticky">
+<div class="sticky show-for-large-up">
     <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
         <ul class="title-area">
             <li class="toggle-topbar"></li>
@@ -197,43 +208,13 @@
     </nav>
 </div>
 
-<!--medium and small screens off canvas menu-->
-<div class="off-canvas-wrap show-for-small-only hide-for-large" data-offcanvas>
-    <div class="inner-wrap">
-		<nav class="tab-bar">
-			<section class="left-small">
-			<a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
-			</section>
-			<section class="middle tab-bar-section">
-			<h1 class="title">Administration Menu</h1>
-			</section>
-			<section class="right-small">
-			<a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
-			</section>
-		</nav>
-		
-		<aside class="left-off-canvas-menu">
-			<ul class="off-canvas-list">
-				<li><a href="#">Home</a></li>
-				<li><a href="#"></a></li>
-			</ul>
-		</aside>
-		
-		<section class="main-section">
-			<!--page content goes here-->
-		</section>
-		
-		<a class="exit-off-canvas"></a>
-		
-    </div>
-</div>
-
 
 <?php
 switch ($role) {
     case 'A':
         echo '<div id="deliveryModal" class="reveal-modal" data-reveal>';
         $this->load->view('newDelivery', array('customers' => $customers, 'items' => $items));
+	echo '<a class="close-reveal-modal">&#215;</a>';
         echo '</div>';
         echo '<div id="addItemModal" class="reveal-modal" data-reveal>';
         echo '<div class="item_table">';
@@ -241,14 +222,17 @@ switch ($role) {
         echo '</div></div>';
         echo '<div id="customerModal" class="reveal-modal" data-reveal>';
         $this->load->view('custN');
+	echo '<a class="close-reveal-modal">&#215;</a>';
         echo '</div>';
         echo '<div id="addEmployeeModal" class="reveal-modal small" data-reveal>';
         $this->load->view('addEmployee');
+	echo '<a class="close-reveal-modal">&#215;</a>';
         echo '</div>';
-        echo '<div id="editEmployeeModal" class="reveal-modal large" data-reveal>';
+        echo '<div id="editEmployeeModal" class="reveal-modal xlarge" data-reveal>';
         $this->load->view('editEmployee', array('employees' => $employees));
+	echo '<a class="close-reveal-modal">&#215;</a>';
         echo '</div>';
-        echo '<div id="editDeliveryModal" class="reveal-modal large" data-reveal>';
+        echo '<div id="editDeliveryModal" class="reveal-modal xlarge" data-reveal>';
         $this->load->view('editDelivery', array('deliveries' => $deliveries));
         echo '<a class="close-reveal-modal">&#215;</a>';
         echo '</div>';
@@ -272,20 +256,25 @@ switch ($role) {
         echo '</div>';
         echo '<div id="profileModal" class="reveal-modal small" data-reveal>';
         $this->load->view('profile', array('user' => $user));
+	echo '<a class="close-reveal-modal">&#215;</a>';
         echo '</div>';
         break;
     case 'M':
         echo '<div id="deliveryModal" class="reveal-modal" data-reveal>';
         $this->load->view('newDelivery', array('customers' => $customers, 'items' => $items));
+	echo '<a class="close-reveal-modal">&#215;</a>';
         echo '</div>';
         echo '<div id="customerModal" class="reveal-modal" data-reveal>';
         $this->load->view('custN');
+	echo '<a class="close-reveal-modal">&#215;</a>';
         echo '</div>';
         echo '<div id="addEmployeeModal" class="reveal-modal small" data-reveal>';
         $this->load->view('addEmployee');
+	echo '<a class="close-reveal-modal">&#215;</a>';
         echo '</div>';
-        echo '<div id="editEmployeeModal" class="reveal-modal large" data-reveal>';
+        echo '<div id="editEmployeeModal" class="reveal-modal xlarge" data-reveal>';
         $this->load->view('editEmployee', array('employees' => $employees));
+	echo '<a class="close-reveal-modal">&#215;</a>';
         echo '</div>';
         echo '<div id="editDeliveryModal" class="reveal-modal large" data-reveal>';
         $this->load->view('editDelivery', array('deliveries' => $deliveries));
@@ -298,11 +287,13 @@ switch ($role) {
         echo '</div>';
         echo '<div id="profileModal" class="reveal-modal small" data-reveal>';
         $this->load->view('profile', array('user' => $user));
+	echo '<a class="close-reveal-modal">&#215;</a>';
         echo '</div>';
         break;
     case 'E':
         echo '<div id="profileModal" class="reveal-modal small" data-reveal>';
         $this->load->view('profile', array('user' => $user));
+	echo '<a class="close-reveal-modal">&#215;</a>';
         echo '</div>';
         break;
     default:

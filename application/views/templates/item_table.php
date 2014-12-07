@@ -42,19 +42,19 @@ $description = array(
         <fieldset>
             <legend>Add a new item</legend>
             <div class="row">
-                <div class="small-5 columns">
+                <div class="small-12 medium-12 large-12 columns">
                     <div class="row">
-                        <div class="small-4 columns">
-                            <label for="itemN" class="right">
+                        <div class="small-4 medium-4 large-4 columns">
+                            <label for="itemN" class="right hide-for-small-only">
                                 New item
                             </label>
                         </div>
-                        <div class="small-8 columns">
+                        <div class="small-12 medium-8 large-8 columns">
                             <input name='iname' id='itemN' placeholder="Enter new item name"/>
                         </div>
                     </div>
                 </div>
-                <div class="small-7 columns">
+                <div class="small-12 medium-7 large-7 columns">
                     <?php echo form_textarea($description); ?>
                 </div>
             </div>

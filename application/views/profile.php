@@ -32,8 +32,8 @@
         </div>
     </div>
     <div class="row">
-        <div class="small-8 small-centered columns">
-            <button id="showPass" type="button" class="button expanded">Change Password</button>
+        <div class="small-8 medium-6 small-centered columns">
+            <button id="showPass" type="button" class="button radius">Change Password</button>
         </div>
     </div>
     <div class="password hide">
@@ -59,7 +59,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="right">
+        <div class="small-8 medium-6 small-centered columns">
             <button id="updateUser" type="submit" class="button radius">Update Profile</button>
         </div>
     </div>

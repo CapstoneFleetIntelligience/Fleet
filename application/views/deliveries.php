@@ -1,3 +1,10 @@
+<!--mini navigation tab for this page only-->
+<nav class="top-bar hide-for-large-up" data-top-bar role="navigation" data-options="is_hover: false">
+	<ul class="title-area">
+		<li class="name">
+			<h1><?php echo anchor('adminH', 'Home'); ?></h1>
+	</ul>
+</nav>
 <?php
 /**
  * Created by PhpStorm.

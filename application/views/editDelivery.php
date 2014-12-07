@@ -9,7 +9,7 @@
 ?>
 <div class="delivery_table">
     <div class="row">
-        <table>
+        <table class="responsive">
             <thead>
             <tr>
                 <th width="100">Customer</th>

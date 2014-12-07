@@ -19,35 +19,45 @@ foreach ($customers as $index => $customer) {
 
 <div class="container">
     <div class="small-centered">
-        <?php echo form_open('', "id= 'add_delivery'"); ?>
         <div class="row">
             <div class="small-12 columns">
-                <label class="prefix">Select Customer</label>
-                <?php echo form_dropdown('cid', $options); ?>
-            </div>
-        </div>
-        <div class="row">
-            <div class="small-12 columns">
-                  <span class="prefix">
-                     Delivery Date
-                </span>
-                <input name="ischd" type="text" id="delDate">
-
+            <fieldset>
+                    <?php echo form_open('', "id= 'add_delivery'"); ?>
+                    <div class="row">
+                        <div class="small-12 columns">
+                            <label>Select Customer</label>
+                            <?php echo form_dropdown('cid', $options); ?>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="small-12 columns">
+                            <label>Delivery Date</label>
+                            <input name="ischd" type="text" id="delDate">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="small-12 columns">
+                            <?php echo $this->load->view('bChkList', array('items' => $items, 'delivery' => null)); ?>
+                        </div>
+                    </div>
+                <div class="row">
+                    <div class="small-12 medium-8 columns">
+                        <div class="name-field">
+                            Notes (optional):
+                        </div>
+                        <?php echo form_textarea($note); ?>
+                    </div>
+                </div>
+            
+                <?php echo form_submit('', 'create', "id = 'submit_delivery' class = 'button small'"); ?>
+            </fieldset>
+            
+                <?php echo form_close(); ?>
             </div>
         </div>
     </div>
-    <?php echo $this->load->view('bChkList', array('items' => $items, 'delivery' => null)); ?>
-    <div class="row">
-                <span class="prefix">
-                    Notes (optional):
-                </span>
-        <?php echo form_textarea($note); ?>
-    </div>
+</div>
 
-    <?php echo form_submit('', 'create', "id = 'submit_delivery' class = 'button small'"); ?>
-    <?php echo form_close(); ?>
-</div>
-</div>
 
 <script type="application/javascript">
 
