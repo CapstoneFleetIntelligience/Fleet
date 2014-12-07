@@ -76,7 +76,7 @@ function initialize()
 	title: '<? echo $business->name; ?>'
     });
     <?
-    if (sizeof($coordinates) > 0){
+    if (isset($coordinates)){
         $cnt = 1;
         foreach ($coordinates as $coor){
         ?>
