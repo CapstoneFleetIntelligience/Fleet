@@ -83,6 +83,8 @@
             data:form_data,
             success: function(data){
                 $('#add_delivery').trigger('reset');
+                $('.delivery_table').html(data);
+
             }
 
         });

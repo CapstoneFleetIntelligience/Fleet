@@ -32,34 +32,35 @@
             </thead>
             <tbody>
         <?php
-        foreach ($items as $item)
-        {
-        ?>
-            <tr>
-                <td><?php echo $item->iname; ?></td>
-                <td><?php echo $item->description; ?></td>
-                <td><?php
+        foreach ($items as $item) {
+            ?>
+            <?php if ($item->active == 't'): ?>
+                <tr>
+                    <td><?php echo $item->iname; ?></td>
+                    <td><?php echo $item->description; ?></td>
+                    <td><?php
 
-                    $quantity = array(
-                        'type' => 'number',
-                        'name'  => $item->iid,
-                        'id' => $item->iid,
-                        'value' => '0',
-                        'min' => '0',
-                        'max' => '1000',
-                        'step' => '1'
-                    );
-                    echo form_input($quantity) ?></td>
-            </tr>
-        <?php
+                        $quantity = array(
+                            'type' => 'number',
+                            'name' => $item->iid,
+                            'id' => $item->iid,
+                            'value' => '0',
+                            'min' => '0',
+                            'max' => '1000',
+                            'step' => '1'
+                        );
+                        echo form_input($quantity) ?></td>
+                </tr>
+            <?php
+            endif;
         }
-
         ?>
+
+
         </tbody>
         </table>
         <?php
-            if($delivery)
-            {
+            if($delivery){
                 echo form_submit('','Finish', "id = 'submit_chklst' class = 'button small'");
                 echo form_close();
             }
@@ -73,6 +74,8 @@
     ?>
         <div class="row"><h2>There are no items associated with this business. Please add items to your business then you can create checklists.</h2></div>
     <?php endif; ?>
+
+
 <script type="text/javascript">
     $("#add_list").submit(function (e) {
         var form_data = $("#add_list").serializeArray();
@@ -86,6 +89,8 @@
                 $("#add_cust").trigger('reset');
                 $('.add_items').fadeOut(2000, 'swing');
                 $(".add_items").empty();
+                $('.delivery_table').html(data);
+
             }
         });
         $("#submit_cust").prop('disabled', false);

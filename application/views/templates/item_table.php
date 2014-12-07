@@ -29,7 +29,7 @@ $description = array(
                         echo '<tr>';
                         echo '<td>' . $item->iname . '</td>';
                         echo '<td>' . $item->description . '</td>';
-                        echo '<td><button name="remove" id="' . $item->iid . '" class="button small radius remove-btn">Remove</button>';
+                        echo '<td><button name="remove" id="' . $item->iid . '" class="button tiny radius remove-btn">Remove</button>';
                         echo '</tr>';
                     }
                 }

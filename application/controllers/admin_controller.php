@@ -74,6 +74,7 @@ class admin_controller extends CI_Controller
     function newDelivery()
     {
         $data = $this->input->post(NULL, TRUE);
+
         $delData = array(
             'cid' => $data['cid'],
             'schd' => $data['ischd'],
@@ -84,6 +85,8 @@ class admin_controller extends CI_Controller
         $delivery->setDelv($delData);
         $delivery->insert();
         $this->delivery_item->insert($data);
+        $deliveries = $this->delivery->getDeliveries($this->session->userdata('bname'));
+        $this->load->view('editDelivery', array('deliveries' => $deliveries));
     }
 
     /**
@@ -92,6 +95,8 @@ class admin_controller extends CI_Controller
     public function addList()
     {
         $this->delivery_item->insert($this->input->post(NULL, TRUE));
+        $deliveries = $this->delivery->getDeliveries($this->session->userdata('bname'));
+        $this->load->view('editDelivery', array('deliveries' => $deliveries));
     }
 
 }

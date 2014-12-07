@@ -50,6 +50,7 @@
 
             $(function () {
                 $("#scd").datepicker();
+                $('#delDate').datepicker();
             });
             $(function () {
                 var arrayD = [<? echo $ddates ?>];
@@ -70,7 +71,7 @@
                     }
                 });
             });
-            $('#delDate').datepicker();
+
         </script>
     <? } ?>
 </head>
