@@ -24,7 +24,6 @@ $note = array(
 );
 
 ?>
-<div class="container">
     <div class="row">
 		<div class="small-12 medium-12 large-12 columns">
 		<fieldset>
@@ -174,4 +173,3 @@ $note = array(
         <div class="small-12 small-centered columns add_items">
         </div>
     </div>
-</div>

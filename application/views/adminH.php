@@ -263,7 +263,6 @@ function initialize()
     <div class="row">
 	<div class="large-12 medium-12 columns">
 	    <h2 style="text-align: center;"><?php echo $this->session->userdata('bname') ?></h2>
-	    <h3 style="text-align: center;"><?php echo $this->session->userdata('uname') ?></h3>
 	</div>
     </div>
     <div class="row">
