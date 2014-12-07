@@ -62,7 +62,7 @@ if ($dquery->num_rows() > 0){
     $('#delDate').datepicker();
 </script>
 
-<div class="container">
+<div class="container row">
     <?php
     if ($this->uri->segment(2) == "baddate"){?>
         <div class="row">
@@ -80,15 +80,14 @@ if ($dquery->num_rows() > 0){
         echo form_fieldset('Select a Delivery Date and the Deliverers to execute the routes.');
         ?>
 		</br>
-        <div class="row">
             <div class="small-8 small-centered columns">
 				<label> <b>Delivery Date</b>
 					<div class="row">
-						<div align="center" id="datepicker2"></div> <input type="text" name="schd" id="dateoutput" disabled>
+						<div align="center" id="datepicker2"></div> <input type="text" name="schd" id="dateoutput" readonly>
 					</div>
 				</label>
             </div>
-        </div>
+    </div>
         <table>
             <thead>
             <tr>
@@ -125,9 +124,8 @@ if ($dquery->num_rows() > 0){
             ?>
             </tbody>
         </table>
-        <?php
-        echo form_submit('','Create Route', "id = 'submit_route' class = 'button small'");
-        echo form_close();
-        ?>
-    </div>
+                <?php
+                echo form_submit('','Create Route', "id = 'submit_route' class = 'button right small'");
+                echo form_close();
+                ?>
 </div>

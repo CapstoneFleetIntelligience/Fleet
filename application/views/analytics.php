@@ -44,24 +44,21 @@
         chart.draw(data, options);
     }
 </script>
-<div class="container">
+<div class="container row">
     <div class="row">
       <div class="small-12 columns">
          <div class="small-centered ">
              <h2 class="text-center"><?php echo $user->bname ?></h2>
              <div id="chart_div"></div>
-             <p class="text-justify"><b>Total deliveries made today: </b><?php echo $count ?></p>
+             <p class="text-center"><b>Total deliveries made today: </b><?php echo $count ?></p>
          </div>
-         <div class="row">
              <div class="small-centered">
                  <hr/>
-                 <b><h4 class="text-justify">Employee Information</h4></b>
- 
-                 <div class="row">
+                 <b><h4 class="text-center">Employee Information</h4></b>
                      <table>
                          <thead>
                          <tr>
-                             <th width="100">
+                             <th width="50">
                                  Employee
                              </th>
                              <th width="80">
@@ -93,8 +90,6 @@
                          ?>
                          </tbody>
                      </table>
-                 </div>
-             </div>
          </div>
       </div>
     </div>

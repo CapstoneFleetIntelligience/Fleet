@@ -214,11 +214,12 @@ switch ($role) {
     case 'A':
         echo '<div id="deliveryModal" class="reveal-modal" data-reveal>';
         $this->load->view('newDelivery', array('customers' => $customers, 'items' => $items));
-	echo '<a class="close-reveal-modal">&#215;</a>';
+	    echo '<a class="close-reveal-modal">&#215;</a>';
         echo '</div>';
         echo '<div id="addItemModal" class="reveal-modal" data-reveal>';
         echo '<div class="item_table">';
         $this->load->view('templates/item_table');
+        echo '<a class="close-reveal-modal">&#215;</a>';
         echo '</div></div>';
         echo '<div id="customerModal" class="reveal-modal" data-reveal>';
         $this->load->view('custN');

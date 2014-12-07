@@ -35,12 +35,10 @@ $pass = array(
 <div class="employee hide">
     <?php endif;
     if ($deliverer == false){
-        ?><div class="container">
-            <div class="row">
+        ?><div class="container row">
                 <div class="small-12">
-                    <h3>You have no routes assigned for today.</h3>
+                    <h3 class="text-center">You have no routes assigned for today.</h3>
                 </div>
-            </div>
         </div><?php
     }
     else{

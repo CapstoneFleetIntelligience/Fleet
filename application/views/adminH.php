@@ -24,7 +24,7 @@ if ($dquery->num_rows() > 0){
 <script>
 
     $(function() {
-        var arrayD = [<? echo $ddates ?>];
+        var arrayD = [<?php echo $ddates ?>];
         $( "#datepicker" ).datepicker({
             changeMonth: true,
             changeYear: true,
@@ -46,9 +46,6 @@ if ($dquery->num_rows() > 0){
 
     $('#delDate').datepicker();
 
-    </script>
-
-<script>
 function initialize()
 {
     var myLatlng = new google.maps.LatLng(<?php echo $business->blat; ?>,<? echo $business->blong; ?>);
@@ -100,11 +97,7 @@ function initialize()
  ?>
 
 }
-
-
     google.maps.event.addDomListener(window, 'load', initialize);
-    
-
 </script>
 <!--medium and small screens off canvas menu-->
 <div class="off-canvas-wrap show-for-small-up hide-for-large-up" data-offcanvas>
@@ -266,7 +259,7 @@ function initialize()
 </div>
 
 <!--large screen page content-->
-<div class="container show-for-large-up">
+<div class="container row show-for-large-up">
     <div class="row">
 	<div class="large-12 medium-12 columns">
 	    <h2 style="text-align: center;"><?php echo $this->session->userdata('bname') ?></h2>
@@ -285,93 +278,12 @@ function initialize()
 		    </div>
 		</div>
 		<div class="large-12 show-for-large-up columns">
-		    <div class="row">
 			<div id="googleMap2" style="width:1000px;height:500px;"></div>
-		    </div>
+
 		</div>
 	    </div>
 	</div>
     </div>
 </div>
 
-<?php
-switch ($role) {
-    case 'A':
-        echo '<div id="deliveryModal" class="reveal-modal" data-reveal>';
-        $this->load->view('newDelivery', array('customers' => $customers, 'items' => $items));
-        echo '</div>';
-        echo '<div id="addItemModal" class="reveal-modal" data-reveal>';
-        echo '<div class="item_table">';
-        $this->load->view('templates/item_table');
-        echo '</div></div>';
-        echo '<div id="customerModal" class="reveal-modal" data-reveal>';
-        $this->load->view('custN');
-        echo '</div>';
-        echo '<div id="addEmployeeModal" class="reveal-modal small" data-reveal>';
-        $this->load->view('addEmployee');
-        echo '</div>';
-        echo '<div id="editEmployeeModal" class="reveal-modal large" data-reveal>';
-        $this->load->view('editEmployee', array('employees' => $employees));
-        echo '</div>';
-        echo '<div id="editDeliveryModal" class="reveal-modal xlarge" data-reveal>';
-        $this->load->view('editDelivery', array('deliveries' => $deliveries));
-        echo '<a class="close-reveal-modal">&#215;</a>';
-        echo '</div>';
-        echo '<div class="reveal-modal tiny" id="editPassModal" data-reveal>';
-        echo form_open('changePass', array('id' => 'editBusinessPass'), array('name' => $business->name));
-        echo '<span>New Business Password</span>';
-        $bpass = array(
-            'name' => 'bpass',
-            'id' => 'bpass',
-            'class' => 'small-6 small-centered'
-        );
-        echo form_password($bpass);
-        echo form_submit('submit', 'Submit', "class='tiny button' id='updateBusinessPass'");
-        echo form_close();
-        echo '<a class="close-reveal-modal">&#215;</a>';
-        echo '</div>';
-        echo '<div id="routeModal" class="reveal-modal tiny text-center" data-reveal>';
-        echo '<h4>Select the date of routes to be edited.</h4>';
-        echo '<div id="datepicker" style="font-size: 12px; text-align: center; display: inline-block"></div>';
-        echo '<a class="close-reveal-modal">&#215;</a>';
-        echo '</div>';
-        echo '<div id="profileModal" class="reveal-modal small" data-reveal>';
-        $this->load->view('profile', array('user' => $user));
-        echo '</div>';
-        break;
-    case 'M':
-        echo '<div id="deliveryModal" class="reveal-modal" data-reveal>';
-        $this->load->view('newDelivery', array('customers' => $customers, 'items' => $items));
-        echo '</div>';
-        echo '<div id="customerModal" class="reveal-modal" data-reveal>';
-        $this->load->view('custN');
-        echo '</div>';
-        echo '<div id="addEmployeeModal" class="reveal-modal small" data-reveal>';
-        $this->load->view('addEmployee');
-        echo '</div>';
-        echo '<div id="editEmployeeModal" class="reveal-modal large" data-reveal>';
-        $this->load->view('editEmployee', array('employees' => $employees));
-        echo '</div>';
-        echo '<div id="editDeliveryModal" class="reveal-modal large" data-reveal>';
-        $this->load->view('editDelivery', array('deliveries' => $deliveries));
-        echo '<a class="close-reveal-modal">&#215;</a>';
-        echo '</div>';
-        echo '<div id="routeModal" class="reveal-modal tiny text-center" data-reveal>';
-        echo '<h4>Select the date of routes to be edited.</h4>';
-        echo '<div id="datepicker" style="font-size: 12px; text-align: center; display: inline-block"></div>';
-        echo '<a class="close-reveal-modal">&#215;</a>';
-        echo '</div>';
-        echo '<div id="profileModal" class="reveal-modal small" data-reveal>';
-        $this->load->view('profile', array('user' => $user));
-        echo '</div>';
-        break;
-    case 'E':
-        echo '<div id="profileModal" class="reveal-modal small" data-reveal>';
-        $this->load->view('profile', array('user' => $user));
-        echo '</div>';
-        break;
-    default:
-        break;
-}
-?>
 

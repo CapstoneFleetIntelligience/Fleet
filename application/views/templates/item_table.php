@@ -42,7 +42,7 @@ $description = array(
         <fieldset>
             <legend>Add a new item</legend>
             <div class="row">
-                <div class="small-12 medium-12 large-12 columns">
+                <div class="small-5 medium-5 large-5 columns">
                     <div class="row">
                         <div class="small-4 medium-4 large-4 columns">
                             <label for="itemN" class="right hide-for-small-only">

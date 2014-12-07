@@ -56,7 +56,7 @@ if ($success == true)
 
 
 </script>
-<div class="container">
+<div class="container row">
     <div class="row">
         <div class="small-12">
             <div id="topdiv" data-alert class="alert-box info radius">

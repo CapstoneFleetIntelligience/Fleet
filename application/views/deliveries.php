@@ -14,12 +14,10 @@
  */
 if ($deliverer == false){
     ?>
-<div class="container">
-    <div class="row">
+<div class="container row">
         <div class="small-12">
-            <h3>You have no routes assigned for today.</h3>
+            <h3 class="text-center">You have no routes assigned for today.</h3>
         </div>
-    </div>
 </div>
 <?
 }
@@ -64,8 +62,7 @@ foreach ($deliverer->routes['route'] as $row)
     google.maps.event.addDomListener(window, 'load', initialize);
 
 </script>
-<div class="container">
-    <div class="row">
+<div class="container row">
     <div class="small-8 small-centered columns">
         <div id="googleMap" style="width:500px;height:380px;border: 10px solid #ffffff"></div>
     </div>
@@ -143,7 +140,7 @@ foreach ($deliverer->routes['route'] as $row)
         </div>
         <?}?>
     </div>
-</div>
+
     <script>
         $('.dcheck').click(function(){
             if ($(this).data('check') == 'true'){
