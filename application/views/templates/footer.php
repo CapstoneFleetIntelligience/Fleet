@@ -27,6 +27,7 @@
 
     $('#register_user').click(function () {
         var form_data = $('#registration_form').serialize();
+
         $.ajax({
             url:"<?php echo site_url('register') ?>",
             type: 'POST',

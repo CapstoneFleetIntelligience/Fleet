@@ -156,7 +156,7 @@ class employee_controller extends CI_Controller
     public function create()
     {
         $user = $this->user->createEmployee($this->input->post(null, true));
-        $this->sendEmail($user);
+        //$this->sendEmail($user);
         echo $this->load->view('templates/success', array('user' => $user));
     }
 
