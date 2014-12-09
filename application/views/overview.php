@@ -26,7 +26,9 @@ $pass = array(
     <div class="small-centered">
         <?php
               echo form_open('changePass', 'id = "changePass"');
+              echo form_label('Enter a new password', 'pass');
               echo form_password($pass);
+
               echo form_submit('', 'Continue', 'id="submit_pass" class="button tiny"');
               echo form_close();
         ?>

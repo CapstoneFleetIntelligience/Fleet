@@ -12,12 +12,12 @@
         <table class="responsive">
             <thead>
             <tr>
-                <th width="100">Customer</th>
-                <th width="250">Address</th>
-                <th width="150">Delivery Date</th>
-                <th width="150">Items</th>
-                <th width="80">Qty</th>
-                <th width="80">Remove</th>
+                <th>Customer</th>
+                <th >Address</th>
+                <th >Delivery Date</th>
+                <th >Items</th>
+                <th>Qty</th>
+                <th>Remove</th>
             </tr>
             </thead>
             <tbody>
