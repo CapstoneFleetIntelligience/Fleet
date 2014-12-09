@@ -85,7 +85,6 @@
             success: function(data){
                 $('#add_delivery').trigger('reset');
                 $('.delivery_table').html(data);
-
             }
 
         });
@@ -151,7 +150,6 @@
             type: "POST",
             data: form_data,
             success: function(data){
-                console.log(data);
                 alert('Update successful');
             }
         });

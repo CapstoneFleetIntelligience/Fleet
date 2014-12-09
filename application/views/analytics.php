@@ -58,18 +58,18 @@
                      <table>
                          <thead>
                          <tr>
-                             <th width="50">
+                             <th>
                                  Employee
                              </th>
-                             <th width="80">
+                             <th>
                                  Average delivery times(Hours, Minutes)
                              </th>
-                             <th width="80">Total # of items delivered</th>
-                             <th width="80">
+                             <th>Total # of items delivered</th>
+                             <th>
                                  Average # of items delivered
                              </th>
-                             <th width="80">Total # of deliveries</th>
-                             <th width="80">Total distance traveled</th>
+                             <th>Total # of deliveries</th>
+                             <th>Total distance traveled</th>
                          </tr>
                          </thead>
                          <tbody>

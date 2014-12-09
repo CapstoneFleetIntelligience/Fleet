@@ -219,38 +219,25 @@ function initialize()
 		
 		<section class="main-section">
 		    <!--page content goes here-->
-		    <div class="container">
-			<div class="row">
+		    <div class="container row">
 			    <div class="small-12 columns">
 				<h2 style="text-align: center;"><?php echo $this->session->userdata('bname') ?></h2>
-				<h3 style="text-align: center;"><?php echo $this->session->userdata('uname') ?></h3>
 			    </div>
-			</div>
-			<div class="row">
- 
+
 			    <br/>
-		
-			    <div class="row">
-				<div class="small-12 columns">
+
 				    <div class="small-12 columns">
 					<div class="panel">
 					    <h2 style="text-align: center;">Today's Scheduled Deliveries</h2>
 					</div>
 				    </div>
-				    <div class=" medium-10 show-for-medium-only columns">
-					<div class="row">
+				    <div class="medium-offset-1 medium-8 show-for-medium-only columns">
 					    <div id="googleMap1" style="width:800px;height:500px;"></div>
-					</div>
 				    </div>
-				    <div class="small-10 columns show-for-small-only">
-					<div class="row">
+				    <div class="small-12 columns show-for-small-only">
 					    <div id="googleMap1" style="width:300px;height:300px;"></div>
-					</div>
 				    </div>
-				</div>
-			    </div>
 			</div>
-		    </div>
 		</section>
 		
 		<a class="exit-off-canvas"></a>
@@ -266,9 +253,7 @@ function initialize()
 	</div>
     </div>
     <div class="row">
-
 	<br/>
-
 	<div class="row">
 	    <div class="medium-12 large-12 columns">
 		<div class="large-12 medium-12 columns">
